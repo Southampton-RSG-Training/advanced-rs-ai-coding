@@ -30,6 +30,26 @@ exercises: 5
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+## Technical Debt
+
+When faced with a problem that you need to solve by writing code - it may be tempted to
+skip the design phase and dive straight into coding.
+
+What happens if you do not follow the good software design and development best practices?
+It can lead to accumulated 'technical debt',
+which (according to [Wikipedia](https://en.wikipedia.org/wiki/Technical_debt)),
+is the "cost of additional rework caused by choosing an easy (limited) solution now
+instead of using a better approach that would take longer".
+The pressure to achieve project goals can sometimes lead to quick and easy solutions,
+which make the software become
+more messy, more complex, and more difficult to understand and maintain.
+
+The extra effort required to make changes in the future is the interest paid on the (technical) debt.
+It is natural for software to accrue some technical debt,
+but it is important to pay off that debt during a maintenance phase -
+simplifying, clarifying the code, making it easier to understand -
+to keep these interest payments on making changes manageable.
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - FIXME

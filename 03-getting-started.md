@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with using Copilot within VSCode"
 teaching: 15
-exercises: 15
+exercises: 30
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -217,6 +217,23 @@ and drill down and be increasingly specific on questioning until we have what we
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::: callout
+
+## Why Aren't I Seeing the Same Results for the Same Question?
+
+Sometimes, you may ask the same question and get a different response.
+
+As we've mentioned, LLMs are non-deterministic,
+in that the same question can produce different answers.
+In addition to it's probablistic nature, there are other reasons for these differences:
+
+- Context-dependent: small changes in files, cursor position, or prompt matter
+- Approximate understanding: infers intent, doesn't fully "understand" the codebase
+- Model changes over time: behaviour can shift as Copilot and it's underlying models are updated
+
+:::::::::::::::::::::::::::::::::::::::::
+
+
 ## Personalising Copilot to Match our Project
 
 ### What is an Instructions File?
@@ -322,21 +339,23 @@ since our quotas will be consumed more quickly with higher cost multipliers!
 
 ## Asking Copilot to Suggest Improvements
 
-15 mins.
+10 mins.
 
 Ensuring you have the `Ask` mode selected in the chat box:
 
-1. Select one of the `Claude Haiku 4.5` or `GPT-5 mini` models in the model dropdown.
-1. Choose a prompt to ask Copilot how to improve this code, e.g.:
+- Select one of the `Claude Haiku 4.5` or `GPT-5 mini` models in the model dropdown.
+- Choose a prompt to ask Copilot how to improve this code, e.g.:
    - `How can I make this code more readable?`
    - `How should I refactor this code to be more modular?`
    - `What can I do to improve this code?`
 
-Repeat this for the other model types, asking the same exact question each time.
-What answer does each model give you?
-How are these responses similar?
-How are these responses different?
+Repeat this for the other model types, asking the same exact question each time:
 
+1. What answer does each model give you?
+2. How are these responses similar?
+3. How are these responses different?
+
+Use any remaining time to explore asking other questions!
 
 :::::::::::::::::::::::::: instructor
 
@@ -346,6 +365,8 @@ highlighting the key similarities and differences between each response.
 :::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: solution
+
+1.
 
 For the question `How can I make this code more readable?` (your responses may differ!)
 
@@ -453,14 +474,15 @@ if __name__ == '__main__':
 # ...existing code...
 ```
 
-For these particular responses,
-there are a number of things worth noting.
+2.
 
 Key similarities - both models:
 
 - Refactored the duplicated `fig.add_subplot` generation into a Python list comprehension
 - Refactored the duplicated `axes` set up into a separate function
 - Added a docstring to the new function, albeit only a brief one with `GPT-5 mini`
+
+3.
 
 Key differences:
 
@@ -571,20 +593,9 @@ If you assume "Copilot must have chosen this for a good reason", you miss the cr
 your own review and justification.
 
 One way to consider Copilot is as a fast junior developer with infinite autocomplete and zero accountability!
+Such tools are optimised for help, not correctness: suggestions still need human review.
 
 :::::::::::::::::::::::::::::::::::::::::
-
-## Limitations
-
-As we've mentioned, AI models are non-deterministic,
-in that the same question can produce different answers.
-In addition to it's probablistic nature, there are other reasons for these differences:
-
-- Context-dependent: small changes in files, cursor position, or prompt matter
-- Approximate understanding: infers intent, doesn't fully "understand" the codebase
-- Not authoritative: may sound confident while being incomplete or wrong
-- Model changes over time: behaviour can shift as Copilot and it's underlying models are updated
-- Optimised for help, not correctness: suggestions still need human review
 
 ## What's my Copilot Usage?
 
