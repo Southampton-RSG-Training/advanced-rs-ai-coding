@@ -345,7 +345,7 @@
         
 <section id="aio-01-intro-ai-ide-tools"><p>Content from <a href="01-intro-ai-ide-tools.html">Introduction to AI Coding IDE Tools</a></p>
 <hr>
-<p>Last updated on 2026-01-29 |
+<p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro-ai-ide-tools.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -396,6 +396,26 @@ providers</li>
 </div>
 </div>
 </div>
+<section><h2 class="section-heading" id="technical-debt">Technical Debt<a class="anchor" aria-label="anchor" href="#technical-debt"></a>
+</h2>
+<hr class="half-width">
+<p>When faced with a problem that you need to solve by writing code - it
+may be tempted to skip the design phase and dive straight into
+coding.</p>
+<p>What happens if you do not follow the good software design and
+development best practices? It can lead to accumulated ‘technical debt’,
+which (according to <a href="https://en.wikipedia.org/wiki/Technical_debt" class="external-link">Wikipedia</a>), is
+the “cost of additional rework caused by choosing an easy (limited)
+solution now instead of using a better approach that would take longer”.
+The pressure to achieve project goals can sometimes lead to quick and
+easy solutions, which make the software become more messy, more complex,
+and more difficult to understand and maintain.</p>
+<p>The extra effort required to make changes in the future is the
+interest paid on the (technical) debt. It is natural for software to
+accrue some technical debt, but it is important to pay off that debt
+during a maintenance phase - simplifying, clarifying the code, making it
+easier to understand - to keep these interest payments on making changes
+manageable.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -408,7 +428,12 @@ providers</li>
 </ul>
 </div>
 </div>
-</div></section><section id="aio-02-intro-vscode"><p>Content from <a href="02-intro-vscode.html">Introduction to Microsoft Visual Studio Code</a></p>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-02-intro-vscode"><p>Content from <a href="02-intro-vscode.html">Introduction to Microsoft Visual Studio Code</a></p>
 <hr>
 <p>Last updated on 2026-01-26 |
 
@@ -958,7 +983,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-03-getting-started"><p>Content from <a href="03-getting-started.html">Getting Started with using Copilot within VSCode</a></p>
 <hr>
-<p>Last updated on 2026-01-29 |
+<p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1243,6 +1268,31 @@ what we need (as we would in an a typical conversation).</p>
 </div>
 </div>
 </div>
+<div id="why-arent-i-seeing-the-same-results-for-the-same-question" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="why-arent-i-seeing-the-same-results-for-the-same-question" class="callout-inner">
+<h3 class="callout-title">Why Aren’t I Seeing the Same Results for the
+Same Question?</h3>
+<div class="callout-content">
+<p>Sometimes, you may ask the same question and get a different
+response.</p>
+<p>As we’ve mentioned, LLMs are non-deterministic, in that the same
+question can produce different answers. In addition to it’s probablistic
+nature, there are other reasons for these differences:</p>
+<ul>
+<li>Context-dependent: small changes in files, cursor position, or
+prompt matter</li>
+<li>Approximate understanding: infers intent, doesn’t fully “understand”
+the codebase</li>
+<li>Model changes over time: behaviour can shift as Copilot and it’s
+underlying models are updated</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a>
 </h2>
@@ -1377,10 +1427,10 @@ will be consumed more quickly with higher cost multipliers!</p>
 <div id="asking-copilot-to-suggest-improvements" class="callout-inner">
 <h3 class="callout-title">Asking Copilot to Suggest Improvements</h3>
 <div class="callout-content">
-<p>15 mins.</p>
+<p>10 mins.</p>
 <p>Ensuring you have the <code>Ask</code> mode selected in the chat
 box:</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li>Select one of the <code>Claude Haiku 4.5</code> or
 <code>GPT-5 mini</code> models in the model dropdown.</li>
 <li>Choose a prompt to ask Copilot how to improve this code, e.g.:
@@ -1390,10 +1440,15 @@ box:</p>
 <li><code>What can I do to improve this code?</code></li>
 </ul>
 </li>
-</ol>
+</ul>
 <p>Repeat this for the other model types, asking the same exact question
-each time. What answer does each model give you? How are these responses
-similar? How are these responses different?</p>
+each time:</p>
+<ol style="list-style-type: decimal">
+<li>What answer does each model give you?</li>
+<li>How are these responses similar?</li>
+<li>How are these responses different?</li>
+</ol>
+<p>Use any remaining time to explore asking other questions!</p>
 </div>
 </div>
 </div>
@@ -1405,6 +1460,8 @@ similar? How are these responses different?</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
+<ol style="list-style-type: decimal"><li>
+</li></ol>
 <p>For the question <code>How can I make this code more readable?</code>
 (your responses may differ!)</p>
 <p>Note that, for each model, at the top of the response, it mentions
@@ -1508,8 +1565,8 @@ taken as context</li>
 <span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>    main()</span>
 <span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co"># ...existing code...</span></span></code></pre>
 </div>
-<p>For these particular responses, there are a number of things worth
-noting.</p>
+<ol start="2" style="list-style-type: decimal"><li>
+</li></ol>
 <p>Key similarities - both models:</p>
 <ul>
 <li>Refactored the duplicated <code>fig.add_subplot</code> generation
@@ -1520,6 +1577,8 @@ function</li>
 <code>GPT-5 mini</code>
 </li>
 </ul>
+<ol start="3" style="list-style-type: decimal"><li>
+</li></ol>
 <p>Key differences:</p>
 <ul>
 <li>Claude Haiku 4.5:
@@ -1666,28 +1725,12 @@ Remember that such tools can be confidently incorrect.</p>
 <p>If you assume “Copilot must have chosen this for a good reason”, you
 miss the critical step: your own review and justification.</p>
 <p>One way to consider Copilot is as a fast junior developer with
-infinite autocomplete and zero accountability!</p>
+infinite autocomplete and zero accountability! Such tools are optimised
+for help, not correctness: suggestions still need human review.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
-</h2>
-<hr class="half-width">
-<p>As we’ve mentioned, AI models are non-deterministic, in that the same
-question can produce different answers. In addition to it’s probablistic
-nature, there are other reasons for these differences:</p>
-<ul>
-<li>Context-dependent: small changes in files, cursor position, or
-prompt matter</li>
-<li>Approximate understanding: infers intent, doesn’t fully “understand”
-the codebase</li>
-<li>Not authoritative: may sound confident while being incomplete or
-wrong</li>
-<li>Model changes over time: behaviour can shift as Copilot and it’s
-underlying models are updated</li>
-<li>Optimised for help, not correctness: suggestions still need human
-review</li>
-</ul></section><section><h2 class="section-heading" id="whats-my-copilot-usage">What’s my Copilot Usage?<a class="anchor" aria-label="anchor" href="#whats-my-copilot-usage"></a>
+</section><section><h2 class="section-heading" id="whats-my-copilot-usage">What’s my Copilot Usage?<a class="anchor" aria-label="anchor" href="#whats-my-copilot-usage"></a>
 </h2>
 <hr class="half-width">
 <p>It’s important to keep track of just how much of our Copilot “plan”
@@ -1719,7 +1762,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-04-use-copilot-improve-code"><p>Content from <a href="04-use-copilot-improve-code.html">How to use Copilot to Improve an Existing Codebase</a></p>
 <hr>
-<p>Last updated on 2026-01-13 |
+<p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-use-copilot-improve-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1747,20 +1790,78 @@ any links that you are not going to use.
 <ul>
 <li>Describe how to use prompt engineering to obtain valuable responses
 from Copilot</li>
-<li>Use Copilot to add a new, small feature to an existing codebase</li>
 <li>Use Copilot to improve a segment of code</li>
 <li>Use Copilot to diagnose a failing unit test and fix it</li>
+<li>Use Copilot to add a new, small feature to an existing codebase</li>
+<li>Describe how to use Copilot to assist with Git commits and managing
+Git history</li>
 <li>Create and use a reusable prompt context</li>
 <li>Create an VSCode Agent Skill to define a specialised and reusable
 domain-specific task</li>
-<li>Describe key limitations and known issues of using Copilot as a
-coding assistant within an IDE</li>
+<li>Describe key limitations and known issues of using LLM coding
+assistants within an IDE</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p>In the previous episode we looked at Copilot giving us guidance and
+advice to improve our code. In this episode, we’ll look at how Copilot
+can assist with code modifications more directly, looking at the
+following features:</p>
+<ul>
+<li>
+<code>Inline suggestions</code> - where Copilot provides coding
+suggestions as you type</li>
+<li>
+<code>Edit mode</code> - where Copilot provides broad suggestions
+(like <code>Ask</code> mode) but will also enact them step-by-step
+directly on our approval</li>
+<li>
+<code>Agent mode</code> - where Copilot directly autonomously
+undertakes large scale changes, with a single option to approve the
+changes at the end of the process</li>
+</ul>
+<p>These are in ascending order of the autonomy, authority and scope
+that we delegate to Copilot to make changes. As we’ll see, as we
+delegate more authority and scope, the more we should increase our
+skepticism and diligence in reviewing and understanding suggestions made
+by such tools.</p>
+<section><h2 class="section-heading" id="inline-suggestions">Inline Suggestions<a class="anchor" aria-label="anchor" href="#inline-suggestions"></a>
+</h2>
+<hr class="half-width">
+<p>Within VSCode, Copilot can provide “inline” suggestions as we type,
+which go much further than typical IDE autocomplete suggestions.</p>
+<p>Let’s say we want to add a new section describing our coding style.
+Directly under <code>Code Patterns &amp; Conventions</code>, add:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">### Coding Style</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ss">- </span></span></code></pre>
+</div>
+<p>You should see a suggestion appear direcly after your cursor,
+something like <code>Use PEP 8 style guidelines for Python code</code>
+or similar. You can accept this suggestion by pressing <code>Tab</code>.
+If you continue to add new lines after this, you may find it continues
+to suggest other things to include, so we end up with, for example:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">### Coding Style</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ss">- </span>Use PEP 8 style guidelines for Python code</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ss">- </span>Use descriptive variable names (e.g., <span class="in">`inflammation_data`</span>, <span class="in">`mean_inflammation`</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ss">- </span>Comment code sections for clarity, especially data processing steps</span></code></pre>
+</div>
+<p>It does this by rapidly incorporating contextual information from a
+number of sources to infer a suggestion, including:</p>
+<ul>
+<li>The code file you are editing</li>
+<li>Any code you have currently selected</li>
+<li>Frameworks, languages and dependencies</li>
+<li>Any instructions file</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1773,7 +1874,12 @@ coding assistant within an IDE</li>
 </ul>
 </div>
 </div>
-</div></section>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section>
 </div>
     </main>
 </div>
@@ -1823,8 +1929,8 @@ coding assistant within an IDE</li>
   "url": "https://carpentries.github.io/workbench-template-md/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/aio.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-01-29",
-  "datePublished": "2026-01-29"
+  "dateModified": "2026-02-02",
+  "datePublished": "2026-02-02"
 }
 
   </script><script>

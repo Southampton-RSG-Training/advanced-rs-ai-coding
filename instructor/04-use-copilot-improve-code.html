@@ -119,11 +119,11 @@
   Developing Research Software with AI Tools
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 64%" class="percentage">
-    64%
+<aside class="col-md-12 lesson-progress"><div style="width: 67%" class="percentage">
+    67%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 64%" aria-valuenow="64" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 67%" aria-valuenow="67" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -234,12 +234,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         4. How to use Copilot to Improve an Existing Codebase
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#inline-suggestions">Inline Suggestions</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -302,7 +309,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>How to use Copilot to Improve an Existing Codebase</h1>
-        <p>Last updated on 2026-01-13 |
+        <p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-use-copilot-improve-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -335,20 +342,72 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li>Describe how to use prompt engineering to obtain valuable responses
 from Copilot</li>
-<li>Use Copilot to add a new, small feature to an existing codebase</li>
 <li>Use Copilot to improve a segment of code</li>
 <li>Use Copilot to diagnose a failing unit test and fix it</li>
+<li>Use Copilot to add a new, small feature to an existing codebase</li>
+<li>Describe how to use Copilot to assist with Git commits and managing
+Git history</li>
 <li>Create and use a reusable prompt context</li>
 <li>Create an VSCode Agent Skill to define a specialised and reusable
 domain-specific task</li>
-<li>Describe key limitations and known issues of using Copilot as a
-coding assistant within an IDE</li>
+<li>Describe key limitations and known issues of using LLM coding
+assistants within an IDE</li>
 </ul></div>
 </div>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
+<p>In the previous episode we looked at Copilot giving us guidance and
+advice to improve our code. In this episode, we’ll look at how Copilot
+can assist with code modifications more directly, looking at the
+following features:</p>
+<ul><li>
+<code>Inline suggestions</code> - where Copilot provides coding
+suggestions as you type</li>
+<li>
+<code>Edit mode</code> - where Copilot provides broad suggestions
+(like <code>Ask</code> mode) but will also enact them step-by-step
+directly on our approval</li>
+<li>
+<code>Agent mode</code> - where Copilot directly autonomously
+undertakes large scale changes, with a single option to approve the
+changes at the end of the process</li>
+</ul><p>These are in ascending order of the autonomy, authority and scope
+that we delegate to Copilot to make changes. As we’ll see, as we
+delegate more authority and scope, the more we should increase our
+skepticism and diligence in reviewing and understanding suggestions made
+by such tools.</p>
+<section><h2 class="section-heading" id="inline-suggestions">Inline Suggestions<a class="anchor" aria-label="anchor" href="#inline-suggestions"></a></h2>
+<hr class="half-width"><p>Within VSCode, Copilot can provide “inline” suggestions as we type,
+which go much further than typical IDE autocomplete suggestions.</p>
+<p>Let’s say we want to add a new section describing our coding style.
+Directly under <code>Code Patterns &amp; Conventions</code>, add:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">### Coding Style</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ss">- </span></span></code></pre>
+</div>
+<p>You should see a suggestion appear direcly after your cursor,
+something like <code>Use PEP 8 style guidelines for Python code</code>
+or similar. You can accept this suggestion by pressing <code>Tab</code>.
+If you continue to add new lines after this, you may find it continues
+to suggest other things to include, so we end up with, for example:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">### Coding Style</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ss">- </span>Use PEP 8 style guidelines for Python code</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ss">- </span>Use descriptive variable names (e.g., <span class="in">`inflammation_data`</span>, <span class="in">`mean_inflammation`</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ss">- </span>Comment code sections for clarity, especially data processing steps</span></code></pre>
+</div>
+<p>It does this by rapidly incorporating contextual information from a
+number of sources to infer a suggestion, including:</p>
+<ul><li>The code file you are editing</li>
+<li>Any code you have currently selected</li>
+<li>Frameworks, languages and dependencies</li>
+<li>Any instructions file</li>
+</ul><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -363,10 +422,7 @@ coding assistant within an IDE</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/03-getting-started.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -426,8 +482,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/04-use-copilot-improve-code.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/04-use-copilot-improve-code.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-01-13",
-  "datePublished": "2026-01-29"
+  "dateModified": "2026-02-02",
+  "datePublished": "2026-02-02"
 }
 
   </script><script>

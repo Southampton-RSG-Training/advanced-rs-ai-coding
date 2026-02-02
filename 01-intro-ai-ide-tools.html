@@ -207,12 +207,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         1. Introduction to AI Coding IDE Tools
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#technical-debt">Technical Debt</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -302,7 +309,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to AI Coding IDE Tools</h1>
-        <p>Last updated on 2026-01-29 |
+        <p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro-ai-ide-tools.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -355,6 +362,24 @@ providers</li>
 </div>
 </div>
 </div>
+<section><h2 class="section-heading" id="technical-debt">Technical Debt<a class="anchor" aria-label="anchor" href="#technical-debt"></a></h2>
+<hr class="half-width"><p>When faced with a problem that you need to solve by writing code - it
+may be tempted to skip the design phase and dive straight into
+coding.</p>
+<p>What happens if you do not follow the good software design and
+development best practices? It can lead to accumulated ‘technical debt’,
+which (according to <a href="https://en.wikipedia.org/wiki/Technical_debt" class="external-link">Wikipedia</a>), is
+the “cost of additional rework caused by choosing an easy (limited)
+solution now instead of using a better approach that would take longer”.
+The pressure to achieve project goals can sometimes lead to quick and
+easy solutions, which make the software become more messy, more complex,
+and more difficult to understand and maintain.</p>
+<p>The extra effort required to make changes in the future is the
+interest paid on the (technical) debt. It is natural for software to
+accrue some technical debt, but it is important to pay off that debt
+during a maintenance phase - simplifying, clarifying the code, making it
+easier to understand - to keep these interest payments on making changes
+manageable.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -370,10 +395,7 @@ providers</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="02-intro-vscode.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -433,8 +455,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/01-intro-ai-ide-tools.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/01-intro-ai-ide-tools.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-01-29",
-  "datePublished": "2026-01-29"
+  "dateModified": "2026-02-02",
+  "datePublished": "2026-02-02"
 }
 
   </script><script>

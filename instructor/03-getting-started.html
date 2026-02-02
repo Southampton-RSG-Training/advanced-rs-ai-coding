@@ -119,11 +119,11 @@
   Developing Research Software with AI Tools
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 45%" class="percentage">
-    45%
+<aside class="col-md-12 lesson-progress"><div style="width: 42%" class="percentage">
+    42%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 45%" aria-valuenow="45" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 42%" aria-valuenow="42" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -239,7 +239,6 @@
 <li><a href="#asking-questions-about-your-code">Asking Questions about Your Code</a></li>
 <li><a href="#personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project</a></li>
 <li><a href="#obtaining-guidance-on-how-to-improve-our-code">Obtaining Guidance on how to Improve our Code</a></li>
-<li><a href="#limitations">Limitations</a></li>
 <li><a href="#whats-my-copilot-usage">What’s my Copilot Usage?</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -314,13 +313,13 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started with using Copilot within VSCode</h1>
-        <p>Last updated on 2026-01-29 |
+        <p>Last updated on 2026-02-02 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
-        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 45 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -584,6 +583,29 @@ what we need (as we would in an a typical conversation).</p>
 </div>
 </div>
 </div>
+<div id="why-arent-i-seeing-the-same-results-for-the-same-question" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="why-arent-i-seeing-the-same-results-for-the-same-question" class="callout-inner">
+<h3 class="callout-title">Why Aren’t I Seeing the Same Results for the
+Same Question?</h3>
+<div class="callout-content">
+<p>Sometimes, you may ask the same question and get a different
+response.</p>
+<p>As we’ve mentioned, LLMs are non-deterministic, in that the same
+question can produce different answers. In addition to it’s probablistic
+nature, there are other reasons for these differences:</p>
+<ul><li>Context-dependent: small changes in files, cursor position, or
+prompt matter</li>
+<li>Approximate understanding: infers intent, doesn’t fully “understand”
+the codebase</li>
+<li>Model changes over time: behaviour can shift as Copilot and it’s
+underlying models are updated</li>
+</ul></div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a></h2>
 <hr class="half-width"><div class="section level3">
@@ -703,19 +725,22 @@ will be consumed more quickly with higher cost multipliers!</p>
 <div id="asking-copilot-to-suggest-improvements" class="callout-inner">
 <h3 class="callout-title">Asking Copilot to Suggest Improvements</h3>
 <div class="callout-content">
-<p>15 mins.</p>
+<p>10 mins.</p>
 <p>Ensuring you have the <code>Ask</code> mode selected in the chat
 box:</p>
-<ol style="list-style-type: decimal"><li>Select one of the <code>Claude Haiku 4.5</code> or
+<ul><li>Select one of the <code>Claude Haiku 4.5</code> or
 <code>GPT-5 mini</code> models in the model dropdown.</li>
 <li>Choose a prompt to ask Copilot how to improve this code, e.g.:
 <ul><li><code>How can I make this code more readable?</code></li>
 <li><code>How should I refactor this code to be more modular?</code></li>
 <li><code>What can I do to improve this code?</code></li>
 </ul></li>
-</ol><p>Repeat this for the other model types, asking the same exact question
-each time. What answer does each model give you? How are these responses
-similar? How are these responses different?</p>
+</ul><p>Repeat this for the other model types, asking the same exact question
+each time:</p>
+<ol style="list-style-type: decimal"><li>What answer does each model give you?</li>
+<li>How are these responses similar?</li>
+<li>How are these responses different?</li>
+</ol><p>Use any remaining time to explore asking other questions!</p>
 </div>
 </div>
 </div>
@@ -740,7 +765,8 @@ response.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>For the question <code>How can I make this code more readable?</code>
+<ol style="list-style-type: decimal"><li>
+</li></ol><p>For the question <code>How can I make this code more readable?</code>
 (your responses may differ!)</p>
 <p>Note that, for each model, at the top of the response, it mentions
 three references are used:</p>
@@ -841,9 +867,8 @@ taken as context</li>
 <span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>    main()</span>
 <span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co"># ...existing code...</span></span></code></pre>
 </div>
-<p>For these particular responses, there are a number of things worth
-noting.</p>
-<p>Key similarities - both models:</p>
+<ol start="2" style="list-style-type: decimal"><li>
+</li></ol><p>Key similarities - both models:</p>
 <ul><li>Refactored the duplicated <code>fig.add_subplot</code> generation
 into a Python list comprehension</li>
 <li>Refactored the duplicated <code>axes</code> set up into a separate
@@ -851,7 +876,8 @@ function</li>
 <li>Added a docstring to the new function, albeit only a brief one with
 <code>GPT-5 mini</code>
 </li>
-</ul><p>Key differences:</p>
+</ul><ol start="3" style="list-style-type: decimal"><li>
+</li></ol><p>Key differences:</p>
 <ul><li>Claude Haiku 4.5:
 <ul><li>Defines constants for some of the hardcoded values</li>
 <li>The high-level code is refactored into a <code>main()</code>
@@ -1010,25 +1036,12 @@ Remember that such tools can be confidently incorrect.</p>
 <p>If you assume “Copilot must have chosen this for a good reason”, you
 miss the critical step: your own review and justification.</p>
 <p>One way to consider Copilot is as a fast junior developer with
-infinite autocomplete and zero accountability!</p>
+infinite autocomplete and zero accountability! Such tools are optimised
+for help, not correctness: suggestions still need human review.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a></h2>
-<hr class="half-width"><p>As we’ve mentioned, AI models are non-deterministic, in that the same
-question can produce different answers. In addition to it’s probablistic
-nature, there are other reasons for these differences:</p>
-<ul><li>Context-dependent: small changes in files, cursor position, or
-prompt matter</li>
-<li>Approximate understanding: infers intent, doesn’t fully “understand”
-the codebase</li>
-<li>Not authoritative: may sound confident while being incomplete or
-wrong</li>
-<li>Model changes over time: behaviour can shift as Copilot and it’s
-underlying models are updated</li>
-<li>Optimised for help, not correctness: suggestions still need human
-review</li>
-</ul></section><section><h2 class="section-heading" id="whats-my-copilot-usage">What’s my Copilot Usage?<a class="anchor" aria-label="anchor" href="#whats-my-copilot-usage"></a></h2>
+</section><section><h2 class="section-heading" id="whats-my-copilot-usage">What’s my Copilot Usage?<a class="anchor" aria-label="anchor" href="#whats-my-copilot-usage"></a></h2>
 <hr class="half-width"><p>It’s important to keep track of just how much of our Copilot “plan”
 we’re using, particularly since we’re (by default) on the free tier of
 Copilot. We can see an overview of what we’ve consumed and how much is
@@ -1114,8 +1127,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/03-getting-started.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/03-getting-started.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-01-29",
-  "datePublished": "2026-01-29"
+  "dateModified": "2026-02-02",
+  "datePublished": "2026-02-02"
 }
 
   </script><script>
