@@ -405,7 +405,106 @@ number of sources to infer a suggestion, including:</p>
 <li>Any code you have currently selected</li>
 <li>Frameworks, languages and dependencies</li>
 <li>Any instructions file</li>
-</ul><div id="keypoints1" class="callout keypoints">
+</ul><p>Copilot suggestions are a starting point, but we should alwyays
+review, understand, and amend as necessary, as opposed to blindly
+accepting suggestions.</p>
+<div id="amend-the-suggestions" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="amend-the-suggestions" class="callout-inner">
+<h3 class="callout-title">Amend the Suggestions</h3>
+<div class="callout-content">
+<p>3 mins.</p>
+<p>Read through and understand the Copilot suggestions for the Coding
+Style section of the <code>copilot-instructions.md</code> file, and
+add/amend as you see fit, perhaps to fit your coding style.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>For example:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">### Coding Style</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ss">- </span>Follow PEP 8 style guidelines for Python code</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ss">- </span>Use descriptive variable names (e.g., <span class="in">`inflammation_data`</span>, <span class="in">`mean_inflammation`</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="ss">- </span>Comment code sections for clarity, especially to explain purpose and logic, and to describe data processing steps</span></code></pre>
+</div>
+<p>As we’ll see shortly, these coding style guidelines will inform
+future refactoring of our code.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="inline-suggestions-for-code" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="inline-suggestions-for-code" class="callout-inner">
+<h3 class="callout-title">Inline Suggestions for Code</h3>
+<div class="callout-content">
+<p>3 mins.</p>
+<p>In <code>inflammation-plot.py</code>, begin adding an additional
+parameter to the functions calls in the code, by placing an additional
+<code>,</code> at the end of the given list of parameters, and see which
+inline suggestions are being made, e.g.:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>    data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>, ... )</span></code></pre>
+</div>
+<p>Try this for the following function calls: - <code>np.loadtxt</code>
+- <code>plt.figure</code> - Each of the <code>.plot</code> calls to the
+<code>axes</code> variables</p>
+<ol style="list-style-type: decimal"><li>What’s being suggested?</li>
+<li>Are the suggestions helpful? Are they always the same?</li>
+<li>Does the code still run?</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li>For example:</li>
+</ol><div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>    data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>, dtype<span class="op">=</span>np.float64)</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.0</span>, <span class="fl">3.0</span>), dpi<span class="op">=</span><span class="dv">100</span>)</span></code></pre>
+</div>
+<p>For <code>.plot</code>, if the first suggestion of a
+<code>color</code> parameter is selected, it suggests variants of that
+for the other calls to <code>plot</code>, e.g.</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>    axes1.plot(data.mean(axis<span class="op">=</span><span class="dv">0</span>), color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    axes2.plot(data.mean(axis<span class="op">=</span><span class="dv">0</span>), color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    axes3.plot(data.mean(axis<span class="op">=</span><span class="dv">0</span>), color<span class="op">=</span><span class="st">'green'</span>)</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
