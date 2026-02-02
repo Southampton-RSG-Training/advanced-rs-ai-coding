@@ -216,16 +216,39 @@ FIXME: list of files in file explorer
 Now we've acquainted ourselves with running VSCode, let's take a look at our example code.
 Select the `FIXME` file in the explorer window, which will bring up the contents of the file in the code editor.
 
-::::::::::::::::::::::::::::::::: callout
+```python
+import glob
 
-## The File Explorer has Disappeared!
+import numpy as np
+from matplotlib import pyplot as plt
 
-You may find, perhaps on reopening VSCode, that the explorer is no longer visible.
-In this case, you can select `Explorer` from the sidebar to bring it back up again,
-and if you don't currently have a workspace loaded,
-you can select `Open Folder` to select the code folder.
+filenames = glob.glob('data/inflammation-*.csv')
+filenames.sort()
+filenames = filenames[0:3]
 
-:::::::::::::::::::::::::::::::::::::::::
+for filename in filenames:
+    print(filename)
+
+    data = np.loadtxt(fname=filename, delimiter=',')
+
+    fig = plt.figure(figsize=(10.0, 3.0))
+
+    axes1 = fig.add_subplot(1, 3, 1)
+    axes2 = fig.add_subplot(1, 3, 2)
+    axes3 = fig.add_subplot(1, 3, 3)
+
+    axes1.set_ylabel('average')
+    axes1.plot(data.mean(axis=0))
+
+    axes2.set_ylabel('max')
+    axes2.plot(data.max(axis=0))
+
+    axes3.set_ylabel('min')
+    axes3.plot(data.min(axis=0))
+
+    fig.tight_layout()
+    fig.savefig(filename + '.png')
+```
 
 Note that as an example, the code is deliberately written to have flaws.
 Things like the line spacing is inconsistent, there are no code comments, there's a variable that's not used, and you may spot other issues too.
@@ -237,6 +260,17 @@ But in essence, the code is designed to do the following:
    - Otherwise, extract the fourth column (which contains temperature in Fahrenheit), convert it to Celsius and Kelvin, and output those readings.
 
 Let's take a look at some of what the code editor gives us.
+
+::::::::::::::::::::::::::::::::: callout
+
+## The File Explorer has Disappeared!
+
+You may find, perhaps on reopening VSCode, that the explorer is no longer visible.
+In this case, you can select `Explorer` from the sidebar to bring it back up again,
+and if you don't currently have a workspace loaded,
+you can select `Open Folder` to select the code folder.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 ### Syntax Highlighting
 
@@ -304,18 +338,6 @@ You should see the program run, and output displayed in a pop-up terminal window
 FIXME: adapt to show output from updated example
 
 ```output
-steve@laptop:~/code-style-example$ /bin/python3 /home/steve/code-style-example/climate_analysis.py
-Max temperature in Celsius 14.73888888888889 Kelvin 287.88888888888886
-Max temperature in Celsius 14.777777777777779 Kelvin 287.92777777777775
-Max temperature in Celsius 14.61111111111111 Kelvin 287.76111111111106
-Max temperature in Celsius 13.838888888888887 Kelvin 286.9888888888889
-Max temperature in Celsius 15.477777777777778 Kelvin 288.62777777777774
-Max temperature in Celsius 14.972222222222225 Kelvin 288.1222222222222
-Max temperature in Celsius 14.85 Kelvin 288.0
-Max temperature in Celsius 16.33888888888889 Kelvin 289.4888888888889
-Max temperature in Celsius 16.261111111111113 Kelvin 289.4111111111111
-Max temperature in Celsius 16.33888888888889 Kelvin 289.4888888888889
-steve@laptop:~/code-style-example$ 
 ```
 
 ::::::::::::::::::::::::::::::::::::::::: instructor

@@ -71,8 +71,81 @@ including:
 - Frameworks, languages and dependencies
 - Any instructions file
 
+Copilot suggestions are a starting point, but we should alwyays review, understand, and amend as necessary,
+as opposed to blindly accepting suggestions.
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
+## Amend the Suggestions
+
+3 mins.
+
+Read through and understand the Copilot suggestions for the Coding Style section of the `copilot-instructions.md` file,
+and add/amend as you see fit, perhaps to fit your coding style.
+
+:::::::::::::::::::::::::: solution
+
+For example:
+
+```markdown
+### Coding Style
+- Follow PEP 8 style guidelines for Python code
+- Use descriptive variable names (e.g., `inflammation_data`, `mean_inflammation`)
+- Comment code sections for clarity, especially to explain purpose and logic, and to describe data processing steps
+```
+
+As we'll see shortly, these coding style guidelines will inform future refactoring of our code.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Inline Suggestions for Code
+
+3 mins.
+
+In `inflammation-plot.py`, begin adding an additional parameter to the functions calls in the code,
+by placing an additional `, ` at the end of the given list of parameters, and see which inline suggestions are being made, e.g.:
+
+```python
+    data = np.loadtxt(fname=filename, delimiter=',', ... )
+```
+
+Try this for the following function calls:
+- `np.loadtxt`
+- `plt.figure`
+- Each of the `.plot` calls to the `axes` variables
+
+1. What's being suggested?
+1. Are the suggestions helpful? Are they always the same?
+1. Does the code still run?
+
+:::::::::::::::::::::::::: solution
+
+1. For example:
+
+```python
+    data = np.loadtxt(fname=filename, delimiter=',', dtype=np.float64)
+```
+
+```python
+    fig = plt.figure(figsize=(10.0, 3.0), dpi=100)
+```
+
+For `.plot`, if the first suggestion of a `color` parameter is selected,
+it suggests variants of that for the other calls to `plot`, e.g.
+
+```python
+    axes1.plot(data.mean(axis=0), color='blue')
+    axes2.plot(data.mean(axis=0), color='red')
+    axes3.plot(data.mean(axis=0), color='green')
+```
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
