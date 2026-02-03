@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Microsoft Visual Studio Code"
-teaching: 25
+teaching: 40
 exercises: 20
 ---
 
@@ -167,13 +167,139 @@ Once selected, the default Python interpreter for VSCode will be configured.
 
 ### A Sample Project
 
-Next, let's obtain some example Python and edit it from within VSCode.
-First, download the example code we'll use from FIXME, either as a `.zip` or `.tar.gz` compressed archive file.
-If you're unsure, download the `.zip` file.
-Then, extract all the files from the archive into a convenient location.
-You should see files contained within a new directory named `FIXME`.
+For this lesson we'll be using some example code available on GitHub,
+which we'll clone onto our machines using the Bash shell.
+So firstly open a Bash shell (via Git Bash in Windows or Terminal on a Mac).
+Then, on the command line, navigate to where you'd like the example code to reside,
+and use Git to clone it.
+For example, to clone the repository in our home directory,
+and change our directory to the repository contents:
 
-Now we need to load the code into VSCode to see it. You can do this in a couple of ways, either:
+```bash
+cd
+git clone https://github.com/Southampton-RSG-Training/ai-tools-example.git
+cd ai-tools-example
+```
+
+## Installing Dependencies into a Virtual Environment
+
+This particular code makes use of two very popular Python packages:
+
+- `numpy`
+- `matplotlib`
+
+These need to be installed if we're to run the code,
+and we're going to create what's known as a virtual environment to hold these packages.
+
+:::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Installing Python Packages
+
+Who has installed a Python package before, using the program `pip`?
+Who has created and used a Python virtual environment before?
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Benefits of Virtual Environments
+
+Virtual environments are an indispensible tool for managing package dependencies across multiple projects,
+and could be a whole topic itself.
+In the case of Python, the idea is that instead of installing Python packages at the level of our machine's Python installation,
+which we could do,
+we're going to install them within their own "container",
+which is separate to the machine's Python installation.
+Then we'll run our Python code only using packages within that virtual environment.
+
+There are a number of key benefits to using virtual environments:
+
+- It creates a clear separation between the packages we use for this project,
+and the packages we use other projects.
+- We don't end up with a machine's Python installation containing a clutter of a thousand different packages,
+where determining which packages are used for which project often becomes very time consuming and prone to error.
+- Since we are sure what our code actually needs as dependencies,
+it becomes much easier for someone else (which could be a future version of ourselves) to know what these dependencies are and install them to use our code.
+- Virtual environments are not limited to Python; for example there are similar tools for available for Ruby, Java and JavaScript.
+
+### Setting up a Virtual Environment
+
+Let's now create a Python virtual environment and make use of it.
+Make sure you're in the root directory of the repository, then type
+
+```bash
+python -m venv venv
+```
+
+Here, we're using the built-on Python `venv` module - short for virtual environment - to create a virtual environment directory called "venv".
+We could have called the directory anything, but naming it `venv` (or `.venv`) is a common convention,
+as is creating it within the repository root directory.
+This makes sure the virtual environment is closely associated with this project, and not easily confused with another.
+
+Once created, we can *activate* it so it's the one in use:
+
+```bash
+[Linux] source venv/bin/activate
+[Mac] source venv/bin/activate
+[Windows] source venv/Scripts/activate
+```
+
+You should notice the prompt changes to reflect that the virtual environment is active, which is a handy reminder. For example:
+
+```output
+(venv) $
+```
+
+:::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+### Checkpoint: Setting up a Virtual Environment
+
+Who has successfully created and activated their virtual environment?
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now it's created, let's take a look at what's in this virtual environment at this point.
+
+```bash
+python -m pip list
+```
+
+```output
+Package    Version
+---------- -------
+pip        22.0.2
+setuptools 59.6.0
+```
+
+We can see this is essentially empty,
+aside from some default packages that installed when it is created.
+Depending on your version of Python, you may only see `pip` installed here.
+Importantly, note that whilst within this virtual environment,
+we no longer have access to any globally installed Python packages.
+
+### Adding Packages to a Virtual Environment
+
+Now we have our virtual environment, we can install NumPy and Matplotlib to it:
+
+```bash
+python -m pip install numpy matplotlib
+```
+
+If we do `python -m pip list` now, we can see these packages, and their dependencies, installed within the virtual environment we have activated.
+
+If we want to deactivate this environment, and return to the global Python package context,
+we can use `deactivate`.
+To reactivate it again, it's the same as before:
+
+```bash
+[Linux] source venv/bin/activate
+[Mac] source venv/bin/activate
+[Windows] source venv/Scripts/activate
+```
+
+
+## Opening in VSCode
+
+Now we need to load the code into VSCode to see it.
+You can do this in a couple of ways, either:
 
 1. Select the `Source control` icon from the middle of the icons on the left navigation bar. You should see an `Open Folder` option, so select that.
 1. Select the `File` option from the top menu bar, and select `Open Folder...`.
@@ -187,7 +313,7 @@ Note that we're looking for the *folder* that contains the files, not a specific
 
 If your system has the Git version control system installed, you may see a `Clone Repository` option here too.
 If you are familiar with Git and wish to use this option instead,
-select it and enter the repository's location as `FIXME`.
+select it and enter the repository's location as `https://github.com/Southampton-RSG-Training/ai-tools-example.git`.
 Then use the file browser that is presented to find a convenient location to store the cloned code and click on `Select as Repository Destination`,
 then select `Open` when ‘Would you like to open the cloned repository?' popup appears.
 
@@ -209,12 +335,13 @@ So far within VSCode we have downloaded some code from a repository and opened a
 Whenever we open a folder in VSCode, this is referred to as a "Workspace" - essentially, a collection of a project's files and directories.
 So within this workspace, you'll see the following:
 
-FIXME: list of files in file explorer
+- `data/` - a directory containing some example CSV files, each representing inflammation data from a series of hypothetical clinical trials for 60 patients over 40 days
+- `inflammation-plot.py` - which plots three graphs of the mean, maximum, and minimum values for each day of a trial for all patients
 
 ## Using VSCode
 
 Now we've acquainted ourselves with running VSCode, let's take a look at our example code.
-Select the `FIXME` file in the explorer window, which will bring up the contents of the file in the code editor.
+Select the `inflammation-plot.py` file in the explorer window, which will bring up the contents of the file in the code editor.
 
 ```python
 import glob
@@ -224,7 +351,6 @@ from matplotlib import pyplot as plt
 
 filenames = glob.glob('data/inflammation-*.csv')
 filenames.sort()
-filenames = filenames[0:3]
 
 for filename in filenames:
     print(filename)
@@ -251,13 +377,13 @@ for filename in filenames:
 ```
 
 Note that as an example, the code is deliberately written to have flaws.
-Things like the line spacing is inconsistent, there are no code comments, there's a variable that's not used, and you may spot other issues too.
+Things like the line spacing is inconsistent, there are no code comments, there's some code duplication, and you may spot other issues too.
 But in essence, the code is designed to do the following:
 
-1. Open a file in the CSV (comma separated value) format
-1. Go through the file line by line, and:
-   - If the line begins with a `#` symbol, ignore it.
-   - Otherwise, extract the fourth column (which contains temperature in Fahrenheit), convert it to Celsius and Kelvin, and output those readings.
+- Loop through a list of all inflammation data files (sorted by their filename) in the `data/` subdirectory
+- For each file, load the data into a Numpy array
+- For that array, create a plot containing three graphs, one for each of the mean, minimum and maximum of the data
+- Save the plot image to a file (essentially the same path and filename, with a `.png` added to it)
 
 Let's take a look at some of what the code editor gives us.
 
@@ -293,15 +419,15 @@ For example, on a blank line somewhere, enter `for x in something:`, and press t
 
 On the next line, we can see that it's automatically indented it for us, knowing that we're inside a loop.
 
-Another really helpful feature is something known as code completion (in VSCode, this is referred to as IntelliSense).
+Another really helpful feature is something known as code completion, or code autocomplete (in VSCode, this is referred to as IntelliSense).
 This is a great time saver, and a really useful feature of IDEs.
 Essentially, as you type, it works out the context of what you are doing, and gives you hints.
 
-FIXME: adapt below to example code used
-
-For example, if we start typing a variable we've already defined, for example `climate_data`,
+For example, if we start typing a variable we've already defined, for example `filenames`,
 we can see that it's zeroing in as we type on the options for what we might be trying to type.
-When we see `climate_data`, we can press `Tab` to complete it for us.
+When we see `filenames`, we can press `Tab` to complete it for us.
+If we then type `.`, to perhaps make use of a property or method, we'll see a list of possible options to autocomplete.
+
 As another example, if we wanted to open another file, we might type `new_file = open(`.
 In this case, it provides information on the file `open` function and its arguments, along with a description of what it does.
 This is really handy to we don't have to take the time to look up all this information up on the web, for example.
@@ -327,22 +453,44 @@ So in summary, many of these editing features are typical of IDEs in general,
 and the great thing is that they are really helpful at saving us time.
 Things like syntax highlighting, code completion, automatic code formatting and inserting docstrings, may not seem like much, but it all adds up!
 
+
 ## Running Python in VSCode
 
 Now let's try running a Python script.
 First, make sure your Python code doesn't have any errors!
+Next, you may recall we needed NumPy and Matplotlib to run this code;
+if you look at the the bottom right of VSCode's status bar, it should mention the version of Python being used, e.g. `3.14.2 (venv)`.
+So here, we can see that VSCode has automatically picked up our virtual environment we created earlier and will use that by default.
+
 Then, select the "Play"-looking icon at the top right of the code editor.
 
-You should see the program run, and output displayed in a pop-up terminal window at the bottom:
-
-FIXME: adapt to show output from updated example
+You should see the program run in a terminal window that appears at the bottom,
+along with the following output from the program:
 
 ```output
+data/inflammation-01.csv
+data/inflammation-02.csv
+data/inflammation-03.csv
+data/inflammation-04.csv
+data/inflammation-05.csv
+data/inflammation-06.csv
+data/inflammation-07.csv
+data/inflammation-08.csv
+data/inflammation-09.csv
+data/inflammation-10.csv
+data/inflammation-11.csv
+data/inflammation-12.csv
 ```
+
+After it's completed, we should see corresponding plot image files in the data directory,
+essentially each with a `.png` on the end.
+For example, `inflammation-01.csv.png` looks like:
+
+![Plot generated from data/inflammation-01.csv](fig/example-code-image-output.png)
 
 ::::::::::::::::::::::::::::::::::::::::: instructor
 
-## Checkpoint: who's run their Python progran and seen some output in a pop-up window?
+## Checkpoint: who's run their Python progran and seen this image when opening `data/inflammation-01.csv.png`?
 
 ::::::::::::::::::::::::::::::::::::::::: 
 
@@ -382,6 +530,7 @@ So when we write and run our code, we have the option of never having to leave V
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Integrated Development Environments (IDEs) are all-in-one tools for writing, editing, testing, and debugging code, improving developer efficiency by reducing the need to switch between different applications
+- Virtual environments are used to contain dependencies specific to a particular code project
 - Key VSCode features are accessible via the left navigation bar and the menu
 - VSCode's capabilities can be increased by installing extensions
 - A VSCode "workspace" is a project that consists of a collection of folder and files

@@ -42,6 +42,17 @@ the more we should increase our skepticism and diligence in reviewing and unders
 Within VSCode, Copilot can provide "inline" suggestions as we type,
 which go much further than typical IDE autocomplete suggestions.
 
+If we select the Copilot icon again in the status bar,
+we can see the current inline settings:
+
+![](fig/copilot-inline-settings.png)
+
+So here, we can see that inline settings will apply to all Python files.
+These suggestions will appear as "ghosted text" suggestion which you can autocomplete with tab,
+very similar to how they appear with standard VSCode autocomplete.
+There are also `Next edit suggestions` which go beyond the immediate context to make suggestions in other places in your code.
+These predict the location and the content of the next edit you'll want to make.
+
 Let's say we want to add a new section describing our coding style.
 Directly under `Code Patterns & Conventions`, add:
 
@@ -146,6 +157,92 @@ it suggests variants of that for the other calls to `plot`, e.g.
 :::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Edit Mode
+
+Edit mode differs from inline suggestions by offering the ability to enact changes step-by-step directly on your approval.
+Unlike inline suggestions which appear as you type, Edit mode allows you to request broader changes across multiple lines or functions,
+so it's ideal for repetive things like small-scale refactoring of code logic or renaming variables.
+It represents a middle ground in terms of autonomy — more direct than inline suggestions but less autonomous than Agent mode.
+
+To get started with using edit mode in VSCode, you highlight the code you want to modify before requesting the change you want.
+
+For example:
+
+1. Select `Edit` as the Copilot mode in the chat window
+1. Select the entire for loop in `inflammation-plot.py`; you'll notice that the context now includes this file with the selected line numbers
+1. Enter `Add a comment about this code above this line`
+1. Press `Enter`
+
+You'll now see a comment added above the loop highlighted in green, with a `Keep` or `Undo` pop-up displayed at the bottom.
+Read through the comment, and if you agree that the comment summarises the code sufficiently, select `Keep`.
+
+::::::::::::::::::::::::::::::::: callout
+
+## The Temptation to Blindly Accept!
+
+So note that here, we properly scrutinise the suggestion as opposed to accepting it blindly!
+it would be all too easy to just assume it's correct and just accept it,
+but it's helpful to remember that tools like Copilot are like a more helpful autocomplete,
+not a thinking teammate.
+As such, skepticism and review must become a key practice when using such tools.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Refactor!
+
+3 mins.
+
+Let's assume we want to rename the `axes` variables to have the prefix `subplot` instead,
+e.g. instead of `axes1`, we'd have `subplot1`.
+
+Use Copilot edit mode to rename all of these variables,
+then verify and accept the changes if you agree with them.
+Does the code still run correctly?
+
+:::::::::::::::::::::::::: solution
+
+1. Select the code from the first `axes1` definition to the last use of `subplot3`, e.g.
+
+   ```python
+       axes1 = fig.add_subplot(1, 3, 1)
+       axes2 = fig.add_subplot(1, 3, 2)
+       axes3 = fig.add_subplot(1, 3, 3)
+
+       axes1.set_ylabel('average')
+       axes1.plot(data.mean(axis=0))
+
+       axes2.set_ylabel('max')
+       axes2.plot(data.max(axis=0))
+
+       axes3.set_ylabel('min')
+       axes3.plot(data.min(axis=0))
+   ```
+
+1. Ensure `Edit` mode is selected in chat, and enter `Rename axes variables to have a subplot prefix instead`
+1. Press `Enter` and you should see something like the following:
+   ![](fig/copilot-rename-variables.png)
+1. After reviewing the suggestions, select `Keep`
+
+The code still runs correctly.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Agent Mode
+
+Agent mode differs from edit mode by being outcome driven rather than per-edit driven.
+So instead of asking Copilot to change a specific piece of code, you give it a goal, such as adding a feature, or refactoring a module.
+Copilot then plans how to achieve that goal and works across the repository to do so.
+It may read and modify multiple files, add or update tests, adjust configuration, and iterate over several steps before presenting the result.
+In this way, agent mode behaves more like a junior developer taking on a task, rather than a pair programmer responding line-by-line.
+Note the increase in authority to modify code, which represents a much greater risk:
+the impact of changes is greater and requires more careful (and potentially more involved) review.
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

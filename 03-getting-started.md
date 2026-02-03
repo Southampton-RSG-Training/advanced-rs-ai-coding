@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with using Copilot within VSCode"
-teaching: 15
+teaching: 30
 exercises: 30
 ---
 
