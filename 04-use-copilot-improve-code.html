@@ -119,11 +119,11 @@
   Developing Research Software with AI Tools
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 67%" class="percentage">
-    67%
+<aside class="col-md-12 lesson-progress"><div style="width: 71%" class="percentage">
+    71%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 67%" aria-valuenow="67" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 71%" aria-valuenow="71" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -245,6 +245,8 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#inline-suggestions">Inline Suggestions</a></li>
+<li><a href="#edit-mode">Edit Mode</a></li>
+<li><a href="#agent-mode">Agent Mode</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -309,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>How to use Copilot to Improve an Existing Codebase</h1>
-        <p>Last updated on 2026-02-02 |
+        <p>Last updated on 2026-02-03 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-use-copilot-improve-code.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -378,6 +380,15 @@ by such tools.</p>
 <section><h2 class="section-heading" id="inline-suggestions">Inline Suggestions<a class="anchor" aria-label="anchor" href="#inline-suggestions"></a></h2>
 <hr class="half-width"><p>Within VSCode, Copilot can provide “inline” suggestions as we type,
 which go much further than typical IDE autocomplete suggestions.</p>
+<p>If we select the Copilot icon again in the status bar, we can see the
+current inline settings:</p>
+<figure><img src="fig/copilot-inline-settings.png" class="figure mx-auto d-block"></figure><p>So here, we can see that inline settings will apply to all Python
+files. These suggestions will appear as “ghosted text” suggestion which
+you can autocomplete with tab, very similar to how they appear with
+standard VSCode autocomplete. There are also
+<code>Next edit suggestions</code> which go beyond the immediate context
+to make suggestions in other places in your code. These predict the
+location and the content of the next edit you’ll want to make.</p>
 <p>Let’s say we want to add a new section describing our coding style.
 Directly under <code>Code Patterns &amp; Conventions</code>, add:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -504,6 +515,115 @@ for the other calls to <code>plot</code>, e.g.</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="edit-mode">Edit Mode<a class="anchor" aria-label="anchor" href="#edit-mode"></a></h2>
+<hr class="half-width"><p>Edit mode differs from inline suggestions by offering the ability to
+enact changes step-by-step directly on your approval. Unlike inline
+suggestions which appear as you type, Edit mode allows you to request
+broader changes across multiple lines or functions, so it’s ideal for
+repetive things like small-scale refactoring of code logic or renaming
+variables. It represents a middle ground in terms of autonomy — more
+direct than inline suggestions but less autonomous than Agent mode.</p>
+<p>To get started with using edit mode in VSCode, you highlight the code
+you want to modify before requesting the change you want.</p>
+<p>For example:</p>
+<ol style="list-style-type: decimal"><li>Select <code>Edit</code> as the Copilot mode in the chat window</li>
+<li>Select the entire for loop in <code>inflammation-plot.py</code>;
+you’ll notice that the context now includes this file with the selected
+line numbers</li>
+<li>Enter
+<code>Add a comment about this code above this line</code>
+</li>
+<li>Press <code>Enter</code>
+</li>
+</ol><p>You’ll now see a comment added above the loop highlighted in green,
+with a <code>Keep</code> or <code>Undo</code> pop-up displayed at the
+bottom. Read through the comment, and if you agree that the comment
+summarises the code sufficiently, select <code>Keep</code>.</p>
+<div id="the-temptation-to-blindly-accept" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="the-temptation-to-blindly-accept" class="callout-inner">
+<h3 class="callout-title">The Temptation to Blindly Accept!</h3>
+<div class="callout-content">
+<p>So note that here, we properly scrutinise the suggestion as opposed
+to accepting it blindly! it would be all too easy to just assume it’s
+correct and just accept it, but it’s helpful to remember that tools like
+Copilot are like a more helpful autocomplete, not a thinking teammate.
+As such, skepticism and review must become a key practice when using
+such tools.</p>
+</div>
+</div>
+</div>
+<div id="refactor" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="refactor" class="callout-inner">
+<h3 class="callout-title">Refactor!</h3>
+<div class="callout-content">
+<p>3 mins.</p>
+<p>Let’s assume we want to rename the <code>axes</code> variables to
+have the prefix <code>subplot</code> instead, e.g. instead of
+<code>axes1</code>, we’d have <code>subplot1</code>.</p>
+<p>Use Copilot edit mode to rename all of these variables, then verify
+and accept the changes if you agree with them. Does the code still run
+correctly?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li>
+<p>Select the code from the first <code>axes1</code> definition to
+the last use of <code>subplot3</code>, e.g.</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>    axes1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    axes2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    axes3 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>    axes1.set_ylabel(<span class="st">'average'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>    axes1.plot(data.mean(axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>    axes2.set_ylabel(<span class="st">'max'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>    axes2.plot(data.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    axes3.set_ylabel(<span class="st">'min'</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>    axes3.plot(data.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>))</span></code></pre>
+</div>
+</li>
+<li><p>Ensure <code>Edit</code> mode is selected in chat, and enter
+<code>Rename axes variables to have a subplot prefix instead</code></p></li>
+<li><p>Press <code>Enter</code> and you should see something like the
+following: <img src="fig/copilot-rename-variables.png" class="figure"></p></li>
+<li><p>After reviewing the suggestions, select
+<code>Keep</code></p></li>
+</ol><p>The code still runs correctly.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="agent-mode">Agent Mode<a class="anchor" aria-label="anchor" href="#agent-mode"></a></h2>
+<hr class="half-width"><p>Agent mode differs from edit mode by being outcome driven rather than
+per-edit driven. So instead of asking Copilot to change a specific piece
+of code, you give it a goal, such as adding a feature, or refactoring a
+module. Copilot then plans how to achieve that goal and works across the
+repository to do so. It may read and modify multiple files, add or
+update tests, adjust configuration, and iterate over several steps
+before presenting the result. In this way, agent mode behaves more like
+a junior developer taking on a task, rather than a pair programmer
+responding line-by-line. Note the increase in authority to modify code,
+which represents a much greater risk: the impact of changes is greater
+and requires more careful (and potentially more involved) review.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -579,7 +699,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/04-use-copilot-improve-code.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/04-use-copilot-improve-code.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-02-02",
+  "dateModified": "2026-02-03",
   "datePublished": "2026-02-03"
 }
 
