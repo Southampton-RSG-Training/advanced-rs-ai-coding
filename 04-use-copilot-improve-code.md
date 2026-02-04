@@ -189,6 +189,8 @@ As such, skepticism and review must become a key practice when using such tools.
 
 :::::::::::::::::::::::::::::::::::::::::
 
+FIXME: add a bit on git commit messages in Copilot
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## A Small Refactor!
@@ -232,6 +234,26 @@ The code still runs correctly.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::: callout
+
+## The Importance of Process
+
+Process - the way we do things - is important in software engineering because it’s what leads towards reliable outcomes.
+Without process we rely on tacit knowledge and luck.
+But with process, we get repeatability, shared understanding, and the ability to improve over time.
+Good process makes work visible, enforces quality at the right moments (design, review, testing, release),
+and creates feedback loops so mistakes are caught early, when they’re cheapest to fix.
+In science, reproducibility is a central tenet of research.
+So as responsible researchers, we need to ensure we apply the same rigour to the software we write.
+
+AI tools like Copilot make this more important, not less.
+Whilst it accelerates code generation, it doesn't understand intent or consequences,
+so a strong process ensures we use AI in an environment that amplifies good engineering habits instead of bypassing them.
+
+The key principle is that process assigns responsibility to people, not tools.
+Copilot speeds up execution, but process ensures accountability, quality, and sustainability.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 ## Agent Mode
 
@@ -534,6 +556,62 @@ and summarise the responses:
 Were you able to achieve something that you regard as well written code you can understand?
 
 :::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## A "Clever" Refactor!
+
+5 mins.
+
+Let's assume that we want to expand this codebase further.
+Perhaps we know that the inflammation data format will change in the future,
+in ways that mean the NumPy library isn't the ideal processing library of choice,
+and that the Pandas library (which is a more general purpose data analysis library) will be a much better fit for this work.
+
+Using agent mode and a model of your choice,
+ask Copilot to refactor your code to use Pandas instead of NumPy:
+
+Part 1:
+
+1. Construct and enter a suitable prompt
+1. Review and accept the changes
+1. What do you need to do to be able to re-run the code?
+1. Does the code generate the correct results?
+
+Part 2:
+
+If you already know Pandas, do the changes look sensible?
+If you don't know Pandas, what are the risks of accepting these changes?
+
+:::::::::::::::::::::::::: solution
+
+Part 1:
+
+Prompt: `Modify this code to use Pandas instead of NumPy`
+Need to add pandas library to the virtual environment.
+In a terminal:
+
+```bash
+python -m pip install pandas
+```
+
+:::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: solution
+
+Part 2:
+
+If you don't already know Pandas,
+there is a considerable risk with this type of refactoring:
+by accepting these modifications,
+we're including code without understanding the concepts or operations of Pandas.
+This greatly increases the risk that we generate incorrect code,
+and should be avoided.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
