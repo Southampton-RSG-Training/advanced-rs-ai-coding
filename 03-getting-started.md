@@ -355,6 +355,9 @@ Repeat this for the other model types, asking the same exact question each time:
 2. How are these responses similar?
 3. How are these responses different?
 
+Don't update your code with any of the suggestions just yet,
+we'll come to this in the next episode.
+
 Use any remaining time to explore asking other questions!
 
 :::::::::::::::::::::::::: instructor
