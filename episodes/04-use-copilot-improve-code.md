@@ -217,6 +217,9 @@ Of course, we should vet and edit (or ask Copilot to retry) this description acc
 In this case, it doesn't mention about the DPI setting which might be a particular nuance we wish to add,
 so again, we need to review what Copilot suggests.
 
+Also worth noting is that if we wanted to reference a repository issue number in our commit message,
+we should remember to add that as well.
+
 Once we're happy with it, we can then select `Commit` to commit our changes to our local repository.
 
 :::::::::::::::::::::::::::::::::::::: challenge
@@ -280,7 +283,6 @@ So as responsible researchers, we need to ensure we apply the same rigour to the
 AI tools like Copilot make this more important, not less.
 Whilst it accelerates code generation, it doesn't understand intent or consequences,
 so a strong process ensures we use AI in an environment that amplifies good engineering habits instead of bypassing them.
-
 The key principle is that process assigns responsibility to people, not tools.
 Copilot speeds up execution, but process ensures accountability, quality, and sustainability.
 
