@@ -82,12 +82,12 @@ Some IDEs also offer:
   
 Here are a few widely used IDEs across different languages and fields:
 
-- [Visual Studio Code (VS Code)][vs-code] – lightweight and highly customisable; supports many languages
-- [PyCharm][pycharm] – great for Python development
-- [RStudio][r-studio] – tailored for R programming but allows users to mix (R Markdown) text with code in R, Python, Julia, shell scripts, SQL, Stan, JavaScript, C, C++, Fortran, and others, similar to Jupyter Notebooks.
-- [Eclipse][eclipse] – often used for Java and other compiled languages
-- [JupyterLab][jupyter-lab] – interactive environment for Python and data science
-- [Spyder][spyder] – popular among scientists using Python
+- [Visual Studio Code (VS Code)][https://code.visualstudio.com/] – lightweight and highly customisable; supports many languages
+- [PyCharm][https://www.jetbrains.com/pycharm/] – great for Python development
+- [RStudio][https://posit.co/download/rstudio-desktop/] – tailored for R programming but allows users to mix (R Markdown) text with code in R, Python, Julia, shell scripts, SQL, Stan, JavaScript, C, C++, Fortran, and others, similar to Jupyter Notebooks.
+- [Eclipse][https://jupyter.org/] – often used for Java and other compiled languages
+- [JupyterLab][https://eclipseide.org/] – interactive environment for Python and data science
+- [Spyder][https://www.spyder-ide.org/] – popular among scientists using Python
 
 ## Getting Started with VSCode
 
