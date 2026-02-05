@@ -313,7 +313,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started with using Copilot within VSCode</h1>
-        <p>Last updated on 2026-02-04 |
+        <p>Last updated on 2026-02-05 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -515,6 +515,12 @@ step separately and you’ll typically get a better outcome. This implies
 that it’s good to use a logical, iterative process of using AI to
 assist, using responses to simple questions to inform the next question,
 and so on.</p>
+<p>One thing to remember is how the context of each chat informs the
+flow of questions. Copilot chat uses the history of a chat thread to get
+context about your request. To ensure you only provide the context you
+want, use separate threads for each new conversation area you wish to
+start, and delete requests that are no longer relevant or otherwise not
+useful.</p>
 </div>
 </div>
 </div>
@@ -538,7 +544,7 @@ and so on.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>Describe the main packages used? e.g.</li>
 </ol><pre><code>1. glob: Built-in Python module for file pattern matching
@@ -717,6 +723,20 @@ will be consumed more quickly with higher cost multipliers!</p>
 </div>
 </div>
 </div>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div class="accordion-body">
+<p>Following the exercise below, talk through the possible solutions,
+highlighting the key similarities and differences between each
+response.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="asking-copilot-to-suggest-improvements" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -746,26 +766,12 @@ come to this in the next episode.</p>
 </div>
 </div>
 </div>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
-<div class="accordion-body">
-<p>Following the exercise, talk through the possible solution to this
-below, highlighting the key similarities and differences between each
-response.</p>
-</div>
-</div>
-</div>
-</div>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol><p>For the question <code>How can I make this code more readable?</code>
@@ -898,6 +904,20 @@ end</li>
 </div>
 <p>FIXME: summary of differences between model answers and key model
 differences and what they are best used for</p>
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div class="accordion-body">
+<p>For the next exercise, add two sections - one each for Benefits and
+Risks, so that participants can add their own comments to each
+category.</p>
+</div>
+</div>
+</div>
+</div>
 <div id="class-discussion-what-are-the-benefits-and-risks" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -908,28 +928,11 @@ differences and what they are best used for</p>
 Risks?</h3>
 <div class="callout-content">
 <p>10 mins.</p>
-<p>Having used some of the features of Copilot, what do you think
-are:</p>
-<ul><li>The benefits are of using it? How do you think it would help you in
-your work?</li>
+<p>Having used some of the features of Copilot, what do <em>you</em>
+think are:</p>
+<ul><li>The benefits are of using it?</li>
 <li>The risks of using it? What could go wrong?</li>
 </ul></div>
-</div>
-</div>
-<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
-  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
-</button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
-<div class="accordion-body">
-<p>For this exercise, send out a shared notes document to the cohort
-(writable by everyone) that is split into two sections: Benefits and
-Risks, so that participants can add their own comments to each category.
-For each of these, allow them 4 mins to add comments and 1 minute to
-summarise the comments.</p>
-</div>
-</div>
 </div>
 </div>
 <div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
@@ -937,7 +940,7 @@ summarise the comments.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Possible benefits:</p>
 <ul><li>Accelerates coding by generating boilerplate, scaffolding, and
@@ -962,60 +965,6 @@ detect</li>
 <li>Reinfoce poor existing patterns in the codebase</li>
 <li>Can deskill developers if used uncritically</li>
 </ul></div>
-</div>
-</div>
-</div>
-<div id="class-discussion-how-should-we-mitigate-these-risks" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div id="class-discussion-how-should-we-mitigate-these-risks" class="callout-inner">
-<h3 class="callout-title">Class Discussion: How Should we Mitigate These
-Risks?</h3>
-<div class="callout-content">
-<p>5 mins.</p>
-<p>What can we do to mitigate the risks we’ve identified? How should we
-adapt our day-to-day development to accomodate these changes?</p>
-</div>
-</div>
-</div>
-<div id="accordionInstructor3" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
-  <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
-</button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
-<div class="accordion-body">
-<p>For this exercise, in the shared notes document have a section for
-participants to add in answers.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
-</button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
-<div class="accordion-body">
-<ul><li>Ensure suggested changes are throughly reviewed understood prior to
-their inclusion in the code</li>
-<li>Keep the context and scope of prompts (and their expression) to a
-minimum to accomplish a task, to discourage large and/or complex
-suggestions that are difficult to understand</li>
-<li>In the case of refactored code, ensure suggested changes are
-throughly tested against the original version to ensure correct
-behaviour, i.e. manually, but also re-running a unit test suite if one
-exists and includes sufficient tests for the modified code</li>
-<li>Consider adding unit tests for AI-suggested changes or new
-features</li>
-</ul><p>Note that many of these changes are accepted best practice for code
-written manually; but since much less of our own cognition is involved
-in this style of development, adopting a more prudent and skeptical
-approach becomes even more important.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1129,7 +1078,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/03-getting-started.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/03-getting-started.html",
   "dateCreated": "2026-01-13",
-  "dateModified": "2026-02-04",
+  "dateModified": "2026-02-05",
   "datePublished": "2026-02-05"
 }
 
