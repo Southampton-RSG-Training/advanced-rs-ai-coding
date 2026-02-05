@@ -569,8 +569,6 @@ Were you able to achieve something that you regard as well written code that you
 
 :::::::::::::::::::::::::::::::::::::
 
-FIXME: add something on reusable prompt files
-
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## A "Clever" Refactor!
@@ -738,6 +736,74 @@ adopting a more critical and skeptical approach becomes even more important.
 :::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Reusable Code Prompts
+
+Reusable prompts in VSCode Copilot are predefined instructions or templates that you can quickly insert and use to guide Copilot's code generation or assistance.
+These prompts help you standardize requests, save time, and ensure consistency when working on repetitive tasks or when you want Copilot to follow specific patterns.
+
+### How Reusable Prompts Work
+
+You can create reusable prompts by saving frequently used instructions or code templates.
+These can be stored as snippets, comments, or in dedicated prompt files, depending on your workflow and the Copilot extension features.
+
+When you need Copilot to perform a task, you can insert a reusable prompt into your code or command palette.
+Copilot will interpret the prompt and generate code or suggestions based on the provided context.
+
+Reusable prompts help you:
+- Speed up development by avoiding repetitive typing
+- Maintain consistency in code style and structure
+- Share best practices and prompt templates with your team
+
+Common reusable prompts include requests like "Write a function to...", "Add type annotations to...", or "Generate unit tests for...".
+We then have the option to adapt these to our specific project needs.
+
+Some Copilot extensions or plugins may offer enhanced support for managing and sharing reusable prompts, making it easier to organize and access them within VSCode.
+
+Let's create a reusable prompt now.
+Our code repository is currently lacking a README, so let's adapt a pre-existing prompt definition.
+There are many reusable and freely available Copilot resources at [Awesome GitHub Copilot](https://github.github.com/awesome-copilot/),
+including agents, reusable prompts, and instruction files, all available from a GitHub repository.
+
+Let's first obtain a reusable prompt for generating README files.
+Take a look at https://raw.githubusercontent.com/github/awesome-copilot/refs/heads/main/prompts/readme-blueprint-generator.prompt.md:
+
+Looking at the file, we can see a number of structural features:
+
+- A metadata header at the top, describing what it aims to do and how it will run (in this case, via an agent)
+- A sequence of steps to follow, in this case starting with scanning a certain set of files to build context, using any `copilot-instructions.md` file, and generating a sections each based on specific criteria
+- Some end instructions clarifying how to format the README, and some high-level guidance on how to write it
+
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, add a section into the shared notes so that participants can add their own comments.
+
+:::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Create a Reusable Prompt File and Generate a README
+
+5 mins.
+
+1. Create a new directory at `.github/prompts` to hold any prompt files we want to include
+1. Download the prompt file at https://raw.githubusercontent.com/github/awesome-copilot/refs/heads/main/prompts/readme-blueprint-generator.prompt.md into this directory
+1. Select `Agent` and a model of your choice in the chat
+1. Use the prompt file to generate a README by typing `/readme-blueprint-generator` into the chat. The chat will autocomplete the name. Press enter to invoke it
+1. Select `Retry` if you want it to try again
+
+Once generated, review, accept, and amend the README as you see fit.
+You'll likely see things you want to correct or adapt!
+
+Add a short description to the shared notes document describing what you think about what is generated:
+
+- Generally, to what extent is the README is useful?
+- What is incorrect and needs to be fixed?
+- What is missing?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
