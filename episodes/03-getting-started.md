@@ -506,8 +506,6 @@ Key differences:
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: summary of differences between model answers and key model differences and what they are best used for
-
 :::::::::::::::::::::::::: instructor
 
 For the next exercise, add two sections - one each for Benefits and Risks, so that participants can add their own comments to each category.
