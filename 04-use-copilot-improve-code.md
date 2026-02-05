@@ -18,7 +18,7 @@ exercises: 30
 - Use Copilot to improve a segment of code
 - Use Copilot to diagnose a failing unit test and fix it
 - Use Copilot to add a new, small feature to an existing codebase
-- Describe how to use Copilot to assist with Git commits and managing Git history
+- Describe how to use Copilot to assist with Git commit messages
 - Create and use a reusable prompt context
 - Create an VSCode Agent Skill to define a specialised and reusable domain-specific task
 - Describe key limitations and known issues of using LLM coding assistants within an IDE
@@ -171,10 +171,17 @@ For example:
 
 1. Select `Edit` as the Copilot mode in the chat window
 1. Select the entire for loop in `inflammation-plot.py`; you'll notice that the context now includes this file with the selected line numbers
-1. Enter `Add a comment about this code above this line`
+1. Enter `Add a comment about this code above this loop`
 1. Press `Enter`
 
-You'll now see a comment added above the loop highlighted in green, with a `Keep` or `Undo` pop-up displayed at the bottom.
+You'll now see a comment added above the loop highlighted in green, e.g.
+
+```python
+# Process each inflammation data file and generate a 3-panel visualization
+# showing the mean, maximum, and minimum inflammation values across patients
+```
+
+You'll also see a `Keep` or `Undo` pop-up displayed at the bottom.
 Read through the comment, and if you agree that the comment summarises the code sufficiently, select `Keep`.
 
 ::::::::::::::::::::::::::::::::: callout
@@ -189,7 +196,28 @@ As such, skepticism and review must become a key practice when using such tools.
 
 :::::::::::::::::::::::::::::::::::::::::
 
-FIXME: add a bit on git commit messages in Copilot
+### Copilot and Commit Messages
+
+What's also useful is that we can have Copilot draft Git commit messages for us too.
+Sometimes writing concise messages is a bit of a pain, and this can help shortcut this activity a bit.
+It's also useful as an indicator of the scope of what we've changed semantically,
+although since Copilot aims to be concise, it may miss some key details.
+
+Let's add the changes we've made so far to the Git staging area:
+
+1. Select `Source Control` in the navigation bar (the third one down)
+1. Select the `+` icon next to `inflammation-plot.py` in the `Changes` list, which will add our changes so far to the Git staging area
+1. Select the sparkle icon next to the `Message` text box
+
+You should see something like:
+
+`Enhance inflammation plot visualization by adding colors and specifying data type`
+
+Of course, we should vet and edit (or ask Copilot to retry) this description accordingly.
+In this case, it doesn't mention about the DPI setting which might be a particular nuance we wish to add,
+so again, we need to review what Copilot suggests.
+
+Once we're happy with it, we can then select `Commit` to commit our changes to our local repository.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -203,6 +231,9 @@ e.g. instead of `axes1`, we'd have `subplot1`.
 Use Copilot edit mode to rename all of these variables,
 then verify and accept the changes if you agree with them.
 Does the code still run correctly?
+
+Note: after selecting the code, you can also request edits by typing `Ctrl` + `I` (Linux) or `Cmd Key/Windows Key` + `I` (Mac/Windows) to have a small pop-up appear to type in your request,
+which is quicker and sometimes more convenient if it's a small request.
 
 :::::::::::::::::::::::::: solution
 
@@ -553,9 +584,11 @@ if __name__ == '__main__':
 Following the exercise, paste the following comment into the chat, and ask for thumbs up/down as a reaction to it,
 and summarise the responses:
 
-Were you able to achieve something that you regard as well written code you can understand?
+Were you able to achieve something that you regard as well written code that you understand and runs?
 
 :::::::::::::::::::::::::::::::::::::
+
+FIXME: add something on reusable prompt files
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -577,6 +610,7 @@ Part 1:
 1. Review and accept the changes
 1. What do you need to do to be able to re-run the code?
 1. Does the code generate the correct results?
+1. Add the changes to Git staging area, Ask Copilot to generate a commit message, amend as necessary, and commit the change
 
 Part 2:
 
@@ -607,6 +641,47 @@ by accepting these modifications,
 we're including code without understanding the concepts or operations of Pandas.
 This greatly increases the risk that we generate incorrect code,
 and should be avoided.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Another Plot Please
+
+3 mins.
+
+Use agent mode to add the generation of a fourth plot to the code,
+for standard deviation,
+test the code to ensure it works,
+then add and commit the changes with a Copilot-generated (and reviewed) commit message.
+
+:::::::::::::::::::::::::: solution
+
+Prompt: `Add a fourth axes plot for standard deviation`
+
+```python
+    fig = plt.figure(figsize=(13.0, 3.0), dpi=100)
+
+    axes1 = fig.add_subplot(1, 4, 1)
+    axes2 = fig.add_subplot(1, 4, 2)
+    axes3 = fig.add_subplot(1, 4, 3)
+    axes4 = fig.add_subplot(1, 4, 4)
+
+    axes1.set_ylabel('average')
+    axes1.plot(data.mean(axis=0), color='blue')
+
+    axes2.set_ylabel('max')
+    axes2.plot(data.max(axis=0), color='red')
+
+    axes3.set_ylabel('min')
+    axes3.plot(data.min(axis=0), color='green')
+
+    axes4.set_ylabel('std')
+    axes4.plot(data.std(axis=0), color='orange')
+```
 
 :::::::::::::::::::::::::::::::::::
 
