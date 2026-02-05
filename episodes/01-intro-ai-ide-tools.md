@@ -337,6 +337,40 @@ The conclusion drawn was that, despite Replit’s popularity and large user base
 
 :::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Class Discussion: What are your AI Coding Fears?
+
+3 mins.
+
+Do you have any concerns with using AI coding assistants?
+What are you afraid could happen?
+
+:::::::::::::::::::::::::: solution
+
+Some possible concerns:
+
+- Incorrect but plausible code
+- Hallucinated APIs or behavior
+- Hidden assumptions
+- Over-trust of code / reduced code review
+- Poor maintainability
+- Loss of algorithmic understanding
+- Reproducibility issues
+- Mismatch with scientific methods
+- Licensing/IP uncertainty
+- Security and data leakage risks
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### A Key Risk: Technical Debt
 
 When faced with a problem that you need to solve by writing code,
@@ -436,9 +470,45 @@ It's particularly relevant to AI coding assistants, which at the time of writing
 
 ## Introduction to GitHub Copilot
 
-### How Copilot works within VSCode
+GitHub Copilot integrates directly into Visual Studio Code as an extension installable from within the IDE,
+providing access to:
 
+- **On-request explanations** - allowing you to obtain responses to questions in a chat interface
+- **Real-time assistance as you continue to develop your code** - where Copilot continuously analyzes the code you write, as well as comments and surrounding context, to offer intelligent suggestions which require approval.
+- **On-request direct code modification** - by requesting specific changes, your code is modified directly by Copilot (again, requiring specific approval before it integrates the suggested changes)
 
+All of this is integrated into the VSCode editor, so you do not need to leave your development environment.
+
+### The Lifecycle of a Copilot Prompt
+
+So how does Copilot integrate with VSCode, and how does it handle data?
+Let's look at how it creates a code suggestion as an example:
+
+![Lifecycle of a Copilot prompt](fig/copilot-prompt-lifecycle.png)
+
+At a high level, the following steps are followed:
+
+Within the Copilot-enabled IDE:
+
+1. Developer enters text into code editor, such as VSCode, gathering context from a number of sources (code before and after cursor, file name and type, other open editor tabs)
+2. The prompt is constructed from the amassed context and sent to the Copilot proxy
+
+Within the Copilot proxy (within the "Cloud"):
+
+3. Filters the requests, terminating those involving toxic language, unrelated code requests, and perceived hacking attempts.
+The prompt is sent to the GitHub Copilot LLM
+
+The Copilot LLM (also in the "Cloud"):
+
+4. Receives the request and formulates a code suggestion which is sent back to the proxy
+
+Back within the Copilot proxy:
+
+5. Receives the response, and tests code suggestions for code vulnerabilities, truncating responses that contain unique identifiers (sources), and filters out those matching known public code. The processed response is fed back to the Copilot client within the IDE
+
+Back within the Copilot-enabled IDE:
+
+6. The Copilot extension receives the code suggestion which is presented to the user to accept or reject
 
 ### Different Models
 

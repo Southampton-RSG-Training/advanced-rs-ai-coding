@@ -668,6 +668,12 @@ Prompt: `Add a fourth axes plot for standard deviation`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Class Discussion: What Will *You* Change?
@@ -675,12 +681,6 @@ Prompt: `Add a fourth axes plot for standard deviation`
 5 mins.
 
 How do you see AI coding assistants like Copilot changing your working practices?
-
-:::::::::::::::::::::::::: instructor
-
-For this exercise, in the shared notes document have a section for participants to add in answers.
-
-:::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -704,6 +704,12 @@ Copilot speeds up execution, but process ensures accountability, quality, and su
 
 :::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Class Discussion: How Should we Mitigate The Risks of using AI Coding Tools?
@@ -713,12 +719,6 @@ Copilot speeds up execution, but process ensures accountability, quality, and su
 What can we do to mitigate the risks of using AI coding tools like Copilot?
 How should we adapt our day-to-day development to accommodate these changes,
 not only for we use such tools with code, but also with our data?
-
-:::::::::::::::::::::::::: instructor
-
-For this exercise, in the shared notes document have a section for participants to add in answers.
-
-:::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: solution
 

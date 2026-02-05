@@ -341,6 +341,13 @@ since our quotas will be consumed more quickly with higher cost multipliers!
 
 :::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: instructor
+
+Following the exercise below, talk through the possible solutions,
+highlighting the key similarities and differences between each response.
+
+:::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Asking Copilot to Suggest Improvements
@@ -365,13 +372,6 @@ Don't update your code with any of the suggestions just yet,
 we'll come to this in the next episode.
 
 Use any remaining time to explore asking other questions!
-
-:::::::::::::::::::::::::: instructor
-
-Following the exercise, talk through the possible solution to this below,
-highlighting the key similarities and differences between each response.
-
-:::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: solution
 
@@ -508,6 +508,12 @@ Key differences:
 
 FIXME: summary of differences between model answers and key model differences and what they are best used for
 
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, add two sections - one each for Benefits and Risks, so that participants can add their own comments to each category.
+
+:::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Class Discussion: What are the Benefits and Risks?
@@ -519,14 +525,6 @@ what do *you* think are:
 
 - The benefits are of using it?
 - The risks of using it? What could go wrong?
-
-:::::::::::::::::::::::::: instructor
-
-For this exercise, send out a shared notes document to the cohort (writable by everyone) that is split into two sections:
-Benefits and Risks, so that participants can add their own comments to each category.
-For each of these, allow them 4 mins to add comments and 1 minute to summarise the comments.
-
-:::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: solution
 
