@@ -16,12 +16,10 @@ exercises: 30
 
 - Describe how to use prompt engineering to obtain valuable responses from Copilot
 - Use Copilot to improve a segment of code
-- Use Copilot to diagnose a failing unit test and fix it
 - Use Copilot to add a new, small feature to an existing codebase
 - Describe how to use Copilot to assist with Git commit messages
 - Create and use a reusable prompt context
 - Create an VSCode Agent Skill to define a specialised and reusable domain-specific task
-- Describe key limitations and known issues of using LLM coding assistants within an IDE
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -268,25 +266,6 @@ The code still runs correctly.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::: callout
-
-## The Importance of Process
-
-Process - the way we do things - is important in software engineering because it’s what leads towards reliable outcomes.
-Without process we rely on tacit knowledge and luck.
-But with process, we get repeatability, shared understanding, and the ability to improve over time.
-Good process makes work visible, enforces quality at the right moments (design, review, testing, release),
-and creates feedback loops so mistakes are caught early, when they’re cheapest to fix.
-In science, reproducibility is a central tenet of research.
-So as responsible researchers, we need to ensure we apply the same rigour to the software we write.
-
-AI tools like Copilot make this more important, not less.
-Whilst it accelerates code generation, it doesn't understand intent or consequences,
-so a strong process ensures we use AI in an environment that amplifies good engineering habits instead of bypassing them.
-The key principle is that process assigns responsibility to people, not tools.
-Copilot speeds up execution, but process ensures accountability, quality, and sustainability.
-
-:::::::::::::::::::::::::::::::::::::::::
 
 ## Agent Mode
 
@@ -689,7 +668,76 @@ Prompt: `Add a fourth axes plot for standard deviation`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::: challenge
 
+## Class Discussion: What Will *You* Change?
+
+5 mins.
+
+How do you see AI coding assistants like Copilot changing your working practices?
+
+:::::::::::::::::::::::::: instructor
+
+For this exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::: callout
+
+## The Importance of Process
+
+Process - the way we do things - is important in software engineering because it’s what leads towards reliable outcomes.
+Without process we rely on tacit knowledge and luck.
+But with process, we get repeatability, shared understanding, and the ability to improve over time.
+Good process makes work visible, enforces quality at the right moments (design, review, testing, release),
+and creates feedback loops so mistakes are caught early, when they’re cheapest to fix.
+In science, reproducibility is a central tenet of research.
+So as responsible researchers, we need to ensure we apply the same rigour to the software we write.
+
+AI tools like Copilot make this more important, not less.
+Whilst it accelerates code generation, it doesn't understand intent or consequences,
+so a strong process ensures we use AI in an environment that amplifies good engineering habits instead of bypassing them.
+The key principle is that process assigns responsibility to people, not tools.
+Copilot speeds up execution, but process ensures accountability, quality, and sustainability.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Class Discussion: How Should we Mitigate The Risks of using AI Coding Tools?
+
+5 mins.
+
+What can we do to mitigate the risks of using AI coding tools like Copilot?
+How should we adapt our day-to-day development to accommodate these changes,
+not only for we use such tools with code, but also with our data?
+
+:::::::::::::::::::::::::: instructor
+
+For this exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: solution
+
+Some suggestions:
+
+- Ensure suggested changes are throughly reviewed understood prior to their inclusion in the code
+- Keep the context and scope of prompts (and their expression) to a minimum to accomplish a task,
+to discourage large and/or complex suggestions that are difficult to understand
+- In the case of refactored code, ensure suggested changes are throughly tested against the original version to ensure correct behaviour, i.e. manually, but also re-running a unit test suite if one exists and includes sufficient tests for the modified code
+- Consider adding unit tests for AI-suggested changes or new features
+- Ensure we continue to adhere to any project defined data management plan and institutional research data management policies
+
+Note that many of these changes are accepted best practice for code written manually.
+However since much less of our own cognition is involved in this style of development,
+adopting a more critical and skeptical approach becomes even more important.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

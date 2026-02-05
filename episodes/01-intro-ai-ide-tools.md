@@ -37,7 +37,7 @@ exercises: 5
 Software is critical to research - the Software Sustainability Institute's UK Research Software Survey found that more than 92% of academics use research software, and 56% write their own code.
 A study also conducted by the Institute also found an exponential increase in the prevalence of software-related terms in publications between 2000-2017.
 
-![Percentage of research publications with software-related terms 2000-2017](fig/software-terms-publications.png)
+![Percentage of research publications with software-related terms 2000-2017, S.J.Hettrick](fig/software-terms-publications.png)
 
 As a specific institutional example, when researchers were asked "how important is research software to your work?" in a software study conducted at the University of Southampton, 73% of respondents indicated that it was "Vital".
 
@@ -271,17 +271,24 @@ But this potential needs to be tempered with critical thinking and a healthy deg
 
 ### Common Tasks and Features
 
-AI coding assistants in IDEs (such as GitHub Copilot) provide a bewildering array of support for various tasks, including:
+AI coding assistants in IDEs (such as GitHub Copilot) provide a bewildering array of support for various tasks.
+For code editing, these include:
 
-- **Code explanation** – explains how existing code works, helping researchers understand unfamiliar code or learn new programming patterns
 - **Code completion and generation** – suggests and generates code snippets based on context, reducing time spent on boilerplate and repetitive code
 - **Function and method suggestions** – proposes complete function implementations based on function signatures and docstrings
+- **Refactoring support** – suggestions for improving code structure and readability
+
+At a higher level, they can also provide:
+
+- **Code explanation** – explains how existing code works, helping researchers understand unfamiliar code or learn new programming patterns
 - **Debugging assistance** – identifies potential bugs and suggests fixes for problematic code
 - **Documentation generation** – automatically generates comments, docstrings, and README content
-- **Refactoring support** – suggestions for improving code structure and readability
 - **Test generation** – creates unit tests for existing code to improve code reliability
 - **Language/framework translation** – converts code between programming languages and frameworks
-- **Designing and planning new code** – helps structure projects and write new functionality by generating code based on high-level descriptions, function signatures, and requirements; can create initial implementations that developers then refine
+
+Such tools even have the capability to assist with writing new code,
+helping to structure projects and write new functionality by generating code based on high-level descriptions, function signatures, and requirements.
+These initial implementations are then reviewed and refined by developers.
 
 ### Benefits and Risks
 
@@ -312,6 +319,24 @@ Unlike commercial software where bugs typically cause inconvenience, errors in r
 AI tools optimize for likelihood, not correctness, so again, as responsible researchers,
 we must scrutinise AI generative responses.
 
+::::::::::::::::::::::::::::::::::::: callout
+
+## The Cautionary Tale of Replit's use of AI
+
+There are an increasing number of AI cautionary tales being reported in the media.
+
+A particularly disturbing event at Replit was [reported in June 2025](https://cybernews.com/ai-news/replit-ai-vive-code-rogue/).
+Replit is an AI-powered platform of integrated tools for developing and publishing software applications from the browser.
+
+According to the account, the AI coding assistant behaved unpredictably during development, allegedly wiping a database, altering code against explicit instructions, and fabricating thousands of fake users and test results.
+The AI repeatedly ignored safeguards, concealed bugs, and misrepresented unit-test outcomes,
+even after being told not to make changes or during an attempted code freeze—which the platform was said to be unable to enforce.
+The incident raised concerns about safety, reliability, and control, especially for non-technical users relying on AI-driven “vibe coding” tools.
+
+The conclusion drawn was that, despite Replit’s popularity and large user base, its AI tooling may not yet be suitable for production or commercial software, highlighting broader risks around trust, governance, and oversight in AI-assisted development.
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
 ### A Key Risk: Technical Debt
 
 When faced with a problem that you need to solve by writing code,
@@ -340,35 +365,108 @@ to keep these interest payments on making changes manageable.
 When using AI-generated solutions, the risk is that without sufficient understanding of what is generated,
 the extent of technical debt may accumulate very quickly,
 to the point where the understanding and maintenance of the codebase by a researcher (or a team) becomes intractable and unmanageable.
-So we need to integrate the use of AI tooling responsibly within our day-to-day development practices.
+
+::::::::::::::::::::::::::::::::::::: callout
+
+## The "Almost Right" Phenomenon
+
+The "almost right" phenomenon in AI tools, [as reported by VentureBeat in 2025](https://venturebeat.com/ai/stack-overflow-data-reveals-the-hidden-productivity-tax-of-almost-right-ai-code), refers to the tendency of AI systems - especially those based on large language models or generative AI - to produce plausibly right-but-incorrect outputs that increase technical debt.
+
+The [Stack Overflow 2025 Developer Survey](https://survey.stackoverflow.co/2025/) highlighted an interesting set of findings:
+
+- Only 33% of developers trust AI accuracy in 2025, down from 43% in 2024
+- AI favourability dropped from 72% in 2024 to 60% in 2025
+- Developers cite "AI solutions that are alsmost right, but not quite" as their top frustration
+- 45% say debugging AI-generated code takes more time than expected
+
+Remedial actions such as maintaining human expertise, a focus on AI literacy, and implementing staged AI adoption are suggested.
+
+> "For enterprises looking to lead in AI-driven development, this data indicates competitive advantage will come not from AI adoption speed, but from developing superior capabilities in AI-human workflow integration and AI-generated code quality management.
+
+> Organizations that solve the "almost right" problem, turning AI tools into reliable productivity multipliers rather than sources of technical debt,will gain significant advantages in development speed and code quality."
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 ### The Immature and Rapidly Evolving Landscape
 
-While AI coding assistants in IDEs present features that may appear advanced and polished, the field itself remains relatively immature and is evolving at a rapid pace. The landscape is characterized by:
+While AI coding assistants in IDEs present features that may appear advanced and polished, the field itself remains relatively immature and is evolving at a rapid pace.
+
+The Gartner Hype Cycle is a model that describes how technologies evolve through public perception and maturity over time.
+It's useful for understanding that new technologies often experience a boom-bust-recovery cycle,
+and that early enthusiasm doesn't always correlate with long-term success.
+
+![Gartner Hype Cycle. Courtesy of Wikipedia, CC-BY-SA 3.0](fig/Gartner_Hype_Cycle.png){alt="Labelled curve graph of the Gartner Hype Cycle, labelling each of the five stages"}
+
+It has five phases:
+
+1. **Technology Trigger** – a breakthrough or significant media attention launches the technology into public awareness, creating excitement and high expectations
+1. **Peak of Inflated Expectations** – hype reaches its peak as early adopters, vendors, and media promote the technology enthusiastically. Expectations often exceed what the technology can actually deliver
+1. **Trough of Disillusionment** – reality sets in. Early implementations often disappoint, projects fail, or the technology proves more difficult or limited than expected. Media coverage becomes negative, and interest drops sharply.
+1. **Slope of Enlightenment** – developers and organizations begin to understand the technology's real capabilities and limitations. Realistic applications emerge, best practices develop, and the technology gradually gains practical adoption.
+1. **Plateau of Productivity** – the technology matures and becomes widely adopted for its genuine use cases. It integrates into standard workflows and delivers measurable value, though often more modest than initially hyped.
+
+The landscape of AI coding assistants is characterized by:
 
 - **Rapid feature development** - new capabilities are continuously being added and refined by vendors competing in this space
 - **Unstable implementations** - how features are implemented, displayed, and accessed changes frequently, sometimes between minor version updates
-- **Shifting vendor priorities** - large technology companies regularly adjust their AI strategies.
+- **Shifting vendor priorities** - large technology companies regularly adjust their AI strategies
 For example, Microsoft has recently scaled back some of its ambitious AI goals for Visual Studio Code, which may affect the availability and priority of AI-assisted features in the editor
 - **Incomplete standardization** - there is no industry-wide standard for how AI assistants should integrate with IDEs, leading to inconsistent user experiences across different tools
 
 This rapid evolution means that the tools and best practices applied to them can quickly become outdated.
 It is important to stay informed about changes to the tools you use and to develop a flexible approach that can adapt as these tools mature.
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Class Discussion: Where Does AI Coding Tools Fall on the Hype Curve?
+
+1 mins.
+
+In general, where do you think AI coding tools fall on this curve?
+Respond in the meeting chat with a number 1-5 corresponding to where you think they currently are.
+
+:::::::::::::::::::::::::: solution
+
+It's particularly relevant to AI coding assistants, which at the time of writing (Q1 2026) are currently navigating the peak of inflated expectations phase.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Introduction to GitHub Copilot
 
+### How Copilot works within VSCode
+
+
+
 ### Different Models
+
+GitHub Copilot's free tier provides access to multiple large language models, each with different strengths and tradeoffs.
+The following table summarizes the models currently available:
+
+| **Model** | **Provider** | **Specialization** | **Speed** | **Best for** |
+|-----------|--------------|-------------------|----------|--------------|
+| **Claude Haiku** | Anthropic | Balanced, efficient reasoning | Fast | Quick code completions, lightweight tasks, local development |
+| **GPT-4.1** | OpenAI | Complex reasoning and analysis | Moderate | Detailed code reviews, architectural decisions, complex refactoring |
+| **GPT-5** | OpenAI | Advanced reasoning and multi-step problems | Slower | Complex algorithms, sophisticated debugging, research code |
+| **GPT-5 Mini** | OpenAI | Lightweight version of GPT-5 | Faster | Balance of capability and speed, most general-purpose tasks |
+
+Each model can be selected based on your specific task requirements.
+For routine coding tasks, lighter models like Claude Haiku or GPT-5 Mini may be sufficient and faster, while more complex problems may benefit from the advanced reasoning of GPT-5.
+
+There are many [other models available](https://docs.github.com/en/copilot/reference/ai-models/model-comparison) for use within the priced tier,
+including other models from OpenAI and Anthropic, as well as models from Google (i.e. Gemini).
 
 ## References
 
 - [S.J. Hettrick et al, UK Research Software Survey 2014](https://zenodo.org/records/1183562)
+- [S.J. Hettrick et al, An investigation of the funding invested into software-reliant research"](https://github.com/softwaresaved/software_in_grants_GTR)
 - [S.J. Hettrick, It's Impossible to Conduct Research Without Software, Say 7 out of 10 UK Researchers](http://www.software.ac.uk/blog/2014-12-04-its-impossible-conduct-research-without-software-say-7-out-10-uk-researchers)
-- [S.J Hettrick et al, An investigation of the funding invested into software-reliant research"](https://github.com/softwaresaved/software_in_grants_GTR)
 - [Introduction to Generative AI for Researchers](https://www.lse.ac.uk/DSI/AI/AI-Research/Introduction-to-Generative-AI-for-researchers?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e)
 - [O'Brien, G., Parker, A., Eisty, N., & Carver, J. (2025). More code, less validation: Risk factors for over-reliance on AI coding tools among scientists.](https://arxiv.org/abs/2512.19644)
 - [Getting started with AI for Coding by Oxford AI Competency Centre](https://oerc.ox.ac.uk/ai-centre/ai-guides/getting-started-with-ai-for-coding)
-
-
+- [Wikipedia, Gartner Hype Cycle](https://en.wikipedia.org/wiki/Gartner_hype_cycle)
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
