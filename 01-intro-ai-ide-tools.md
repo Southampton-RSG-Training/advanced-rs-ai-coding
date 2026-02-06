@@ -515,7 +515,7 @@ The Copilot LLM (also in the "Cloud"):
 
 Back within the Copilot proxy:
 
-5. Receives the response, and tests code suggestions for code vulnerabilities, truncating responses that contain unique identifiers (sources), and filters out those matching known public code. The processed response is fed back to the Copilot client within the IDE
+5. Receives the response, and tests code suggestions for code vulnerabilities, truncating responses that contain unique identifiers (such as email addresses, GitHub URLs, IP addresses, etc.), and filters out those matching known public code. The processed response is fed back to the Copilot client within the IDE
 
 Back within the Copilot-enabled IDE:
 
