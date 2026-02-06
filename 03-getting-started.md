@@ -58,6 +58,29 @@ Now we have the extension installed, but we need to associate it with our GitHub
 
 Once completed, you'll now be able to use GitHub Copilot within VSCode.
 
+::::::::::::::::::::::::::::::::: callout
+
+## Decide on Copilot Privacy Settings
+
+Within GitHub itself, since Copilot's VSCode configuration inherits from GitHub's configuration,
+as a first step we can and should decide and configure a suitable level of privacy for how Copilot will operate;
+particularly if we are making use of sensitive or otherwise confidential data within our codebase.
+
+We can set this within our GitHub user settings, which will apply to all we do with Copilot:
+
+1. Select out GitHub profile icon at github.com, and select `Settings` and then `Copilot`
+1. Scroll down to `Privacy`:
+
+   ![Privacy settings within GitHub Copilot](fig/copilot-privacy.png)
+
+By default, in the free tier, the first two are enabled.
+
+In general, it's a good idea to disable `Suggestions matching public code` since the risk is that it may make use of public code sources in a way that isn't properly licensed.
+In addition, it's recommended to disable the other two (depending on the extent you trust GitHub and their affiliates),
+since - as it clearly states - they allow GitHub and others to use data and code snippets for product improvements.
+
+:::::::::::::::::::::::::::::::::::::::::
+
 ## Asking Questions about Your Code
 
 Attempting to understand a new codebase, whether it's your first week on a project or one you have inherited from another source, can be difficult. 
@@ -347,7 +370,7 @@ Approve this file addition by selecting `Keep`.
 From this starting point we are free to update this file manually as we continue to develop the code,
 and this context will be used whenever we interact with Copilot.
 
-### Specifying Privacy
+### Specifying Privacy per File Type
 
 In VS Code, GitHub Copilot gives developers some mechanisms to control the level of privacy.
 This should be considered important where our code uses sensitive or otherwise confidential data,
@@ -378,6 +401,7 @@ If you wanted a stricter "default deny" approach instead, you could specify `fal
 
 There are stricter controls, including some that allow exclusion by directory specifications,
 but these are currently limited to Copilot Business users for their repositories and organisations.
+
 
 ## Obtaining Guidance on how to Improve our Code
 
