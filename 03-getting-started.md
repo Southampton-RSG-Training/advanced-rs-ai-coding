@@ -135,7 +135,7 @@ This effect is often visibly compounded over time, as the probabilistic outcome 
 
 ::::::::::::::::::::::::::::::::: callout
 
-## How to Write Good Chat Prompts?
+## Writing Good Chat Prompts
 
 AI tools work best with context, so it's good to be specific where you can.
 
@@ -149,6 +149,12 @@ so if you end up with a question that is decomposable into separate steps,
 ask each step separately and you'll typically get a better outcome.
 This implies that it's good to use a logical, iterative process of using AI to assist,
 using responses to simple questions to inform the next question, and so on.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::: callout
+
+## Managing Context
 
 One thing to remember is how the context of each chat informs the flow of questions.
 Copilot chat uses the history of a chat thread to get context about your request.
