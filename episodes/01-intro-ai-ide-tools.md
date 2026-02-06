@@ -538,6 +538,7 @@ For routine coding tasks, lighter models like Claude Haiku or GPT-5 Mini may be 
 
 There are many [other models available](https://docs.github.com/en/copilot/reference/ai-models/model-comparison) for use within the priced tier,
 including other models from OpenAI and Anthropic, as well as models from Google (i.e. Gemini).
+Some of these e.g. GPT-5-Codex have been optimised for writing code and other software engineering tasks.
 
 ## References
 
