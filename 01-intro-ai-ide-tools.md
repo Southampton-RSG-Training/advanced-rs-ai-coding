@@ -521,6 +521,8 @@ Back within the Copilot-enabled IDE:
 
 6. The Copilot extension receives the code suggestion which is presented to the user to accept or reject
 
+GitHub provides further detailed information about [how GitHub Copilot handles data](https://resources.github.com/learn/pathways/copilot/essentials/how-github-copilot-handles-data/).
+
 ### Different Models
 
 GitHub Copilot's free tier provides access to multiple large language models, each with different strengths and tradeoffs.
