@@ -500,21 +500,18 @@ increasingly different result.</p>
 <div id="writing-good-chat-prompts" class="callout-inner">
 <h3 class="callout-title">Writing Good Chat Prompts</h3>
 <div class="callout-content">
-<p>AI tools work best with context, so it’s good to be specific where
-you can.</p>
-<p>To add context to a chat prompt you can type <code>#</code> followed
-by the context item you want to add, such as a file, folder, tools, code
-elements (such as variables, functions or classes), tools, amongst
-others. For example, we could type <code>#inflammation-plot.py</code> to
-ensure only responses relevant to that specific file will be generated.
-Alternatively, we could use <code>#codebase</code> if we aren’t sure
-which files are relevant to our question.</p>
+<p>AI tools work best with context, so it’s good to be as specific and
+concise as possible.</p>
 <p>It’s also a good idea to be provide simple questions, so if you end
 up with a question that is decomposable into separate steps, ask each
 step separately and you’ll typically get a better outcome. This implies
 that it’s good to use a logical, iterative process of using AI to
 assist, using responses to simple questions to inform the next question,
 and so on.</p>
+<p>There’s a very useful cheat sheet developed by Northwestern
+University (US) Research Computing and Data Services, which can be found
+in their <a href="https://github.com/nuitrcs/promptEngineering" class="external-link">GitHub
+promptEngineering repository</a>.</p>
 </div>
 </div>
 </div>
@@ -526,7 +523,18 @@ and so on.</p>
 <div id="managing-context" class="callout-inner">
 <h3 class="callout-title">Managing Context</h3>
 <div class="callout-content">
-<p>One thing to remember is how the context of each chat informs the
+<p>To improve the specificity of a prompt, it’s helpful to add as much
+context as you can.</p>
+<p>To add context to a chat prompt you can type <code>#</code> followed
+by the context item you want to add, such as a file, folder, tools, code
+elements (such as variables, functions or classes), tools, amongst
+others. For example, we could type <code>#inflammation-plot.py</code> to
+ensure only responses relevant to that specific file will be generated.
+We could use <code>#codebase</code> if we aren’t sure which files are
+relevant to our question, to include all our files. Of course, our code
+may make use of sensitive data files that we don’t want Copilot to use,
+which we’ll look at shortly.</p>
+<p>Another thing to remember is how the context of each chat informs the
 flow of questions. Copilot chat uses the history of a chat thread to get
 context about your request. To ensure you only provide the context you
 want, use separate threads for each new conversation area you wish to
@@ -734,6 +742,47 @@ otherwise enhancement it</li>
 we continue to develop the code, and this context will be used whenever
 we interact with Copilot.</p>
 </div>
+<div class="section level3">
+<h3 id="specifying-privacy">Specifying Privacy<a class="anchor" aria-label="anchor" href="#specifying-privacy"></a></h3>
+<p>In VS Code, GitHub Copilot gives developers some mechanisms to
+control the level of privacy. This should be considered important where
+our code uses sensitive or otherwise confidential data, or potentially
+valuable IP-related code, such as algorithms.</p>
+<p>At a high level, Copilot works by sending small, relevant snippets of
+your open code (plus surrounding context) to the Copilot service to
+generate suggestions. You don’t explicitly “upload a project”, but you
+do control which files Copilot is allowed to see and draw context
+from.</p>
+<p>The most practical control is scoping Copilot by file, folder, or
+workspace. In VS Code you can disable Copilot entirely, or selectively
+turn it off for particular file types (for example, configuration files,
+data files, or notebooks).</p>
+<p>For example, we edit our VSCode settings to ignore csv files by:</p>
+<ol style="list-style-type: decimal"><li><p>Using <code>Ctrl + Shift + P</code> or
+<code>Cmd/Windows Key + Shift + P</code> to open the Command
+Palette</p></li>
+<li><p>Entering and selecting
+<code>Preferences: Open User Settings (JSON)</code></p></li>
+<li>
+<p>In the <code>settings.json</code> file that appears, add the
+following:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="at">   </span><span class="fu">"github.copilot.enable"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="kw">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="at">      </span><span class="fu">"csv"</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="at">   </span><span class="kw">}</span></span></code></pre>
+</div>
+</li>
+</ol><p>This will have the effect of potentially including all file types in
+context by default, but not CSV files. If you wanted a stricter “default
+deny” approach instead, you could specify <code>false</code> for
+<code>*</code> and enable each filetype explicitly.</p>
+<p>There are stricter controls, including some that allow exclusion by
+directory specifications, but these are currently limited to Copilot
+Business users for their repositories and organisations.</p>
+</div>
 </section><section><h2 class="section-heading" id="obtaining-guidance-on-how-to-improve-our-code">Obtaining Guidance on how to Improve our Code<a class="anchor" aria-label="anchor" href="#obtaining-guidance-on-how-to-improve-our-code"></a></h2>
 <hr class="half-width"><p>Now have an instructions file to guide Copilot, let’s take its
 guidance one step further. So far we’ve been asking quite specific
@@ -829,44 +878,44 @@ in the source code</li>
 taken as context</li>
 </ul><p>Claude Haiku 4.5:</p>
 <pre><code>Your code can be made more readable by extracting the repetitive subplot pattern into a helper function and using a tuple/list to store the axes. Here's a refactored version:</code></pre>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="kw">def</span> plot_statistics(axes, data, stat_func, label):</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    <span class="co">"""Plot a single statistic on the given axes.</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">        axes: Matplotlib axes object</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">        data: NumPy array of inflammation measurements</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">        stat_func: Function to compute statistic (e.g., data.mean)</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">        label: Y-axis label string</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>    axes.set_ylabel(label)</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    axes.plot(stat_func(axis<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>filenames <span class="op">=</span> glob.glob(<span class="st">'../data/inflammation-*.csv'</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>filenames.sort()</span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>filenames <span class="op">=</span> filenames[<span class="dv">0</span>:<span class="dv">3</span>]</span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>    data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.0</span>, <span class="fl">3.0</span>))</span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>    axes <span class="op">=</span> [fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">0</span>], data, data.mean, <span class="st">'average'</span>)</span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">1</span>], data, data.<span class="bu">max</span>, <span class="st">'max'</span>)</span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">2</span>], data, data.<span class="bu">min</span>, <span class="st">'min'</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>    fig.tight_layout()</span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>    fig.savefig(filename <span class="op">+</span> <span class="st">'.png'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="kw">def</span> plot_statistics(axes, data, stat_func, label):</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="co">"""Plot a single statistic on the given axes.</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">        axes: Matplotlib axes object</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">        data: NumPy array of inflammation measurements</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">        stat_func: Function to compute statistic (e.g., data.mean)</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">        label: Y-axis label string</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>    axes.set_ylabel(label)</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>    axes.plot(stat_func(axis<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>filenames <span class="op">=</span> glob.glob(<span class="st">'../data/inflammation-*.csv'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>filenames.sort()</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>filenames <span class="op">=</span> filenames[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>    <span class="bu">print</span>(filename)</span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>    data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">10.0</span>, <span class="fl">3.0</span>))</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>    axes <span class="op">=</span> [fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">0</span>], data, data.mean, <span class="st">'average'</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">1</span>], data, data.<span class="bu">max</span>, <span class="st">'max'</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>    plot_statistics(axes[<span class="dv">2</span>], data, data.<span class="bu">min</span>, <span class="st">'min'</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>    fig.tight_layout()</span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>    fig.savefig(filename <span class="op">+</span> <span class="st">'.png'</span>)</span></code></pre>
 </div>
 <pre><code>Key improvements:
 
@@ -876,45 +925,45 @@ taken as context</li>
 - Maintains all existing functionality and conventions from your codebase</code></pre>
 <p>GPT-5 mini:</p>
 <pre><code>Refactored file to improve readability (extracted helper, constants, main, axes list):</code></pre>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># ...existing code...</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>FIGSIZE <span class="op">=</span> (<span class="fl">10.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>DATA_PATTERN <span class="op">=</span> <span class="st">'../data/inflammation-*.csv'</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>FILE_LIMIT <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="kw">def</span> plot_stat(ax, data, stat_func, ylabel):</span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="co">"""Plot a statistic computed from data on ax."""</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>    ax.plot(stat_func(data))</span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="kw">def</span> main():</span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>    filenames <span class="op">=</span> glob.glob(DATA_PATTERN)</span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>    filenames.sort()</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>    filenames <span class="op">=</span> filenames[:FILE_LIMIT]</span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>        <span class="bu">print</span>(filename)</span>
-<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>        data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>FIGSIZE)</span>
-<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>        axes <span class="op">=</span> [fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>        plot_stat(axes[<span class="dv">0</span>], data, <span class="kw">lambda</span> d: d.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'average'</span>)</span>
-<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>        plot_stat(axes[<span class="dv">1</span>], data, <span class="kw">lambda</span> d: d.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'max'</span>)</span>
-<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>        plot_stat(axes[<span class="dv">2</span>], data, <span class="kw">lambda</span> d: d.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'min'</span>)</span>
-<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>        fig.tight_layout()</span>
-<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>        fig.savefig(filename <span class="op">+</span> <span class="st">'.png'</span>)</span>
-<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>    main()</span>
-<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co"># ...existing code...</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># ...existing code...</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>FIGSIZE <span class="op">=</span> (<span class="fl">10.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>DATA_PATTERN <span class="op">=</span> <span class="st">'../data/inflammation-*.csv'</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>FILE_LIMIT <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="kw">def</span> plot_stat(ax, data, stat_func, ylabel):</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    <span class="co">"""Plot a statistic computed from data on ax."""</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>    ax.plot(stat_func(data))</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>    filenames <span class="op">=</span> glob.glob(DATA_PATTERN)</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    filenames.sort()</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>    filenames <span class="op">=</span> filenames[:FILE_LIMIT]</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>        <span class="bu">print</span>(filename)</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>        data <span class="op">=</span> np.loadtxt(fname<span class="op">=</span>filename, delimiter<span class="op">=</span><span class="st">','</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>        fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>FIGSIZE)</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>        axes <span class="op">=</span> [fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>        plot_stat(axes[<span class="dv">0</span>], data, <span class="kw">lambda</span> d: d.mean(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'average'</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>        plot_stat(axes[<span class="dv">1</span>], data, <span class="kw">lambda</span> d: d.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'max'</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>        plot_stat(axes[<span class="dv">2</span>], data, <span class="kw">lambda</span> d: d.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">0</span>), <span class="st">'min'</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>        fig.tight_layout()</span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>        fig.savefig(filename <span class="op">+</span> <span class="st">'.png'</span>)</span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>    main()</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a><span class="co"># ...existing code...</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal"><li>
 </li></ol><p>Key similarities - both models:</p>
