@@ -1177,8 +1177,9 @@ back to the proxy</li>
 </ol><p>Back within the Copilot proxy:</p>
 <ol start="5" style="list-style-type: decimal"><li>Receives the response, and tests code suggestions for code
 vulnerabilities, truncating responses that contain unique identifiers
-(sources), and filters out those matching known public code. The
-processed response is fed back to the Copilot client within the IDE</li>
+(such as email addresses, GitHub URLs, IP addresses, etc.), and filters
+out those matching known public code. The processed response is fed back
+to the Copilot client within the IDE</li>
 </ol><p>Back within the Copilot-enabled IDE:</p>
 <ol start="6" style="list-style-type: decimal"><li>The Copilot extension receives the code suggestion which is
 presented to the user to accept or reject</li>
