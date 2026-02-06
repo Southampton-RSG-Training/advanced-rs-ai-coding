@@ -87,7 +87,7 @@ Attempting to understand a new codebase, whether it's your first week on a proje
 This can be due to many reasons; documentation may be incomplete, architectural decisions may be undocumented,
 and the people who know the system may be unavailable or have left the organisation.
 
-We can use Copilot to build our understand and confidence about our codebase by asking natural-language questions about the code. It helps you:
+We can use Copilot to build our understanding and confidence about our codebase by asking natural-language questions about the code. It helps you:
 
 - Build a high-level mental model of the system, which with complex codebases is often a huge task!
 - Identify where key functionality is located in the code
@@ -203,7 +203,7 @@ For the next exercise, in the shared notes document have a section for participa
 
 ## Improving a Chat Prompt
 
-A research asks two questions of a particular codebase:
+A researcher asks two questions of a particular codebase:
 
 - "What does this do?"
 - "What's wrong with this code it doesn't work"
@@ -633,7 +633,7 @@ Possible risks:
 - Ignore project-specific requirements or architectural decisions
 - Obscures rationale and decision-making responsibility
 - Risks licensing or provenance uncertainty if not reviewed
-- Reinfoce poor existing patterns in the codebase
+- Reinforce poor existing patterns in the codebase
 - Can deskill developers if used uncritically
 
 :::::::::::::::::::::::::::::::::::

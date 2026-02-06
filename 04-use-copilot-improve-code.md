@@ -379,12 +379,12 @@ So in this instance, we can see that there are a whole swathe of changes:
 - Docstrings have been added for each of the functions and the module
 - The processing of the average, maximum and minimum values has been refactored into a loop iterating over a data structure
 - The subplots are generated within a loop using `zip()` to provide corresponding pairs of array elements into the loop.
-If we didn't like this particular style, we might use Edit mode on this segment to simpligy it
+If we didn't like this particular style, we might use Edit mode on this segment to simplify it
 
 Note that it differs substantially from the version shown from a similar question made in Ask mode earlier,
 and whilst it is more modular,
 it's now 127 lines of code where before it was 32 lines - 
-we might consider this to be quite an over-engineered overkill for what 
+we might consider this to be quite an over-engineered overkill.
 
 
 ::::::::::::::::::::::::::::::::: callout
