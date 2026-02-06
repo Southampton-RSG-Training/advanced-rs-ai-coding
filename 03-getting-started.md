@@ -158,6 +158,27 @@ and delete requests that are no longer relevant or otherwise not useful.
 
 :::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: instructor
+
+For the next exercise, in the shared notes document have a section for participants to add in answers.
+
+:::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Improving a Chat Prompt
+
+A research asks two questions of a particular codebase:
+
+- "What does this do?"
+- "What's wrong with this code it doesn't work"
+
+ Rewrite each of these prompts using the tips we have learned to improve the output from the model.
+ Add your improved questions to the shared Google Doc.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## What do I Need to Know?
