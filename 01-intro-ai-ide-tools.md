@@ -14,21 +14,21 @@ exercises: 5
 - What are the limitations of a free Copilot account?
 - What is GitHub Copilot?
 - Which AI models are available within Copilot?
-- How do I make use of other third party or bespoke language models?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Describe where ChatGPT and similar large language models fit within the broader AI landscape.
+- List the three main categories of AI systems.
 - Explain, at a conceptual level, what generative AI and ChatGPT are.
 - Summarize the primary functions and intended use cases of common AI coding assistants.
-- Describe some common tasks undertaken by an IDE coding assistant
-- Describe a responsible approach to using IDE coding assistants in development
-- Describe how GitHub Copilot integrates with Visual Studio Code
-- Describe the different built-in models and their specialisms and tradeoffs
-- Describe how to make use of other non built-in LLMs within Copilot
-- List the limitations of the free pricing tier of GitHub Copilot
+- Describe some common tasks undertaken by an IDE coding assistant.
+- Describe a responsible approach to using IDE coding assistants in development.
+- Describe how GitHub Copilot integrates with Visual Studio Code.
+- Describe the lifecycle of a Copilot request and how it uses data.
+- Describe the different built-in models and their specialisms and tradeoffs.
+- List the limitations of the free pricing tier of GitHub Copilot.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -526,21 +526,28 @@ GitHub provides further detailed information about [how GitHub Copilot handles d
 ### Different Models
 
 GitHub Copilot's free tier provides access to multiple large language models, each with different strengths and tradeoffs.
-The following table summarizes the models currently available:
+The following table summarizes the models currently available at time of writing:
 
 | **Model** | **Provider** | **Specialization** | **Speed** | **Best for** |
-|-----------|--------------|-------------------|----------|--------------|
+|-----------|--------------|--------------------|-----------|--------------|
 | **Claude Haiku** | Anthropic | Balanced, efficient reasoning | Fast | Quick code completions, lightweight tasks, local development |
 | **GPT-4.1** | OpenAI | Complex reasoning and analysis | Moderate | Detailed code reviews, architectural decisions, complex refactoring |
-| **GPT-5** | OpenAI | Advanced reasoning and multi-step problems | Slower | Complex algorithms, sophisticated debugging, research code |
 | **GPT-5 Mini** | OpenAI | Lightweight version of GPT-5 | Faster | Balance of capability and speed, most general-purpose tasks |
 
 Each model can be selected based on your specific task requirements.
-For routine coding tasks, lighter models like Claude Haiku or GPT-5 Mini may be sufficient and faster, while more complex problems may benefit from the advanced reasoning of GPT-5.
+For routine coding tasks, lighter models like Claude Haiku or GPT-5 Mini may be sufficient and faster, while more complex problems may benefit from the deeper reasoning of GPT-4.1.
 
-There are many [other models available](https://docs.github.com/en/copilot/reference/ai-models/model-comparison) for use within the priced tier,
+There are many [other models available](https://docs.github.com/en/copilot/get-started/plans#models) for use within various priced priced tiers,
 including other models from OpenAI and Anthropic, as well as models from Google (i.e. Gemini).
-Some of these e.g. GPT-5-Codex have been optimised for writing code and other software engineering tasks.
+Some of these e.g. GPT-5-Codex have been further optimised for writing code and other software engineering tasks.
+You can also find a [comparison of these models](https://docs.github.com/en/copilot/reference/ai-models/model-comparison).
+
+### Limitations of the Copilot Free Tier
+
+There are two key quotas which are reset per month to be aware of (which we'll look into during the practical elements of the course):
+
+- **Inline suggestions** - 2000 completions per month, essentially where Copilot provides suggestions as you type
+- **Premium requests** - 50 per month, where you use more advanced AI features, such as Copilot chat requests or advanced reasonsing models
 
 ## References
 
@@ -561,5 +568,8 @@ Some of these e.g. GPT-5-Codex have been optimised for writing code and other so
 - GPT models are trained in stages: collecting large text datasets, designing the neural network, pre-training on broad data, fine-tuning on task-specific datasets, and iteratively evaluating and improving performance.
 - ChatGPT is a user-friendly application built on GPT models, while GPT itself is also integrated into other tools like Microsoft Copilot, search engines, and coding environments.
 - Technical debt accumulates when skipping design phases for quick AI-generated solutions, requiring future maintenance effort to simplify and clarify code.
+- AI coding assistants are relatively new as a technology and subject to rapid change and advancement.
+- The Copilot free tier currently includes access to three AI models each with a different balance of speed and purpose.
+- The Copilot free tier currently allows 2000 completions and 50 premium requests per month.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
