@@ -289,6 +289,18 @@
 </div>
 <!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="05-investigate-codebase.html">5. Investigate a New Codebase</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
                 </div>
               </div>
             </div>
@@ -1041,7 +1053,7 @@ are you afraid could happen?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Some possible benefits:</p>
 <ul>
@@ -1228,7 +1240,7 @@ think they currently are.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s particularly relevant to AI coding assistants, which at the time
 of writing (Q1 2026) are currently navigating the peak of inflated
@@ -4063,6 +4075,246 @@ quality, and sustainability are maintained within a codebase.</li>
 <li>Reusable prompts in VSCode Copilot are predefined instructions or
 templates that you can quickly insert and use to guide Copilot’s code
 generation or assistance.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</section></section><section id="aio-05-investigate-codebase"><p>Content from <a href="05-investigate-codebase.html">Investigate a New Codebase</a></p>
+<hr>
+<p>Last updated on 2026-02-10 |
+
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/05-investigate-codebase.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How can I use Copilot in a defined and repeatable way to explore new
+codebases?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Investigate a new codebase in terms of purpose and areas for
+improvement.</li>
+<li>Write and use a reusable prompt to understand a codebase.</li>
+<li>Write and use a reusable prompt to conduct a code review.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In this episode we’ll investigate a new codebase to increase our
+understanding of how it operates and to identify strengths, weaknesses
+and ways to improve it.</p>
+<section><h2 class="section-heading" id="preparing-useful-prompts">Preparing Useful Prompts<a class="anchor" aria-label="anchor" href="#preparing-useful-prompts"></a>
+</h2>
+<hr class="half-width">
+<p>We’ve seen how we are able to reuse prompts by storing them in a
+prompt file. Before we go ahead and investigate a new codebase, let’s
+add some reusable specialist prompts to help conduct this investigation
+for us.</p>
+<div class="section level3">
+<h3 id="prompt-to-explain-a-codebase">Prompt to Explain a Codebase<a class="anchor" aria-label="anchor" href="#prompt-to-explain-a-codebase"></a>
+</h3>
+<p>Let’s start with a prompt to help us understand a codebase. Here’s an
+example code review prompt file based on one from the <a href="https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file#code-explanation-prompt" class="external-link">GitHub
+Docs</a>. Add the following draft to a new prompt file at
+<code>.github/prompts/explain-code.prompt.md</code>:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="an">description:</span><span class="co"> 'Generate a clear code explanation with examples'</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="an">agent:</span><span class="co"> 'agent'</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>Explain the following code in a clear, beginner-friendly way:</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>Please provide:</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="ss">* </span>A brief overview of what the code does</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="ss">* </span>A step-by-step breakdown of the main parts</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="ss">* </span>Explanation of any key concepts or terminology</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="ss">* </span>A simple example showing how it works</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="ss">* </span>Common use cases or when you might use this approach</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>Use clear, simple language and avoid unnecessary jargon.</span></code></pre>
+</div>
+<div id="how-do-you-understand-a-codebase" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="how-do-you-understand-a-codebase" class="callout-inner">
+<h3 class="callout-title">How Do You Understand a Codebase?</h3>
+<div class="callout-content">
+<p>3 mins.</p>
+<p>When investigating a new codebase, what is it that really helps you
+to understand what it does and how it works? Tailor the
+<code>explain-code.prompt.md</code> file to include this criteria.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="prompt-to-conduct-a-code-review">Prompt to Conduct a Code Review<a class="anchor" aria-label="anchor" href="#prompt-to-conduct-a-code-review"></a>
+</h3>
+<p>Next, let’s add a reusable prompt to conduct a code review of a
+codebase, to help us understand it’s strengths and weaknesses, and what
+needs to be fixed.</p>
+<p>Here’s an example code review prompt file based on one from the <a href="https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/review-code" class="external-link">GitHub
+Docs</a>. Copy this into a
+<code>.github/prompts/review-code.prompt.md</code> file:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="an">description:</span><span class="co"> 'Perform a comprehensive code review'</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="an">agent:</span><span class="co"> 'agent'</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">## Role</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>You're a senior software engineer conducting a thorough code review. Provide constructive, actionable feedback.</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">## Review Areas</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>Analyze the selected code for:</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="ss">1. </span>**Security Issues**</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="ss">   - </span>Input validation and sanitization</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="ss">   - </span>Authentication and authorization</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="ss">   - </span>Data exposure risks</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="ss">   - </span>Injection vulnerabilities</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="ss">2. </span>**Performance &amp; Efficiency**</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="ss">   - </span>Algorithm complexity</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="ss">   - </span>Memory usage patterns</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="ss">   - </span>Database query optimization</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="ss">   - </span>Unnecessary computations</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="ss">3. </span>**Code Quality**</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="ss">   - </span>Readability and maintainability</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="ss">   - </span>Proper naming conventions</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="ss">   - </span>Function/class size and responsibility</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="ss">   - </span>Code duplication</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="ss">4. </span>**Architecture &amp; Design**</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="ss">   - </span>Design pattern usage</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="ss">   - </span>Separation of concerns</span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="ss">   - </span>Dependency management</span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="ss">   - </span>Error handling strategy</span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="ss">5. </span>**Testing &amp; Documentation**</span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="ss">   - </span>Test coverage and quality</span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="ss">   - </span>Documentation completeness</span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="ss">   - </span>Comment clarity and necessity</span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="fu">## Output Format</span></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a>Provide feedback as:</span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a>**🔴 Critical Issues** - Must fix before merge</span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a>**🟡 Suggestions** - Improvements to consider</span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a>**✅ Good Practices** - What's done well</span>
+<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a>For each issue:</span>
+<span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a><span class="ss">- </span>Specific line references</span>
+<span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="ss">- </span>Clear explanation of the problem</span>
+<span id="cb2-54"><a href="#cb2-54" tabindex="-1"></a><span class="ss">- </span>Suggested solution with code example</span>
+<span id="cb2-55"><a href="#cb2-55" tabindex="-1"></a><span class="ss">- </span>Rationale for the change</span>
+<span id="cb2-56"><a href="#cb2-56" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" tabindex="-1"></a>Be constructive and educational in your feedback.</span></code></pre>
+</div>
+<div id="how-do-you-do-a-code-review" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="how-do-you-do-a-code-review" class="callout-inner">
+<h3 class="callout-title">How Do You do a Code Review?</h3>
+<div class="callout-content">
+<p>3 mins.</p>
+<p>If you were to conduct a code review of a codebase, how would you go
+about it? Which areas would you look at and how would you investigate
+them? Tailor the <code>review-code.prompt.md</code> file to include this
+criteria.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+<div id="investigate" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="investigate" class="callout-inner">
+<h3 class="callout-title">Investigate!</h3>
+<div class="callout-content">
+<p>20 mins.</p>
+<p>Pick a GitHub code repository of your choice. It could be something
+you (or your group) has written, something you’re planning on using, or
+something you’re simply interested in.</p>
+<p>Clone the repository to your local machine, and use the prompts
+you’ve just created to build an understanding of the codebase and
+explore it’s strengths and weaknesses.</p>
+<p>Do you agree with the assessments? Are they useful? How could you
+improve them for use in the future?</p>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Build an array of useful reusable prompts to accomplish specific
+tasks related to software development.</li>
+<li>Review their usefulness and improve them over time.</li>
 </ul>
 </div>
 </div>
