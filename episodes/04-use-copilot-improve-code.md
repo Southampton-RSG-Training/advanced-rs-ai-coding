@@ -153,6 +153,9 @@ it suggests variants of that for the other calls to `plot`, e.g.
 
 :::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::: solution
+:::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Edit Mode
@@ -801,7 +804,6 @@ Add a short description to the shared notes document describing what you think a
 - What is missing?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
