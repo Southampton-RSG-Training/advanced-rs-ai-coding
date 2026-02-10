@@ -119,7 +119,9 @@ Hovering your mouse over each one will show a tooltip that names that feature:
 - `Run and Debug` - this allows you to run programs you write in a special way with a debugger, which allows you to check the state of your program as it is running, which is very useful and we'll look into later.
 - `Extensions` - which we'll look into right now, allows you to install extensions to VSCode to extend its functionality in some way.
 
-At the very bottom of the main VSCode window is the `Status bar`, which shows us 
+At the very bottom of the main VSCode window is the `Status bar`, which will show us the status of a number of things,
+such as the Python interpreter we're currently using, the current Git branch we're on, and also the status of key extensions,
+such as Copilot that we'll look into shortly.
 
 There are many other features and ways to access them, and we'll cover key ones throughout this lesson.
 
@@ -151,19 +153,6 @@ It might take a minute - you can see a sliding blue line in the top left to indi
 Once complete, you should see a couple of "Welcome" windows introducing you to two of its key features - support for Python and Jupyter notebooks.
 If you use Jupyter notebooks, which is a way of writing Python programs that you can run line by line from within an editor as you write the program, you may find this useful.
 
-For now, let's configure this extension for our Python development, and to do that, we need to tell VSCode which Python installation on our machine we'd like it to use. VSCode has a sophisticated method to access it's inner functionality known as the Command Palette, which we'll use to address this.
-
-1. Select `View` and `Command Palette` from the VSCode menu
-1. Begin typing `Python: Select Interpreter`, and then select it when it appears
-1. A list of available Python installations should appear. You may find you have many installations of Python, or only have one. Try to select the version later than 3.8 if you can.
-
-Once selected, the default Python interpreter for VSCode will be configured.
-
-::::::::::::::::::::::::::::::::::::::::: instructor
-
-## Checkpoint: who's configured the Python extension?
-
-::::::::::::::::::::::::::::::::::::::::: 
 
 ### A Sample Project
 
@@ -226,7 +215,7 @@ Let's now create a Python virtual environment and make use of it.
 Make sure you're in the root directory of the repository, then type
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 ```
 
 Here, we're using the built-on Python `venv` module - short for virtual environment - to create a virtual environment directory called "venv".
@@ -331,12 +320,31 @@ Be careful here - I found on Windows the "Trust" option appears on the left, whi
 In this case, feel free to trust the repository!
 You'll then see the explorer present you with some files in a small window (or pane) on the left you can use to navigate and find files.
 
+We also need to configure the Python extension within this workspace to use the Python contained with the virtual environment we created earlier.
+VSCode has a sophisticated method to access it's inner functionality known as the Command Palette, which we'll use to address this.
+
+1. Select `View` and `Command Palette` from the VSCode menu
+1. Begin typing `Python: Select Interpreter`, and then select it when it appears
+1. A list of available Python installations should appear. Look for and select the one that says `./venv/bin/python` (our virtual environment)
+
+Once selected, the default Python interpreter for VSCode will be configured.
+
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: who's configured the Python extension?
+
+::::::::::::::::::::::::::::::::::::::::: 
+
 So far within VSCode we have downloaded some code from a repository and opened a folder.
 Whenever we open a folder in VSCode, this is referred to as a "Workspace" - essentially, a collection of a project's files and directories.
 So within this workspace, you'll see the following:
 
 - `data/` - a directory containing some example CSV files, each representing inflammation data from a series of hypothetical clinical trials for 60 patients over 40 days
+- `.gitignore` - a text file that contains things that shouldn't be tracked by Git version control
 - `inflammation-plot.py` - which plots three graphs of the mean, maximum, and minimum values for each day of a trial for all patients
+
+You'll also see `venv/` which is not part of the repository, but the virtual environment we created and configured earlier.
+
 
 ## Using VSCode
 
@@ -376,8 +384,15 @@ for filename in filenames:
     fig.savefig(filename + '.png')
 ```
 
+We'll be using this code example throughout the session.
 Note that as an example, the code is deliberately written to have flaws.
 Things like the line spacing is inconsistent, there are no code comments, there's some code duplication, and you may spot other issues too.
+It's also deliberately been kept relatively simple.
+This is for two reasons:
+
+- Most importantly, from a training perspective, when we use Copilot later to suggest changes, we'll be able to quickly reason about the changes and how they impact the codebase
+- To give us enough scope to improve it
+
 But in essence, the code is designed to do the following:
 
 - Loop through a list of all inflammation data files (sorted by their filename) in the `data/` subdirectory
@@ -439,7 +454,7 @@ This is really handy to we don't have to take the time to look up all this infor
 For those of you familiar with version control and who retrieved the example code via cloning its repository instead of downloading it, there are some other editor features that help with using version control.
 One of these is that the filename changes colours in the file explorer depending on its status within version control:
 
-- White - an existing file is unchanged from the copy in the local repository).
+- White - an existing file is unchanged from the copy in the local repository.
 - Orange - the content of an existing file has changed, and the change(s) have not been tracked by version control yet.
 - Green - a new file has been added and is unknown to version control.
 
@@ -460,7 +475,7 @@ Now let's try running a Python script.
 First, make sure your Python code doesn't have any errors!
 Next, you may recall we needed NumPy and Matplotlib to run this code;
 if you look at the the bottom right of VSCode's status bar, it should mention the version of Python being used, e.g. `3.14.2 (venv)`.
-So here, we can see that VSCode has automatically picked up our virtual environment we created earlier and will use that by default.
+So here, we can see that VSCode has picked up our virtual environment we configured earlier and will use that by default.
 
 Then, select the "Play"-looking icon at the top right of the code editor.
 

@@ -51,23 +51,23 @@ There are also `Next edit suggestions` which go beyond the immediate context to 
 These predict the location and the content of the next edit you'll want to make.
 
 Let's say we want to add a new section describing our coding style.
-Directly under `Code Patterns & Conventions`, add:
+Add the following at the bottom of the file:
 
 ```markdown
-### Coding Style
+## Coding Style
 - 
 ```
 
 You should see a suggestion appear direcly after your cursor,
-something like `Use PEP 8 style guidelines for Python code` or similar.
+something like `Use PEP 8 style guidelines for Python code`, `Use descriptive variable names (e.g., data, mean_plot, max_plot, min_plot)` or similar.
 You can accept this suggestion by pressing `Tab`.
 If you continue to add new lines after this, you may find it continues to suggest other things to include,
 so we end up with, for example:
 
 ```markdown
 ### Coding Style
-- Use PEP 8 style guidelines for Python code
 - Use descriptive variable names (e.g., `inflammation_data`, `mean_inflammation`)
+- Follow PEP 8 for formatting (indentation, spacing)
 - Comment code sections for clarity, especially data processing steps
 ```
 
@@ -128,7 +128,7 @@ Try this for the following function calls:
 
 1. What's being suggested?
 1. Are the suggestions helpful? Are they always the same?
-1. Does the code still run?
+1. Does the code run as you expect?
 
 :::::::::::::::::::::::::: solution
 
@@ -158,18 +158,21 @@ it suggests variants of that for the other calls to `plot`, e.g.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Edit Mode
+## Agent Mode: Small Changes
 
-Edit mode differs from inline suggestions by offering the ability to enact changes step-by-step directly on your approval.
-Unlike inline suggestions which appear as you type, Edit mode allows you to request broader changes across multiple lines or functions,
+Agent mode differs from inline suggestions by offering the ability to enact changes step-by-step directly on your approval.
+Unlike inline suggestions which appear as you type, this mode allows you to request broader changes across multiple lines or functions,
 so it's ideal for repetive things like small-scale refactoring of code logic or renaming variables.
-It represents a middle ground in terms of autonomy — more direct than inline suggestions but less autonomous than Agent mode.
+It represents a middle ground in terms of autonomy — more direct than inline suggestions but less autonomous than Plan mode.
 
-To get started with using edit mode in VSCode, you highlight the code you want to modify before requesting the change you want.
+To get started with using Copilot to make a small edit, you highlight the code you want to modify before requesting the change you want.
 
 For example:
 
-1. Select `Edit` as the Copilot mode in the chat window
+1. Select `+` to create a new chat conversation
+1. Select `inflammation-plot.py` in the chat context
+1. Select `Ask` as the Copilot mode in the chat window
+1. Select a model of your choice
 1. Select the entire for loop in `inflammation-plot.py`; you'll notice that the context now includes this file with the selected line numbers
 1. Enter `Add a comment about this code above this loop`
 1. Press `Enter`
@@ -231,7 +234,7 @@ Once we're happy with it, we can then select `Commit` to commit our changes to o
 Let's assume we want to rename the `axes` variables to have the prefix `subplot` instead,
 e.g. instead of `axes1`, we'd have `subplot1`.
 
-Use Copilot edit mode to rename all of these variables,
+Use Copilot agent mode to rename all of these variables,
 then verify and accept the changes if you agree with them.
 Does the code still run correctly?
 
@@ -257,7 +260,7 @@ which is quicker and sometimes more convenient if it's a small request.
        axes3.plot(data.min(axis=0))
    ```
 
-1. Ensure `Edit` mode is selected in chat, and enter `Rename axes variables to have a subplot prefix instead`
+1. Ensure `Agent` mode is selected in chat, and enter `Rename axes variables to have a subplot prefix instead`
 1. Press `Enter` and you should see something like the following:
    ![](fig/copilot-rename-variables.png)
 1. After reviewing the suggestions, select `Keep`
@@ -269,13 +272,14 @@ The code still runs correctly.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Agent Mode
+## Agent Mode: Larger-scale Changes
 
-Agent mode differs from edit mode by being outcome driven rather than per-edit driven.
+We can also ask Copilot in agent mode to make much larger, potentially multi-file changes across our codebase.
 So instead of asking Copilot to change a specific piece of code, you give it a goal, such as adding a feature, or refactoring a module.
 Copilot then plans how to achieve that goal and works across the repository to do so.
 It may read and modify multiple files, add or update tests, adjust configuration, and iterate over several steps before presenting the result.
 In this way, agent mode behaves more like a junior developer taking on a task, rather than a pair programmer responding line-by-line.
+
 Note the increase in authority to modify code, which represents a much greater risk:
 the impact of changes is greater and requires more careful (and potentially more involved) review.
 
@@ -283,6 +287,8 @@ In the last episode we looked at the suggestions made by two Copilot models to i
 Let's now use agent mode to do this as a refactoring activity,
 directly amending our code with the goal to improve its readability.
 
+1. Select `+` to create a new chat conversation
+1. Select `inflammation-plot.py` in the chat context
 1. Set Copilot's mode to `Agent`
 1. Select a model you'd like to use
 1. Enter the following prompt: `Refactor this code to improve it's modularity and readability`
@@ -413,6 +419,8 @@ perhaps adding more specifics for what we want.
 
 Perhaps the suggestions look generally quite good,
 but maybe it isn't quite what we're after.
+
+Select `Edit` and then `Undo` from the VSCode menu to undo the recent changes.
 
 Edit the agent mode prompt in the chat (using a model of your choice) to include more specificity in the request, for example:
 
@@ -595,15 +603,16 @@ Part 1:
 
 Part 2:
 
-If you already know Pandas, do the changes look sensible?
-If you don't know Pandas, what are the risks of accepting these changes?
+- If you already know Pandas, do the changes look sensible?
+- If you don't know Pandas, what are the risks of accepting these changes?
 
 :::::::::::::::::::::::::: solution
 
 Part 1:
 
 Prompt: `Modify this code to use Pandas instead of NumPy`
-Need to add pandas library to the virtual environment.
+
+In order to run it, we also need to add pandas library to the virtual environment.
 In a terminal:
 
 ```bash
@@ -790,7 +799,7 @@ For the next exercise, add a section into the shared notes so that participants 
 
 1. Create a new directory at `.github/prompts` to hold any prompt files we want to include
 1. Download the prompt file at https://raw.githubusercontent.com/github/awesome-copilot/refs/heads/main/prompts/readme-blueprint-generator.prompt.md into this directory
-1. Select `Agent` and a model of your choice in the chat
+1. Select agent mode and a model of your choice in the chat
 1. Use the prompt file to generate a README by typing `/readme-blueprint-generator` into the chat. The chat will autocomplete the name. Press enter to invoke it
 1. Select `Retry` if you want it to try again
 

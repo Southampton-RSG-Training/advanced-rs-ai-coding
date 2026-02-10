@@ -43,9 +43,16 @@ It's possible to have VSCode manage the installation of these extensions automat
 but we'll do this explicitly so you see the explicit changes necessary to get it working.
 
 1. Firstly, select the extensions icon, then type in "Copilot" into the search box at the top, and it'll give you a list of all Copilot-related extensions.
-1. Select the one which says `GitHub Copilot` from Microsoft, which is the Microsoft official Copilot extension. You may also see the `GitHub Copilot Chat` extension, which will be automatically installed along with this one.
+1. Select the one which says `GitHub Copilot` from GitHub, which is the official Copilot extension. You may also see the `GitHub Copilot Chat` extension, which will be automatically installed along with this one.
 1. Select `Install`. It might take a minute - you can see a sliding blue line in the top left to indicate it's working.
 1. You'll be presented with a "Welcome" page for the extension which covers the main features. Select `Mark Done`.
+
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: I've installed the GitHub Copilot extension
+
+::::::::::::::::::::::::::::::::::::::::: 
+
 
 Now we have the extension installed, but we need to associate it with our GitHub account by signing in:
 
@@ -57,6 +64,12 @@ Now we have the extension installed, but we need to associate it with our GitHub
 1. If a pop-up appears in your browser to open a link within VSCode, select `Open Link`.
 
 Once completed, you'll now be able to use GitHub Copilot within VSCode.
+
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: I've logged the Copilot extension into my GitHub account
+
+::::::::::::::::::::::::::::::::::::::::: 
 
 ::::::::::::::::::::::::::::::::: callout
 
@@ -78,6 +91,13 @@ By default, in the free tier, the first two are enabled.
 In general, it's a good idea to disable `Suggestions matching public code` since the risk is that it may make use of public code sources in a way that isn't properly licensed.
 In addition, it's recommended to disable the other two (depending on the extent you trust GitHub and their affiliates),
 since - as it clearly states - they allow GitHub and others to use data and code snippets for product improvements.
+
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: I've configured my privacy settings
+
+::::::::::::::::::::::::::::::::::::::::: 
+
 
 :::::::::::::::::::::::::::::::::::::::::
 
@@ -111,8 +131,8 @@ On the left, there's `Set Agent`, which allows you to set the mode of operation 
 Each of these modes provides an increasing degree of autonomy for Copilot to interact with your code:
 
 - `Ask` - designed for learning and orienting yourself with existing code without changing it.
-- `Edit` - proposes concrete code changes for your approval based on your instructions. It's useful when you already understand a codebase that you want to change.
-- `Agent` - the most powerful mode, which lets you specify a high-level prompt to allow Copilot at a high level of autonomy to plan changes in steps, select files, and run tools or terminal commands, iterating on code edits until it is complete.
+- `Agent` - proposes concrete code changes for your approval based on your instructions. It's useful when you already understand a codebase that you want to change.
+- `Plan` - the most powerful mode, which lets you specify a high-level prompt to allow Copilot at a high level of autonomy to plan changes in steps, select files, and run tools or terminal commands, iterating on code edits until it is complete.
 
 Since we want to ask questions regarding our codebase, let's set the mode to `Ask`.
 
@@ -121,6 +141,8 @@ By default, this is set to `Auto` so that Copilot will decide the model.
 However, for consistency in this training, let's select the entry for `Claude Haiki 4.5`.
 
 Select the `inflammation-plot.py` file in the File Explorer.
+You'll notice this appears as "context" at the top of the chat box.
+Essentially, this is what we're asking questions about.
 
 Let's now ask the very high level question: `What does this code do?`, and press enter.
 You'll likely be asked whether you want to enable Claude Haiku 4.5 for all clients - select `Enable` when prompted.
@@ -162,8 +184,8 @@ This effect is often visibly compounded over time, as the probabilistic outcome 
 
 AI tools work best with context, so it's good to be as specific and concise as possible.
 
-It's also a good idea to be provide simple questions,
-so if you end up with a question that is decomposable into separate steps,
+It's also a good idea to provide simple questions,
+so if you end up with a large question that is decomposable into separate steps,
 ask each step separately and you'll typically get a better outcome.
 This implies that it's good to use a logical, iterative process of using AI to assist,
 using responses to simple questions to inform the next question, and so on.
@@ -181,6 +203,7 @@ To improve the specificity of a prompt, it's helpful to add as much context as y
 
 To add context to a chat prompt you can type `#` followed by the context item you want to add,
 such as a file, folder, tools, code elements (such as variables, functions or classes), tools, amongst others.
+Then press `Tab` to confirm.
 For example, we could type `#inflammation-plot.py` to ensure only responses relevant to that specific file will be generated.
 We could use `#codebase` if we aren't sure which files are relevant to our question, to include all our files.
 Of course, our code may make use of sensitive data files that we don't want Copilot to use, which we'll look at shortly.
@@ -203,13 +226,15 @@ For the next exercise, in the shared notes document have a section for participa
 
 ## Improving a Chat Prompt
 
+3 mins.
+
 A researcher asks two questions of a particular codebase:
 
 - "What does this do?"
 - "What's wrong with this code it doesn't work"
 
- Rewrite each of these prompts using the tips we have learned to improve the output from the model.
- Add your improved questions to the shared Google Doc.
+Rewrite each of these prompts using the tips we have learned to improve the output from the model.
+Add your improved questions to the shared Google Doc.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -281,9 +306,10 @@ and drill down and be increasingly specific on questioning until we have what we
 
 ::::::::::::::::::::::::::::::::: callout
 
-## Why Aren't I Seeing the Same Results for the Same Question?
+## Why Aren't I Seeing the Same Results for the Same Question on the Same Machine?
 
-Sometimes, you may ask the same question and get a different response.
+Sometimes, you may ask the same question and get a different response,
+even on the same machine in the same editor.
 
 As we've mentioned, LLMs are non-deterministic,
 in that the same question can produce different answers.
@@ -302,7 +328,7 @@ In addition to it's probablistic nature, there are other reasons for these diffe
 
 GitHub Copilot can be personalised by adding a instructions file to a repository that tells Copilot how you want it to behave in that project.
 
-The file acts as standing, project-level guidance for Copilot, covering things like:
+The file acts as persistent, project-level guidance for Copilot, covering things like:
 
 - Preferred architecture and design patterns
 - Coding style and naming conventions
@@ -342,6 +368,12 @@ Note that it may request access to run a Bash command in the `data` directory,
 from which it can then ascertain the structure of the data,
 which you'll have to approve.
 
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: I've generated a Copilot instructions file
+
+::::::::::::::::::::::::::::::::::::::::: 
+
 We'll look at the contents of the file in a moment.
 
 You may also see some feedback questions, such as:
@@ -360,7 +392,6 @@ If you open this file now, you'll see some things to note:
 - Content is highlighted with a `Keep / Undo` option.
 This is VSCode's way of highlighting the changes Copilot has made as suggestions,
 so that you explicitly review and approve them.
-- Directory names may appear strangely located (e.g. `../data/`), since these are file references relative to the location of the instructions file.
 - A summary of the main code entry point, the data source directory, and the overall workflow of the application
 - A section on the code patterns and conventions, essentially generalising how the code works and providing assumptions on how it operates, e.g. `axis=0 consistently means aggregate across rows (patients), preserving measurement dimensions`
 - Some suggestions on how to refactor (tidy) the codebase and otherwise enhancement it
@@ -386,7 +417,7 @@ For example, we edit our VSCode settings to ignore csv files by:
 
 1. Using `Ctrl + Shift + P` or `Cmd/Windows Key + Shift + P` to open the Command Palette
 1. Entering and selecting `Preferences: Open User Settings (JSON)`
-1. In the `settings.json` file that appears, add the following:
+1. In the `settings.json` file that appears, add the following and save the file:
 
    ```yaml
       "github.copilot.enable": {
@@ -397,6 +428,13 @@ For example, we edit our VSCode settings to ignore csv files by:
 
 This will have the effect of potentially including all file types in context by default,
 but not CSV files.
+
+::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Checkpoint: I've disabled the inclusion of csv files
+
+::::::::::::::::::::::::::::::::::::::::: 
+
 If you wanted a stricter "default deny" approach instead, you could specify `false` for `*` and enable each filetype explicitly.
 
 There are stricter controls, including some that allow exclusion by directory specifications,
@@ -422,7 +460,7 @@ essentially some variants of GPT, and a Raptor model preview.
 ## What's the 'x' Figure Displayed Next to Each Model?
 
 Next to each model you'll see an `x` figure, e.g. `1x`.
-This is a multiplier related to the "cost" of using this model within our quota of requests.
+This is a multiplier related to the "cost" of using this model within our quota of premium requests.
 So models with a `2x` beside them will cost twice as much as one with `1x`.
 
 It's important to be clear on the relative cost,
@@ -443,15 +481,16 @@ highlighting the key similarities and differences between each response.
 
 10 mins.
 
-Ensuring you have the `Ask` mode selected in the chat box:
-
+- Select `+` to create a new chat conversation
+- Ensure you have the `Ask` mode selected in the chat box,
+and the `inflammation-plot.py` file open and selected in the code editor
 - Select one of the `Claude Haiku 4.5` or `GPT-5 mini` models in the model dropdown.
 - Choose a prompt to ask Copilot how to improve this code, e.g.:
    - `How can I make this code more readable?`
    - `How should I refactor this code to be more modular?`
    - `What can I do to improve this code?`
 
-Repeat this for the other model types, asking the same exact question each time:
+Repeat this for the other model, asking the same exact question each time:
 
 1. What answer does each model give you?
 2. How are these responses similar?
@@ -605,7 +644,7 @@ For the next exercise, add two sections - one each for Benefits and Risks, so th
 
 ## Class Discussion: What are the Benefits and Risks?
 
-10 mins.
+5 mins.
 
 Having used some of the features of Copilot,
 what do *you* think are:
@@ -635,6 +674,7 @@ Possible risks:
 - Risks licensing or provenance uncertainty if not reviewed
 - Reinforce poor existing patterns in the codebase
 - Can deskill developers if used uncritically
+- Risks generating incorrect output data which ends up in a research publication
 
 :::::::::::::::::::::::::::::::::::
 
