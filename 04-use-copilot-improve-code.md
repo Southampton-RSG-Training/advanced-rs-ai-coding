@@ -19,7 +19,6 @@ exercises: 30
 - Use Copilot to add a new, small feature to an existing codebase
 - Describe how to use Copilot to assist with Git commit messages
 - Create and use a reusable prompt context
-- Create an VSCode Agent Skill to define a specialised and reusable domain-specific task
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -807,6 +806,13 @@ Add a short description to the shared notes document describing what you think a
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- FIXME
+- Inline suggestions are made by Copilot as "ghosted text" in the editor which you autocomplete with the `Tab` key.
+- Copilot can suggest small-scale modifications for your approval based on a segment of code by selecting the code and using `Edit` mode in the chat window (or pressing `Ctrl + I` or `Cmd/Windows Key + I`) and entering a request.
+- Always review and never blindly accept AI-generated code suggestions.
+- Copilot can write summary Git commit messages for us in VSCode by selecting the sparkle icon next to the commit message text box in the `Source control` navigation tab.
+- Agent mode can suggest larger-scale modifications to our code across multiple files by using `Agent` mode in the chat window, and entering a more comprehensive and complex request.
+- Select `Retry` to have Copilot re-generated a response.
+- It's important to consider how to include AI-based coding assistants in your day-to-day development process to ensure accountability, quality, and sustainability are maintained within a codebase.
+- Reusable prompts in VSCode Copilot are predefined instructions or templates that you can quickly insert and use to guide Copilot’s code generation or assistance.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
