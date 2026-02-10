@@ -345,7 +345,7 @@
         
 <section id="aio-01-intro-ai-ide-tools"><p>Content from <a href="01-intro-ai-ide-tools.html">Introduction to AI Coding IDE Tools</a></p>
 <hr>
-<p>Last updated on 2026-02-06 |
+<p>Last updated on 2026-02-10 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro-ai-ide-tools.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -371,8 +371,6 @@ in my development workflow?</li>
 <li>What are the limitations of a free Copilot account?</li>
 <li>What is GitHub Copilot?</li>
 <li>Which AI models are available within Copilot?</li>
-<li>How do I make use of other third party or bespoke language
-models?</li>
 </ul>
 </div>
 </div>
@@ -384,20 +382,22 @@ models?</li>
 <ul>
 <li>Describe where ChatGPT and similar large language models fit within
 the broader AI landscape.</li>
+<li>List the three main categories of AI systems.</li>
 <li>Explain, at a conceptual level, what generative AI and ChatGPT
 are.</li>
 <li>Summarize the primary functions and intended use cases of common AI
 coding assistants.</li>
 <li>Describe some common tasks undertaken by an IDE coding
-assistant</li>
+assistant.</li>
 <li>Describe a responsible approach to using IDE coding assistants in
-development</li>
-<li>Describe how GitHub Copilot integrates with Visual Studio Code</li>
+development.</li>
+<li>Describe how GitHub Copilot integrates with Visual Studio Code.</li>
+<li>Describe the lifecycle of a Copilot request and how it uses
+data.</li>
 <li>Describe the different built-in models and their specialisms and
-tradeoffs</li>
-<li>Describe how to make use of other non built-in LLMs within
-Copilot</li>
-<li>List the limitations of the free pricing tier of GitHub Copilot</li>
+tradeoffs.</li>
+<li>List the limitations of the free pricing tier of GitHub
+Copilot.</li>
 </ul>
 </div>
 </div>
@@ -1307,13 +1307,13 @@ GitHub Copilot handles data</a>.</p>
 </h3>
 <p>GitHub Copilot’s free tier provides access to multiple large language
 models, each with different strengths and tradeoffs. The following table
-summarizes the models currently available:</p>
+summarizes the models currently available at time of writing:</p>
 <table class="table">
 <colgroup>
-<col width="16%">
+<col width="15%">
 <col width="20%">
-<col width="27%">
-<col width="14%">
+<col width="28%">
+<col width="15%">
 <col width="20%">
 </colgroup>
 <thead><tr class="header">
@@ -1340,13 +1340,6 @@ summarizes the models currently available:</p>
 refactoring</td>
 </tr>
 <tr class="odd">
-<td><strong>GPT-5</strong></td>
-<td>OpenAI</td>
-<td>Advanced reasoning and multi-step problems</td>
-<td>Slower</td>
-<td>Complex algorithms, sophisticated debugging, research code</td>
-</tr>
-<tr class="even">
 <td><strong>GPT-5 Mini</strong></td>
 <td>OpenAI</td>
 <td>Lightweight version of GPT-5</td>
@@ -1358,12 +1351,29 @@ refactoring</td>
 <p>Each model can be selected based on your specific task requirements.
 For routine coding tasks, lighter models like Claude Haiku or GPT-5 Mini
 may be sufficient and faster, while more complex problems may benefit
-from the advanced reasoning of GPT-5.</p>
-<p>There are many <a href="https://docs.github.com/en/copilot/reference/ai-models/model-comparison" class="external-link">other
-models available</a> for use within the priced tier, including other
-models from OpenAI and Anthropic, as well as models from Google
-(i.e. Gemini). Some of these e.g. GPT-5-Codex have been optimised for
-writing code and other software engineering tasks.</p>
+from the deeper reasoning of GPT-4.1.</p>
+<p>There are many <a href="https://docs.github.com/en/copilot/get-started/plans#models" class="external-link">other
+models available</a> for use within various priced priced tiers,
+including other models from OpenAI and Anthropic, as well as models from
+Google (i.e. Gemini). Some of these e.g. GPT-5-Codex have been further
+optimised for writing code and other software engineering tasks. You can
+also find a <a href="https://docs.github.com/en/copilot/reference/ai-models/model-comparison" class="external-link">comparison
+of these models</a>.</p>
+</div>
+<div class="section level3">
+<h3 id="limitations-of-the-copilot-free-tier">Limitations of the Copilot Free Tier<a class="anchor" aria-label="anchor" href="#limitations-of-the-copilot-free-tier"></a>
+</h3>
+<p>There are two key quotas which are reset per month to be aware of
+(which we’ll look into during the practical elements of the course):</p>
+<ul>
+<li>
+<strong>Inline suggestions</strong> - 2000 completions per month,
+essentially where Copilot provides suggestions as you type</li>
+<li>
+<strong>Premium requests</strong> - 50 per month, where you use more
+advanced AI features, such as Copilot chat requests or advanced
+reasonsing models</li>
+</ul>
 </div>
 </section><section><h2 class="section-heading" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
@@ -1417,6 +1427,12 @@ search engines, and coding environments.</li>
 <li>Technical debt accumulates when skipping design phases for quick
 AI-generated solutions, requiring future maintenance effort to simplify
 and clarify code.</li>
+<li>AI coding assistants are relatively new as a technology and subject
+to rapid change and advancement.</li>
+<li>The Copilot free tier currently includes access to three AI models
+each with a different balance of speed and purpose.</li>
+<li>The Copilot free tier currently allows 2000 completions and 50
+premium requests per month.</li>
 </ul>
 </div>
 </div>
@@ -3145,7 +3161,7 @@ add/amend as you see fit, perhaps to fit your coding style.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>For example:</p>
 <div class="codewrapper sourceCode" id="cb3">
@@ -3196,7 +3212,7 @@ inline suggestions are being made, e.g.:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>For example:</li>
@@ -3336,7 +3352,7 @@ sometimes more convenient if it’s a small request.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>
@@ -3560,7 +3576,7 @@ to obtain something you find acceptable!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>For the second prompt above, for example (note the increased level of
 commenting, more descriptive docstrings, and less complex coding
@@ -3737,7 +3753,7 @@ don’t know Pandas, what are the risks of accepting these changes?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>Part 1:</p>
 <p>Prompt: <code>Modify this code to use Pandas instead of NumPy</code>
@@ -3757,7 +3773,7 @@ terminal:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Part 2:</p>
 <p>If you don’t already know Pandas, there is a considerable risk with
@@ -3790,7 +3806,7 @@ message.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>Prompt:
 <code>Add a fourth axes plot for standard deviation</code></p>
@@ -3887,7 +3903,7 @@ our data?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>Some suggestions:</p>
 <ul>
