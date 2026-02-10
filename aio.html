@@ -1041,7 +1041,7 @@ are you afraid could happen?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Some possible benefits:</p>
 <ul>
@@ -1228,7 +1228,7 @@ think they currently are.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It’s particularly relevant to AI coding assistants, which at the time
 of writing (Q1 2026) are currently navigating the peak of inflated
@@ -2175,7 +2175,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-03-getting-started"><p>Content from <a href="03-getting-started.html">Getting Started with using Copilot within VSCode</a></p>
 <hr>
-<p>Last updated on 2026-02-06 |
+<p>Last updated on 2026-02-10 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2192,8 +2192,8 @@ any links that you are not going to use.
 <li>How do I use Copilot from within Visual Studio Code?</li>
 <li>How can I improve the relevance of responses from Copilot for my
 project?</li>
-<li>What are the differences between the language models available
-within VSCode?</li>
+<li>What are the practical differences between the language models
+available within VSCode?</li>
 <li>How much of my Copilot quota have I used?</li>
 </ul>
 </div>
@@ -2491,7 +2491,7 @@ shared Google Doc.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>Describe the main packages used? e.g.</li>
@@ -2776,7 +2776,7 @@ come to this in the next episode.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 </li></ol>
@@ -2945,7 +2945,7 @@ think are:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Possible benefits:</p>
 <ul>
@@ -3022,7 +3022,32 @@ case February 23 2026.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>FIXME</li>
+<li>Copilot’s capabilities are added to VSCode by installing two
+plugins, GitHub Copilot and GitHub Copilot chat.</li>
+<li>Consider and configure the level of privacy for Copilot by
+configuring it within your account at GitHub’s website.</li>
+<li>Generally, it’s recommended to disable
+<code>Suggestions matching public code</code> at a minimum to avoid it
+making use of public code sources in a way that isn’t properly
+licensed.</li>
+<li>Copilot has three modes of operation: Ask, Edit and Agent, each
+delegating a higher degree of autonomy to Copilot.</li>
+<li>Due to the way LLMs process requests, responses based on the same
+question will likely show differences.</li>
+<li>To write a good chat response, be specific and add as much context
+as possible.</li>
+<li>Add context to a prompt by including <code>#</code> followed by the
+context, e.g. <code>#inflammation-plot.py</code> or
+<code>#codebase'</code>.</li>
+<li>Personalise Copilot’s context by creating an
+<code>.github/.copilot-instructions.md</code> file.</li>
+<li>Explicitly deny (or allow) Copilot to use specific file types by
+editing or adding <code>github.copilot.enable</code> in
+<code>settings.json</code>.</li>
+<li>Due to the way LLMs work, there is no “rationale” behind Copilot’s
+responses.</li>
+<li>Check Copilot’s usage for inline suggestions and chat messages
+within your current tier by selecting it’s icon in the status bar.</li>
 </ul>
 </div>
 </div>
@@ -3161,7 +3186,7 @@ add/amend as you see fit, perhaps to fit your coding style.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>For example:</p>
 <div class="codewrapper sourceCode" id="cb3">
@@ -3212,7 +3237,7 @@ inline suggestions are being made, e.g.:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>For example:</li>
@@ -3352,7 +3377,7 @@ sometimes more convenient if it’s a small request.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>
@@ -3576,7 +3601,7 @@ to obtain something you find acceptable!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>For the second prompt above, for example (note the increased level of
 commenting, more descriptive docstrings, and less complex coding
@@ -3753,7 +3778,7 @@ don’t know Pandas, what are the risks of accepting these changes?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <p>Part 1:</p>
 <p>Prompt: <code>Modify this code to use Pandas instead of NumPy</code>
@@ -3773,7 +3798,7 @@ terminal:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Show me the solution </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>Part 2:</p>
 <p>If you don’t already know Pandas, there is a considerable risk with
@@ -3806,7 +3831,7 @@ message.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
   <h4 class="accordion-header" id="headingSolution7"> Show me the solution </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Prompt:
 <code>Add a fourth axes plot for standard deviation</code></p>
@@ -3903,7 +3928,7 @@ our data?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
   <h4 class="accordion-header" id="headingSolution8"> Show me the solution </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
 <div class="accordion-body">
 <p>Some suggestions:</p>
 <ul>

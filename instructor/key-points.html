@@ -402,7 +402,32 @@ statements and names</li>
 </ul></section><section id="03-getting-started"><h2 class="section-heading"><a href="03-getting-started.html">Getting Started with using Copilot within VSCode</a></h2>
 <hr class="half-width">
 <ul>
-<li>FIXME</li>
+<li>Copilot’s capabilities are added to VSCode by installing two
+plugins, GitHub Copilot and GitHub Copilot chat.</li>
+<li>Consider and configure the level of privacy for Copilot by
+configuring it within your account at GitHub’s website.</li>
+<li>Generally, it’s recommended to disable
+<code>Suggestions matching public code</code> at a minimum to avoid it
+making use of public code sources in a way that isn’t properly
+licensed.</li>
+<li>Copilot has three modes of operation: Ask, Edit and Agent, each
+delegating a higher degree of autonomy to Copilot.</li>
+<li>Due to the way LLMs process requests, responses based on the same
+question will likely show differences.</li>
+<li>To write a good chat response, be specific and add as much context
+as possible.</li>
+<li>Add context to a prompt by including <code>#</code> followed by the
+context, e.g. <code>#inflammation-plot.py</code> or
+<code>#codebase'</code>.</li>
+<li>Personalise Copilot’s context by creating an
+<code>.github/.copilot-instructions.md</code> file.</li>
+<li>Explicitly deny (or allow) Copilot to use specific file types by
+editing or adding <code>github.copilot.enable</code> in
+<code>settings.json</code>.</li>
+<li>Due to the way LLMs work, there is no “rationale” behind Copilot’s
+responses.</li>
+<li>Check Copilot’s usage for inline suggestions and chat messages
+within your current tier by selecting it’s icon in the status bar.</li>
 </ul></section><section id="04-use-copilot-improve-code"><h2 class="section-heading"><a href="04-use-copilot-improve-code.html">How to use Copilot to Improve an Existing Codebase</a></h2>
 <hr class="half-width">
 <ul>
