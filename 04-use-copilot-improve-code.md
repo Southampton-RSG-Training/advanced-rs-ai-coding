@@ -27,10 +27,9 @@ In this episode, we'll look at how Copilot can assist with code modifications mo
 looking at the following features:
 
 - `Inline suggestions` - where Copilot provides coding suggestions as you type
-- `Edit mode` - where Copilot provides broad suggestions (like `Ask` mode) but will also enact them step-by-step directly on our approval
-- `Agent mode` - where Copilot directly autonomously undertakes large scale changes, with a single option to approve the changes at the end of the process
+- `Agent mode` - where Copilot directly autonomously undertakes either small or large scale changes on request, with a single option to approve the changes at the end of the process
 
-These are in ascending order of the autonomy, authority and scope that we delegate to Copilot to make changes.
+These are in ascending order of autonomy, authority and scope that we delegate to Copilot to make changes.
 As we'll see, as we delegate more authority and scope,
 the more we should increase our skepticism and diligence in reviewing and understanding suggestions made by such tools.
 
