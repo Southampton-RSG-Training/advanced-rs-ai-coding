@@ -754,11 +754,11 @@ These prompts help you standardize requests, save time, and ensure consistency w
 
 ### How Reusable Prompts Work
 
-You can create reusable prompts by saving frequently used instructions or code templates.
-These can be stored as snippets, comments, or in dedicated prompt files, depending on your workflow and the Copilot extension features.
+You can create reusable prompts by saving frequently used chat instructions or code templates in markdown format.
+These reside in the `.github/prompts` directory, and their filenames look like `my-command-name.prompt.md`.
 
-When you need Copilot to perform a task, you can insert a reusable prompt into your code or command palette.
-Copilot will interpret the prompt and generate code or suggestions based on the provided context.
+When you need Copilot to perform a task, you can insert a reusable prompt you've already created into the chat using `/` followed by the command name
+(e.g. `/my-command-name`), and Copilot will interpret the prompt and generate code or suggestions based on the provided context.
 
 Reusable prompts help you:
 - Speed up development by avoiding repetitive typing
