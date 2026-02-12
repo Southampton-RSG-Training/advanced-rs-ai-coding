@@ -120,6 +120,29 @@ but more of a guide to help build your own understanding of a codebase.
 
 Let's use Copilot to help us investigate how our existing codebase works.
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## What Does the Patient Inflammation Data Contain?
+
+Each dataset file in `data/` records inflammation measurements from a separate clinical trial of the drug,
+and each dataset contains information for 60 patients,
+who had their inflammation levels recorded (in some arbitrary units of inflammation measurement) for 40 days whilst participating in the trial.
+
+These datasets are reused from the
+[Software Carpentry Python novice lesson](https://swcarpentry.github.io/python-novice-inflammation/index.html).
+
+![](fig/inflammation-study-pipeline.png){alt='Snapshot of the inflammation dataset' .image-with-shadow width="800px" }
+
+Each of the data files uses the popular
+[comma-separated (CSV) format](https://en.wikipedia.org/wiki/Comma-separated_values)
+to represent the data, where:
+
+- each row holds inflammation measurements for a single patient
+- each column represents a successive day in the trial
+- each cell represents an inflammation reading on a given day for a patient
+  
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Using Copilot for the First Time
 
 Let's move over to using the VSCode pane on the right, labeled `Build with Agent`.
