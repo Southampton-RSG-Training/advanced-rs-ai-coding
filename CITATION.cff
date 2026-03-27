@@ -5,7 +5,7 @@
 # ensuring that the author list and other fields remain accurate.
 
 cff-version: 1.2.0
-title: FIXME
+title: Developing Research Software with AI Tools
 message: >-
   Please cite this lesson using the information in this file
   when you refer to it in publications, and/or if you
@@ -13,10 +13,12 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: FIXME
-    family-names: FIXME
+  - given-names: Steve
+    family-names: Crouch
+  - given-names: Philippa
+    family-names: Broadbent
+  - given-names: Kamilla
+    family-names: Kopec-Harding
 abstract: >-
-  FIXME Replace this with a short abstract describing the
-  lesson, e.g. its target audience and main intended
-  learning objectives.
+  An intermediate-level practical course on integrating Artificial Intelligence (AI) tools into research software development. Building on foundational knowledge of large language models (LLMs) and AI coding assistants, this course focuses on using these tools effectively within integrated development environments (IDEs). Researchers will develop practical skills to enhance productivity, improve code quality, and apply AI responsibly in real-world research projects.
 license: CC-BY-4.0
