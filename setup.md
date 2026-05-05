@@ -2,12 +2,23 @@
 title: Setup
 ---
 
+This course is for you if you have used GitHub Copilot in the past to improve your existing code, but would like to explore it further to:
+
+- Plan and develop software from scratch based on a defined set of project requirements
+- Create agent skills to support high level, reusable, multi-step tasks that integrate with external tools, services or data sources
+- Improve existing unit test cases and/or generate new unit tests
+- Understand the key security risks associated with using AI coding assistants
+- Use the Model Context Protocol to invoke custom service based tools
+- Understand the fundamentals of using AI coding subagents and multi-agent orchestration
+
 ## Skills Prerequisites
 
 The following are necessary to be able to participate in this course:
 
 - You have a basic knowledge of programming in Python (using variables, lists, conditional statements, functions and importing external libraries)
 - You have previously written Python scripts or iPython/Jupyter notebooks to accomplish tasks in your domain of work
+- You have previously used Microsoft Visual Studio Code to develop code in any language (opening workspaces, editing files, installing extensions)
+- You have previously used GitHub Copilot to obtain suggestions to improve your code
 
 It is also helpful but not necessary to have some basic knowledge of Git version control (cloning repositories, making commits, pushing to a remote repository).
 
@@ -18,11 +29,11 @@ To participate in this course you will need the following installed on your mach
 - Bash shell (Linux, Mac) or Git Bash for Windows
 - Git version control (available from the Bash shell or Git Bash for Windows)
 - Python version 3.8 or above
-- Microsoft Visual Studio Code version 1.98 or above
+- Microsoft Visual Studio Code version 1.98 or above, with the following extensions installed:
+  - GitHub Copilot, latest version
 
 If you do not have these installed, see below for installation instructions.
 Please open the tab for your operating system and follow the setup instructions.
-Then, look below the tab and follow the 'Additional Git Setup' instructions too.
 
 :::::::::::::::: spoiler
 
@@ -42,6 +53,8 @@ We’ll be using Git Bash. If you’ve already installed Git Bash then go to the
 We’ll be using Git Bash for both git and a shell to run it in.
 
 #### Python
+
+FIXME: change to recommending standard Python distribution? Less complications. Could reuse the BBRS setup instructions here
 
 The “Anaconda3” package provides everything Python-related you will need for the workshop. To install Anaconda, follow the instructions below.
 
@@ -148,102 +161,9 @@ Answer ‘yes’ to allow the installer to initialize Anaconda3 in your .bashrc.
 
 ### Microsoft Visual Studio Code
 
-The hands-on part of this topic will be conducted using Visual Studio Code (VS Code), a widely used IDE.
+The hands-on part of this topic will be conducted using Visual Studio Code (VSCode), a widely used IDE.
 Please [download the appropriate version of Visual Studio Code][https://code.visualstudio.com/] for your operating system (Windows, macOS, or Linux)
 and system architecture (e.g., 64-bit, ARM).
 
-### Additional Git Setup
-
-#### Setting up Git
-
-The first time we use Git on a new machine, we need to configure it. We’re going to set some global options, so when Git starts tracking changes to files it records who made them and how to contact them.
-
-(Please use your own name and the email address you used to sign up to GitHub!)
-
-```bash
-git config --global user.name "Firstname Surname"
-git config --global user.email "fsurname@university.ac.uk"
-
-```
-
-We’re going to set Nano, a simple, minimal command-line text editor to be the default for when you need to edit messages.  If you’re already comfortable with another command-line editor, feel free to select that!
-
-```bash
-git config --global core.editor "nano -w"`
-```
-
-The three commands above only need to be run once: the flag `--global` tells Git to use the settings for every project on this machine.
-
-You can check your settings at any time:
-
-```bash
- git config --list
-```
-
-#### GitHub
-
-We’ll be using the website [GitHub](https://github.com/) to host, back up, and distribute our code. You’ll need to create an account there. As your GitHub username will appear in the URLs of your projects there, it’s best to use a short, clear version of your name if you can.
-
-#### SSH Key Setup (Optional/Advanced)
-
-An optional step that isn't required for the course but is a useful and established practice,
-is to set up SSH access to GitHub from your computer.
-This is a more secure alternative method to access GitHub than using a password.
-To set up SSH access, we generate a pair of keys - one public, one private. We want to add the public key to GitHub, whilst the private one stays on our computer.
-
-We can run a simple command to generate a new SSH key. It’ll ask you for some settings, but you should just hit enter to use the defaults for everything:
-
-```bash
-ssh-keygen -t ed25519
-```
-
-```output
-Generating public/private ed25519 key pair.
-Enter file in which to save the key (/home/smangham/.ssh/id_ed25519): 
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in id_ed25519
-Your public key has been saved in id_ed25519.pub
-The key fingerprint is:
-SHA256:tm2lRVXqWdkwiu+fvOF8WxRaf6peAqZHKSaWDO8jjjs user-name@computer-name
-The key's randomart image is:
-+--[ED25519 256]--+
-|              +..|
-|           . o +o|
-|    .     . o .+o|
-|     + .   + .ooo|
-|      * S = +.o +|
-|     o + B *   o.|
-|    . o o = o + .|
-|  Eo . . o   O oo|
-|  oo.      .o B+.|
-+----[SHA256]-----+
-```
-
-Now we’ve generated a key, we can add this to [GitHub](https://github.com) and register the key there.
-First, visit GitHub, and make sure you’ve signed in to your account.
-Once you’re signed in, go to [GitHub > Settings > SSH and GPG keys > Add new](https://github.com/settings/ssh/new), and you should see this:
-
-![](../episodes/fig/add-ssh-key.png)
-
-We need to fill in the details. Give the key a title like “Laptop SSH key”, and then paste your public key into the key box - we can find it in our ~/.ssh folder:
-
-```bash
-ls ~/.ssh
-```
-
-```output
-id_ed25519  id_ed25519.pub  known_hosts
-```
-
-You want to copy the contents of the .pub file, which you can display with:
-
-```bash
-cat ~/.ssh/id_ed25519.pub
-```
-
-```output
-ssh-ed25519 <SNIPPED FOR SECURITY> user-name@computer-name
-```
-
-**Make sure you copy the .pub file and not the private key!** Your private key lives on your machine and is never shared with anyone else. Then click Add key, and you’re done!
+Follow or check [these instructions](https://code.visualstudio.com/docs/copilot/setup) to ensure you have GitHub Copilot installed within VSCode.
+You only need to follow steps 1 and 2 from the first section.
