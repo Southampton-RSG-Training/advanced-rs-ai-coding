@@ -18,13 +18,13 @@ carpentry: 'incubator'
 carpentry_description: 'Lesson Description'
 
 # Overall title for pages.
-title: 'Developing Research Software with AI Tools'
+title: 'Advanced Research Software Development using AI'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: 2026-01-13
+created: 2026-05-05
 
 # Comma-separated list of keywords for the lesson
-keywords: 'ai, visual studio code, vscode, copilot, llm, software'
+keywords: 'ai, visual studio code, vscode, copilot, llm, software, software process, advanced software development, research software development'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -66,11 +66,11 @@ contact: 'sc16@soton.ac.uk'
 
 # Order of episodes in your lesson
 episodes: 
-- 01-intro-ai-ide-tools.md
-- 02-intro-vscode.md
-- 03-getting-started.md
-- 04-use-copilot-improve-code.md
-- 05-investigate-codebase.md
+- 01-intro.md
+- 02-process-based-development.md
+- 03-unit-testing-ai.md
+- 04-using-mcp-external-services.md
+- 05-multi-agent-development.md
 
 # Information for Learners
 learners: 
