@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Developing Research Software with AI Tools: Instructor Notes</title>
+<title>Advanced Research Software Development using AI: Instructor Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="../assets/styles.css">
 <script src="../assets/scripts.js" type="text/javascript"></script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
@@ -99,7 +99,7 @@
       <img class="small-logo" alt="Lesson Description" src="../assets/images/incubator-logo-sm.svg">
 </div>
     <div class="lesson-title-md">
-      Developing Research Software with AI Tools
+      Advanced Research Software Development using AI
     </div>
     <div class="search-icon-sm">
       <!-- TODO: do not show until we have search
@@ -110,7 +110,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
           <span class="lesson-title">
-            Developing Research Software with AI Tools
+            Advanced Research Software Development using AI
           </span>
         </li>
         <li class="nav-item">
@@ -238,7 +238,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="01-intro-ai-ide-tools.html">1. Introduction to AI Coding IDE Tools</a>
+        <a href="01-intro.html">1. Introduction to Advanced Research Software AI Coding</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -250,7 +250,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02-intro-vscode.html">2. Introduction to Microsoft Visual Studio Code</a>
+        <a href="02-process-based-development.html">2. Process-based Development with Generative AI</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -262,7 +262,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-getting-started.html">3. Getting Started with using Copilot within VSCode</a>
+        <a href="03-unit-testing-ai.html">3. AI-supported Unit Testing</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -274,7 +274,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="04-use-copilot-improve-code.html">4. How to use Copilot to Improve an Existing Codebase</a>
+        <a href="04-using-mcp-external-services.html">4. Using External Services to Improve Context</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -286,7 +286,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="05-investigate-codebase.html">5. Investigate a New Codebase</a>
+        <a href="05-multi-agent-development.html">5. Multi-agent Development</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -358,121 +358,11 @@ any links that you are not going to use.
  -->
 
 
-      <section id="aggregate-instructor-notes"><section id="01-intro-ai-ide-tools"><h2 class="section-heading"><a href="01-intro-ai-ide-tools.html">Introduction to AI Coding IDE Tools</a></h2>
-<hr class="half-width">
-<h3 id="01-intro-ai-ide-tools-headingInstructor1">
-<a href="01-intro-ai-ide-tools.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#01-intro-ai-ide-tools-headingInstructor1"></a>
-</h3>
-<p>For the next exercise, in the shared notes document have a section
-for participants to add in answers.</p>
-<hr>
-<br></section><section id="02-intro-vscode"><h2 class="section-heading"><a href="02-intro-vscode.html">Introduction to Microsoft Visual Studio Code</a></h2>
-<hr class="half-width">
-<h3 id="02-intro-vscode-headingInstructor1">
-<a href="02-intro-vscode.html#headingInstructor1">Checkpoint: who’s successfully managed to install the Python extension?</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor1"></a>
-</h3>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor2">
-<a href="02-intro-vscode.html#headingInstructor2">Installing Python Packages</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor2"></a>
-</h3>
-<p>Who has installed a Python package before, using the program
-<code>pip</code>? Who has created and used a Python virtual environment
-before?</p>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor3">
-<a href="02-intro-vscode.html#headingInstructor3">Checkpoint: Setting up a Virtual Environment</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor3"></a>
-</h3>
-<p>Who has successfully created and activated their virtual
-environment?</p>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor4">
-<a href="02-intro-vscode.html#headingInstructor4">Checkpoint: who’s been able to download the code and open it within VSCode?</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor4"></a>
-</h3>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor5">
-<a href="02-intro-vscode.html#headingInstructor5">Checkpoint: who’s configured the Python extension?</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor5"></a>
-</h3>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor6">
-<a href="02-intro-vscode.html#headingInstructor6">Checkpoint: who’s run their Python progran and seen this image when opening data/inflammation-01.csv.png?</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor6"></a>
-</h3>
-<hr>
-<br><h3 id="02-intro-vscode-headingInstructor7">
-<a href="02-intro-vscode.html#headingInstructor7">Checkpoint: if you’re using Conda and encountered this error, did it fix it?</a><a class="anchor" aria-label="anchor" href="#02-intro-vscode-headingInstructor7"></a>
-</h3>
-<hr>
-<br></section><section id="03-getting-started"><h2 class="section-heading"><a href="03-getting-started.html">Getting Started with using Copilot within VSCode</a></h2>
-<hr class="half-width">
-<h3 id="03-getting-started-headingInstructor1">
-<a href="03-getting-started.html#headingInstructor1">Checkpoint: I’ve installed the GitHub Copilot extension</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor1"></a>
-</h3>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor2">
-<a href="03-getting-started.html#headingInstructor2">Checkpoint: I’ve logged the Copilot extension into my GitHub account</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor2"></a>
-</h3>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor3">
-<a href="03-getting-started.html#headingInstructor3">Checkpoint: I’ve configured my privacy settings</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor3"></a>
-</h3>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor4">
-<a href="03-getting-started.html#headingInstructor4">Instructor Note</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor4"></a>
-</h3>
-<p>For the next exercise, in the shared notes document have a section
-for participants to add in answers.</p>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor5">
-<a href="03-getting-started.html#headingInstructor5">Checkpoint: I’ve generated a Copilot instructions file</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor5"></a>
-</h3>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor6">
-<a href="03-getting-started.html#headingInstructor6">Checkpoint: I’ve disabled the inclusion of csv files</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor6"></a>
-</h3>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor7">
-<a href="03-getting-started.html#headingInstructor7">Instructor Note</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor7"></a>
-</h3>
-<p>Following the exercise below, talk through the possible solutions,
-highlighting the key similarities and differences between each
-response.</p>
-<hr>
-<br><h3 id="03-getting-started-headingInstructor8">
-<a href="03-getting-started.html#headingInstructor8">Instructor Note</a><a class="anchor" aria-label="anchor" href="#03-getting-started-headingInstructor8"></a>
-</h3>
-<p>For the next exercise, add two sections - one each for Benefits and
-Risks, so that participants can add their own comments to each
-category.</p>
-<hr>
-<br></section><section id="04-use-copilot-improve-code"><h2 class="section-heading"><a href="04-use-copilot-improve-code.html">How to use Copilot to Improve an Existing Codebase</a></h2>
-<hr class="half-width">
-<h3 id="04-use-copilot-improve-code-headingInstructor1">
-<a href="04-use-copilot-improve-code.html#headingInstructor1">Quick Check: Ask the Audience</a><a class="anchor" aria-label="anchor" href="#04-use-copilot-improve-code-headingInstructor1"></a>
-</h3>
-<p>Following the exercise, paste the following comment into the chat,
-and ask for thumbs up/down as a reaction to it, and summarise the
-responses:</p>
-<p>Were you able to achieve something that you regard as well written
-code that you understand and runs?</p>
-<hr>
-<br><h3 id="04-use-copilot-improve-code-headingInstructor2">
-<a href="04-use-copilot-improve-code.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#04-use-copilot-improve-code-headingInstructor2"></a>
-</h3>
-<p>For the next exercise, in the shared notes document have a section
-for participants to add in answers.</p>
-<hr>
-<br><h3 id="04-use-copilot-improve-code-headingInstructor3">
-<a href="04-use-copilot-improve-code.html#headingInstructor3">Instructor Note</a><a class="anchor" aria-label="anchor" href="#04-use-copilot-improve-code-headingInstructor3"></a>
-</h3>
-<p>For the next exercise, in the shared notes document have a section
-for participants to add in answers.</p>
-<hr>
-<br><h3 id="04-use-copilot-improve-code-headingInstructor4">
-<a href="04-use-copilot-improve-code.html#headingInstructor4">Instructor Note</a><a class="anchor" aria-label="anchor" href="#04-use-copilot-improve-code-headingInstructor4"></a>
-</h3>
-<p>For the next exercise, add a section into the shared notes so that
-participants can add their own comments.</p>
-<hr>
-<br></section><section id="05-investigate-codebase"><h2 class="section-heading"><a href="05-investigate-codebase.html">Investigate a New Codebase</a></h2>
+      <section id="aggregate-instructor-notes"><section id="01-intro"><h2 class="section-heading"><a href="01-intro.html">Introduction to Advanced Research Software AI Coding</a></h2>
+<hr class="half-width"></section><section id="02-process-based-development"><h2 class="section-heading"><a href="02-process-based-development.html">Process-based Development with Generative AI</a></h2>
+<hr class="half-width"></section><section id="03-unit-testing-ai"><h2 class="section-heading"><a href="03-unit-testing-ai.html">AI-supported Unit Testing</a></h2>
+<hr class="half-width"></section><section id="04-using-mcp-external-services"><h2 class="section-heading"><a href="04-using-mcp-external-services.html">Using External Services to Improve Context</a></h2>
+<hr class="half-width"></section><section id="05-multi-agent-development"><h2 class="section-heading"><a href="05-multi-agent-development.html">Multi-agent Development</a></h2>
 <hr class="half-width"></section></section>
 </div>
     </main>
@@ -517,12 +407,12 @@ participants can add their own comments.</p>
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "ai, visual studio code, vscode, copilot, llm, software",
+  "keywords": "ai, visual studio code, vscode, copilot, llm, software, software process, advanced software development, research software development",
   "name": "Instructor Notes",
   "creativeWorkStatus": "active",
   "url": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
-  "dateCreated": "2026-01-13",
+  "dateCreated": "2026-05-05",
   "dateModified": "2026-05-05",
   "datePublished": "2026-05-05"
 }
