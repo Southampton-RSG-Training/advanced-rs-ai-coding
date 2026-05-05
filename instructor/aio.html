@@ -455,6 +455,163 @@ own research domains</li>
 </div>
 </div>
 <p>FIXME: clone example repo</p>
+<section><h2 class="section-heading" id="our-example-scenario">Our Example Scenario<a class="anchor" aria-label="anchor" href="#our-example-scenario"></a>
+</h2>
+<hr class="half-width"></section><section><h2 class="section-heading" id="using-the-built-in-plan-agent">Using the Built-in Plan Agent<a class="anchor" aria-label="anchor" href="#using-the-built-in-plan-agent"></a>
+</h2>
+<hr class="half-width">
+<p>Instead of “one-shotting” the development of code using an AI coding
+tool, we’ve seen that a better approach is to plan and implement our
+code in a step-wise, incremental fashion. So how should we go about
+this?</p>
+<p>One way would be to use the built-in VSCode plan agent that helps
+developers break down tasks into clear and actionable steps before
+writing code. Instead of jumping straight into implementation, it
+generates structured plans for features or for other code modification
+activities, improving clarity and efficiency. It aims to guide users
+through a thoughtful planning phase to reduce errors and encourage
+better design and implementation decisions.</p>
+<p>FIXME: add learning actions</p>
+<p>This is very reasonable approach. We are now moving from
+<strong>reactive</strong> development to <strong>intentional</strong>
+development, which forces us to consider ways forward and make decisions
+and capture these within a defined plan that we validate and refine
+before moving to implementation.</p>
+<p>However, there are some limitations with the built-in Plan mode:</p>
+<ul>
+<li>As implied by its name, it actively avoids moving to implementing
+solutions. Conversations are pulled back to planning instead of moving
+forward. If we want to go further, we need prompts or another mechanism
+to do that.</li>
+<li>It follows a predefined workflow that may not fit your working style
+or process, gathering context and constraints, developing a structured
+plan before moving to plan execution. This is a very sensible approach
+and guardrail against premature implementation, but may not offer the
+flexibility or adherence to how you want to do things.</li>
+</ul></section><section><h2 class="section-heading" id="introducing-agents">Introducing Agents<a class="anchor" aria-label="anchor" href="#introducing-agents"></a>
+</h2>
+<hr class="half-width">
+<p>One way to overcome these limitations would be to define and use a
+custom agent that follows a behaviour that we define ourselves. These
+give us:</p>
+<ul>
+<li>Specialised, tailored instructions for tasks; with more than one of
+these, we have reusable workflows we can use in many projects</li>
+<li>Greater action consistency, since these instructions are followed
+each time</li>
+<li>Define general constraints for output: coding standards, practices,
+conventions, etc.</li>
+<li>Define guardrails and explicit allowable actions:
+e.g. read-only</li>
+</ul>
+<p>Generally, this approach is much quicker than setting up all this
+context every time for every kind of task - if you have a set way you
+tend to do something, define an agent to do it.</p>
+<p>However, we’ve seen that different stages of a development process
+require different mindsets and approaches. By creating a single agent
+that attempts to do everything, we risk an overly complex definition
+that is prone to failure. Instead, let’s create a separate agent for
+each stage of development that is each responsible for generating a
+specification that requires review before moving on to the next
+stage:</p>
+<ul>
+<li>
+<strong>Requirements Gatherer</strong> - responsible for gathering
+and clarifying requirements, generating a Product Requirements Document
+(PRD)</li>
+<li>
+<strong>Technical Archtect</strong> - given a PRD, creates an
+architecture and overall design, generating a technical design
+specification</li>
+<li>
+<strong>Implementer</strong> - given a design specification, creates
+an implementation</li>
+</ul>
+<p>This approach also has the advantage of token efficiency. By creating
+more tightly defined agents each with a narrower clarity of purpose,
+this minimises the size of the context window - and use of tokens -
+whilst avoiding ambiguity in any given situation.</p>
+<p>There are many ways we could choose to define these agents, in terms
+of their overall behaviour and the practices we want them to follow. For
+the purposes of this training, we’ll consider a generic set of agents
+that cover the basics but are readily modifiable as needed. We should
+ensure their generated stage documents are located in the same
+directory, so they’re logically grouped together, e.g. a
+<code>project-docs</code> directory.</p>
+</section><section><h2 class="section-heading" id="creating-a-requirements-gathering-agent">Creating a Requirements Gathering Agent<a class="anchor" aria-label="anchor" href="#creating-a-requirements-gathering-agent"></a>
+</h2>
+<hr class="half-width">
+<p>There are a number of things we should consider to create our
+requirements gathering agent, for example:</p>
+<ul>
+<li>
+<strong>Assumptions</strong> - we should always be explicit and
+clear what underlying assumptions have been made for the stated
+requirements, to avoid misunderstandings about what is included</li>
+<li>
+<strong>User stories with acceptance criteria</strong> - define
+project requirements in terms of user stories, i.e. “As a [user type], I
+want [goal] so that [benefit]”, each with clear acceptance criteria</li>
+<li>
+<strong>Success metrics</strong> - generally, what does a successful
+implementation look like?</li>
+<li>
+<strong>Out of scope items</strong> - clarify what should not be
+considered</li>
+</ul>
+<div class="section level3">
+<h3 id="a-first-try">A First Try…<a class="anchor" aria-label="anchor" href="#a-first-try"></a>
+</h3>
+<p>One way to create our requirements agent is to use the built-in
+<code>/create-agent</code> VSCode chat command.</p>
+<p>For example, in the VSCode chat ensure you have the
+<code>GPT-5.4 mini</code> agent selected in the model dropdown, and
+enter:</p>
+<pre><code>/create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope</code></pre>
+<p>Here, our request briefly captures the above, explicitly requesting
+the generation of a <code>requirements.md</code> document within a
+<code>project-docs</code> directory.</p>
+<p>This generally produces a very reasonable definition, although given
+the probablistic nature of LLMs, yours will differ.</p>
+<p>For example, this prompt generated a file called
+<code>requirements-gatherer.agent.md</code> that includes the following
+agent definition:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">---</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a><span class="fu">## Constraints</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ss">- </span>ONLY produce requirements content and ask clarifying questions when necessary to avoid guessing.</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a><span class="fu">## Approach</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a><span class="ss">3. </span>Write clear user stories, success metrics, and out-of-scope items in concise markdown.</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a><span class="fu">## Output Format</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>Return a markdown requirements document with these sections:</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a><span class="ss">- </span>Assumptions</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a><span class="ss">- </span>User Stories</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1" aria-label="code-block-2-27"></a><span class="ss">- </span>Out of Scope</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1" aria-label="code-block-2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1" aria-label="code-block-2-29"></a>If the prompt is too ambiguous to draft responsibly, ask only the minimum clarifying questions needed.</span></code></pre>
+</div>
+<p>FIXME: include front-matter definitions and ‘cnfigure tools’
+selectable in the doc with screenshot</p>
+<p>This definition</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -467,7 +624,13 @@ own research domains</li>
 </ul>
 </div>
 </div>
-</div></section><section id="aio-03-unit-testing-ai"><p>Content from <a href="03-unit-testing-ai.html">AI-supported Unit Testing</a></p>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</div>
+</section></section><section id="aio-03-unit-testing-ai"><p>Content from <a href="03-unit-testing-ai.html">AI-supported Unit Testing</a></p>
 <hr>
 <p>Last updated on 2026-05-05 |
 
