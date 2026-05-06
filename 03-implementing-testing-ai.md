@@ -25,6 +25,17 @@ exercises: 0
 
 
 
+## Creating an Implementer Agent
+
+```
+/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible
+```
+
+FIXME: update the agent to have all the perms necessary to execute scripts and set environments
+FIXME: when executing agent, list steps it typically goes through, e.g. setup venv
+
+
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
