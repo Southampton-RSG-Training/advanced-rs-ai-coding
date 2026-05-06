@@ -13,10 +13,16 @@
     <loc>https://carpentries.github.io/workbench-template-md/02-intro-vscode.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/02-planning-development-ai.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/02-process-based-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/03-getting-started.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/03-implementing-testing-ai.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/03-unit-testing-ai.html</loc>
@@ -70,10 +76,16 @@
     <loc>https://carpentries.github.io/workbench-template-md/instructor/02-intro-vscode.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/02-planning-development-ai.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/02-process-based-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/03-getting-started.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/03-implementing-testing-ai.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/03-unit-testing-ai.html</loc>

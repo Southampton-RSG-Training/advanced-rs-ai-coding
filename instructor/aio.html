@@ -250,7 +250,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02-process-based-development.html">2. Process-based Development with Generative AI</a>
+        <a href="02-planning-development-ai.html">2. Planning a Development Project using Copilot Agents</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -262,7 +262,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-unit-testing-ai.html">3. AI-supported Unit Testing</a>
+        <a href="03-implementing-testing-ai.html">3. Implementing and Testing Code with Copilot Agents</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -414,11 +414,11 @@ development</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-02-process-based-development"><p>Content from <a href="02-process-based-development.html">Process-based Development with Generative AI</a></p>
+</section></section><section id="aio-02-planning-development-ai"><p>Content from <a href="02-planning-development-ai.html">Planning a Development Project using Copilot Agents</a></p>
 <hr>
-<p>Last updated on 2026-05-05 |
+<p>Last updated on 2026-05-06 |
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-process-based-development.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-planning-development-ai.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -443,11 +443,14 @@ any links that you are not going to use.
 <ul>
 <li>Use the built-in planning agent to develop a basic Python
 application</li>
-<li>Develop a basic statistical graph visualisations</li>
-<li>Create Copilot agents that follow the defined development phases of
-requirements analysis, design, and implementation</li>
-<li>Evaluate the agents to determine improvements to apply them in your
-own research domains</li>
+<li>Use Copilot to automatically generate a basic agent to gather
+requirements</li>
+<li>Describe the format and basic configuration of an agents definition
+file</li>
+<li>Create and use an improved Copilot agent to gather requirements into
+a set of requirements</li>
+<li>Create and use a Copilot agent to produce a technical specification
+from a set of requirements</li>
 </ul>
 </div>
 </div>
@@ -609,9 +612,58 @@ agent definition:</p>
 <span id="cb2-28"><a href="#cb2-28" tabindex="-1" aria-label="code-block-2-28"></a></span>
 <span id="cb2-29"><a href="#cb2-29" tabindex="-1" aria-label="code-block-2-29"></a>If the prompt is too ambiguous to draft responsibly, ask only the minimum clarifying questions needed.</span></code></pre>
 </div>
-<p>FIXME: include front-matter definitions and ‘cnfigure tools’
-selectable in the doc with screenshot</p>
-<p>This definition</p>
+<p>Agent definitions tend to follow a common pattern of defining agent
+metadata, role, and aspects of its overall behaviour separated into
+subsections.</p>
+<p>So at the top of this definition, there is <a href="https://yaml.org/" class="external-link">YAML</a> front matter that defines metadata
+about this agent, including a plain text description, whether this agent
+can be invoked by the user, and which tools this agent is allowed to
+use. This explicit declaration of allowable tools enables us to conform
+this agent to the Principle of Least Privilege, ensuring we only give it
+permissions that it needs to accomplish its role.</p>
+<p>In this case:</p>
+<ul>
+<li>
+<code>read</code> - the agent is allowed to read files in this
+VSCode workspace, such as source code and other files</li>
+<li>
+<code>search</code> - allows the agent to search across this
+workspace</li>
+<li>
+<code>edit</code> - the agent may edit and modify files within this
+workspace</li>
+</ul>
+<p>If you select the <code>Configure Tools...</code> text above this
+line, you’ll see a pop-up dropdown containing a complete set of
+allowable permissions to select for this agent.</p>
+<figure><img src="../fig/vscode-agent-configure-tools.png" alt="VSCode agent file configure tools pop-up dropdown window" class="figure mx-auto d-block"><div class="figcaption">VSCode agent file configure tools pop-up
+dropdown window</div>
+</figure><p>Note that these are arranged hierarchically, so we are able to assign
+sub-permissions within a particular group
+(e.g. <code>read/readFile</code>) if we want to be more specific.</p>
+<p>Next, its behaviour starts with an initial declaration of the agent’s
+role, where it adopts a persona of a specialist writing a requirements
+specification.</p>
+<div id="managing-expectations" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="managing-expectations" class="callout-inner">
+<h3 class="callout-title">Managing Expectations…</h3>
+<div class="callout-content">
+<p>Importantly, note that in this case whilst the role is declared as a
+requirements <code>specialist</code> to set the agent’s persona, we
+should not consider the output as we would if its coming from a
+<em>real</em> specialist or expert. This is a dangerous trap to fall
+into with using generative AI, since this declaration only provides an
+anchor for its behaviour, not a guarantee of its competence!</p>
+<p>As with all things generative AI, we should treat any output with
+skepticism and use it to inform our own thinking and decisions through
+careful review, and not blindly accept its assertions.</p>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -630,11 +682,11 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</section></section><section id="aio-03-unit-testing-ai"><p>Content from <a href="03-unit-testing-ai.html">AI-supported Unit Testing</a></p>
+</section></section><section id="aio-03-implementing-testing-ai"><p>Content from <a href="03-implementing-testing-ai.html">Implementing and Testing Code with Copilot Agents</a></p>
 <hr>
-<p>Last updated on 2026-05-05 |
+<p>Last updated on 2026-05-06 |
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-unit-testing-ai.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-implementing-testing-ai.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -657,6 +709,8 @@ any links that you are not going to use.
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
+<li>Create a Copilot agent that follows defined practices to implement a
+technical specification</li>
 <li>Describe the purpose of a unit test</li>
 <li>Write and run a unit test to run within the pytest unit testing
 framework</li>
@@ -664,6 +718,8 @@ framework</li>
 <li>Create an agent to write unit tests for our project</li>
 <li>Update our implementation agent to write unit tests for our
 project</li>
+<li>Evaluate the agents to determine improvements to apply them in your
+own research domains</li>
 </ul>
 </div>
 </div>
@@ -832,8 +888,8 @@ a coordinator-subgent pattern</li>
   "url": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-05-05",
-  "datePublished": "2026-05-05"
+  "dateModified": "2026-05-06",
+  "datePublished": "2026-05-06"
 }
 
   </script><script>
