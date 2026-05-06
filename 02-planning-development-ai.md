@@ -35,23 +35,82 @@ One way would be to use the built-in VSCode plan agent that helps developers bre
 Instead of jumping straight into implementation, it generates structured plans for features or for other code modification activities, improving clarity and efficiency.
 It aims to guide users through a thoughtful planning phase to reduce errors and encourage better design and implementation decisions.
 
-FIXME: add learning actions
+Let's try it out now.
 
+1. Select `Plan` from the Copilot mode dropdown in the chat panel.
+1. Select `GPT-5.4 mini` selected in the model dropdown:
+
+   `Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots`
+
+1. Press `Enter`
+1. Answer any clarifying questions from the planning agent.
+1. When the planning agent concludes, select the option to open the plan in the editor, then save it.
+
+You should find you end up with something similar to this, saved as a prompt file in the project folder:
+
+```markdown
+## Plan: CSV statistics plotter
+
+Build a small Python CLI from scratch that takes a data-directory argument, finds the single CSV file inside it, computes per-column mean, minimum, maximum, and standard deviation with NumPy, and writes one PNG per statistic with Matplotlib. The workspace is empty, so the implementation should be minimal and self-contained.
+
+**Steps**
+1. Define the CLI contract and input validation.
+   - Accept one required argument: the path to a data directory.
+   - Require exactly one CSV file in that directory and fail clearly if the directory is empty or contains multiple CSVs.
+   - Process numeric columns only and report which columns were used.
+2. Implement CSV loading and statistic computation.
+   - Read the CSV, extract numeric columns, and convert them into NumPy arrays.
+   - Compute mean, minimum, maximum, and standard deviation for each numeric column.
+   - Keep this logic separate from the CLI and plotting code so it is easy to test.
+3. Implement plotting and output generation.
+   - Generate one PNG per statistic.
+   - Use column names on the x-axis and consistent titles, labels, and styling across all plots.
+   - Save the images to a deterministic output location tied to the input directory.
+4. Add packaging and tests.
+   - Create the minimal project metadata and CLI entry point.
+   - Add tests for directory validation, CSV parsing, statistics, and output file creation.
+   - Include a small fixture CSV with both numeric and non-numeric columns.
+
+**Relevant files**
+- `pyproject.toml` for dependencies and CLI entry-point wiring.
+- `src/<tool_name>/__main__.py` for command-line startup.
+- `src/<tool_name>/cli.py` for argument parsing and orchestration.
+- `src/<tool_name>/stats.py` for NumPy-based calculations.
+- `src/<tool_name>/plotting.py` for Matplotlib figure generation.
+- `tests/test_cli.py` and `tests/test_stats.py` for behavior and math validation.
+- `tests/fixtures/*.csv` for sample inputs.
+
+**Verification**
+1. Run the test suite and confirm the new tests pass.
+2. Execute the CLI against a sample data directory and confirm it writes four PNG files.
+3. Inspect one generated plot to confirm labels, titles, and values are correct.
+
+**Decisions**
+- Use one PNG per statistic.
+- Ignore non-numeric columns.
+- Treat the input as a single CSV file inside the provided data directory.
+```
+
+This now provides us with a planning document which we are able to review and amend as we wish.
 This is very reasonable approach.
-We are now moving from **reactive** development to **intentional** development,
+Importantly, we are now moving from **ad-hoc** development to **intentional** development,
 which forces us to consider ways forward and make decisions and capture these within a defined plan that we validate and refine before moving to implementation.
+It also provides a "checkpoint" - if the implementation is unsatisfactory we can amend the plan and initiate the implementation again.
+In addition, it's provided us with something we can discuss and refine with colleagues.
 
 However, there are some limitations with the built-in Plan mode:
 
-- As implied by its name, it actively avoids moving to implementing solutions. Conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
-- It follows a predefined workflow that may not fit your working style or process, gathering context and constraints, developing a structured plan before moving to plan execution. This is a very sensible approach and guardrail against premature implementation, but may not offer the flexibility or adherence to how you want to do things.
+- As implied by its name, it actively avoids moving to implementing solutions. By staying in planning mode, conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
+- We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process.
+- It's a single intermediate step where important project needs (requirements) and design details may be missed. What if we want to explore the project needs separately to any design considerations?
 
 
 ## A Process-oriented Approach using Agents
 
 One way to overcome these limitations would be to define and use a custom agent
 that follows a behaviour that we define ourselves.
-These give us:
+
+This would give us:
 
 - Specialised, tailored instructions for tasks; with more than one of these, we have reusable workflows we can use in many projects
 - Greater action consistency, since these instructions are followed each time
@@ -63,7 +122,8 @@ Generally, this approach is much quicker than setting up all this context every 
 However, we've seen that different stages of a development process require different mindsets and approaches.
 By creating a single agent that attempts to do everything,
 we risk an overly complex definition that is prone to failure.
-Instead, let's create a separate agent for each stage of development that is each responsible for generating a specification that requires review before moving on to the next stage:
+Instead, let's create a separate agent for each stage of development -
+based on the long-established software development lifecycle - that is each responsible for generating a specification that requires review before moving on to the next stage:
 
 - **Requirements Gatherer** - responsible for gathering and clarifying requirements, generating a Product Requirements Document (PRD)
 - **Technical Archtect** - given a PRD, creates an architecture and overall design, generating a technical design specification
