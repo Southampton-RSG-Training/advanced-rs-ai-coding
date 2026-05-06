@@ -67,8 +67,8 @@ contact: 'sc16@soton.ac.uk'
 # Order of episodes in your lesson
 episodes: 
 - 01-intro.md
-- 02-process-based-development.md
-- 03-unit-testing-ai.md
+- 02-planning-development-ai.md
+- 03-implementing-testing-ai.md
 - 04-using-mcp-external-services.md
 - 05-multi-agent-development.md
 
