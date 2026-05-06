@@ -46,7 +46,8 @@ However, there are some limitations with the built-in Plan mode:
 - As implied by its name, it actively avoids moving to implementing solutions. Conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
 - It follows a predefined workflow that may not fit your working style or process, gathering context and constraints, developing a structured plan before moving to plan execution. This is a very sensible approach and guardrail against premature implementation, but may not offer the flexibility or adherence to how you want to do things.
 
-## Introducing Agents
+
+## A Process-oriented Approach using Agents
 
 One way to overcome these limitations would be to define and use a custom agent
 that follows a behaviour that we define ourselves.
@@ -102,11 +103,13 @@ Here, our request briefly captures the above, explicitly requesting the generati
 This generally produces a very reasonable definition,
 although given the probablistic nature of LLMs, yours will differ.
 
+### The Anatomy of an Agent Definition File
+
 For example, this prompt generated a file called `requirements-gatherer.agent.md` that includes the following agent definition:
 
 ```markdown
 ---
-description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."
+description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."
 tools: [read, search, edit]
 user-invocable: true
 ---
@@ -118,12 +121,12 @@ Your job is to create or refine a requirements document at project-docs/requirem
 - DO NOT invent implementation details.
 - DO NOT expand scope beyond what the prompt supports.
 - DO NOT write design or implementation plans.
-- ONLY produce requirements content and ask clarifying questions when necessary to avoid guessing.
+- ONLY produce requirements content.
 
 ## Approach
 1. Extract the core problem, intended users, and any explicit constraints from the prompt.
 2. Identify assumptions that are necessary to proceed and separate them from confirmed facts.
-3. Write clear user stories, success metrics, and out-of-scope items in concise markdown.
+3. Write clear user stories and success metrics in concise markdown.
 4. Keep the document focused on requirements rather than solutions.
 
 ## Output Format
@@ -131,9 +134,6 @@ Return a markdown requirements document with these sections:
 - Assumptions
 - User Stories
 - Success Metrics
-- Out of Scope
-
-If the prompt is too ambiguous to draft responsibly, ask only the minimum clarifying questions needed.
 ```
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
@@ -173,6 +173,102 @@ and not blindly accept its assertions.
 
 :::::::::::::::::::::::::::::::::::::::::
 
+Lastly, we have a set of subsections, each concisely describing an aspect of its behaviour.
+In this case, we can see we have the following:
+
+- **Section on Constraints** - this is partiuclarly important to set guardrails and constrain the agent's behaviour only to what we want. AI agents otherwise tend to wander outside of their defined scope. In this case, we see that the agent is instructed to not to do any design or implementation, although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
+- **Description of the Desired Approach** - a set of clear and concise steps describing what the agent should do.
+- **Output format** - which describes the output format of the document and the included contents as subsections
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Limitations?
+
+This isn't a bad start.
+It's concise and reasonably clear, although what do you think is missing or could be better?
+
+:::::::::::::::::::::::::: solution
+
+- Be more explicit with for what we want, e.g. include the user story format
+- It would be useful for our agent to ask questions when things aren't clear, instead of making unnecessary assumptions
+- An accepted practice when creating user stories is to create ways to validate that they are correct, i.e. with acceptance criteria for each one
+- Within our output doc, it could be useful to include what is out of scope for the project as a section
+- We should consider more strict permissions for the agent if possible
+- It might be useful to specify the specific AI model to use for this agent, if we can
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### A Better Requirements Agent
+
+Let's take a look at [a version of this agent](../learners/files/agents/requirements-gatherer.agent.md) that takes these limitations into account.
+
+The revised YAML front matter looks like:
+
+```yaml
+----
+description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."
+tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search]
+model: GPT-5.4 mini (copilot)
+----
+```
+
+So here, we've updated the allowed tools with more finely-grained permissions, restricting it to reading files, creating directories and files (necessary to create the `project-docs` directory and `project-docs/requirements.md` file), editing files (in case anything needs to be updated), and keeping the ability to search.
+
+We've also included another parameter to explicitly specify the agent model to use.
+For the purpose of this training, we'll use the GPT-5.4 mini model.
+
+We can also see the revised subsections address our other concerns; asking clarifying questions when necessary, explicitly providing the user story format, and including a section on what is out of scope in the requirements spec.
+
+### Running our Requirements Agent
+
+Select our new `requirements-gatherer` agent from the `Agent/Ask/Plan` menu,
+ensure the `GPT-5.4 mini` model is selected,
+and enter the following:
+
+```
+Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots
+```
+
+You should find a `requirements.md` file in the `project-docs` directory, hopefully with the sections we requested,
+[similar to this one](../learners/files/example-agent-output/requirements.md).
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Review!
+
+As we know, we should always review the output from generative AI.
+So with a skeptical mindset:
+
+- Carefully review the generated requirements document and ensure it makes sense to you.
+- Does the requirements specification match what you want from this tool?
+- Ensure you address any incorrect assumptions.
+- Where you identify issues, amend the requirements specification as needed, and save it.
+
+Of course, your requirements specifications will be different!
+
+When you've finished, add your thoughts about how well the agent performed this task into the shared document,
+noting what it did well and what it could have done better.
+
+:::::::::::::::::::::::::: solution
+
+When first developing agents, similarly to how we develop code, a typical process is to refine the behaviour of the agent over multiple runs until its output is satisfactory.
+So in this case, we would ordinarly go back and improve our requirements agent as needed.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Creating a Software Design Agent
+
+```
+/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide
+```
+
+
+## Summary
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
