@@ -224,8 +224,10 @@
       <div class="accordion-body">
         <ul><li><a href="#our-example-scenario">Our Example Scenario</a></li>
 <li><a href="#using-the-built-in-plan-agent">Using the Built-in Plan Agent</a></li>
-<li><a href="#introducing-agents">Introducing Agents</a></li>
+<li><a href="#a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents</a></li>
 <li><a href="#creating-a-requirements-gathering-agent">Creating a Requirements Gathering Agent</a></li>
+<li><a href="#creating-a-software-design-agent">Creating a Software Design Agent</a></li>
+<li><a href="#summary">Summary</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -389,7 +391,7 @@ or process, gathering context and constraints, developing a structured
 plan before moving to plan execution. This is a very sensible approach
 and guardrail against premature implementation, but may not offer the
 flexibility or adherence to how you want to do things.</li>
-</ul></section><section><h2 class="section-heading" id="introducing-agents">Introducing Agents<a class="anchor" aria-label="anchor" href="#introducing-agents"></a></h2>
+</ul></section><section><h2 class="section-heading" id="a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents<a class="anchor" aria-label="anchor" href="#a-process-oriented-approach-using-agents"></a></h2>
 <hr class="half-width"><p>One way to overcome these limitations would be to define and use a
 custom agent that follows a behaviour that we define ourselves. These
 give us:</p>
@@ -463,6 +465,9 @@ the generation of a <code>requirements.md</code> document within a
 <code>project-docs</code> directory.</p>
 <p>This generally produces a very reasonable definition, although given
 the probablistic nature of LLMs, yours will differ.</p>
+</div>
+<div class="section level3">
+<h3 id="the-anatomy-of-an-agent-definition-file">The Anatomy of an Agent Definition File<a class="anchor" aria-label="anchor" href="#the-anatomy-of-an-agent-definition-file"></a></h3>
 <p>For example, this prompt generated a file called
 <code>requirements-gatherer.agent.md</code> that includes the following
 agent definition:</p>
@@ -470,7 +475,7 @@ agent definition:</p>
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">---</span></span>
@@ -482,22 +487,19 @@ agent definition:</p>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ss">- </span>ONLY produce requirements content and ask clarifying questions when necessary to avoid guessing.</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a></span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a><span class="fu">## Approach</span></span>
 <span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a><span class="ss">3. </span>Write clear user stories, success metrics, and out-of-scope items in concise markdown.</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
 <span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a></span>
 <span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a><span class="fu">## Output Format</span></span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>Return a markdown requirements document with these sections:</span>
 <span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a><span class="ss">- </span>Assumptions</span>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a><span class="ss">- </span>User Stories</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1" aria-label="code-block-2-27"></a><span class="ss">- </span>Out of Scope</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1" aria-label="code-block-2-28"></a></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1" aria-label="code-block-2-29"></a>If the prompt is too ambiguous to draft responsibly, ask only the minimum clarifying questions needed.</span></code></pre>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
 </div>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
@@ -549,7 +551,141 @@ careful review, and not blindly accept its assertions.</p>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
+<p>Lastly, we have a set of subsections, each concisely describing an
+aspect of its behaviour. In this case, we can see we have the
+following:</p>
+<ul><li>
+<strong>Section on Constraints</strong> - this is partiuclarly
+important to set guardrails and constrain the agent’s behaviour only to
+what we want. AI agents otherwise tend to wander outside of their
+defined scope. In this case, we see that the agent is instructed to not
+to do any design or implementation, although note given the probablistic
+nature of LLMs, this doesn’t <em>guarantee</em> that they won’t!</li>
+<li>
+<strong>Description of the Desired Approach</strong> - a set of
+clear and concise steps describing what the agent should do.</li>
+<li>
+<strong>Output format</strong> - which describes the output format
+of the document and the included contents as subsections</li>
+</ul><div id="limitations" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="limitations" class="callout-inner">
+<h3 class="callout-title">Limitations?</h3>
+<div class="callout-content">
+<p>This isn’t a bad start. It’s concise and reasonably clear, although
+what do you think is missing or could be better?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ul><li>Be more explicit with for what we want, e.g. include the user story
+format</li>
+<li>It would be useful for our agent to ask questions when things aren’t
+clear, instead of making unnecessary assumptions</li>
+<li>An accepted practice when creating user stories is to create ways to
+validate that they are correct, i.e. with acceptance criteria for each
+one</li>
+<li>Within our output doc, it could be useful to include what is out of
+scope for the project as a section</li>
+<li>We should consider more strict permissions for the agent if
+possible</li>
+<li>It might be useful to specify the specific AI model to use for this
+agent, if we can</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="a-better-requirements-agent">A Better Requirements Agent<a class="anchor" aria-label="anchor" href="#a-better-requirements-agent"></a></h3>
+<p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.html">a version of this
+agent</a> that takes these limitations into account.</p>
+<p>The revised YAML front matter looks like:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="pp">----</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="pp">----</span></span></code></pre>
+</div>
+<p>So here, we’ve updated the allowed tools with more finely-grained
+permissions, restricting it to reading files, creating directories and
+files (necessary to create the <code>project-docs</code> directory and
+<code>project-docs/requirements.md</code> file), editing files (in case
+anything needs to be updated), and keeping the ability to search.</p>
+<p>We’ve also included another parameter to explicitly specify the agent
+model to use. For the purpose of this training, we’ll use the GPT-5.4
+mini model.</p>
+<p>We can also see the revised subsections address our other concerns;
+asking clarifying questions when necessary, explicitly providing the
+user story format, and including a section on what is out of scope in
+the requirements spec.</p>
+</div>
+<div class="section level3">
+<h3 id="running-our-requirements-agent">Running our Requirements Agent<a class="anchor" aria-label="anchor" href="#running-our-requirements-agent"></a></h3>
+<p>Select our new <code>requirements-gatherer</code> agent from the
+<code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
+model is selected, and enter the following:</p>
+<pre><code>Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots</code></pre>
+<p>You should find a <code>requirements.md</code> file in the
+<code>project-docs</code> directory, hopefully with the sections we
+requested, <a href="files/example-agent-output/requirements.html">similar to this
+one</a>.</p>
+<div id="review" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="review" class="callout-inner">
+<h3 class="callout-title">Review!</h3>
+<div class="callout-content">
+<p>As we know, we should always review the output from generative AI. So
+with a skeptical mindset:</p>
+<ul><li>Carefully review the generated requirements document and ensure it
+makes sense to you.</li>
+<li>Does the requirements specification match what you want from this
+tool?</li>
+<li>Ensure you address any incorrect assumptions.</li>
+<li>Where you identify issues, amend the requirements specification as
+needed, and save it.</li>
+</ul><p>Of course, your requirements specifications will be different!</p>
+<p>When you’ve finished, add your thoughts about how well the agent
+performed this task into the shared document, noting what it did well
+and what it could have done better.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>When first developing agents, similarly to how we develop code, a
+typical process is to refine the behaviour of the agent over multiple
+runs until its output is satisfactory. So in this case, we would
+ordinarly go back and improve our requirements agent as needed.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="creating-a-software-design-agent">Creating a Software Design Agent<a class="anchor" aria-label="anchor" href="#creating-a-software-design-agent"></a></h2>
+<hr class="half-width"><pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide</code></pre>
+</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
+<hr class="half-width"><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -564,7 +700,6 @@ careful review, and not blindly accept its assertions.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="01-intro.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
