@@ -1,5 +1,5 @@
 ---
-title: "Process-based Development with Generative AI"
+title: "Planning a Development Project using Copilot Agents"
 teaching: 0
 exercises: 0
 ---
@@ -13,9 +13,10 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Use the built-in planning agent to develop a basic Python application
-- Develop a basic statistical graph visualisations
-- Create Copilot agents that follow the defined development phases of requirements analysis, design, and implementation
-- Evaluate the agents to determine improvements to apply them in your own research domains
+- Use Copilot to automatically generate a basic agent to gather requirements
+- Describe the format and basic configuration of an agents definition file
+- Create and use an improved Copilot agent to gather requirements into a set of requirements
+- Create and use a Copilot agent to produce a technical specification from a set of requirements
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -135,9 +136,43 @@ Return a markdown requirements document with these sections:
 If the prompt is too ambiguous to draft responsibly, ask only the minimum clarifying questions needed.
 ```
 
-FIXME: include front-matter definitions and 'cnfigure tools' selectable in the doc with screenshot
+Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
 
-This definition
+So at the top of this definition, there is [YAML](https://yaml.org/) front matter that defines metadata about this agent,
+including a plain text description, whether this agent can be invoked by the user, and which tools this agent is allowed to use.
+This explicit declaration of allowable tools enables us to conform this agent to the Principle of Least Privilege,
+ensuring we only give it permissions that it needs to accomplish its role.
+
+In this case:
+
+- `read` - the agent is allowed to read files in this VSCode workspace, such as source code and other files
+- `search` - allows the agent to search across this workspace
+- `edit` - the agent may edit and modify files within this workspace
+
+If you select the `Configure Tools...` text above this line, you'll see a pop-up dropdown containing a complete set of allowable permissions to select for this agent.
+
+![VSCode agent file configure tools pop-up dropdown window](fig/vscode-agent-configure-tools.png)
+
+Note that these are arranged hierarchically, so we are able to assign sub-permissions within a particular group (e.g. `read/readFile`) if we want to be more specific.
+
+Next, its behaviour starts with an initial declaration of the agent's role,
+where it adopts a persona of a specialist writing a requirements specification.
+
+::::::::::::::::::::::::::::::::: callout
+
+## Managing Expectations...
+
+Importantly, note that in this case whilst the role is declared as a requirements `specialist` to set the agent's persona,
+we should not consider the output as we would if its coming from a *real* specialist or expert.
+This is a dangerous trap to fall into with using generative AI,
+since this declaration only provides an anchor for its behaviour,
+not a guarantee of its competence!
+
+As with all things generative AI, we should treat any output with skepticism and use it to inform our own thinking and decisions through careful review,
+and not blindly accept its assertions.
+
+:::::::::::::::::::::::::::::::::::::::::
+
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
