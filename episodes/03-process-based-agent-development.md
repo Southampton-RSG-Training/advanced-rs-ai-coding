@@ -1,5 +1,5 @@
 ---
-title: "Planning a Development Project using Copilot Agents"
+title: "Process-based Approach to Agentic Development"
 teaching: 0
 exercises: 0
 ---
@@ -12,91 +12,13 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Use the built-in planning agent to develop a basic Python application
-- Use Copilot to automatically generate a basic agent to gather requirements
-- Describe the format and basic configuration of an agents definition file
-- Create and use an improved Copilot agent to gather requirements into a set of requirements
+- Create and use a Copilot agent to gather requirements within a requirements specification
 - Create and use a Copilot agent to produce a technical specification from a set of requirements
+- Create and use a Copilot agent that follows defined practices to implement a technical specification from a technical specification
+- Evaluate the agents to determine improvements to apply them in your own research domains
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: clone example repo
-
-## Our Example Scenario
-
-## Using the Built-in Plan Agent
-
-Instead of "one-shotting" the development of code using an AI coding tool, 
-we've seen that a better approach is to plan and implement our code in a step-wise, 
-incremental fashion.
-So how should we go about this?
-
-One way would be to use the built-in VSCode plan agent that helps developers break down tasks into clear and actionable steps before writing code.
-Instead of jumping straight into implementation, it generates structured plans for features or for other code modification activities, improving clarity and efficiency.
-It aims to guide users through a thoughtful planning phase to reduce errors and encourage better design and implementation decisions.
-
-Let's try it out now.
-
-1. Select `Plan` from the Copilot mode dropdown in the chat panel.
-1. Select `GPT-5.4 mini` selected in the model dropdown:
-
-   `Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots`
-
-1. Press `Enter`
-1. Answer any clarifying questions from the planning agent.
-1. When the planning agent concludes, select the option to open the plan in the editor, then save it.
-
-You should find you end up with something similar to this, saved as a prompt file in the project folder:
-
-```markdown
-## Plan: CSV statistics plotter
-
-Build a small Python CLI from scratch that takes a data-directory argument, finds the single CSV file inside it, computes per-column mean, minimum, maximum, and standard deviation with NumPy, and writes one PNG per statistic with Matplotlib. The workspace is empty, so the implementation should be minimal and self-contained.
-
-**Steps**
-1. Define the CLI contract and input validation.
-   - Accept one required argument: the path to a data directory.
-   - Require exactly one CSV file in that directory and fail clearly if the directory is empty or contains multiple CSVs.
-   - Process numeric columns only and report which columns were used.
-2. Implement CSV loading and statistic computation.
-   - Read the CSV, extract numeric columns, and convert them into NumPy arrays.
-   - Compute mean, minimum, maximum, and standard deviation for each numeric column.
-   - Keep this logic separate from the CLI and plotting code so it is easy to test.
-3. Implement plotting and output generation.
-   - Generate one PNG per statistic.
-   - Use column names on the x-axis and consistent titles, labels, and styling across all plots.
-   - Save the images to a deterministic output location tied to the input directory.
-4. Add packaging and tests.
-   - Create the minimal project metadata and CLI entry point.
-   - Add tests for directory validation, CSV parsing, statistics, and output file creation.
-   - Include a small fixture CSV with both numeric and non-numeric columns.
-
-**Relevant files**
-- `pyproject.toml` for dependencies and CLI entry-point wiring.
-- `src/<tool_name>/__main__.py` for command-line startup.
-- `src/<tool_name>/cli.py` for argument parsing and orchestration.
-- `src/<tool_name>/stats.py` for NumPy-based calculations.
-- `src/<tool_name>/plotting.py` for Matplotlib figure generation.
-- `tests/test_cli.py` and `tests/test_stats.py` for behavior and math validation.
-- `tests/fixtures/*.csv` for sample inputs.
-
-**Verification**
-1. Run the test suite and confirm the new tests pass.
-2. Execute the CLI against a sample data directory and confirm it writes four PNG files.
-3. Inspect one generated plot to confirm labels, titles, and values are correct.
-
-**Decisions**
-- Use one PNG per statistic.
-- Ignore non-numeric columns.
-- Treat the input as a single CSV file inside the provided data directory.
-```
-
-This now provides us with a planning document which we are able to review and amend as we wish.
-This is very reasonable approach.
-Importantly, we are now moving from **ad-hoc** development to **intentional** development,
-which forces us to consider ways forward and make decisions and capture these within a defined plan that we validate and refine before moving to implementation.
-It also provides a "checkpoint" - if the implementation is unsatisfactory we can amend the plan and initiate the implementation again.
-In addition, it's provided us with something we can discuss and refine with colleagues.
 
 However, there are some limitations with the built-in Plan mode:
 
@@ -328,8 +250,18 @@ So in this case, we would ordinarly go back and improve our requirements agent a
 ```
 
 
-## Summary
+## Creating an Implementer Agent
 
+```
+/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible
+```
+
+FIXME: update the agent to have all the perms necessary to execute scripts and set environments
+FIXME: when executing agent, list steps it typically goes through, e.g. setup venv
+
+
+
+## Summary
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
