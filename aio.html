@@ -249,7 +249,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="02-planning-development-ai.html">2. Planning a Development Project using Copilot Agents</a>
+        <a href="02-task-based-agents.html">2. Task-based Approach to Agentic Development</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -261,7 +261,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="03-implementing-testing-ai.html">3. Implementing and Testing Code with Copilot Agents</a>
+        <a href="03-process-based-agent-development.html">3. Process-based Approach to Agentic Development</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -411,11 +411,11 @@ development</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-02-planning-development-ai"><p>Content from <a href="02-planning-development-ai.html">Planning a Development Project using Copilot Agents</a></p>
+</section></section><section id="aio-02-task-based-agents"><p>Content from <a href="02-task-based-agents.html">Task-based Approach to Agentic Development</a></p>
 <hr>
-<p>Last updated on 2026-05-06 |
+<p>Last updated on 2026-05-13 |
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-planning-development-ai.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -439,14 +439,14 @@ any links that you are not going to use.
 <ul>
 <li>Use the built-in planning agent to develop a basic Python
 application</li>
-<li>Use Copilot to automatically generate a basic agent to gather
-requirements</li>
+<li>Create reusable Copilot agents automatically for specific
+development tasks</li>
 <li>Describe the format and basic configuration of an agents definition
 file</li>
-<li>Create and use an improved Copilot agent to gather requirements into
-a set of requirements</li>
-<li>Create and use a Copilot agent to produce a technical specification
-from a set of requirements</li>
+<li>Describe the purpose of a unit test</li>
+<li>Write and run a unit test to run within the pytest unit testing
+framework</li>
+<li>Interpret the output of running pytest</li>
 </ul>
 </div>
 </div>
@@ -459,6 +459,9 @@ from a set of requirements</li>
 <hr class="half-width"></section><section><h2 class="section-heading" id="using-the-built-in-plan-agent">Using the Built-in Plan Agent<a class="anchor" aria-label="anchor" href="#using-the-built-in-plan-agent"></a>
 </h2>
 <hr class="half-width">
+<div class="section level3">
+<h3 id="creating-a-plan">Creating a Plan<a class="anchor" aria-label="anchor" href="#creating-a-plan"></a>
+</h3>
 <p>Instead of “one-shotting” the development of code using an AI coding
 tool, we’ve seen that a better approach is to plan and implement our
 code in a step-wise, incremental fashion. So how should we go about
@@ -481,6 +484,8 @@ dropdown:</p>
 </li>
 <li><p>Press <code>Enter</code></p></li>
 <li><p>Answer any clarifying questions from the planning agent.</p></li>
+<li><p>Observe the step-by-step thinking and actions undertaken by the
+agent.</p></li>
 <li><p>When the planning agent concludes, select the option to open the
 plan in the editor, then save it.</p></li>
 </ol>
@@ -489,57 +494,249 @@ prompt file in the project folder:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">## Plan: CSV statistics plotter</span></span>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">## Plan: CSV Statistics Plotter</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a>Build a small Python CLI from scratch that takes a data-directory argument, finds the single CSV file inside it, computes per-column mean, minimum, maximum, and standard deviation with NumPy, and writes one PNG per statistic with Matplotlib. The workspace is empty, so the implementation should be minimal and self-contained.</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a>**Steps**</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="ss">1. </span>Define the CLI contract and input validation.</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="ss">   - </span>Accept one required argument: the path to a data directory.</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="ss">   - </span>Require exactly one CSV file in that directory and fail clearly if the directory is empty or contains multiple CSVs.</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="ss">   - </span>Process numeric columns only and report which columns were used.</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="ss">2. </span>Implement CSV loading and statistic computation.</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="ss">   - </span>Read the CSV, extract numeric columns, and convert them into NumPy arrays.</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ss">   - </span>Compute mean, minimum, maximum, and standard deviation for each numeric column.</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a><span class="ss">   - </span>Keep this logic separate from the CLI and plotting code so it is easy to test.</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="ss">3. </span>Implement plotting and output generation.</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ss">   - </span>Generate one PNG per statistic.</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="ss">   - </span>Use column names on the x-axis and consistent titles, labels, and styling across all plots.</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="ss">   - </span>Save the images to a deterministic output location tied to the input directory.</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1" aria-label="code-block-1-18"></a><span class="ss">4. </span>Add packaging and tests.</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1" aria-label="code-block-1-19"></a><span class="ss">   - </span>Create the minimal project metadata and CLI entry point.</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1" aria-label="code-block-1-20"></a><span class="ss">   - </span>Add tests for directory validation, CSV parsing, statistics, and output file creation.</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1" aria-label="code-block-1-21"></a><span class="ss">   - </span>Include a small fixture CSV with both numeric and non-numeric columns.</span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1" aria-label="code-block-1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1" aria-label="code-block-1-23"></a>**Relevant files**</span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1" aria-label="code-block-1-24"></a><span class="ss">- </span><span class="in">`pyproject.toml`</span> for dependencies and CLI entry-point wiring.</span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1" aria-label="code-block-1-25"></a><span class="ss">- </span><span class="in">`src/&lt;tool_name&gt;/__main__.py`</span> for command-line startup.</span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1" aria-label="code-block-1-26"></a><span class="ss">- </span><span class="in">`src/&lt;tool_name&gt;/cli.py`</span> for argument parsing and orchestration.</span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1" aria-label="code-block-1-27"></a><span class="ss">- </span><span class="in">`src/&lt;tool_name&gt;/stats.py`</span> for NumPy-based calculations.</span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1" aria-label="code-block-1-28"></a><span class="ss">- </span><span class="in">`src/&lt;tool_name&gt;/plotting.py`</span> for Matplotlib figure generation.</span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1" aria-label="code-block-1-29"></a><span class="ss">- </span><span class="in">`tests/test_cli.py`</span> and <span class="in">`tests/test_stats.py`</span> for behavior and math validation.</span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1" aria-label="code-block-1-30"></a><span class="ss">- </span><span class="in">`tests/fixtures/*.csv`</span> for sample inputs.</span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1" aria-label="code-block-1-31"></a></span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1" aria-label="code-block-1-32"></a>**Verification**</span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1" aria-label="code-block-1-33"></a><span class="ss">1. </span>Run the test suite and confirm the new tests pass.</span>
-<span id="cb1-34"><a href="#cb1-34" tabindex="-1" aria-label="code-block-1-34"></a><span class="ss">2. </span>Execute the CLI against a sample data directory and confirm it writes four PNG files.</span>
-<span id="cb1-35"><a href="#cb1-35" tabindex="-1" aria-label="code-block-1-35"></a><span class="ss">3. </span>Inspect one generated plot to confirm labels, titles, and values are correct.</span>
-<span id="cb1-36"><a href="#cb1-36" tabindex="-1" aria-label="code-block-1-36"></a></span>
-<span id="cb1-37"><a href="#cb1-37" tabindex="-1" aria-label="code-block-1-37"></a>**Decisions**</span>
-<span id="cb1-38"><a href="#cb1-38" tabindex="-1" aria-label="code-block-1-38"></a><span class="ss">- </span>Use one PNG per statistic.</span>
-<span id="cb1-39"><a href="#cb1-39" tabindex="-1" aria-label="code-block-1-39"></a><span class="ss">- </span>Ignore non-numeric columns.</span>
-<span id="cb1-40"><a href="#cb1-40" tabindex="-1" aria-label="code-block-1-40"></a><span class="ss">- </span>Treat the input as a single CSV file inside the provided data directory.</span></code></pre>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a>Build a small Python CLI that takes a directory argument, finds the single CSV inside it, loads the data as a NumPy array, computes column-wise mean, minimum, maximum, and standard deviation, and writes PNG plots with Matplotlib.</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a>The sample file at <span class="co">[</span><span class="ot">data/inflammation-01.csv</span><span class="co">](/Users/steve/Test/ai-plan-test/data/inflammation-01.csv)</span> has 40 numeric columns and no header row, so the tool should synthesize column labels instead of expecting names in the file.</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a>**Steps**</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a><span class="ss">1. </span>Set up a minimal Python project scaffold with a CLI entry point and dependencies for NumPy and Matplotlib.</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="ss">2. </span>Implement input discovery and validation so the tool accepts a directory path, confirms there is exactly one CSV file, and reads it into a numeric array.</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a><span class="ss">3. </span>Compute the four requested statistics per column with NumPy, keeping the output shape consistent for plotting.</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="ss">4. </span>Generate PNG visualizations with Matplotlib, using synthetic column labels like <span class="in">`1`</span> through <span class="in">`40`</span>, and write the images to a separate <span class="in">`output`</span> directory.</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a><span class="ss">5. </span>Add argument handling for input and output locations plus clear error messages for missing files, multiple CSVs, or non-numeric data.</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="ss">6. </span>Validate the end-to-end flow against the provided sample dataset and confirm the PNGs are created successfully.</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a>**Relevant files**</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="ss">- </span><span class="in">`pyproject.toml`</span> for project metadata, dependencies, and the console script.</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="ss">- </span>A new CLI module under <span class="in">`src/`</span> for loading the CSV, computing stats, and generating plots.</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="ss">- </span><span class="in">`README.md`</span> for usage notes and output behavior.</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1" aria-label="code-block-1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1" aria-label="code-block-1-19"></a>**Verification**</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1" aria-label="code-block-1-20"></a><span class="ss">1. </span>Run the CLI against the sample data directory and confirm PNG files are generated without errors.</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1" aria-label="code-block-1-21"></a><span class="ss">2. </span>Inspect the images to verify the four statistics are plotted sensibly across all 40 columns.</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1" aria-label="code-block-1-22"></a><span class="ss">3. </span>Do not create any unit tests.</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1" aria-label="code-block-1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1" aria-label="code-block-1-24"></a>**Decisions**</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1" aria-label="code-block-1-25"></a><span class="ss">- </span>Assume the directory contains exactly one CSV file.</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1" aria-label="code-block-1-26"></a><span class="ss">- </span>Assume the CSV has no header row.</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1" aria-label="code-block-1-27"></a><span class="ss">- </span>Prefer separate plots per statistic unless a combined figure is clearer and still readable.</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1" aria-label="code-block-1-28"></a><span class="ss">- </span>Keep the scope focused on a single-file workflow rather than batch processing.</span></code></pre>
 </div>
 <p>This now provides us with a planning document which we are able to
-review and amend as we wish. This is very reasonable approach.
-Importantly, we are now moving from <strong>ad-hoc</strong> development
-to <strong>intentional</strong> development, which forces us to consider
-ways forward and make decisions and capture these within a defined plan
-that we validate and refine before moving to implementation. It also
-provides a “checkpoint” - if the implementation is unsatisfactory we can
-amend the plan and initiate the implementation again. In addition, it’s
-provided us with something we can discuss and refine with
-colleagues.</p>
+review and amend as we wish. This is very reasonable approach:</p>
+<ul>
+<li>Importantly, we are now moving from <strong>ad-hoc</strong>
+development to <strong>intentional</strong> development, which forces us
+to consider ways forward and make decisions and capture these within a
+defined plan that we validate and refine before moving to
+implementation.</li>
+<li>We may extend this plan with other sections and further detail as
+needed.</li>
+<li>It has created a concrete document we can discuss and refine with
+colleagues before we proceed.</li>
+<li>It also provides a “checkpoint”: if the implementation is
+unsatisfactory we can remove the implementation, amend the plan, and ask
+Copilot to create the implementation again.</li>
+</ul>
+<p>FIXME: expand on the benefits of externalising the agentic reasoning
+a bit</p>
+<div id="review" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="review" class="callout-inner">
+<h3 class="callout-title">Review!</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>As we know, we should always review the output from generative AI. So
+with a skeptical mindset:</p>
+<ul>
+<li>Carefully review the generated plan and ensure it complies with the
+initial prompt.</li>
+<li>Does the plan match what you want from this tool?</li>
+<li>Refine the plan as needed.</li>
+<li>If you spot any references to creating unit tests, remove them for
+now - we’ll cover this later!</li>
+<li>Add a new line to the <code>Verification</code> section:
+<code>Do not create any unit tests.</code>
+</li>
+</ul>
+<p>When you’ve finished, add your thoughts about how well the built-in
+planning agent performed this task into the shared document, noting what
+it did well and what it could have done better.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="enacting-the-plan">Enacting the Plan<a class="anchor" aria-label="anchor" href="#enacting-the-plan"></a>
+</h3>
+<p>Once we’re happy with our plan, we may proceed with implementation
+either by selecting the ‘Start implementation’ option in the chat if it
+appears, or by entering something like the following in the chat with
+the <code>Agent</code> mode enabled:</p>
+<pre><code>Implement the plan</code></pre>
+</div>
+</section><section><h2 class="section-heading" id="supplementary-implementation-agents">Supplementary Implementation Agents<a class="anchor" aria-label="anchor" href="#supplementary-implementation-agents"></a>
+</h2>
+<hr class="half-width">
+<p>With the aid of Copilot’s planning agent we’ve created an initial
+plan, reviewed and refined it, and had Copilot implement the plan for
+us, which is a helpful start. However, there are other development tasks
+typically associated with</p>
+</section><section><h2 class="section-heading" id="a-lint-agent">A Lint Agent<a class="anchor" aria-label="anchor" href="#a-lint-agent"></a>
+</h2>
+<hr class="half-width">
+<p>One way to create our agent is to use the built-in
+<code>/create-agent</code> VSCode chat command.</p>
+<div class="section level3">
+<h3 id="the-anatomy-of-an-agent-definition-file">The Anatomy of an Agent Definition File<a class="anchor" aria-label="anchor" href="#the-anatomy-of-an-agent-definition-file"></a>
+</h3>
+<p>For example, this prompt generated a file called
+<code>code-linter.agent.md</code> that includes the following agent
+definition:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"></code></pre>
+</div>
+<p>Agent definitions tend to follow a common pattern of defining agent
+metadata, role, and aspects of its overall behaviour separated into
+subsections.</p>
+<p>So at the top of this definition, there is <a href="https://yaml.org/" class="external-link">YAML</a> front matter that defines metadata
+about this agent, including a plain text description, whether this agent
+can be invoked by the user, and which tools this agent is allowed to
+use. This explicit declaration of allowable tools enables us to conform
+this agent to the Principle of Least Privilege, ensuring we only give it
+permissions that it needs to accomplish its role.</p>
+<p>In this case:</p>
+<ul>
+<li>
+<code>read</code> - the agent is allowed to read files in this
+VSCode workspace, such as source code and other files</li>
+<li>
+<code>search</code> - allows the agent to search across this
+workspace</li>
+<li>
+<code>edit</code> - the agent may edit and modify files within this
+workspace</li>
+</ul>
+<p>If you select the <code>Configure Tools...</code> text above this
+line, you’ll see a pop-up dropdown containing a complete set of
+allowable permissions to select for this agent.</p>
+<figure><img src="fig/vscode-agent-configure-tools.png" alt="VSCode agent file configure tools pop-up dropdown window" class="figure mx-auto d-block"><div class="figcaption">VSCode agent file configure tools pop-up
+dropdown window</div>
+</figure><p>Note that these are arranged hierarchically, so we are able to assign
+sub-permissions within a particular group
+(e.g. <code>read/readFile</code>) if we want to be more specific.</p>
+<p>Next, its behaviour starts with an initial declaration of the agent’s
+role, where it adopts a persona of a specialist writing a requirements
+specification.</p>
+<div id="managing-expectations" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="managing-expectations" class="callout-inner">
+<h3 class="callout-title">Managing Expectations…</h3>
+<div class="callout-content">
+<p>Importantly, note that in this case whilst the role is declared as a
+requirements <code>specialist</code> to set the agent’s persona, we
+should not consider the output as we would if its coming from a
+<em>real</em> specialist or expert. This is a dangerous trap to fall
+into with using generative AI, since this declaration only provides an
+anchor for its behaviour, not a guarantee of its competence!</p>
+<p>As with all things generative AI, we should treat any output with
+skepticism and use it to inform our own thinking and decisions through
+careful review, and not blindly accept its assertions.</p>
+</div>
+</div>
+</div>
+<p>Lastly, we have a set of subsections, each concisely describing an
+aspect of its behaviour. In this case, we can see we have the
+following:</p>
+<ul>
+<li>
+<strong>Section on Constraints</strong> - this is partiuclarly
+important to set guardrails and constrain the agent’s behaviour only to
+what we want. AI agents otherwise tend to wander outside of their
+defined scope. In this case, we see that the agent is instructed to not
+to do any design or implementation, although note given the probablistic
+nature of LLMs, this doesn’t <em>guarantee</em> that they won’t!</li>
+<li>
+<strong>Description of the Desired Approach</strong> - a set of
+clear and concise steps describing what the agent should do.</li>
+<li>
+<strong>Output format</strong> - which describes the output format
+of the document and the included contents as subsections</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="a-documentation-agent">A Documentation Agent<a class="anchor" aria-label="anchor" href="#a-documentation-agent"></a>
+</h2>
+<hr class="half-width">
+<pre><code>/create-agent a documentation agent that writes documentation based on the contents of the repository, including sections on installation, API docs and basic usage. Use mkdocs to generate the documentation. Write documentation to `docs/` and never modify source code.</code></pre>
+</section><section><h2 class="section-heading" id="a-standalone-test-agent">A Standalone Test Agent<a class="anchor" aria-label="anchor" href="#a-standalone-test-agent"></a>
+</h2>
+<hr class="half-width">
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>FIXME</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-03-process-based-agent-development"><p>Content from <a href="03-process-based-agent-development.html">Process-based Approach to Agentic Development</a></p>
+<hr>
+<p>Last updated on 2026-05-13 |
+
+        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-process-based-agent-development.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>FIXME</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Create and use a Copilot agent to gather requirements within a
+requirements specification</li>
+<li>Create and use a Copilot agent to produce a technical specification
+from a set of requirements</li>
+<li>Create and use a Copilot agent that follows defined practices to
+implement a technical specification from a technical specification</li>
+<li>Evaluate the agents to determine improvements to apply them in your
+own research domains</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>However, there are some limitations with the built-in Plan mode:</p>
 <ul>
 <li>As implied by its name, it actively avoids moving to implementing
@@ -551,7 +748,8 @@ to operate, which may not fit our working style or process.</li>
 <li>It’s a single intermediate step where important project needs
 (requirements) and design details may be missed. What if we want to
 explore the project needs separately to any design considerations?</li>
-</ul></section><section><h2 class="section-heading" id="a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents<a class="anchor" aria-label="anchor" href="#a-process-oriented-approach-using-agents"></a>
+</ul>
+<section><h2 class="section-heading" id="a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents<a class="anchor" aria-label="anchor" href="#a-process-oriented-approach-using-agents"></a>
 </h2>
 <hr class="half-width">
 <p>One way to overcome these limitations would be to define and use a
@@ -644,35 +842,35 @@ the probablistic nature of LLMs, yours will differ.</p>
 <p>For example, this prompt generated a file called
 <code>requirements-gatherer.agent.md</code> that includes the following
 agent definition:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="co">---</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a><span class="fu">## Constraints</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1" aria-label="code-block-3-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1" aria-label="code-block-3-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1" aria-label="code-block-3-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1" aria-label="code-block-3-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1" aria-label="code-block-3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1" aria-label="code-block-3-16"></a><span class="fu">## Approach</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1" aria-label="code-block-3-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1" aria-label="code-block-3-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1" aria-label="code-block-3-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1" aria-label="code-block-3-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1" aria-label="code-block-3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1" aria-label="code-block-3-22"></a><span class="fu">## Output Format</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1" aria-label="code-block-3-23"></a>Return a markdown requirements document with these sections:</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1" aria-label="code-block-3-24"></a><span class="ss">- </span>Assumptions</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1" aria-label="code-block-3-25"></a><span class="ss">- </span>User Stories</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1" aria-label="code-block-3-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">---</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a><span class="fu">## Constraints</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a><span class="fu">## Approach</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a><span class="fu">## Output Format</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>Return a markdown requirements document with these sections:</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a><span class="ss">- </span>Assumptions</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a><span class="ss">- </span>User Stories</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
 </div>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
@@ -762,7 +960,7 @@ what do you think is missing or could be better?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>Be more explicit with for what we want, e.g. include the user story
@@ -790,14 +988,14 @@ agent, if we can</li>
 <p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.html">a version of this
 agent</a> that takes these limitations into account.</p>
 <p>The revised YAML front matter looks like:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="pp">----</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="pp">----</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="pp">----</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="pp">----</span></span></code></pre>
 </div>
 <p>So here, we’ve updated the allowed tools with more finely-grained
 permissions, restricting it to reading files, creating directories and
@@ -854,7 +1052,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>When first developing agents, similarly to how we develop code, a
 typical process is to refine the behaviour of the agent over multiple
@@ -869,76 +1067,16 @@ ordinarly go back and improve our requirements agent as needed.</p>
 </h2>
 <hr class="half-width">
 <pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide</code></pre>
-</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<hr class="half-width">
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<span class="callout-header">Key Points</span>
-<div class="callout-inner">
-<div class="callout-content">
-<ul>
-<li>FIXME</li>
-</ul>
-</div>
-</div>
-</div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-</section></section><section id="aio-03-implementing-testing-ai"><p>Content from <a href="03-implementing-testing-ai.html">Implementing and Testing Code with Copilot Agents</a></p>
-<hr>
-<p>Last updated on 2026-05-06 |
-
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-implementing-testing-ai.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>FIXME</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Create a Copilot agent that follows defined practices to implement a
-technical specification</li>
-<li>Describe the purpose of a unit test</li>
-<li>Write and run a unit test to run within the pytest unit testing
-framework</li>
-<li>Interpret the output of running pytest</li>
-<li>Create an agent to write unit tests for our project</li>
-<li>Update our implementation agent to write unit tests for our
-project</li>
-<li>Evaluate the agents to determine improvements to apply them in your
-own research domains</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section><h2 class="section-heading" id="creating-an-implementer-agent">Creating an Implementer Agent<a class="anchor" aria-label="anchor" href="#creating-an-implementer-agent"></a>
+</section><section><h2 class="section-heading" id="creating-an-implementer-agent">Creating an Implementer Agent<a class="anchor" aria-label="anchor" href="#creating-an-implementer-agent"></a>
 </h2>
 <hr class="half-width">
 <pre><code>/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible</code></pre>
 <p>FIXME: update the agent to have all the perms necessary to execute
 scripts and set environments FIXME: when executing agent, list steps it
 typically goes through, e.g. setup venv</p>
+</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
+</h2>
+<hr class="half-width">
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1104,8 +1242,8 @@ a coordinator-subgent pattern</li>
   "url": "https://carpentries.github.io/workbench-template-md/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/aio.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-05-06",
-  "datePublished": "2026-05-06"
+  "dateModified": "2026-05-13",
+  "datePublished": "2026-05-13"
 }
 
   </script><script>

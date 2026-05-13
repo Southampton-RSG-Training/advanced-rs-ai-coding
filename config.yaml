@@ -67,8 +67,8 @@ contact: 'sc16@soton.ac.uk'
 # Order of episodes in your lesson
 episodes: 
 - 01-intro.md
-- 02-planning-development-ai.md
-- 03-implementing-testing-ai.md
+- 02-task-based-agents.md
+- 03-process-based-agent-development.md
 - 04-using-mcp-external-services.md
 - 05-multi-agent-development.md
 
