@@ -72,22 +72,16 @@ There are a number of things we should consider to create our requirements gathe
 
 ### A First Try...
 
-One way to create our requirements agent is to use the built-in `/create-agent` VSCode chat command.
-
 For example, in the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
 
 ```
 /create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope
 ```
 
-Here, our request briefly captures the above, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
+Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
 
 This generally produces a very reasonable definition,
-although given the probablistic nature of LLMs, yours will differ.
-
-### The Anatomy of an Agent Definition File
-
-For example, this prompt generated a file called `requirements-gatherer.agent.md` that includes the following agent definition:
+although given the probablistic nature of LLMs, yours will differ:
 
 ```markdown
 ---
@@ -118,49 +112,6 @@ Return a markdown requirements document with these sections:
 - Success Metrics
 ```
 
-Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
-
-So at the top of this definition, there is [YAML](https://yaml.org/) front matter that defines metadata about this agent,
-including a plain text description, whether this agent can be invoked by the user, and which tools this agent is allowed to use.
-This explicit declaration of allowable tools enables us to conform this agent to the Principle of Least Privilege,
-ensuring we only give it permissions that it needs to accomplish its role.
-
-In this case:
-
-- `read` - the agent is allowed to read files in this VSCode workspace, such as source code and other files
-- `search` - allows the agent to search across this workspace
-- `edit` - the agent may edit and modify files within this workspace
-
-If you select the `Configure Tools...` text above this line, you'll see a pop-up dropdown containing a complete set of allowable permissions to select for this agent.
-
-![VSCode agent file configure tools pop-up dropdown window](fig/vscode-agent-configure-tools.png)
-
-Note that these are arranged hierarchically, so we are able to assign sub-permissions within a particular group (e.g. `read/readFile`) if we want to be more specific.
-
-Next, its behaviour starts with an initial declaration of the agent's role,
-where it adopts a persona of a specialist writing a requirements specification.
-
-::::::::::::::::::::::::::::::::: callout
-
-## Managing Expectations...
-
-Importantly, note that in this case whilst the role is declared as a requirements `specialist` to set the agent's persona,
-we should not consider the output as we would if its coming from a *real* specialist or expert.
-This is a dangerous trap to fall into with using generative AI,
-since this declaration only provides an anchor for its behaviour,
-not a guarantee of its competence!
-
-As with all things generative AI, we should treat any output with skepticism and use it to inform our own thinking and decisions through careful review,
-and not blindly accept its assertions.
-
-:::::::::::::::::::::::::::::::::::::::::
-
-Lastly, we have a set of subsections, each concisely describing an aspect of its behaviour.
-In this case, we can see we have the following:
-
-- **Section on Constraints** - this is partiuclarly important to set guardrails and constrain the agent's behaviour only to what we want. AI agents otherwise tend to wander outside of their defined scope. In this case, we see that the agent is instructed to not to do any design or implementation, although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
-- **Description of the Desired Approach** - a set of clear and concise steps describing what the agent should do.
-- **Output format** - which describes the output format of the document and the included contents as subsections
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -220,7 +171,8 @@ You should find a `requirements.md` file in the `project-docs` directory, hopefu
 
 ## Review!
 
-As we know, we should always review the output from generative AI.
+5 mins.
+
 So with a skeptical mindset:
 
 - Carefully review the generated requirements document and ensure it makes sense to you.

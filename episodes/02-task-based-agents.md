@@ -21,7 +21,7 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: clone example repo
+FIXME: intro
 
 ## Our Example Scenario
 
@@ -35,8 +35,8 @@ incremental fashion.
 So how should we go about this?
 
 One way would be to use the built-in VSCode plan agent that helps developers break down tasks into clear and actionable steps before writing code.
-Instead of jumping straight into implementation, it generates structured plans for features or for other code modification activities, improving clarity and efficiency.
-It aims to guide users through a thoughtful planning phase to reduce errors and encourage better design and implementation decisions.
+Instead of jumping straight into implementation, it researches the requested task, analyses any existing project code in read-only mode, and generates structured step-based plans for features or for other code modification activities.
+In short, it aims to guide users through a thoughtful planning phase prior to coding to reduce errors and encourage better design and implementation decisions.
 
 Let's try it out now.
 
@@ -125,23 +125,77 @@ or by entering something like the following in the chat with the `Agent` mode en
 Implement the plan
 ```
 
+FIXME: complete
 
-## Supplementary Implementation Agents
 
-With the aid of Copilot's planning agent we've created an initial plan, reviewed and refined it, and had Copilot implement the plan for us,
-which is a helpful start.
-However, there are other development tasks typically associated with 
+## Supplementary Development Agents
 
-## A Lint Agent
+With the aid of Copilot's planning agent we've created an initial plan, reviewed and refined it, and had Copilot create an initial implementation for us based on the plan.
+However, there are other tasks typically conducted during development,
+and Copilot (and other similar generative AI tools and infrastructure) allows us to encapsulate these tasks by creating our own custom *agents*.
 
-One way to create our agent is to use the built-in `/create-agent` VSCode chat command.
+When we define an agent it's good practice to ensure it contains:
 
-### The Anatomy of an Agent Definition File
+- **A Persona** - a series of clear assertions that define the role of the agent
+- **Description of Behaviour** - a set of clear and concise steps; essentially a process describing what the agent should do.
+- **Code Examples** - these are generally better than explanations for describing what you want
+- **Clear Boundaries** - it is particularly important to set guardrails and constrain the agent's behaviour only to what we want, otherwise agents tend to wander outside of their defined scope. Although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
+- **Requests for Clarification and Approval** - instead of making arbitrary decisions, have the agent ask in the event of any ambiguity and before any actions are taken
 
-For example, this prompt generated a file called `code-linter.agent.md` that includes the following agent definition:
+Let's create some agents using this format to help us with some development tasks.
+
+First, from within our coding directory, create a new directory `.github/agents` to hold our agents, e.g.
+
+```bash
+mkdir .github/agents
+```
+
+VSCode also has a useful extension that's useful for identifying issues with agents that we develop, so let's install that now:
+
+1. Select the `Extensions` icon on the sidebar.
+1. Add `@id:ms-vscode.vscode-chat-customizations-evaluations` into the search box, which is a specific reference for the extension we want.
+1. Select `Install`
+
+This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities.
+This extension is also useful for identifying issues with other Copilot AI definitions, such as `.prompt.md`, `skills.md` and `.instructions.md` files.
+
+### A Code Linter Agent
+
+Code linters are automated tools that analyse source code to identify potential errors, stylistic inconsistencies, and violations of coding standards before the software is run.
+They help developers maintain cleaner and more readable code by highlighting issues such as unused variables, formatting problems, syntax mistakes, and poor programming practices.
+Linters are commonly integrated into Integrated Development Environments (IDEs), and in the case of VSCode, additional linting tools can be installed as extensions, such as [Pylint](https://marketplace.visualstudio.com/items?itemName=ms-python.pylint) or [flake8](https://marketplace.visualstudio.com/items?itemName=ms-python.flake8).
+
+Let's define an agent that uses Pylint to identify code issues, provide a summary and plan of action, and fix these issues when the plan is approved.
+
+In VSCode, agents are typically defined in a file with a `.agent.md` suffix.
+Create a new `code-linter.agent.md` file in the `.github/agents` directory, and add the following contents:
 
 ```markdown
+---
+description: "Use to identify code styling issues, present a plan of action, and fix issues when approved."
+tools: [read, search, edit]
+user-invocable: true
+---
 
+You are a senior software developer focuses on improving the quality of code.
+You run the Pylint linter tool, examine its report, and create a plan to improve the code.
+
+## Persona
+- You specialise in improving the readability and maintainability of code.
+- You understand the project codebase.
+
+## Behaviour
+- You run the Pylint code linter to obtain a report of how the code should be improved.
+- You analyse report from Pylint and translate that into an actionable plan for approval.
+- When the plan is approved, you undertake the tasks in the plan.
+
+## Tools you can use
+- Use `pylint .` in the repository directory to run Pylint and get a report.
+
+## Constraints
+- Only examine source code.
+- Only fix code style, never change code logic.
+- Do not modify any documentation except code comments.
 ```
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
@@ -181,22 +235,51 @@ and not blindly accept its assertions.
 
 :::::::::::::::::::::::::::::::::::::::::
 
-Lastly, we have a set of subsections, each concisely describing an aspect of its behaviour.
-In this case, we can see we have the following:
+Lastly, we have our set of subsections that describe the contents we covered earlier.
 
-- **Section on Constraints** - this is partiuclarly important to set guardrails and constrain the agent's behaviour only to what we want. AI agents otherwise tend to wander outside of their defined scope. In this case, we see that the agent is instructed to not to do any design or implementation, although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
-- **Description of the Desired Approach** - a set of clear and concise steps describing what the agent should do.
-- **Output format** - which describes the output format of the document and the included contents as subsections
+#### Improving our Agent
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Class Exercise: So What's Wrong with It?
+
+5 mins.
+
+It's important for an agent definition to be concise and without ambiguity,
+so our agent does not consider unwanted situations or edge cases.
+
+Are there any ambiguities? What do you think could be improved?
+
+Add your thoughts to the shared document.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+One way to help us identify any issues is to use the `Chat Customizations Evaluations` extension we installed earlier:
+
+1. Select `Analyze` that should have appeared at the bottom of the agent definition editor pane.
+1. A pop-up box will request permission to conduct the analysis. Select `Allow` (or similar).
+1. When the analysis is complete, select `Show problems` when the pop-up appears, which will display a list of issues in the `PROBLEMS` tab in the bottom VSCode pane.
+
+You should see a list of issues that include the following: `Cognitive load (constraint-overload)`, `Ambiguous`, `Coverage gap`, and `Missing error handling`.
+Within the file code editor, you should see these issues highlighted with underlines.
+If you hover over either the entries in the `PROBLEMS` pane, or the editor underlines,
+a description will pop up explaining the issue.
 
 
-## A Documentation Agent
 
 
-```
-/create-agent a documentation agent that writes documentation based on the contents of the repository, including sections on installation, API docs and basic usage. Use mkdocs to generate the documentation. Write documentation to `docs/` and never modify source code.
-```
 
-## A Standalone Test Agent
+### A Code Reviewer Agent
+
+FIXME: provide the agent code, get learners to use chat customisations evaluations extension to remedy and fix issues
+
+
+### A Documentation Agent
+
+FIXME: get learners to create the agent themselves from a brief spec (inc. use of mkdocs), and then use chat customisations evaluations extension to remedy and fix issues
+
+
+### A Standalone Test Agent
 
 
 
