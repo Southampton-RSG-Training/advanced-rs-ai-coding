@@ -68,7 +68,7 @@
         </ul></div>
     </div>
   </div>
-  <hr></header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
+</header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
       <span class="menu-title">Menu</span>
@@ -117,12 +117,8 @@
     -->
     <a id="search-button" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
-</nav><aside class="col-md-12 lesson-progress"><div style="width: NaN%" class="percentage">
-    NaN%
-  </div>
-  <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="NaN" style="width: NaN%">
-    </div>
+</nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
+    <div class="progress-bar incubator" role="progressbar" style="width: NaN%" aria-valuenow="NaN" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">NaN%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -178,7 +174,7 @@
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
 
-            <hr></div><!--/div.mobile-row -->
+          </div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordion-chapters-toggle">
             <div class="accordion-item">
@@ -224,10 +220,7 @@
       <div class="accordion-body">
         <ul><li><a href="#our-example-scenario">Our Example Scenario</a></li>
 <li><a href="#using-the-built-in-plan-agent">Using the Built-in Plan Agent</a></li>
-<li><a href="#supplementary-implementation-agents">Supplementary Implementation Agents</a></li>
-<li><a href="#a-lint-agent">A Lint Agent</a></li>
-<li><a href="#a-documentation-agent">A Documentation Agent</a></li>
-<li><a href="#a-standalone-test-agent">A Standalone Test Agent</a></li>
+<li><a href="#supplementary-development-agents">Supplementary Development Agents</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -303,8 +296,8 @@
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter Top"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="01-intro.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="03-process-based-agent-development.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="01-intro.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="03-process-based-agent-development.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -317,9 +310,9 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
-      <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
+    </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Task-based Approach to Agentic Development</h1>
-        <p>Last updated on 2026-05-13 |
+        <p>Last updated on 2026-05-20 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -361,7 +354,7 @@ framework</li>
 </div>
 </div>
 </div>
-<p>FIXME: clone example repo</p>
+<p>FIXME: intro</p>
 <section><h2 class="section-heading" id="our-example-scenario">Our Example Scenario<a class="anchor" aria-label="anchor" href="#our-example-scenario"></a></h2>
 <hr class="half-width"></section><section><h2 class="section-heading" id="using-the-built-in-plan-agent">Using the Built-in Plan Agent<a class="anchor" aria-label="anchor" href="#using-the-built-in-plan-agent"></a></h2>
 <hr class="half-width"><div class="section level3">
@@ -373,10 +366,11 @@ this?</p>
 <p>One way would be to use the built-in VSCode plan agent that helps
 developers break down tasks into clear and actionable steps before
 writing code. Instead of jumping straight into implementation, it
-generates structured plans for features or for other code modification
-activities, improving clarity and efficiency. It aims to guide users
-through a thoughtful planning phase to reduce errors and encourage
-better design and implementation decisions.</p>
+researches the requested task, analyses any existing project code in
+read-only mode, and generates structured step-based plans for features
+or for other code modification activities. In short, it aims to guide
+users through a thoughtful planning phase prior to coding to reduce
+errors and encourage better design and implementation decisions.</p>
 <p>Let’s try it out now.</p>
 <ol style="list-style-type: decimal"><li><p>Select <code>Plan</code> from the Copilot mode dropdown in the
 chat panel.</p></li>
@@ -475,24 +469,106 @@ either by selecting the ‘Start implementation’ option in the chat if it
 appears, or by entering something like the following in the chat with
 the <code>Agent</code> mode enabled:</p>
 <pre><code>Implement the plan</code></pre>
+<p>FIXME: complete</p>
 </div>
-</section><section><h2 class="section-heading" id="supplementary-implementation-agents">Supplementary Implementation Agents<a class="anchor" aria-label="anchor" href="#supplementary-implementation-agents"></a></h2>
+</section><section><h2 class="section-heading" id="supplementary-development-agents">Supplementary Development Agents<a class="anchor" aria-label="anchor" href="#supplementary-development-agents"></a></h2>
 <hr class="half-width"><p>With the aid of Copilot’s planning agent we’ve created an initial
-plan, reviewed and refined it, and had Copilot implement the plan for
-us, which is a helpful start. However, there are other development tasks
-typically associated with</p>
-</section><section><h2 class="section-heading" id="a-lint-agent">A Lint Agent<a class="anchor" aria-label="anchor" href="#a-lint-agent"></a></h2>
-<hr class="half-width"><p>One way to create our agent is to use the built-in
-<code>/create-agent</code> VSCode chat command.</p>
-<div class="section level3">
-<h3 id="the-anatomy-of-an-agent-definition-file">The Anatomy of an Agent Definition File<a class="anchor" aria-label="anchor" href="#the-anatomy-of-an-agent-definition-file"></a></h3>
-<p>For example, this prompt generated a file called
-<code>code-linter.agent.md</code> that includes the following agent
-definition:</p>
+plan, reviewed and refined it, and had Copilot create an initial
+implementation for us based on the plan. However, there are other tasks
+typically conducted during development, and Copilot (and other similar
+generative AI tools and infrastructure) allows us to encapsulate these
+tasks by creating our own custom <em>agents</em>.</p>
+<p>When we define an agent it’s good practice to ensure it contains:</p>
+<ul><li>
+<strong>A Persona</strong> - a series of clear assertions that
+define the role of the agent</li>
+<li>
+<strong>Description of Behaviour</strong> - a set of clear and
+concise steps; essentially a process describing what the agent should
+do.</li>
+<li>
+<strong>Code Examples</strong> - these are generally better than
+explanations for describing what you want</li>
+<li>
+<strong>Clear Boundaries</strong> - it is particularly important to
+set guardrails and constrain the agent’s behaviour only to what we want,
+otherwise agents tend to wander outside of their defined scope. Although
+note given the probablistic nature of LLMs, this doesn’t
+<em>guarantee</em> that they won’t!</li>
+<li>
+<strong>Requests for Clarification and Approval</strong> - instead
+of making arbitrary decisions, have the agent ask in the event of any
+ambiguity and before any actions are taken</li>
+</ul><p>Let’s create some agents using this format to help us with some
+development tasks.</p>
+<p>First, from within our coding directory, create a new directory
+<code>.github/agents</code> to hold our agents, e.g.</p>
 <div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">mkdir</span> .github/agents</span></code></pre>
+</div>
+<p>VSCode also has a useful extension that’s useful for identifying
+issues with agents that we develop, so let’s install that now:</p>
+<ol style="list-style-type: decimal"><li>Select the <code>Extensions</code> icon on the sidebar.</li>
+<li>Add
+<code>@id:ms-vscode.vscode-chat-customizations-evaluations</code> into
+the search box, which is a specific reference for the extension we
+want.</li>
+<li>Select <code>Install</code>
+</li>
+</ol><p>This extension helps us find contradictions in agent logic, persona,
+as well as identiying other ambiguities. This extension is also useful
+for identifying issues with other Copilot AI definitions, such as
+<code>.prompt.md</code>, <code>skills.md</code> and
+<code>.instructions.md</code> files.</p>
+<div class="section level3">
+<h3 id="a-code-linter-agent">A Code Linter Agent<a class="anchor" aria-label="anchor" href="#a-code-linter-agent"></a></h3>
+<p>Code linters are automated tools that analyse source code to identify
+potential errors, stylistic inconsistencies, and violations of coding
+standards before the software is run. They help developers maintain
+cleaner and more readable code by highlighting issues such as unused
+variables, formatting problems, syntax mistakes, and poor programming
+practices. Linters are commonly integrated into Integrated Development
+Environments (IDEs), and in the case of VSCode, additional linting tools
+can be installed as extensions, such as <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.pylint" class="external-link">Pylint</a>
+or <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.flake8" class="external-link">flake8</a>.</p>
+<p>Let’s define an agent that uses Pylint to identify code issues,
+provide a summary and plan of action, and fix these issues when the plan
+is approved.</p>
+<p>In VSCode, agents are typically defined in a file with a
+<code>.agent.md</code> suffix. Create a new
+<code>code-linter.agent.md</code> file in the
+<code>.github/agents</code> directory, and add the following
+contents:</p>
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="an">description:</span><span class="co"> "Use to identify code styling issues, present a plan of action, and fix issues when approved."</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="co">---</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a>You are a senior software developer focuses on improving the quality of code.</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a>You run the Pylint linter tool, examine its report, and create a plan to improve the code.</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1" aria-label="code-block-4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1" aria-label="code-block-4-10"></a><span class="fu">## Persona</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1" aria-label="code-block-4-11"></a><span class="ss">- </span>You specialise in improving the readability and maintainability of code.</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1" aria-label="code-block-4-12"></a><span class="ss">- </span>You understand the project codebase.</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1" aria-label="code-block-4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1" aria-label="code-block-4-14"></a><span class="fu">## Behaviour</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1" aria-label="code-block-4-15"></a><span class="ss">- </span>You run the Pylint code linter to obtain a report of how the code should be improved.</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1" aria-label="code-block-4-16"></a><span class="ss">- </span>You analyse report from Pylint and translate that into an actionable plan for approval.</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1" aria-label="code-block-4-17"></a><span class="ss">- </span>When the plan is approved, you undertake the tasks in the plan.</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1" aria-label="code-block-4-18"></a></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1" aria-label="code-block-4-19"></a><span class="fu">## Tools you can use</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1" aria-label="code-block-4-20"></a><span class="ss">- </span>Use <span class="in">`pylint .`</span> in the repository directory to run Pylint and get a report.</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1" aria-label="code-block-4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1" aria-label="code-block-4-22"></a><span class="fu">## Constraints</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1" aria-label="code-block-4-23"></a><span class="ss">- </span>Only examine source code.</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1" aria-label="code-block-4-24"></a><span class="ss">- </span>Only fix code style, never change code logic.</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1" aria-label="code-block-4-25"></a><span class="ss">- </span>Do not modify any documentation except code comments.</span></code></pre>
 </div>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
@@ -544,27 +620,60 @@ careful review, and not blindly accept its assertions.</p>
 </div>
 </div>
 </div>
-<p>Lastly, we have a set of subsections, each concisely describing an
-aspect of its behaviour. In this case, we can see we have the
-following:</p>
-<ul><li>
-<strong>Section on Constraints</strong> - this is partiuclarly
-important to set guardrails and constrain the agent’s behaviour only to
-what we want. AI agents otherwise tend to wander outside of their
-defined scope. In this case, we see that the agent is instructed to not
-to do any design or implementation, although note given the probablistic
-nature of LLMs, this doesn’t <em>guarantee</em> that they won’t!</li>
-<li>
-<strong>Description of the Desired Approach</strong> - a set of
-clear and concise steps describing what the agent should do.</li>
-<li>
-<strong>Output format</strong> - which describes the output format
-of the document and the included contents as subsections</li>
-</ul></div>
-</section><section><h2 class="section-heading" id="a-documentation-agent">A Documentation Agent<a class="anchor" aria-label="anchor" href="#a-documentation-agent"></a></h2>
-<hr class="half-width"><pre><code>/create-agent a documentation agent that writes documentation based on the contents of the repository, including sections on installation, API docs and basic usage. Use mkdocs to generate the documentation. Write documentation to `docs/` and never modify source code.</code></pre>
-</section><section><h2 class="section-heading" id="a-standalone-test-agent">A Standalone Test Agent<a class="anchor" aria-label="anchor" href="#a-standalone-test-agent"></a></h2>
-<hr class="half-width"><div id="keypoints1" class="callout keypoints">
+<p>Lastly, we have our set of subsections that describe the contents we
+covered earlier.</p>
+<div class="section level4">
+<h4 id="improving-our-agent">Improving our Agent<a class="anchor" aria-label="anchor" href="#improving-our-agent"></a></h4>
+<div id="class-exercise-so-whats-wrong-with-it" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="class-exercise-so-whats-wrong-with-it" class="callout-inner">
+<h3 class="callout-title">Class Exercise: So What’s Wrong with It?</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>It’s important for an agent definition to be concise and without
+ambiguity, so our agent does not consider unwanted situations or edge
+cases.</p>
+<p>Are there any ambiguities? What do you think could be improved?</p>
+<p>Add your thoughts to the shared document.</p>
+</div>
+</div>
+</div>
+<p>One way to help us identify any issues is to use the
+<code>Chat Customizations Evaluations</code> extension we installed
+earlier:</p>
+<ol style="list-style-type: decimal"><li>Select <code>Analyze</code> that should have appeared at the bottom
+of the agent definition editor pane.</li>
+<li>A pop-up box will request permission to conduct the analysis. Select
+<code>Allow</code> (or similar).</li>
+<li>When the analysis is complete, select <code>Show problems</code>
+when the pop-up appears, which will display a list of issues in the
+<code>PROBLEMS</code> tab in the bottom VSCode pane.</li>
+</ol><p>You should see a list of issues that include the following:
+<code>Cognitive load (constraint-overload)</code>,
+<code>Ambiguous</code>, <code>Coverage gap</code>, and
+<code>Missing error handling</code>. Within the file code editor, you
+should see these issues highlighted with underlines. If you hover over
+either the entries in the <code>PROBLEMS</code> pane, or the editor
+underlines, a description will pop up explaining the issue.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="a-code-reviewer-agent">A Code Reviewer Agent<a class="anchor" aria-label="anchor" href="#a-code-reviewer-agent"></a></h3>
+<p>FIXME: provide the agent code, get learners to use chat
+customisations evaluations extension to remedy and fix issues</p>
+</div>
+<div class="section level3">
+<h3 id="a-documentation-agent">A Documentation Agent<a class="anchor" aria-label="anchor" href="#a-documentation-agent"></a></h3>
+<p>FIXME: get learners to create the agent themselves from a brief spec
+(inc. use of mkdocs), and then use chat customisations evaluations
+extension to remedy and fix issues</p>
+</div>
+<div class="section level3">
+<h3 id="a-standalone-test-agent">A Standalone Test Agent<a class="anchor" aria-label="anchor" href="#a-standalone-test-agent"></a></h3>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -579,6 +688,7 @@ of the document and the included contents as subsections</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="01-intro.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -617,7 +727,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.1" class="external-link">sandpaper (0.20.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.0" class="external-link">varnish (1.1.0)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -639,8 +749,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/02-task-based-agents.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/02-task-based-agents.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-05-13",
-  "datePublished": "2026-05-13"
+  "dateModified": "2026-05-20",
+  "datePublished": "2026-05-20"
 }
 
   </script><script>
