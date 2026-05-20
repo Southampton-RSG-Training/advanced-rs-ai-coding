@@ -266,6 +266,25 @@ If you hover over either the entries in the `PROBLEMS` pane, or the editor under
 a description will pop up explaining the issue.
 
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Solo Exercise: Fix our Agent
+
+10 mins.
+
+Go through each of the identified issues and fix them.
+
+One way to do this such that you get an opportunity to review the suggestions before they are applied,
+is to first right-click on the entry in the `PROBLEMS` pane and select `Explain` which drafts a set of proposed changes.
+
+If you're happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the agent file,
+then select `Keep` in the editor window.
+
+:::::::::::::::::::::::::: solution
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
