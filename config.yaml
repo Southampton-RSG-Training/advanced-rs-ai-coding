@@ -67,10 +67,11 @@ contact: 'sc16@soton.ac.uk'
 # Order of episodes in your lesson
 episodes: 
 - 01-intro.md
-- 02-task-based-agents.md
-- 03-process-based-agent-development.md
-- 04-using-mcp-external-services.md
-- 05-multi-agent-development.md
+- 02-getting-started.md
+- 03-task-based-agents.md
+- 04-process-based-agent-development.md
+- 05-using-mcp-external-services.md
+- 06-multi-agent-development.md
 
 # Information for Learners
 learners: 

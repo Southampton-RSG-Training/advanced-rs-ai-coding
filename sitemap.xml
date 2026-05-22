@@ -10,6 +10,9 @@
     <loc>https://carpentries.github.io/workbench-template-md/01-introduction.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/02-getting-started.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/02-intro-vscode.html</loc>
   </url>
   <url>
@@ -31,7 +34,13 @@
     <loc>https://carpentries.github.io/workbench-template-md/03-process-based-agent-development.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/03-task-based-agents.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/03-unit-testing-ai.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/04-process-based-agent-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/04-use-copilot-improve-code.html</loc>
@@ -47,6 +56,12 @@
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/05-use-different-models.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/05-using-mcp-external-services.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/06-multi-agent-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/404.html</loc>
@@ -79,6 +94,9 @@
     <loc>https://carpentries.github.io/workbench-template-md/instructor/01-introduction.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/02-intro-vscode.html</loc>
   </url>
   <url>
@@ -100,7 +118,13 @@
     <loc>https://carpentries.github.io/workbench-template-md/instructor/03-process-based-agent-development.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/03-task-based-agents.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/03-unit-testing-ai.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/04-process-based-agent-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/04-use-copilot-improve-code.html</loc>
@@ -116,6 +140,12 @@
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/05-use-different-models.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/05-using-mcp-external-services.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/06-multi-agent-development.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/404.html</loc>
