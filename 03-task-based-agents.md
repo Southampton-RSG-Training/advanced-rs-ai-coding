@@ -1,5 +1,5 @@
 ---
-title: "Task-based Approach to Agentic Development"
+title: "Task-based Approach to Software Development"
 teaching: 0
 exercises: 0
 ---
@@ -13,8 +13,8 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Use the built-in planning agent to develop a basic Python application
-- Create reusable Copilot agents automatically for specific development tasks
-- Describe the format and basic configuration of an agents definition file
+- Create reusable Copilot skills for specific development tasks
+- Describe the format and basic configuration of a skills definition file
 - Describe the purpose of a unit test
 - Write and run a unit test to run within the pytest unit testing framework
 - Interpret the output of running pytest
@@ -22,8 +22,6 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 FIXME: intro
-
-## Our Example Scenario
 
 ## Using the Built-in Plan Agent
 
@@ -128,116 +126,82 @@ Implement the plan
 FIXME: complete
 
 
-## Supplementary Development Agents
+## Using Skills for On-demand Coding Tasks
+
+FIXME: change these to skills and use them within the implementer agent in the next episode?
+FIXME: workflow then becomes: develop/use skills, build agents that use skills, plus diagram for that
 
 With the aid of Copilot's planning agent we've created an initial plan, reviewed and refined it, and had Copilot create an initial implementation for us based on the plan.
 However, there are other tasks typically conducted during development,
-and Copilot (and other similar generative AI tools and infrastructure) allows us to encapsulate these tasks by creating our own custom *agents*.
+and Copilot (and other similar generative AI tools and infrastructure such as Claude) allows us to encapsulate these tasks by creating our own custom *skills*.
+By defining common development tasks as skills, when it comes to implementation, we can call on these skills to lighten the load.
 
-When we define an agent it's good practice to ensure it contains:
+FIXME: diagram showing developer agency vs autonomy: focus is on a person at the center driving development, reviewing suggestions and making decisions. AI is just another tool
 
-- **A Persona** - a series of clear assertions that define the role of the agent
-- **Description of Behaviour** - a set of clear and concise steps; essentially a process describing what the agent should do.
-- **Code Examples** - these are generally better than explanations for describing what you want
-- **Clear Boundaries** - it is particularly important to set guardrails and constrain the agent's behaviour only to what we want, otherwise agents tend to wander outside of their defined scope. Although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
-- **Requests for Clarification and Approval** - instead of making arbitrary decisions, have the agent ask in the event of any ambiguity and before any actions are taken
+Let's create some skills using this approach to help us with some development tasks.
 
-Let's create some agents using this format to help us with some development tasks.
-
-First, from within our coding directory, create a new directory `.github/agents` to hold our agents, e.g.
+First, from within our coding directory, create a new directory `.github/skills` to hold our skills, e.g.
 
 ```bash
-mkdir .github/agents
+mkdir .github/skills
 ```
 
-VSCode also has a useful extension that's useful for identifying issues with agents that we develop, so let's install that now:
+VSCode also has a useful extension that's useful for identifying issues with skills that we develop, so let's install that now:
 
 1. Select the `Extensions` icon on the sidebar.
 1. Add `@id:ms-vscode.vscode-chat-customizations-evaluations` into the search box, which is a specific reference for the extension we want.
 1. Select `Install`
 
-This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities.
-This extension is also useful for identifying issues with other Copilot AI definitions, such as `.prompt.md`, `skills.md` and `.instructions.md` files.
+This extension - which actually acts as a Copilot skill - helps us find contradictions in skill prompt logic as well as other ambiguities and issues.
+This extension is also useful for identifying issues with other Copilot AI prompt files, such as `.instructions.md`, `.prompt.md` and `.agent.md` files.
 
-### A Code Linter Agent
+### A Code Linter Skill
 
 Code linters are automated tools that analyse source code to identify potential errors, stylistic inconsistencies, and violations of coding standards before the software is run.
 They help developers maintain cleaner and more readable code by highlighting issues such as unused variables, formatting problems, syntax mistakes, and poor programming practices.
 Linters are commonly integrated into Integrated Development Environments (IDEs), and in the case of VSCode, additional linting tools can be installed as extensions, such as [Pylint](https://marketplace.visualstudio.com/items?itemName=ms-python.pylint) or [flake8](https://marketplace.visualstudio.com/items?itemName=ms-python.flake8).
 
-Let's define an agent that uses Pylint to identify code issues, provide a summary and plan of action, and fix these issues when the plan is approved.
+Let's define a skill that uses Pylint to identify code issues, provide a summary and plan of action, and fix these issues when the plan is approved.
 
 In VSCode, agents are typically defined in a file with a `.agent.md` suffix.
 Create a new `code-linter.agent.md` file in the `.github/agents` directory, and add the following contents:
 
-```markdown
+~~~markdown
 ---
-description: "Use to identify code styling issues, present a plan of action, and fix issues when approved."
-tools: [read, search, edit]
-user-invocable: true
+name: pylint-fix
+description: Identify and fix code styling issues using the Pylint code linter.
+compatibility: Requires python3
+version: 1.0.0
 ---
 
-You are a senior software developer focuses on improving the quality of code.
-You run the Pylint linter tool, examine its report, and create a plan to improve the code.
-
-## Persona
-- You specialise in improving the readability and maintainability of code.
-- You understand the project codebase.
-
-## Behaviour
-- You run the Pylint code linter to obtain a report of how the code should be improved.
-- You analyse report from Pylint and translate that into an actionable plan for approval.
-- When the plan is approved, you undertake the tasks in the plan.
-
-## Tools you can use
-- Use `pylint .` in the repository directory to run Pylint and get a report.
+This skill automatically fixes code issues identified by pylint.
 
 ## Constraints
-- Only examine source code.
-- Only fix code style, never change code logic.
-- Do not modify any documentation except code comments.
+
+- ONLY make modifications based on output from pylint
+- ONLY make modifications to files in the `src/` directory
+
+## Approach
+
+1. Run pylint and capture the output from running the command.
+2. Analyse pylint output to identify warnings.
+3. Apply fixes only with 100% confidence.
+4. Re-run pylint to verify fixes.
+5. Provide a summary of what was fixed.
+
+## Commands to Use
+
+- Ensure the virtual environment is activated before running pylint
+
+```bash
+python -m pylint src/
 ```
+~~~
 
-Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
 
-So at the top of this definition, there is [YAML](https://yaml.org/) front matter that defines metadata about this agent,
-including a plain text description, whether this agent can be invoked by the user, and which tools this agent is allowed to use.
-This explicit declaration of allowable tools enables us to conform this agent to the Principle of Least Privilege,
-ensuring we only give it permissions that it needs to accomplish its role.
+#### Improving our Skill
 
-In this case:
-
-- `read` - the agent is allowed to read files in this VSCode workspace, such as source code and other files
-- `search` - allows the agent to search across this workspace
-- `edit` - the agent may edit and modify files within this workspace
-
-If you select the `Configure Tools...` text above this line, you'll see a pop-up dropdown containing a complete set of allowable permissions to select for this agent.
-
-![VSCode agent file configure tools pop-up dropdown window](fig/vscode-agent-configure-tools.png)
-
-Note that these are arranged hierarchically, so we are able to assign sub-permissions within a particular group (e.g. `read/readFile`) if we want to be more specific.
-
-Next, its behaviour starts with an initial declaration of the agent's role,
-where it adopts a persona of a specialist writing a requirements specification.
-
-::::::::::::::::::::::::::::::::: callout
-
-## Managing Expectations...
-
-Importantly, note that in this case whilst the role is declared as a requirements `specialist` to set the agent's persona,
-we should not consider the output as we would if its coming from a *real* specialist or expert.
-This is a dangerous trap to fall into with using generative AI,
-since this declaration only provides an anchor for its behaviour,
-not a guarantee of its competence!
-
-As with all things generative AI, we should treat any output with skepticism and use it to inform our own thinking and decisions through careful review,
-and not blindly accept its assertions.
-
-:::::::::::::::::::::::::::::::::::::::::
-
-Lastly, we have our set of subsections that describe the contents we covered earlier.
-
-#### Improving our Agent
+As we have it, the definition may seem reasonable, but let's check it over.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -245,10 +209,7 @@ Lastly, we have our set of subsections that describe the contents we covered ear
 
 5 mins.
 
-It's important for an agent definition to be concise and without ambiguity,
-so our agent does not consider unwanted situations or edge cases.
-
-Are there any ambiguities? What do you think could be improved?
+What do you think could be improved? Is there anything missing?
 
 Add your thoughts to the shared document.
 
@@ -256,19 +217,19 @@ Add your thoughts to the shared document.
 
 One way to help us identify any issues is to use the `Chat Customizations Evaluations` extension we installed earlier:
 
-1. Select `Analyze` that should have appeared at the bottom of the agent definition editor pane.
+1. Select `Analyze` that should have appeared at the bottom of the `SKILL.md` file editor pane.
 1. A pop-up box will request permission to conduct the analysis. Select `Allow` (or similar).
 1. When the analysis is complete, select `Show problems` when the pop-up appears, which will display a list of issues in the `PROBLEMS` tab in the bottom VSCode pane.
 
-You should see a list of issues that include the following: `Cognitive load (constraint-overload)`, `Ambiguous`, `Coverage gap`, and `Missing error handling`.
+You should see a whole host of issues that indicate problems with ambiguity, cognitive load, coverage gaps, amongst others.
+
 Within the file code editor, you should see these issues highlighted with underlines.
 If you hover over either the entries in the `PROBLEMS` pane, or the editor underlines,
 a description will pop up explaining the issue.
 
-
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Solo Exercise: Fix our Agent
+## Solo Exercise: Fix our `SKILL.md`
 
 10 mins.
 
@@ -277,8 +238,15 @@ Go through each of the identified issues and fix them.
 One way to do this such that you get an opportunity to review the suggestions before they are applied,
 is to first right-click on the entry in the `PROBLEMS` pane and select `Explain` which drafts a set of proposed changes.
 
+The Chat Customisations Evaluations tool can be a bit overzealous,
+so if you think a suggestion is overkill, feel free to ignore it.
+
 If you're happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the agent file,
 then select `Keep` in the editor window.
+Otherwise, `Undo` the change and add your own fix.
+
+Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` pane still remain.
+Restarting VSCode fixes this.
 
 :::::::::::::::::::::::::: solution
 
@@ -286,19 +254,33 @@ then select `Keep` in the editor window.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::: callout
+
+## When You Have a Hammer...
+
+...everything looks like a nail.
+
+We've created a generative AI skill for this which seems useful.
+But using AI tools come at a cost - typically, they take a while to run and are prone to error.
+What we should also consider is whether a more dedicated tool would be a better fit.
+For example, would simply using a code linting tool such as [ruff]() be enough?
+If we wanted automatic code formatting, would [black]() be sufficient?
+
+It's a trade-off we should consider.
+AI-based solutions often offer powerful, broader sets of capabilities,
+but dedicated tools run more efficiently and with a greater degree of precision.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 
-### A Code Reviewer Agent
-
-FIXME: provide the agent code, get learners to use chat customisations evaluations extension to remedy and fix issues
-
-
-### A Documentation Agent
+### A Documentation Skill
 
 FIXME: get learners to create the agent themselves from a brief spec (inc. use of mkdocs), and then use chat customisations evaluations extension to remedy and fix issues
 
 
-### A Standalone Test Agent
+### A Unit Test Builder Skill
+
+FIXME: use built-in test agent 
 
 
 
