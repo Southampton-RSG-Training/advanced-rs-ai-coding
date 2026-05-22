@@ -1,5 +1,5 @@
 ---
-title: "Process-based Approach to Agentic Development"
+title: "Process-based Development Approach using Agents"
 teaching: 0
 exercises: 0
 ---
@@ -20,11 +20,13 @@ exercises: 0
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-However, there are some limitations with the built-in Plan mode:
+However, there are some limitations with the approach we have so far with using the built-in planning agent:
 
 - As implied by its name, it actively avoids moving to implementing solutions. By staying in planning mode, conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
 - We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process.
-- It's a single intermediate step where important project needs (requirements) and design details may be missed. What if we want to explore the project needs separately to any design considerations?
+- It's a single intermediate step where important project needs (requirements) and design details may be missed. Established software development practice separates requirements and design. What if we want to explore the project needs separately to any design considerations?
+
+FIXME: add more downsides
 
 
 ## A Process-oriented Approach using Agents
@@ -63,16 +65,25 @@ We should ensure their generated stage documents are located in the same directo
 
 ## Creating a Requirements Gathering Agent
 
-There are a number of things we should consider to create our requirements gathering agent, for example:
+There are a number of things we should consider to create our requirements gathering agent.
+A minimal requirements specification could include, for example:
 
 - **Assumptions** - we should always be explicit and clear what underlying assumptions have been made for the stated requirements, to avoid misunderstandings about what is included
 - **User stories with acceptance criteria** - define project requirements in terms of user stories, i.e. "As a [user type], I want [goal] so that [benefit]", each with clear acceptance criteria
 - **Success metrics** - generally, what does a successful implementation look like?
 - **Out of scope items** - clarify what should not be considered
 
+When defining our agent that will produce this specifiction, we should consider, as a minimum:
+
+- **A Persona** - a series of clear assertions that define the role of the agent
+- **Clear Boundaries** - it is particularly important to set guardrails and constrain the agent's behaviour only to what we want, otherwise agents tend to wander outside of their defined scope. Although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
+- **Approach** - a set of clear and concise steps; essentially a process describing what the agent should do.
+
 ### A First Try...
 
-For example, in the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
+Fortunately VSCode allows us to create an agent definition file from a chat request,
+which we will then adapt to suit our needs more specifically.
+In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
 
 ```
 /create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope
@@ -80,7 +91,7 @@ For example, in the VSCode chat ensure you have the `GPT-5.4 mini` agent selecte
 
 Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
 
-This generally produces a very reasonable definition,
+This generally produces a reasonable definition,
 although given the probablistic nature of LLMs, yours will differ:
 
 ```markdown
@@ -112,6 +123,44 @@ Return a markdown requirements document with these sections:
 - Success Metrics
 ```
 
+Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
+
+So at the top of this definition, there is [YAML](https://yaml.org/) "front matter" that defines metadata about this agent,
+including a plain text description, whether this agent can be invoked by the user, and which tools this agent is allowed to use.
+This explicit declaration of allowable tools enables us to conform this agent to the Principle of Least Privilege,
+ensuring we only give it permissions that it needs to accomplish its role.
+
+In this case:
+
+- `read` - the agent is allowed to read files in this VSCode workspace, such as source code and other files
+- `search` - allows the agent to search across this workspace
+- `edit` - the agent may edit and modify files within this workspace
+
+If you select the `Configure Tools...` text above this line, you'll see a pop-up dropdown containing a complete set of allowable permissions to select for this agent.
+
+![VSCode agent file configure tools pop-up dropdown window](fig/vscode-agent-configure-tools.png)
+
+Note that these are arranged hierarchically, so we are able to assign sub-permissions within a particular group (e.g. `read/readFile`) if we want to be more specific.
+
+Next, its behaviour starts with an initial declaration of the agent's role,
+where it adopts a persona of a specialist writing a requirements specification.
+
+::::::::::::::::::::::::::::::::: callout
+
+## Managing Expectations...
+
+Importantly, note that in this case whilst the role is declared as a requirements `specialist` to set the agent's persona,
+we should not consider the output as we would if its coming from a *real* specialist or expert.
+This is a dangerous trap to fall into with using generative AI,
+since this declaration only provides an anchor for its behaviour,
+not a guarantee of its competence!
+
+As with all things generative AI, we should treat any output with skepticism and use it to inform our own thinking and decisions through careful review,
+and not blindly accept its assertions.
+
+:::::::::::::::::::::::::::::::::::::::::
+
+Lastly, we have our set of subsections that describe the points of behaviour we wanted it to address.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -130,6 +179,10 @@ It's concise and reasonably clear, although what do you think is missing or coul
 - It might be useful to specify the specific AI model to use for this agent, if we can
 
 :::::::::::::::::::::::::::::::::::
+
+FIXME: use chat customisations evaluations extension to check agent file, amend exercise above as needed
+FIXME: add "This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities."
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
