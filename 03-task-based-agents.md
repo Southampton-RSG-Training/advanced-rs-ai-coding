@@ -1,5 +1,5 @@
 ---
-title: "Task-based Approach to Software Development"
+title: "Planning and Task-based Approach to Software Development"
 teaching: 0
 exercises: 0
 ---
@@ -224,7 +224,7 @@ One way to help us identify any issues is to use the `Chat Customizations Evalua
 You should see a whole host of issues that indicate problems with ambiguity, cognitive load, coverage gaps, amongst others.
 
 Within the file code editor, you should see these issues highlighted with underlines.
-If you hover over either the entries in the `PROBLEMS` pane, or the editor underlines,
+If you hover over either the entries in the `PROBLEMS` tab, or the editor underlines,
 a description will pop up explaining the issue.
 
 :::::::::::::::::::::::::::::::::::::: challenge
@@ -236,7 +236,7 @@ a description will pop up explaining the issue.
 Go through each of the identified issues and fix them.
 
 One way to do this such that you get an opportunity to review the suggestions before they are applied,
-is to first right-click on the entry in the `PROBLEMS` pane and select `Explain` which drafts a set of proposed changes.
+is to first right-click on the entry in the `PROBLEMS` tab and select `Explain` which drafts a set of proposed changes.
 
 The Chat Customisations Evaluations tool can be a bit overzealous,
 so if you think a suggestion is overkill, feel free to ignore it.
@@ -245,12 +245,8 @@ If you're happy with the change, select the `Apply to...` icon at the top right 
 then select `Keep` in the editor window.
 Otherwise, `Undo` the change and add your own fix.
 
-Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` pane still remain.
+Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` tab still remain.
 Restarting VSCode fixes this.
-
-:::::::::::::::::::::::::: solution
-
-:::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
