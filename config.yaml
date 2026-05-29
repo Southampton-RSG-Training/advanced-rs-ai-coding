@@ -70,11 +70,11 @@ episodes:
 - 02-getting-started.md
 - 03-task-based-agents.md
 - 04-process-based-agent-development.md
-- 05-using-mcp-external-services.md
-- 06-multi-agent-development.md
 
 # Information for Learners
 learners: 
+- using-mcp-external-services.md
+- multi-agent-development.md
 
 # Information for Instructors
 instructors: 
