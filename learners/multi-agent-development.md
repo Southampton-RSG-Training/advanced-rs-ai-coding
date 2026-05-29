@@ -1,5 +1,5 @@
 ---
-title: "Using External Services to Improve Context"
+title: "Optional: Multi-agent Development"
 teaching: 0
 exercises: 0
 ---
@@ -12,10 +12,9 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Describe the purpose of the Model Context Protocol (MCP)
-- Describe briefly how agents interact with MCP Servers
-- List popular use cases for how MCP services can assist software development
-- Create and use an MCP Server to interrogate an existing database
+- Describe the benefits and risks of using multiple agents
+- Differentiate between agent conductor and orchestrator models
+- Describe how to organise multiple software development agents using a coordinator-subgent pattern
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
