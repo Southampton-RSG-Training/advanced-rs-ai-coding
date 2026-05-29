@@ -218,7 +218,7 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#an-example-scenario">An Example Scenario</a></li>
+        <ul><li><a href="#an-example-coding-scenario">An Example Coding Scenario</a></li>
 <li><a href="#defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -302,7 +302,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started</h1>
-        <p>Last updated on 2026-05-22 |
+        <p>Last updated on 2026-05-29 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -331,7 +331,8 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Describe the example coding scenario that will be used throughout
+<ul><li>Clone example repository onto local machine</li>
+<li>Describe the example coding scenario that will be used throughout
 this course</li>
 <li>Define constraints and coding practices for this project for Copilot
 to follow</li>
@@ -340,8 +341,200 @@ to follow</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="an-example-scenario">An Example Scenario<a class="anchor" aria-label="anchor" href="#an-example-scenario"></a></h2>
-<hr class="half-width"></section><section><h2 class="section-heading" id="defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints<a class="anchor" aria-label="anchor" href="#defining-repository-wide-coding-practices-and-constraints"></a></h2>
+<section><h2 class="section-heading" id="an-example-coding-scenario">An Example Coding Scenario<a class="anchor" aria-label="anchor" href="#an-example-coding-scenario"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="obtaining-the-example-repository">Obtaining the Example Repository<a class="anchor" aria-label="anchor" href="#obtaining-the-example-repository"></a></h3>
+<p>For this lesson we’ll be using some example data held in a repository
+on GitHub, which we’ll clone onto our machines using the Bash shell. So
+firstly open a Bash shell (via Git Bash in Windows or Terminal on a
+Mac). Then, on the command line, navigate to where you’d like the
+example code to reside, and use Git to clone it. For example, to clone
+the repository in our home directory, and change our directory to the
+repository contents:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="bu">cd</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">git</span> clone https://github.com/Southampton-RSG-Training/advanced-ai-coding-example.git</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="bu">cd</span> advanced-ai-coding-example</span></code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="setting-up-vscode-for-our-project">Setting up VSCode for our Project<a class="anchor" aria-label="anchor" href="#setting-up-vscode-for-our-project"></a></h3>
+<p>Start by running VSCode now on your machine, and open our downloaded
+directory within it as a VSCode workspace.</p>
+<p>You can do this in a couple of ways, either:</p>
+<ol style="list-style-type: decimal"><li>Select the <code>Source control</code> icon from the middle of the
+icons on the left navigation bar. You should see an
+<code>Open Folder</code> option, so select that.</li>
+<li>Select the <code>File</code> option from the top menu bar, and
+select <code>Open Folder...</code>.</li>
+</ol><p>In either case, you should then be able to use the file browser to
+locate the directory with the files you just extracted, and then select
+<code>Open</code>. Note that we’re looking for the <em>folder</em> that
+contains the files, not a specific file.</p>
+<p>We also need to ensure that the Copilot extension is installed and
+activated. It’s installed by default on newer releases of VSCode, so may
+not be installed on older installations.</p>
+<ol style="list-style-type: decimal"><li>Firstly, select the extensions icon, then type in “Copilot” into the
+search box at the top, and it’ll give you a list of all Copilot-related
+extensions.</li>
+<li>Select the one which says <code>GitHub Copilot</code> from GitHub,
+which is the official Copilot extension. You may also see the
+<code>GitHub Copilot Chat</code> extension, which is automatically
+installed along with this one.</li>
+<li>Either:
+<ul><li>It says <code>Installed</code>, in which case you don’t need to do
+anything.</li>
+<li>It says <code>Install</code>, in which cae select that button to
+install it. It might take a minute - you can see a sliding blue line in
+the top left to indicate it’s working. You’ll be presented with a
+“Welcome” page for the extension which covers the main features. Select
+<code>Mark Done</code>.</li>
+</ul></li>
+</ol><p>We also need to ensure we’re logged into our GitHub account. You
+should see a GitHub-looking icon in the status bar at the bottom right
+of VSCode’s window.</p>
+<ol style="list-style-type: decimal"><li>Select the <code>Signed out</code> button in the bottom right of the
+VSCode status bar, and <code>Sign in to use AI Features</code>.</li>
+<li>Select <code>Continue with GitHub</code>.</li>
+<li>You’ll be redirected to a GitHub login web page to authorise Visual
+Studio Code for GitHub. Select the GitHub account you wish to use and
+select <code>Continue</code>.</li>
+<li>Peruse and select <code>Authorize Visual-Studio-Code</code>.</li>
+<li>You may need to further authenticate with GitHub authorise this
+action.</li>
+<li>If a pop-up appears in your browser to open a link within VSCode,
+select <code>Open Link</code>.</li>
+</ol><p>Once completed, you’ll now be able to use GitHub Copilot within
+VSCode.</p>
+</div>
+<div class="section level3">
+<h3 id="the-scenario">The Scenario<a class="anchor" aria-label="anchor" href="#the-scenario"></a></h3>
+<p>The scenario involves studying the effects of a new treatment for
+arthritis by analysing the inflammation levels in patients who have been
+given this treatment. There are a number of datasets in the
+<code>data/</code> directory that each contain the result from a
+separate clinical trial of the drug. Each dataset contains recorded
+measurements of inflammation from 60 patients over the course of a 40
+day trial.</p>
+<figure><img src="../fig/inflammation-study-pipeline.png" class="image-with-shadow figure mx-auto d-block" alt="Snapshot of the inflammation dataset" width="800"></figure><p>Each of the data files uses the popular <a href="https://en.wikipedia.org/wiki/Comma-separated_values" class="external-link">comma-separated
+(CSV) format</a> to represent the data, where:</p>
+<ul><li>Each row holds inflammation measurements for a single patient</li>
+<li>Each column represents a successive day in the trial</li>
+<li>Each cell represents an inflammation reading on a given day for a
+patient</li>
+</ul><p>The goal of the project is to create a software tool that provides
+basic statistical analyses (mean value, minimum value, maximum value,
+and standard deviation), for a given dataset. The project has a few
+constraints, specifically that it must be written in Python and use the
+Numpy and Matplotlib Python libraries, since the group already has
+expertise using these technologies and they’ll wish to extend it
+further.</p>
+</div>
+<div class="section level3">
+<h3 id="setting-up-a-virtual-environment">Setting up a Virtual Environment<a class="anchor" aria-label="anchor" href="#setting-up-a-virtual-environment"></a></h3>
+<p>For this scenario we are constrained to using Numpy and Matplotlib,
+which we’ll install before we start developing our code with Copilot’s
+assistance. We’re going to create what’s known as a virtual environment
+to hold these packages.</p>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
+  Installing Python Packages
+  </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div class="accordion-body">
+<p>Who has created and used a Python virtual environment before?</p>
+</div>
+</div>
+</div>
+</div>
+<div id="benefits-of-virtual-environments" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="benefits-of-virtual-environments" class="callout-inner">
+<h3 class="callout-title">Benefits of Virtual Environments</h3>
+<div class="callout-content">
+<p>Virtual environments are an indispensible tool for managing package
+dependencies across multiple projects, and could be a whole topic
+itself. In the case of Python, the idea is that instead of installing
+Python packages at the level of our machine’s Python installation, which
+we could do, we’re going to install them within their own “container”,
+which is separate to the machine’s Python installation. Then we’ll run
+our Python code only using packages within that virtual environment.</p>
+<p>There are a number of key benefits to using virtual environments:</p>
+<ul><li>It creates a clear separation between the packages we use for this
+project, and the packages we use other projects.</li>
+<li>We don’t end up with a machine’s Python installation containing a
+clutter of a thousand different packages, where determining which
+packages are used for which project often becomes very time consuming
+and prone to error.</li>
+<li>Since we are sure what our code actually needs as dependencies, it
+becomes much easier for someone else (which could be a future version of
+ourselves) to know what these dependencies are and install them to use
+our code.</li>
+<li>Virtual environments are not limited to Python; for example there
+are similar tools for available for Ruby, Java and JavaScript.</li>
+</ul></div>
+</div>
+</div>
+<p>Make sure you’re in the root directory of the repository, then
+type</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span></code></pre>
+</div>
+<p>Here, we’re using the built-on Python <code>venv</code> module -
+short for virtual environment - to create a virtual environment
+directory called “venv”. We could have called the directory anything,
+but naming it <code>venv</code> (or <code>.venv</code>) is a common
+convention, as is creating it within the repository root directory. This
+makes sure the virtual environment is closely associated with this
+project, and not easily confused with another.</p>
+<p>Once created, we can <em>activate</em> it so it’s the one in use:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+</div>
+<p>You should notice the prompt changes to reflect that the virtual
+environment is active, which is a handy reminder. For example:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>(venv) $</code></pre>
+</div>
+<p>Now we have our virtual environment, we can install NumPy and
+Matplotlib to it:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy matplotlib</span></code></pre>
+</div>
+<p>If we do <code>python -m pip list</code> now, we can see these
+packages, and their dependencies, installed within the virtual
+environment we have activated.</p>
+<p>If we want to deactivate this environment, and return to the global
+Python package context, we can use <code>deactivate</code>. To
+reactivate it again, it’s the same as before:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints<a class="anchor" aria-label="anchor" href="#defining-repository-wide-coding-practices-and-constraints"></a></h2>
 <hr class="half-width"><!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -405,7 +598,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-05-22",
+  "dateModified": "2026-05-29",
   "datePublished": "2026-05-29"
 }
 
