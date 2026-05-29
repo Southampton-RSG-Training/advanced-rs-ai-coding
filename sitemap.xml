@@ -178,10 +178,16 @@
     <loc>https://carpentries.github.io/workbench-template-md/instructor/key-points.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/multi-agent-development.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/instructor/using-mcp-external-services.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/instructor-notes.html</loc>
@@ -193,9 +199,15 @@
     <loc>https://carpentries.github.io/workbench-template-md/key-points.html</loc>
   </url>
   <url>
+    <loc>https://carpentries.github.io/workbench-template-md/multi-agent-development.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries.github.io/workbench-template-md/profiles.html</loc>
   </url>
   <url>
     <loc>https://carpentries.github.io/workbench-template-md/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries.github.io/workbench-template-md/using-mcp-external-services.html</loc>
   </url>
 </urlset>
