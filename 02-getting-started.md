@@ -6,7 +6,9 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- FIXME
+- How do I obtain the coding, data, or other resources I need to do this course?
+- How do I prepare Visual Studio Code for this activity?
+- How do I constrain Copilot's suggestions to a defined set of coding standards and behaviours?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
