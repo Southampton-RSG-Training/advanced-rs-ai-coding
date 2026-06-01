@@ -28,6 +28,7 @@ However, there are some limitations with the approach we have so far with using 
 
 FIXME: add more downsides
 
+FIXME: add re-cloning the example repo for a fresh start (so they can keep both and compare/reuse later if they want). Get them to copy over the skills
 
 ## A Process-oriented Approach using Agents
 

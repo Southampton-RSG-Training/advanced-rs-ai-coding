@@ -1,0 +1,31 @@
+---
+name: pylint-fix
+description: Identify and fix code styling issues using the Pylint code linter.
+compatibility: Requires python3
+metadata:
+  version: 1.0.0
+---
+
+This skill automatically fixes style issues identified by pylint in Python files and reports anything that still needs manual review.
+
+## Constraints
+
+- ONLY make modifications based on output from pylint
+- ONLY make modifications to Python source code files
+
+## Approach
+
+1. Run pylint and capture the output from running the command.
+2. Analyse pylint output to identify warnings.
+3. Apply fixes only for safe, mechanical pylint messages such as `C0303` (trailing whitespace), `C0304` (missing newline), and `C0301` (line too long when it can be fixed by reformatting only). Do not apply fixes that require logic changes, renaming, or behavioral changes.
+4. Re-run pylint to verify fixes.
+5. If the re-run reports remaining or new pylint warnings, do not attempt further fixes. Report the outstanding issues to the user with their message codes and line numbers, and state that they require manual review.
+6. Provide a summary that lists each modified file, the pylint message code and description for each fix applied, and the line number(s) changed. If no fixes were applied, state that explicitly.
+
+## Commands to Use
+
+- Ensure the virtual environment is activated before running pylint
+- If pylint is not found after activating the virtual environment, stop and inform the user that pylint must be installed before proceeding.
+
+```bash
+python -m *.py
