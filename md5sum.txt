@@ -11,5 +11,5 @@
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2023-03-16"
 "learners/using-mcp-external-services.md" "a5267e18217f4c37e1acc1d6e198023b" "site/built/using-mcp-external-services.md" "2026-05-29"
 "learners/multi-agent-development.md" "b72e9d65d05d48854c15946e38436616" "site/built/multi-agent-development.md" "2026-05-29"
-"learners/setup.md" "34abd4600bbd00c4a3b5a6c9260be9a0" "site/built/setup.md" "2026-06-15"
+"learners/setup.md" "66526f1b85d543c7ac7b089435ca2b51" "site/built/setup.md" "2026-06-15"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2022-04-22"
