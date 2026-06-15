@@ -54,7 +54,8 @@ We’ll be using Git Bash for both git and a shell to run it in.
 
 #### Python
 
-FIXME: change to recommending standard Python distribution? Less complications. Could reuse the BBRS setup instructions here
+You will need Python 3.8 or above for this course.
+You may already have this installed on your system, in which case you do not have to do anything.
 
 The “Anaconda3” package provides everything Python-related you will need for the workshop. To install Anaconda, follow the instructions below.
 
@@ -122,6 +123,9 @@ xcode-select --install
 ```
 #### Python
 
+You will need Python 3.8 or above for this course.
+You may already have this installed on your system, in which case you do not have to do anything.
+
 Download the latest Anaconda Mac OS X installer from [Anaconda](https://www.anaconda.com/download).
 Double-click the .pkg file and follow the instructions.
 
@@ -141,6 +145,9 @@ This will depend on the Linux distribution you are running, but you should be ab
 Git comes pre-installed on most Linux distributions. You can test if it’s installed by running `git --version`. If it’s not installed, you can install it by running `sudo apt-get install git` or `sudo yum install git`, depending on your distribution.
 
 #### Python
+
+You will need Python 3.8 or above for this course.
+You may already have this installed on your system, in which case you do not have to do anything.
 
 Download the latest Anaconda Linux Installer from [Anaconda](https://www.anaconda.com/download).
 
