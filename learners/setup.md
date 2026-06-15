@@ -60,7 +60,7 @@ NB: You may already have this installed on your system, in which case skip to th
 
 The “Anaconda3” package provides everything Python-related you will need for the workshop. To install Anaconda, follow the instructions below.
 
-Download the latest Anaconda Windows installer from [Anaconda](https://www.anaconda.com/download), you may need click 'Get Started' and register first. 
+If you don't have it installed, download the latest Anaconda Windows installer from [Anaconda](https://www.anaconda.com/download), you may need click 'Get Started' and register first. 
 
 Double-click the installer and follow the instructions. **When asked “Add Anaconda to my PATH environment variable”, answer “yes”. It will warn you not to, but it’s required for it to be found by git bash**. After it’s finished, close and reopen any open terminals to reload the updated PATH and allow the installed Python to be found.
 
@@ -127,7 +127,7 @@ xcode-select --install
 You will need Python 3.8 or above for this course.
 You may already have this installed on your system, in which case you do not have to do anything.
 
-Download the latest Anaconda Mac OS X installer from [Anaconda](https://www.anaconda.com/download).
+If you don't have it installed, download the latest Anaconda Mac OS X installer from [Anaconda](https://www.anaconda.com/download).
 Double-click the .pkg file and follow the instructions.
 
 ::::::::::::::::::::::::
@@ -150,7 +150,7 @@ Git comes pre-installed on most Linux distributions. You can test if it’s inst
 You will need Python 3.8 or above for this course.
 You may already have this installed on your system, in which case you do not have to do anything.
 
-Download the latest Anaconda Linux Installer from [Anaconda](https://www.anaconda.com/download).
+If you don't have it installed, download the latest Anaconda Linux Installer from [Anaconda](https://www.anaconda.com/download).
 
 Install via the terminal like this (you will need to change the version number to the latest version):
 
