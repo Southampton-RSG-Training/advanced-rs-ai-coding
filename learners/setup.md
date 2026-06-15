@@ -55,7 +55,8 @@ We’ll be using Git Bash for both git and a shell to run it in.
 #### Python
 
 You will need Python 3.8 or above for this course.
-You may already have this installed on your system, in which case you do not have to do anything.
+
+NB: You may already have this installed on your system, in which case skip to the part below about testing your Python installation with GitBash.
 
 The “Anaconda3” package provides everything Python-related you will need for the workshop. To install Anaconda, follow the instructions below.
 
