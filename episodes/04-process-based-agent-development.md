@@ -6,7 +6,10 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- FIXME
+- Why should we use specialised AI agents instead of a single general-purpose agent?
+- What is specification-driven development and how does it support AI-assisted software development?
+- How can we specify agents that assist with the different stages of the software development process as a whole?
+- What permissions, constraints, and guardrails should be defined for AI agents?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
