@@ -354,6 +354,16 @@
 <h3 class="card-title">Questions</h3>
 <ul>
 <li>How can I use AI coding tools more responsibly?</li>
+<li>What risks arise when AI coding tools and autonomous agents are
+given increasing levels of autonomy?</li>
+<li>What are the main modes of AI-assisted software development, and how
+do they differ?</li>
+<li>How should established software engineering practices be applied
+when using AI coding assistants?</li>
+<li>Why are requirements, design, review, and testing still important in
+AI-assisted development?</li>
+<li>What security risks are introduced by AI coding tools and agentic
+workflows?</li>
 </ul>
 </div>
 </div>
@@ -375,6 +385,15 @@ development</li>
 </div>
 </div>
 </div>
+<p>AI coding assistants are become increasingly capable and autonomous,
+and it’s important to understand both the opportunities and the risks
+they introduce. This episode introduces how AI tools are being used
+throughout software development, from simple code completion through to
+autonomous agents and emerging software factories. We’ll also cover
+lessons from real-world failures, and explore how established software
+engineering practices such as requirements analysis, design review,
+testing, and human oversight remain essential to produce well written
+software and maintain accountability throughout development.</p>
 <section><h2 class="section-heading" id="when-agentic-development-goes-wrong">When Agentic Development Goes Wrong<a class="anchor" aria-label="anchor" href="#when-agentic-development-goes-wrong"></a>
 </h2>
 <hr class="half-width">
@@ -2085,7 +2104,13 @@ an implementation</li>
 <p>This approach also has the advantage of token efficiency. By creating
 more tightly defined agents each with a narrower clarity of purpose,
 this minimises the size of the context window - and use of tokens -
-whilst avoiding ambiguity in any given situation.</p>
+whilst avoiding ambiguity in any given situation. This type of approach
+is known as <a href="https://en.wikipedia.org/wiki/Specification-driven_development" class="external-link"><strong>specification-driven
+development</strong></a>, where the specifications drive the process of
+development. By constraining generative AI within such guardrails, we
+aim to reduce “unwanted creativity”, force generative AI to expose its
+“rationale”, and provide multiple well-defined points of review within a
+well understood and established development process.</p>
 <p>There are many ways we could choose to define these agents, in terms
 of their overall behaviour and the practices we want them to follow. For
 the purposes of this training, we’ll consider a generic set of agents
@@ -2115,7 +2140,7 @@ implementation look like?</li>
 <strong>Out of scope items</strong> - clarify what should not be
 considered</li>
 </ul>
-<p>When defining our agent that will produce this specifiction, we
+<p>When defining our agent that will produce this specification, we
 should consider, as a minimum:</p>
 <ul>
 <li>
@@ -2142,7 +2167,8 @@ enter:</p>
 <pre><code>/create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope</code></pre>
 <p>Here, our request briefly captures the above points, explicitly
 requesting the generation of a <code>requirements.md</code> document
-within a <code>project-docs</code> directory.</p>
+within a <code>project-docs</code> directory. You should find the
+created agents file in the <code>.github/agents</code> directory.</p>
 <p>This generally produces a reasonable definition, although given the
 probablistic nature of LLMs, yours will differ:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -2175,6 +2201,8 @@ probablistic nature of LLMs, yours will differ:</p>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a><span class="ss">- </span>User Stories</span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
 </div>
+<p>First, to be consistent for the training, rename the agents file as
+<code>requirements-gatherer.agent.md</code>.</p>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
 subsections.</p>
@@ -2369,17 +2397,235 @@ ordinarly go back and improve our requirements agent as needed.</p>
 </section><section><h2 class="section-heading" id="creating-a-software-design-agent">Creating a Software Design Agent<a class="anchor" aria-label="anchor" href="#creating-a-software-design-agent"></a>
 </h2>
 <hr class="half-width">
-<pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide</code></pre>
+<p>Once the requirements have been defined and agreed, the next step is
+to determine how those requirements will be implemented. Requirements
+describe what the software must do and the outcomes it must achieve;
+technical design describes how those outcomes will be delivered.</p>
+<p>Whereas a requirements specification focuses on user needs, business
+goals, constraints, and acceptance criteria, a Technical Design
+Specification (TDS) takes those requirements and translates them into an
+implementation approach. This may include the system architecture, major
+components, interfaces, data structures, technology choices,
+dependencies, security considerations, and any significant design
+decisions or trade-offs.</p>
+<p>The purpose of a technical design specification is not to describe
+every line of code that will be written. Instead, it should provide
+enough detail for developers, reviewers, and stakeholders to understand
+the proposed solution, assess its suitability, identify risks, and agree
+on an implementation approach before coding begins. A good design
+specification provides a clear, reviewable blueprint that guides
+development while remaining flexible enough to accommodate
+implementation details discovered during coding.</p>
+<p>With that in mind, let’s ask Copilot to create an agent for this:</p>
+<pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.</code></pre>
+<div id="a-better-design-agent" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="a-better-design-agent" class="callout-inner">
+<h3 class="callout-title">A Better Design Agent</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>In a similar way to how we improved our requirements agent, improve
+your design agent by doing the following:</p>
+<ul>
+<li>Rename the produced agent file (probably created in
+<code>.github/agents</code>) to <code>architect.agent.md</code>.</li>
+<li>Review the agent in general and refine it as you see fit. Aim to
+reduce ambiguities and ensure it follows a sensible approach that’s in
+line with our process and other agents so far.</li>
+<li>Similarly, revise the YAML front matter to improve the
+<code>description</code>, <code>tools</code>, and <code>models</code>
+fields (the latter two will likely be very similar!).</li>
+<li>Ensure it specifies to produce a <code>technical_spec.md</code>
+document in the <code>project-docs</code> directory.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>FIXME: add example improved version of design agent</p>
+</div>
+</div>
+</div>
+</div>
+<div id="design" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="design" class="callout-inner">
+<h3 class="callout-title">Design!</h3>
+<div class="callout-content">
+<p>Select our new <code>architect</code> agent from the
+<code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
+model is selected, and enter the following:</p>
+<pre><code>Produce design</code></pre>
+<p>FIXME: add example tech spec to learner files</p>
+<p>You should find a <code>technical_spec.md</code> file in the
+<code>project-docs</code> directory, hopefully with the sections we
+requested, <a href="files/example-agent-output/technical_spec.html">similar to this
+one</a>.</p>
+</div>
+</div>
+</div>
+<div id="review-1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="review-1" class="callout-inner">
+<h3 class="callout-title">Review!</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>As before, with a skeptical mindset:</p>
+<ul>
+<li>Carefully review the generated technical specification document and
+ensure it makes sense to you.</li>
+<li>Ensure you address any incorrect assumptions.</li>
+<li>Where you identify issues, amend the technical specification as
+needed, and save it.</li>
+</ul>
+<p>When you’ve finished, add your thoughts about how well the agent
+performed this task into the shared document, noting what it did well
+and what it could have done better.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>We’re settling into a pattern now: have copilot draft an agent,
+review and refine it, run it to produce the actual output we want, and
+refine that output.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="creating-an-implementation-agent">Creating an Implementation Agent<a class="anchor" aria-label="anchor" href="#creating-an-implementation-agent"></a>
 </h2>
 <hr class="half-width">
-<pre><code>/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible</code></pre>
+<p>Implementation is the phase where the approved Technical Design
+Specification (TDS) is translated into working software. The purpose of
+implementation is to build the solution described by the design,
+producing source code, tests, documentation, configuration, and other
+project artifacts required to deliver the agreed functionality.</p>
+<p>Whilst design focuses on how the solution should be structured and
+organised, implementation obviously focuses on building that solution.
+Design decisions should be made and reviewed before implementation
+begins, reducing the risk of developers making significant architectural
+decisions while coding.</p>
+<p>A good implementation should provide a complete and functional,
+maintainable, and tested solution that meets the requirements and
+follows the approved design. It should include clear, reviewable outputs
+such as source code, automated tests, documentation, and evidence that
+the software behaves as intended.</p>
+<pre><code>/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.</code></pre>
+<div class="section level3">
+<h3 id="reusing-our-skills">Reusing our Skills<a class="anchor" aria-label="anchor" href="#reusing-our-skills"></a>
+</h3>
+<p>An incredibly neat feature of agents is that they are able to make
+use of skills. Let’s modify our generated agent file to make use of
+these.</p>
+<p>FIXME: add in how to amend agent file to use skills where
+suitable</p>
+<div id="a-better-implementer-agent" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="a-better-implementer-agent" class="callout-inner">
+<h3 class="callout-title">A Better Implementer Agent</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>In a similar way to how we improved our previous agents, improve your
+implementation agent by doing the following:</p>
+<ul>
+<li>Rename the produced agent file (probably created in
+<code>.github/agents</code>) to <code>implementer.agent.md</code>.</li>
+<li>Review the agent in general and refine it as you see fit. Aim to
+reduce ambiguities and ensure it follows a sensible approach that’s in
+line with our process and other agents so far.</li>
+<li>Similarly, revise the YAML front matter to improve the
+<code>description</code>, <code>tools</code>, and <code>models</code>
+fields (the latter two will likely be very similar!).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div class="accordion-body">
+<p>FIXME: add example improved version of implementer agent</p>
+</div>
+</div>
+</div>
+</div>
+<div id="implement" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="implement" class="callout-inner">
+<h3 class="callout-title">Implement!</h3>
+<div class="callout-content">
+<p>Select our new <code>implementer</code> agent from the
+<code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
+model is selected, and enter the following:</p>
+<pre><code>Produce implemmentation</code></pre>
+<p>You should now find an initial implementation has appeared within
+your repository.</p>
+<p>FIXME: add example implementation to a separate example repo?</p>
+</div>
+</div>
+</div>
+<div id="review-2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<span class="callout-header">Discussion</span>
+<div id="review-2" class="callout-inner">
+<h3 class="callout-title">Review!</h3>
+<div class="callout-content">
+<p>10 mins.</p>
+<p>As before, with a skeptical mindset:</p>
+<ul>
+<li>Carefully review the generated implementation.</li>
+<li>Run the implementation</li>
+</ul>
+<p>When you’ve finished, add your thoughts about how well the agent
+performed this task into the shared document, noting what it did well
+and what it could have done better.</p>
+</div>
+</div>
+</div>
 <p>FIXME: update the agent to have all the perms necessary to execute
 scripts and set environments FIXME: when executing agent, list steps it
 typically goes through, e.g. setup venv</p>
+</div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
+<p>FIXME: how to take this approach further? split technical
+specification into design/implementation tasks? maintenance? specialise
+further for agile development? i.e. whatever you want. but be sure it
+holds to the principles of gated reviews, simplicity, and reducing
+ambiguity. FIXME: existing tools - e.g. <a href="https://github.com/github/spec-kit" class="external-link uri">https://github.com/github/spec-kit</a></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
