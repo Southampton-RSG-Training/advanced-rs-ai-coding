@@ -32,8 +32,7 @@ FIXME: add re-cloning the example repo for a fresh start (so they can keep both 
 
 ## A Process-oriented Approach using Agents
 
-One way to overcome these limitations would be to define and use a custom agent
-that follows a behaviour that we define ourselves.
+One way to overcome these limitations would be to define and use a custom agent that follows a behaviour that we define ourselves.
 
 This would give us:
 
@@ -57,6 +56,10 @@ based on the long-established software development lifecycle - that is each resp
 This approach also has the advantage of token efficiency.
 By creating more tightly defined agents each with a narrower clarity of purpose,
 this minimises the size of the context window - and use of tokens - whilst avoiding ambiguity in any given situation.
+This type of approach is known as [**specification-driven development**](https://en.wikipedia.org/wiki/Specification-driven_development),
+where the specifications drive the process of development.
+By constraining generative AI within such guardrails, we aim to reduce "unwanted creativity",
+force generative AI to expose its "rationale", and provide multiple well-defined points of review within a well understood and established development process.
 
 There are many ways we could choose to define these agents,
 in terms of their overall behaviour and the practices we want them to follow.
@@ -74,7 +77,7 @@ A minimal requirements specification could include, for example:
 - **Success metrics** - generally, what does a successful implementation look like?
 - **Out of scope items** - clarify what should not be considered
 
-When defining our agent that will produce this specifiction, we should consider, as a minimum:
+When defining our agent that will produce this specification, we should consider, as a minimum:
 
 - **A Persona** - a series of clear assertions that define the role of the agent
 - **Clear Boundaries** - it is particularly important to set guardrails and constrain the agent's behaviour only to what we want, otherwise agents tend to wander outside of their defined scope. Although note given the probablistic nature of LLMs, this doesn't *guarantee* that they won't!
@@ -91,6 +94,7 @@ In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the mode
 ```
 
 Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
+You should find the created agents file in the `.github/agents` directory.
 
 This generally produces a reasonable definition,
 although given the probablistic nature of LLMs, yours will differ:
@@ -123,6 +127,8 @@ Return a markdown requirements document with these sections:
 - User Stories
 - Success Metrics
 ```
+
+First, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`.
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
 
@@ -183,7 +189,6 @@ It's concise and reasonably clear, although what do you think is missing or coul
 
 FIXME: use chat customisations evaluations extension to check agent file, amend exercise above as needed
 FIXME: add "This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities."
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -251,23 +256,179 @@ So in this case, we would ordinarly go back and improve our requirements agent a
 
 ## Creating a Software Design Agent
 
+Once the requirements have been defined and agreed, the next step is to determine how those requirements will be implemented.
+Requirements describe what the software must do and the outcomes it must achieve;
+technical design describes how those outcomes will be delivered.
+
+Whereas a requirements specification focuses on user needs, business goals, constraints, and acceptance criteria,
+a Technical Design Specification (TDS) takes those requirements and translates them into an implementation approach.
+This may include the system architecture, major components, interfaces, data structures, technology choices, dependencies, security considerations,
+and any significant design decisions or trade-offs.
+
+The purpose of a technical design specification is not to describe every line of code that will be written.
+Instead, it should provide enough detail for developers, reviewers, and stakeholders to understand the proposed solution,
+assess its suitability, identify risks, and agree on an implementation approach before coding begins.
+A good design specification provides a clear, reviewable blueprint that guides development while remaining flexible enough to accommodate implementation details discovered during coding.
+
+With that in mind, let's ask Copilot to create an agent for this:
+
 ```
-/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide
+/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
 ```
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## A Better Design Agent
+
+5 mins.
+
+In a similar way to how we improved our requirements agent,
+improve your design agent by doing the following:
+
+- Rename the produced agent file (probably created in `.github/agents`) to `architect.agent.md`.
+- Review the agent in general and refine it as you see fit.
+Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
+- Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
+- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory.
+
+:::::::::::::::::::::::::: solution
+
+FIXME: add example improved version of design agent
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+### Design!
+
+Select our new `architect` agent from the `Agent/Ask/Plan` menu,
+ensure the `GPT-5.4 mini` model is selected,
+and enter the following:
+
+```
+Produce design
+```
+
+FIXME: add example tech spec to learner files
+
+You should find a `technical_spec.md` file in the `project-docs` directory, hopefully with the sections we requested,
+[similar to this one](../learners/files/example-agent-output/technical_spec.md).
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Review!
+
+5 mins.
+
+As before, with a skeptical mindset:
+
+- Carefully review the generated technical specification document and ensure it makes sense to you.
+- Ensure you address any incorrect assumptions.
+- Where you identify issues, amend the technical specification as needed, and save it.
+
+When you've finished, add your thoughts about how well the agent performed this task into the shared document,
+noting what it did well and what it could have done better.
+
+:::::::::::::::::::::::::: solution
+
+We're settling into a pattern now: have copilot draft an agent, review and refine it, run it to produce the actual output we want, and refine that output.
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Creating an Implementation Agent
 
+Implementation is the phase where the approved Technical Design Specification (TDS) is translated into working software.
+The purpose of implementation is to build the solution described by the design, producing source code, tests, documentation, configuration,
+and other project artifacts required to deliver the agreed functionality.
+
+Whilst design focuses on how the solution should be structured and organised, implementation obviously focuses on building that solution.
+Design decisions should be made and reviewed before implementation begins, reducing the risk of developers making significant architectural decisions while coding.
+
+A good implementation should provide a complete and functional, maintainable, and tested solution that meets the requirements and follows the approved design.
+It should include clear, reviewable outputs such as source code, automated tests, documentation, and evidence that the software behaves as intended.
+
 ```
-/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible
+/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
 ```
+
+### Reusing our Skills
+
+An incredibly neat feature of agents is that they are able to make use of skills.
+Let's modify our generated agent file to make use of these.
+
+FIXME: add in how to amend agent file to use skills where suitable
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## A Better Implementer Agent
+
+5 mins.
+
+In a similar way to how we improved our previous agents,
+improve your implementation agent by doing the following:
+
+- Rename the produced agent file (probably created in `.github/agents`) to `implementer.agent.md`.
+- Review the agent in general and refine it as you see fit.
+Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
+- Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
+
+:::::::::::::::::::::::::: solution
+
+FIXME: add example improved version of implementer agent
+
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+### Implement!
+
+Select our new `implementer` agent from the `Agent/Ask/Plan` menu,
+ensure the `GPT-5.4 mini` model is selected,
+and enter the following:
+
+```
+Produce implemmentation
+```
+
+You should now find an initial implementation has appeared within your repository.
+
+FIXME: add example implementation to a separate example repo?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Review!
+
+10 mins.
+
+As before, with a skeptical mindset:
+
+- Carefully review the generated implementation.
+- Run the implementation
+
+When you've finished, add your thoughts about how well the agent performed this task into the shared document,
+noting what it did well and what it could have done better.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 FIXME: update the agent to have all the perms necessary to execute scripts and set environments
 FIXME: when executing agent, list steps it typically goes through, e.g. setup venv
 
 
-
 ## Summary
+
+FIXME: how to take this approach further? split technical specification into design/implementation tasks? maintenance? specialise further for agile development? i.e. whatever you want. but be sure it holds to the principles of gated reviews, simplicity, and reducing ambiguity.
+FIXME: existing tools - e.g. https://github.com/github/spec-kit
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 

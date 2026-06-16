@@ -7,6 +7,11 @@ exercises: 0
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How can I use AI coding tools more responsibly?
+- What risks arise when AI coding tools and autonomous agents are given increasing levels of autonomy?
+- What are the main modes of AI-assisted software development, and how do they differ?
+- How should established software engineering practices be applied when using AI coding assistants?
+- Why are requirements, design, review, and testing still important in AI-assisted development?
+- What security risks are introduced by AI coding tools and agentic workflows?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -18,6 +23,12 @@ exercises: 0
 - Explain key considerations for how to use AI agents in software development
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+AI coding assistants are become increasingly capable and autonomous,
+and it's important to understand both the opportunities and the risks they introduce.
+This episode introduces how AI tools are being used throughout software development,
+from simple code completion through to autonomous agents and emerging software factories.
+We'll also cover lessons from real-world failures, and explore how established software engineering practices such as requirements analysis, design review, testing, and human oversight remain essential to produce well written software and maintain accountability throughout development.
 
 ## When Agentic Development Goes Wrong
 
