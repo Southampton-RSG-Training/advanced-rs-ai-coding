@@ -717,7 +717,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-02-getting-started"><p>Content from <a href="02-getting-started.html">Getting Started</a></p>
 <hr>
-<p>Last updated on 2026-06-01 |
+<p>Last updated on 2026-06-16 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -953,15 +953,123 @@ reactivate it again, it’s the same as before:</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints<a class="anchor" aria-label="anchor" href="#defining-repository-wide-coding-practices-and-constraints"></a>
+</section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a>
 </h2>
 <hr class="half-width">
+<div class="section level3">
+<h3 id="what-is-an-instructions-file">What is an Instructions File?<a class="anchor" aria-label="anchor" href="#what-is-an-instructions-file"></a>
+</h3>
+<p>GitHub Copilot can be personalised by adding a instructions file to a
+repository that tells Copilot how you want it to behave in that project.
+The file acts as persistent, project-level guidance for Copilot,
+covering things like:</p>
+<ul>
+<li>Preferred architecture and design patterns</li>
+<li>Coding style and naming conventions</li>
+<li>Approved or banned libraries</li>
+<li>Testing expectations and quality standards</li>
+<li>Security or safety rules</li>
+<li>How detailed Copilot’s answers should be</li>
+</ul>
+<p>By giving Copilot this shared context we can specify the developer’s
+(or developer team’s) coding conventions, reuse existing patterns, and
+avoid unwanted approaches, with the aim to make its suggestions more
+relevant for a particular project.</p>
+<p>It serves a similar purposes to a <code>CONTRIBUTING.md</code> file
+in a code repository; it provides guidance for how suggestions, code
+changes and contributions should be made, but aimed at Copilot’s
+day-to-day decisions instead. It does this by adding context to queries
+from the <code>.github/.copilot-instructions.md</code> file.</p>
+<p>For example, if we were to ask Copilot “How should I make this code
+more readable?”, without instructions Copilot may suggest to:</p>
+<ul>
+<li>Rename or format variable or function names inconsistently</li>
+<li>Change behaviour subtly in an undesired way</li>
+<li>Use an indentation style that isn’t typically used by team
+members</li>
+<li>Without instructions, Copilot may introduce a new design pattern the
+repository doesn’t use</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="create-an-instructions-file">Create an Instructions File<a class="anchor" aria-label="anchor" href="#create-an-instructions-file"></a>
+</h3>
+<p>FIXME: change to manual creation, since there’s no code anyway.
+FIXME: use example in <a href="https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7" class="external-link uri">https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7</a>
+as basis. FIXME: focus on goals for the app (high-level scenario
+description), data safety (i.e. don’t change anything in data/),
+technology stack, dev guidelines, coding style standards (e.g. PEP8,
+comments and docs (commenting strategy, include a README in the
+repository) FIXME: include never hardcode security and secrets FIXME:
+keep sections very short. write a section or two, get them to write
+another</p>
+</div>
+<div class="section level3">
+<h3 id="specifying-privacy-per-file-type">Specifying Privacy per File Type<a class="anchor" aria-label="anchor" href="#specifying-privacy-per-file-type"></a>
+</h3>
+<p>In VS Code, GitHub Copilot gives developers some mechanisms to
+control the level of privacy. This should be considered important where
+our code uses sensitive or otherwise confidential data, or potentially
+valuable IP-related code, such as algorithms.</p>
+<p>At a high level, Copilot works by sending small, relevant snippets of
+your open code (plus surrounding context) to the Copilot service to
+generate suggestions. You don’t explicitly “upload a project”, but you
+do control which files Copilot is allowed to see and draw context
+from.</p>
+<p>The most practical control is scoping Copilot by file, folder, or
+workspace. In VS Code you can disable Copilot entirely, or selectively
+turn it off for particular file types (for example, configuration files,
+data files, or notebooks).</p>
+<p>For example, we edit our VSCode settings to ignore csv files by:</p>
+<ol style="list-style-type: decimal">
+<li><p>Using <code>Ctrl + Shift + P</code> or
+<code>Cmd/Windows Key + Shift + P</code> to open the Command
+Palette</p></li>
+<li><p>Entering and selecting
+<code>Preferences: Open User Settings (JSON)</code></p></li>
+<li>
+<p>In the <code>settings.json</code> file that appears, add the
+following and save the file:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="at">   </span><span class="fu">"github.copilot.enable"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="kw">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="at">      </span><span class="fu">"csv"</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a><span class="at">   </span><span class="kw">}</span></span></code></pre>
+</div>
+</li>
+</ol>
+<p>This will have the effect of potentially including all file types in
+context by default, but not CSV files.</p>
+
+<p>If you wanted a stricter “default deny” approach instead, you could
+specify <code>false</code> for <code>*</code> and enable each filetype
+explicitly.</p>
+<p>There are stricter controls, including some that allow exclusion by
+directory specifications, but these are currently limited to Copilot
+Business users for their repositories and organisations.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>FIXME</li>
+</ul>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></section></section><section id="aio-03-task-based-agents"><p>Content from <a href="03-task-based-agents.html">Planning and Task-based Approach to Software Development</a></p>
+ -->
+</div>
+</section></section><section id="aio-03-task-based-agents"><p>Content from <a href="03-task-based-agents.html">Planning and Task-based Approach to Software Development</a></p>
 <hr>
-<p>Last updated on 2026-06-01 |
+<p>Last updated on 2026-06-16 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1426,7 +1534,7 @@ a bug, and restarting VSCode should fix this.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>You can find an example improved <code>SKILL.md</code> <a href="files/skills/pylint-fix/SKILL.html">here</a>.</p>
 </div>
@@ -1550,7 +1658,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>An initial try:</p>
 <div class="codewrapper sourceCode" id="cb13">
@@ -1825,7 +1933,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here’s one solution:</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -1984,7 +2092,9 @@ up, and how to run the code and the tests?</li>
 <p>So far we’ve created AI-based tools for common development tasks, as
 well as explored the limitations and risks of using AI for such
 activities.</p>
-<p>FIXME: finish summary</p>
+<p>FIXME: finish summary, essentially - can be helpful for creating
+scaffolding and setting up the use of a new technology, and for writing
+preliminary content.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2018,6 +2128,8 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
+<li>How can an agentic approach assist with software development phases
+other than implementation?</li>
 <li>FIXME</li>
 </ul>
 </div>
@@ -2045,23 +2157,30 @@ own research domains</li>
 <p>However, there are some limitations with the approach we have so far
 with using the built-in planning agent:</p>
 <ul>
-<li>As implied by its name, it actively avoids moving to implementing
-solutions. By staying in planning mode, conversations are pulled back to
-planning instead of moving forward. If we want to go further, we need
-prompts or another mechanism to do that.</li>
 <li>We’re completely at the mercy of how the planning agent is designed
-to operate, which may not fit our working style or process.</li>
-<li>It’s a single intermediate step where important project needs
-(requirements) and design details may be missed. Established software
-development practice separates requirements and design. What if we want
-to explore the project needs separately to any design
-considerations?</li>
+to operate, which may not fit our working style or process. What if we
+want to change this approach?</li>
+<li>The planning agent uses a single planning step where important
+project needs (requirements) and design considerations may be missed.
+However, established software development practice separates
+requirements and design as separate phases.</li>
 </ul>
 <p>FIXME: add more downsides</p>
-<p>FIXME: add re-cloning the example repo for a fresh start (so they can
-keep both and compare/reuse later if they want). Get them to copy over
-the skills</p>
-<section><h2 class="section-heading" id="a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents<a class="anchor" aria-label="anchor" href="#a-process-oriented-approach-using-agents"></a>
+<section><h2 class="section-heading" id="setting-up">Setting Up<a class="anchor" aria-label="anchor" href="#setting-up"></a>
+</h2>
+<hr class="half-width">
+<p>Since we’ll be approaching the project again using a different
+perspective and approach, let’s re-clone the repository with the
+inflammation data we had earlier in a different location and use that,
+e.g.</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="bu">cd</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a><span class="fu">git</span> clone https://github.com/Southampton-RSG-Training/advanced-ai-coding-example.git advanced-ai-agents-example</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a><span class="bu">cd</span> advanced-ai-agents-example</span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="a-process-oriented-approach-using-agents">A Process-oriented Approach using Agents<a class="anchor" aria-label="anchor" href="#a-process-oriented-approach-using-agents"></a>
 </h2>
 <hr class="half-width">
 <p>One way to overcome these limitations would be to define and use a
@@ -2171,35 +2290,35 @@ within a <code>project-docs</code> directory. You should find the
 created agents file in the <code>.github/agents</code> directory.</p>
 <p>This generally produces a reasonable definition, although given the
 probablistic nature of LLMs, yours will differ:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a><span class="co">---</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1" aria-label="code-block-2-7"></a></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1" aria-label="code-block-2-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1" aria-label="code-block-2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1" aria-label="code-block-2-10"></a><span class="fu">## Constraints</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1" aria-label="code-block-2-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1" aria-label="code-block-2-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1" aria-label="code-block-2-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1" aria-label="code-block-2-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1" aria-label="code-block-2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1" aria-label="code-block-2-16"></a><span class="fu">## Approach</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1" aria-label="code-block-2-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1" aria-label="code-block-2-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1" aria-label="code-block-2-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1" aria-label="code-block-2-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1" aria-label="code-block-2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1" aria-label="code-block-2-22"></a><span class="fu">## Output Format</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1" aria-label="code-block-2-23"></a>Return a markdown requirements document with these sections:</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1" aria-label="code-block-2-24"></a><span class="ss">- </span>Assumptions</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1" aria-label="code-block-2-25"></a><span class="ss">- </span>User Stories</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1" aria-label="code-block-2-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="co">---</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a><span class="fu">## Constraints</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1" aria-label="code-block-3-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1" aria-label="code-block-3-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1" aria-label="code-block-3-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1" aria-label="code-block-3-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1" aria-label="code-block-3-15"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1" aria-label="code-block-3-16"></a><span class="fu">## Approach</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1" aria-label="code-block-3-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1" aria-label="code-block-3-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1" aria-label="code-block-3-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1" aria-label="code-block-3-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1" aria-label="code-block-3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1" aria-label="code-block-3-22"></a><span class="fu">## Output Format</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1" aria-label="code-block-3-23"></a>Return a markdown requirements document with these sections:</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1" aria-label="code-block-3-24"></a><span class="ss">- </span>Assumptions</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1" aria-label="code-block-3-25"></a><span class="ss">- </span>User Stories</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1" aria-label="code-block-3-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
 </div>
 <p>First, to be consistent for the training, rename the agents file as
 <code>requirements-gatherer.agent.md</code>.</p>
@@ -2275,7 +2394,7 @@ what do you think is missing or could be better?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>Be more explicit with for what we want, e.g. include the user story
@@ -2319,14 +2438,14 @@ ambiguities.”</p>
 <p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.html">a version of this
 agent</a> that takes these limitations into account.</p>
 <p>The revised YAML front matter looks like:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="pp">----</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="pp">----</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="pp">----</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="pp">----</span></span></code></pre>
 </div>
 <p>So here, we’ve updated the allowed tools with more finely-grained
 permissions, restricting it to reading files, creating directories and
@@ -2383,7 +2502,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>When first developing agents, similarly to how we develop code, a
 typical process is to refine the behaviour of the agent over multiple
@@ -2417,6 +2536,7 @@ specification provides a clear, reviewable blueprint that guides
 development while remaining flexible enough to accommodate
 implementation details discovered during coding.</p>
 <p>With that in mind, let’s ask Copilot to create an agent for this:</p>
+<p>FIXME: get them to copy over the skills for the implementer agent</p>
 <pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.</code></pre>
 <div id="a-better-design-agent" class="callout challenge">
 <div class="callout-square">
@@ -2449,7 +2569,7 @@ document in the <code>project-docs</code> directory.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>FIXME: add example improved version of design agent</p>
 </div>
@@ -2504,7 +2624,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We’re settling into a pattern now: have copilot draft an agent,
 review and refine it, run it to produce the actual output we want, and
@@ -2569,7 +2689,7 @@ fields (the latter two will likely be very similar!).</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <p>FIXME: add example improved version of implementer agent</p>
 </div>

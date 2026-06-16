@@ -219,7 +219,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#an-example-coding-scenario">An Example Coding Scenario</a></li>
-<li><a href="#defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints</a></li>
+<li><a href="#personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -302,7 +302,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started</h1>
-        <p>Last updated on 2026-06-01 |
+        <p>Last updated on 2026-06-16 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -538,11 +538,122 @@ reactivate it again, it’s the same as before:</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="defining-repository-wide-coding-practices-and-constraints">Defining Repository-wide Coding Practices and Constraints<a class="anchor" aria-label="anchor" href="#defining-repository-wide-coding-practices-and-constraints"></a></h2>
-<hr class="half-width"><!--
+</section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="what-is-an-instructions-file">What is an Instructions File?<a class="anchor" aria-label="anchor" href="#what-is-an-instructions-file"></a></h3>
+<p>GitHub Copilot can be personalised by adding a instructions file to a
+repository that tells Copilot how you want it to behave in that project.
+The file acts as persistent, project-level guidance for Copilot,
+covering things like:</p>
+<ul><li>Preferred architecture and design patterns</li>
+<li>Coding style and naming conventions</li>
+<li>Approved or banned libraries</li>
+<li>Testing expectations and quality standards</li>
+<li>Security or safety rules</li>
+<li>How detailed Copilot’s answers should be</li>
+</ul><p>By giving Copilot this shared context we can specify the developer’s
+(or developer team’s) coding conventions, reuse existing patterns, and
+avoid unwanted approaches, with the aim to make its suggestions more
+relevant for a particular project.</p>
+<p>It serves a similar purposes to a <code>CONTRIBUTING.md</code> file
+in a code repository; it provides guidance for how suggestions, code
+changes and contributions should be made, but aimed at Copilot’s
+day-to-day decisions instead. It does this by adding context to queries
+from the <code>.github/.copilot-instructions.md</code> file.</p>
+<p>For example, if we were to ask Copilot “How should I make this code
+more readable?”, without instructions Copilot may suggest to:</p>
+<ul><li>Rename or format variable or function names inconsistently</li>
+<li>Change behaviour subtly in an undesired way</li>
+<li>Use an indentation style that isn’t typically used by team
+members</li>
+<li>Without instructions, Copilot may introduce a new design pattern the
+repository doesn’t use</li>
+</ul></div>
+<div class="section level3">
+<h3 id="create-an-instructions-file">Create an Instructions File<a class="anchor" aria-label="anchor" href="#create-an-instructions-file"></a></h3>
+<p>FIXME: change to manual creation, since there’s no code anyway.
+FIXME: use example in <a href="https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7" class="external-link uri">https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7</a>
+as basis. FIXME: focus on goals for the app (high-level scenario
+description), data safety (i.e. don’t change anything in data/),
+technology stack, dev guidelines, coding style standards (e.g. PEP8,
+comments and docs (commenting strategy, include a README in the
+repository) FIXME: include never hardcode security and secrets FIXME:
+keep sections very short. write a section or two, get them to write
+another</p>
+</div>
+<div class="section level3">
+<h3 id="specifying-privacy-per-file-type">Specifying Privacy per File Type<a class="anchor" aria-label="anchor" href="#specifying-privacy-per-file-type"></a></h3>
+<p>In VS Code, GitHub Copilot gives developers some mechanisms to
+control the level of privacy. This should be considered important where
+our code uses sensitive or otherwise confidential data, or potentially
+valuable IP-related code, such as algorithms.</p>
+<p>At a high level, Copilot works by sending small, relevant snippets of
+your open code (plus surrounding context) to the Copilot service to
+generate suggestions. You don’t explicitly “upload a project”, but you
+do control which files Copilot is allowed to see and draw context
+from.</p>
+<p>The most practical control is scoping Copilot by file, folder, or
+workspace. In VS Code you can disable Copilot entirely, or selectively
+turn it off for particular file types (for example, configuration files,
+data files, or notebooks).</p>
+<p>For example, we edit our VSCode settings to ignore csv files by:</p>
+<ol style="list-style-type: decimal"><li><p>Using <code>Ctrl + Shift + P</code> or
+<code>Cmd/Windows Key + Shift + P</code> to open the Command
+Palette</p></li>
+<li><p>Entering and selecting
+<code>Preferences: Open User Settings (JSON)</code></p></li>
+<li>
+<p>In the <code>settings.json</code> file that appears, add the
+following and save the file:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="at">   </span><span class="fu">"github.copilot.enable"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="kw">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="at">      </span><span class="fu">"csv"</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a><span class="at">   </span><span class="kw">}</span></span></code></pre>
+</div>
+</li>
+</ol><p>This will have the effect of potentially including all file types in
+context by default, but not CSV files.</p>
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
+  Checkpoint: I’ve disabled the inclusion of csv files
+  </h3>
+</button>
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div class="accordion-body">
+
+</div>
+</div>
+</div>
+</div>
+<p>If you wanted a stricter “default deny” approach instead, you could
+specify <code>false</code> for <code>*</code> and enable each filetype
+explicitly.</p>
+<p>There are stricter controls, including some that allow exclusion by
+directory specifications, but these are currently limited to Copilot
+Business users for their repositories and organisations.</p>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul><li>FIXME</li>
+</ul></div>
+</div>
+</div>
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></section></div> <!-- / div.lesson-content -->
+ -->
+</div>
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/01-intro.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/03-task-based-agents.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -602,7 +713,7 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-01",
+  "dateModified": "2026-06-16",
   "datePublished": "2026-06-16"
 }
 
