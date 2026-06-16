@@ -256,7 +256,7 @@ So in this case, we would ordinarly go back and improve our requirements agent a
 ```
 
 
-## Creating an Implementer Agent
+## Creating an Implementation Agent
 
 ```
 /create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file, which implements each step in the spec and verifies that all acceptance criteria are met where possible
