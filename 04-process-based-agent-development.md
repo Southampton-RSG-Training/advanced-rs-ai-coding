@@ -6,6 +6,7 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
+- How can an agentic approach assist with software development phases other than implementation?
 - FIXME
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -22,13 +23,22 @@ exercises: 0
 
 However, there are some limitations with the approach we have so far with using the built-in planning agent:
 
-- As implied by its name, it actively avoids moving to implementing solutions. By staying in planning mode, conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
-- We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process.
-- It's a single intermediate step where important project needs (requirements) and design details may be missed. Established software development practice separates requirements and design. What if we want to explore the project needs separately to any design considerations?
+- We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process. What if we want to change this approach?
+- The planning agent uses a single planning step where important project needs (requirements) and design considerations may be missed. However, established software development practice separates requirements and design as separate phases.
 
 FIXME: add more downsides
 
-FIXME: add re-cloning the example repo for a fresh start (so they can keep both and compare/reuse later if they want). Get them to copy over the skills
+## Setting Up
+
+Since we'll be approaching the project again using a different perspective and approach,
+let's re-clone the repository with the inflammation data we had earlier in a different location and use that, e.g.
+
+```bash
+cd
+git clone https://github.com/Southampton-RSG-Training/advanced-ai-coding-example.git advanced-ai-agents-example
+cd advanced-ai-agents-example
+```
+
 
 ## A Process-oriented Approach using Agents
 
@@ -271,6 +281,10 @@ assess its suitability, identify risks, and agree on an implementation approach 
 A good design specification provides a clear, reviewable blueprint that guides development while remaining flexible enough to accommodate implementation details discovered during coding.
 
 With that in mind, let's ask Copilot to create an agent for this:
+
+FIXME: get them to copy over the skills for the implementer agent
+
+
 
 ```
 /create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
