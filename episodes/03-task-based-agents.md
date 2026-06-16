@@ -838,7 +838,7 @@ and add your thoughts to the shared document on the following questions:
 So far we've created AI-based tools for common development tasks,
 as well as explored the limitations and risks of using AI for such activities.
 
-FIXME: finish summary
+FIXME: finish summary, essentially - can be helpful for creating scaffolding and setting up the use of a new technology, and for writing preliminary content.
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
