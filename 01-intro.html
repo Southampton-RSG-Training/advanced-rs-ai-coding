@@ -305,7 +305,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to Advanced Research Software AI Coding</h1>
-        <p>Last updated on 2026-06-16 |
+        <p>Last updated on 2026-06-17 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -455,7 +455,7 @@ effectively.</p>
 industrial organisations today operate between conversational assistance
 and task-agent workflows.</p>
 <div class="section level3">
-<h3 id="inline-autocomplete-assistance">Inline / Autocomplete Assistance<a class="anchor" aria-label="anchor" href="#inline-autocomplete-assistance"></a></h3>
+<h3 id="inline-autocomplete-assistance">1. Inline / Autocomplete Assistance<a class="anchor" aria-label="anchor" href="#inline-autocomplete-assistance"></a></h3>
 <p>At the most basic level, AI tools operate as advanced code completion
 systems. As a developer writes code, the tool predicts and suggests the
 next line, block, or function based on the surrounding context. In this
@@ -466,7 +466,7 @@ boilerplate code, completing repetitive patterns, generating simple
 functions, and producing documentation comments.</p>
 </div>
 <div class="section level3">
-<h3 id="conversational-assistance">Conversational Assistance<a class="anchor" aria-label="anchor" href="#conversational-assistance"></a></h3>
+<h3 id="conversational-assistance">2. Conversational Assistance<a class="anchor" aria-label="anchor" href="#conversational-assistance"></a></h3>
 <p>Conversational AI tools allow developers to interact with an AI
 through natural language. Instead of waiting for suggestions, developers
 ask questions, request explanations, generate code, or seek debugging
@@ -481,7 +481,7 @@ generating larger boilerplate components, learning new frameworks, and
 refactoring code.</p>
 </div>
 <div class="section level3">
-<h3 id="agentic-coding">Agentic Coding<a class="anchor" aria-label="anchor" href="#agentic-coding"></a></h3>
+<h3 id="agentic-coding">3. Agentic Coding<a class="anchor" aria-label="anchor" href="#agentic-coding"></a></h3>
 <p>Task agents go beyond answering questions and can perform
 semi-autonomous development activities. The developer provides a goal
 and scope for the task, and the AI coding assistant plans and executes a
@@ -503,7 +503,7 @@ documentation, or refactoring a component; indeed, any task within
 software development that is amenable to AI automation.</p>
 </div>
 <div class="section level3">
-<h3 id="role-based-agentic-workflow">Role-based Agentic Workflow<a class="anchor" aria-label="anchor" href="#role-based-agentic-workflow"></a></h3>
+<h3 id="role-based-agentic-workflow">4. Role-based Agentic Workflow<a class="anchor" aria-label="anchor" href="#role-based-agentic-workflow"></a></h3>
 <p>In this model, multiple specialised AI agents collaborate on a
 development task. Each agent may have a distinct role and communicate
 with other agents to solve larger problems.</p>
@@ -523,7 +523,7 @@ this approach raises the risk of overly optimistic appraisal of
 automated stage outputs.</p>
 </div>
 <div class="section level3">
-<h3 id="the-dark-factory">The “Dark Factory”<a class="anchor" aria-label="anchor" href="#the-dark-factory"></a></h3>
+<h3 id="the-dark-factory">5. The “Dark Factory”<a class="anchor" aria-label="anchor" href="#the-dark-factory"></a></h3>
 <p>The highest level of AI-assisted development is sometimes referred to
 as the <em>Dark Factory</em>, borrowing terminology from fully automated
 manufacturing facilities that can operate without human workers.</p>
@@ -549,18 +549,56 @@ quality.</p>
 coding assistants, and how established, long-standing best practices
 from software engineering should be considered. But what does software
 engineering tell us?</p>
-<p>Whether we follow a formal development process or not, every software
-project moves through the activities of understanding what needs to be
-built (requirements), determining how it should be structured (design),
-and creating the solution (implementation). These activities exist in
-every project, regardless of the development methodology being used.</p>
-<p>Stage-gated approaches make these activities explicit by requiring
+<p>Whether we follow a formal development process or not, in terms of
+development every software project moves through the activities of:</p>
+<ul><li>
+<strong>Requirements Analysis</strong> - understanding what needs to
+be built</li>
+<li>
+<strong>Design</strong> - determining from the requirements how it
+should be structured (as an archtecture), the separate components within
+that architecture, and other technical decisions</li>
+<li>
+<strong>Implementation</strong> - doing the coding and other
+implementation activities to create the solution based on the
+design</li>
+<li>
+<strong>Testing</strong> - verifying that the implementation is
+correct and behaves as expected</li>
+<li>
+<strong>Maintenance</strong> - unless the output is a transitory one
+and will be discarded, further development necessary to ensure the
+software continues to function as required in the longer term</li>
+</ul><figure><img src="fig/software-dev-process.png" style="width:30.0%" alt="The Software Development Process and its stages" class="figure mx-auto d-block"><div class="figcaption">The Software Development Process and its
+stages</div>
+</figure><!--
+Source of the above image can be rendered in the Mermaid Live editor:
+
+https://mermaid.live/edit#pako:eNpVkk9vozAQxb_KyKdUolH4kwQ4VMqWPeQQqUo4VVwsM4C1YLPG1m6a5rt3gCRqkRDMm_d7Y1u-MKFLZCmrWv1PNNxYyLNCAT1ciFzaFlO47GBoNLUqWTuDYEf5-nBlOAgzuVqtajRQjoLsrdQKdAW2wRvpQSPrpqXXSlWD7HpK5coCttihsgOFzrHHRcGO-NdJMzeKQu0Ub8-DHAr2BM_P8HbM6PMC2YLmy1o9zWBG4CzcfHl2mnz7xb7r5zF8XNnNvyf_z8bMvcDnSTsjEF7pgDz45WRbws5YWXFhh0_ICcxxGDdCxBz2U5tTxhqOOO6UqMPiwKWyqLgSeKMORH1Tp7RCMY_VRpYstcahxzo0HR9LdhmpgtGpduRN6bfk5k_BCnUlpufqXevujhnt6oalFW8HqlxfcouZ5LXh3UPlzurTWYk7g6W02hzmezFdjzv5e-o8slGVaF61U5alYbKehrP0wv5TGW2Xkb9JQt9fB2EUbql7Zqm_TEhcBXGSbKPADzbrq8c-pvWulsk2jqMgWkVhHPubOLl-AUX11pY
+
+The mermaid source:
+
+flowchart TD
+    accTitle: {A short figure title}
+    accDescr: {A longer description of the figure, highlighting important elements}
+
+    R("Requirements\nAnalysis") -- PRD -> D(Design)
+    D("Design") -- TDS -> I(Implementation)
+    I("Implementation") -> |Source Code, Build Artifacts| T("Testing")
+    T("Testing") -> |Test Reports| M(Maintenance)
+    M("Maintenance")
+
+--><p>These activities exist in every development project, regardless of
+the methodology being used, and the scale to which they are done, even
+if they are undertaken solely as a thinking exercise (in the case of
+requirements analysis and design).</p>
+<p>Stage-gated approaches make these activities explicit by having
 requirements, design, and implementation to be considered separately and
 reviewed before moving forward. Although commonly associated with
 waterfall development, the same principles apply in Agile, Scrum, and
 other iterative approaches. Successful teams still need to understand
 requirements, consider design options, and review their work throughout
-development.</p>
+development before proceeding further.</p>
 <p>Review is particularly important because defects may originate in
 requirements and design rather than in code, and indeed there <a href="https://dl.acm.org/doi/10.1145/256428.167069" class="external-link">is evidence</a> that
 most errors are introduced during these stages. A misunderstanding
@@ -570,12 +608,13 @@ time-consuming to correct. This challenge is likely to be amplified by
 AI-assisted development, where incorrect assumptions can quickly result
 in large amounts of incorrect code.</p>
 <p>Software engineering tells us we should aim for a defined process
-with clear, reviewable outputs that supports discussion, feedback, and
-approval at each stage. Requirements can be reviewed with stakeholders,
-designs can be challenged and refined, and code can be examined through
-peer review. Without these artefacts and review points, development
-risks becoming a black box in which important decisions and assumptions
-are hidden from such review.</p>
+with reviewable outputs that support feedback and approval at each
+stage. For example; requirements can be reviewed with stakeholders,
+designs can be challenged and refined within the development team, and
+code can be examined through peer review with other developers. Without
+these artefacts and review points, development risks becoming a black
+box in which important decisions and assumptions are hidden from a
+proper level of consideration.</p>
 </section><section><h2 class="section-heading" id="what-about-software-security">What about Software Security?<a class="anchor" aria-label="anchor" href="#what-about-software-security"></a></h2>
 <hr class="half-width"><p>AI coding tools introduce new security risks, and developers should
 understand these and apply the same security mindset used for any other
@@ -716,8 +755,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/01-intro.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/01-intro.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-16",
-  "datePublished": "2026-06-16"
+  "dateModified": "2026-06-17",
+  "datePublished": "2026-06-17"
 }
 
   </script><script>
