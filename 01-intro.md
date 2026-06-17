@@ -95,7 +95,7 @@ As a result, in the absence of more specialised practices, we must continue to r
 While many tools are moving towards higher levels of autonomy, most industrial organisations today operate between conversational assistance and task-agent workflows.
 
 
-### Inline / Autocomplete Assistance
+### 1. Inline / Autocomplete Assistance
 
 At the most basic level, AI tools operate as advanced code completion systems.
 As a developer writes code, the tool predicts and suggests the next line, block, or function based on the surrounding context.
@@ -104,7 +104,7 @@ In this case, the developer remains fully in control and evaluates each suggesti
 This is particularly useful in small-scale situations when writing boilerplate code, completing repetitive patterns, generating simple functions,
 and producing documentation comments.
 
-### Conversational Assistance
+### 2. Conversational Assistance
 
 Conversational AI tools allow developers to interact with an AI through natural language.
 Instead of waiting for suggestions, developers ask questions, request explanations, generate code, or seek debugging assistance.
@@ -114,7 +114,7 @@ Examples of this include the chat capabilities provided either via the web or fr
 
 These are useful when a conversational approach to assistance is required, in particular explaining unfamiliar code, debugging code, generating larger boilerplate components, learning new frameworks, and refactoring code.
 
-### Agentic Coding
+### 3. Agentic Coding
 
 Task agents go beyond answering questions and can perform semi-autonomous development activities.
 The developer provides a goal and scope for the task, and the AI coding assistant plans and executes a sequence of actions to achieve it.
@@ -129,7 +129,7 @@ Here, a far greater level of autonomy is granted to the AI tool, and the develop
 These can be useful for implementing a small feature (given appropriate guidelines), writing or updating unit tests, writing draft documentation, or refactoring a component;
 indeed, any task within software development that is amenable to AI automation.
 
-### Role-based Agentic Workflow
+### 4. Role-based Agentic Workflow
 
 In this model, multiple specialised AI agents collaborate on a development task.
 Each agent may have a distinct role and communicate with other agents to solve larger problems.
@@ -145,7 +145,7 @@ although at the cost of greater complexity and coordination.
 Effective and mindful review at these stage gates is particularly critical,
 since this approach raises the risk of overly optimistic appraisal of automated stage outputs.
 
-### The "Dark Factory"
+### 5. The "Dark Factory"
 
 The highest level of AI-assisted development is sometimes referred to as the *Dark Factory*,
 borrowing terminology from fully automated manufacturing facilities that can operate without human workers.
@@ -169,23 +169,51 @@ and how established, long-standing best practices from software engineering shou
 But what does software engineering tell us?
 
 Whether we follow a formal development process or not,
-every software project moves through the activities of understanding what needs to be built (requirements),
-determining how it should be structured (design),
-and creating the solution (implementation).
-These activities exist in every project, regardless of the development methodology being used.
+in terms of development every software project moves through the activities of:
 
-Stage-gated approaches make these activities explicit by requiring requirements, design, and implementation to be considered separately and reviewed before moving forward.
+- **Requirements Analysis** - understanding what needs to be built
+- **Design** - determining from the requirements how it should be structured (as an archtecture), the separate components within that architecture, and other technical decisions
+- **Implementation** - doing the coding and other implementation activities to create the solution based on the design
+- **Testing** - verifying that the implementation is correct and behaves as expected
+- **Maintenance** - unless the output is a transitory one and will be discarded, further development necessary to ensure the software continues to function as required in the longer term
+
+![The Software Development Process and its stages](fig/software-dev-process.png){width=30%}
+
+<!--
+Source of the above image can be rendered in the Mermaid Live editor:
+
+https://mermaid.live/edit#pako:eNpVkk9vozAQxb_KyKdUolH4kwQ4VMqWPeQQqUo4VVwsM4C1YLPG1m6a5rt3gCRqkRDMm_d7Y1u-MKFLZCmrWv1PNNxYyLNCAT1ciFzaFlO47GBoNLUqWTuDYEf5-nBlOAgzuVqtajRQjoLsrdQKdAW2wRvpQSPrpqXXSlWD7HpK5coCttihsgOFzrHHRcGO-NdJMzeKQu0Ub8-DHAr2BM_P8HbM6PMC2YLmy1o9zWBG4CzcfHl2mnz7xb7r5zF8XNnNvyf_z8bMvcDnSTsjEF7pgDz45WRbws5YWXFhh0_ICcxxGDdCxBz2U5tTxhqOOO6UqMPiwKWyqLgSeKMORH1Tp7RCMY_VRpYstcahxzo0HR9LdhmpgtGpduRN6bfk5k_BCnUlpufqXevujhnt6oalFW8HqlxfcouZ5LXh3UPlzurTWYk7g6W02hzmezFdjzv5e-o8slGVaF61U5alYbKehrP0wv5TGW2Xkb9JQt9fB2EUbql7Zqm_TEhcBXGSbKPADzbrq8c-pvWulsk2jqMgWkVhHPubOLl-AUX11pY
+
+The mermaid source:
+
+flowchart TD
+    accTitle: {A short figure title}
+    accDescr: {A longer description of the figure, highlighting important elements}
+
+    R("Requirements\nAnalysis") -- PRD -> D(Design)
+    D("Design") -- TDS -> I(Implementation)
+    I("Implementation") -> |Source Code, Build Artifacts| T("Testing")
+    T("Testing") -> |Test Reports| M(Maintenance)
+    M("Maintenance")
+
+-->
+
+These activities exist in every development project, regardless of the methodology being used,
+and the scale to which they are done,
+even if they are undertaken solely as a thinking exercise (in the case of requirements analysis and design).
+
+Stage-gated approaches make these activities explicit by having requirements, design, and implementation to be considered separately and reviewed before moving forward.
 Although commonly associated with waterfall development, the same principles apply in Agile, Scrum, and other iterative approaches.
-Successful teams still need to understand requirements, consider design options, and review their work throughout development.
+Successful teams still need to understand requirements, consider design options, and review their work throughout development before proceeding further.
 
 Review is particularly important because defects may originate in requirements and design rather than in code,
 and indeed there [is evidence](https://dl.acm.org/doi/10.1145/256428.167069) that most errors are introduced during these stages.
 A misunderstanding identified early may take minutes to fix, whereas the same issue discovered after implementation or deployment can be costly and time-consuming to correct.
 This challenge is likely to be amplified by AI-assisted development, where incorrect assumptions can quickly result in large amounts of incorrect code.
 
-Software engineering tells us we should aim for a defined process with clear, reviewable outputs that supports discussion, feedback, and approval at each stage.
-Requirements can be reviewed with stakeholders, designs can be challenged and refined, and code can be examined through peer review.
-Without these artefacts and review points, development risks becoming a black box in which important decisions and assumptions are hidden from such review.
+Software engineering tells us we should aim for a defined process with reviewable outputs that support feedback and approval at each stage.
+For example; requirements can be reviewed with stakeholders, designs can be challenged and refined within the development team, and code can be examined through peer review with other developers.
+Without these artefacts and review points, development risks becoming a black box in which important decisions and assumptions are hidden from a proper level of consideration.
 
 
 ## What about Software Security?
@@ -215,8 +243,6 @@ In some cases, prompt injection attacks can be used to extract confidential data
 - **Slopsquatting** - this is where a bad actor exploits AI hallucinations.
 An AI tool may recommend a software package that does not actually exist,
 and attackers can then create a malicious package with that name, hoping developers or AI agents will install it automatically.
-
-
 
 ## References
 
