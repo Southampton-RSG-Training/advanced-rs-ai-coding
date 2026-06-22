@@ -62,10 +62,11 @@ so may not be installed on older installations.
    - It says `Install`, in which cae select that button to install it. It might take a minute - you can see a sliding blue line in the top left to indicate it's working. You'll be presented with a "Welcome" page for the extension which covers the main features. Select `Mark Done`.
 
 We also need to ensure we're logged into our GitHub account.
-You should see a GitHub-looking icon in the status bar at the bottom right of VSCode's window.
+You should see a GitHub-looking icon in the status bar at the bottom right of VSCode's window (the icon within the blue box):
 
-1. Select the `Signed out` button in the bottom right of the VSCode status bar, and `Sign in to use AI Features`.
-1. Select `Continue with GitHub`.
+![GitHub sign-in icon in the status bar](fig/vscode-github-sign-in.png){width=50%}
+
+1. Select the icon and select `Continue with GitHub`.
 1. You'll be redirected to a GitHub login web page to authorise Visual Studio Code for GitHub. Select the GitHub account you wish to use and select `Continue`.
 1. Peruse and select `Authorize Visual-Studio-Code`.
 1. You may need to further authenticate with GitHub authorise this action.
@@ -133,7 +134,32 @@ it becomes much easier for someone else (which could be a future version of ours
 
 :::::::::::::::::::::::::::::::::::::::::
 
-Make sure you're in the root directory of the repository, then type
+To create a virtual environment we'll use the terminal (or shell).
+You can open one within VSCode by selecting `Terminal` from the VSCode menu and `New Terminal`,
+where you be presented with see a Bash prompt,
+which looks something like:
+
+::::::::::::::::::::::::::::::::: callout
+
+## On Windows, I only see PowerShell?
+
+If you open a terminal on Windows but see a PowerShell prompt instead (which looks like `PS>`),
+you'll need to change the default terminal type to Git Bash.
+
+1. Select `File` from the VSCode menu, then `Preferences` and then `Settings`.
+1. Type `terminal.integrated.defaultProfile.windows` in the search bar.
+1. In the setting that appears, select `Git Bash` from the dropdown.
+1. Open a new terminal by selecting `Terminal` from the VSCode menu, then `New Terminal`.
+
+If you are presented with a Git Bash terminal that looks something like the following, you're ready:
+
+```bash
+user@hostname MINGW64 ~
+```
+
+:::::::::::::::::::::::::::::::::::::::::
+
+Make sure you're in the root directory of the repository, then type:
 
 ```bash
 python3 -m venv venv
@@ -207,53 +233,48 @@ without instructions Copilot may suggest to:
 
 ### Create an Instructions File
 
-FIXME: change to manual creation, since there's no code anyway.
-FIXME: use example in https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7 as basis.
-FIXME: focus on goals for the app (high-level scenario description), data safety (i.e. don't change anything in data/), technology stack, dev guidelines, coding style standards (e.g. PEP8, comments and docs (commenting strategy, include a README in the repository)
-FIXME:   include never hardcode security and secrets
-FIXME: keep sections very short. write a section or two, get them to write another
+Let's create our instructions file now.
 
-### Specifying Privacy per File Type
+For Copilot, the convention is to store various configuration, skills and agents files within the `.github` directory,
+so let's create that now.
+Within a terminal, ensure you're at the root of the repository, and then:
 
-In VS Code, GitHub Copilot gives developers some mechanisms to control the level of privacy.
-This should be considered important where our code uses sensitive or otherwise confidential data,
-or potentially valuable IP-related code, such as algorithms.
+```bash
+mkdir .github
+```
 
-At a high level, Copilot works by sending small, relevant snippets of your open code (plus surrounding context) to the Copilot service to generate suggestions.
-You don’t explicitly "upload a project", but you do control which files Copilot is allowed to see and draw context from.
+Next, use VSCode to create a `copilot-instructions.md` file within that directory, and add the following:
 
-The most practical control is scoping Copilot by file, folder, or workspace.
-In VS Code you can disable Copilot entirely, or selectively turn it off for particular file types (for example, configuration files, data files, or notebooks).
+```markdown
+# Copilot Instructions for ai-tools-example
 
-For example, we edit our VSCode settings to ignore csv files by:
+## Python Code Style
+- Follow **PEP8** for all Python code
+- Use 4-space indentation
+- Keep lines to a maximum of 79 characters
+- Use descriptive variable and function names
+- Add docstrings to functions and modules
 
-1. Using `Ctrl + Shift + P` or `Cmd/Windows Key + Shift + P` to open the Command Palette
-1. Entering and selecting `Preferences: Open User Settings (JSON)`
-1. In the `settings.json` file that appears, add the following and save the file:
+## Data Integrity
+- Do NOT modify files in the `data/` directory
+- The `data/` directory contains CSV files that are input data only
+- Data files should only be read, never written to or deleted
+- Create output files within an `output/` directory
 
-   ```yaml
-      "github.copilot.enable": {
-         "*": true,
-         "csv": false
-      }
-   ```
+## General Guidelines
+- Write clear, maintainable code
+- Test changes before committing
+- Keep the workspace organized and clean
+```
 
-This will have the effect of potentially including all file types in context by default,
-but not CSV files.
-
-::::::::::::::::::::::::::::::::::::::::: instructor
-
-## Checkpoint: I've disabled the inclusion of csv files
-
-::::::::::::::::::::::::::::::::::::::::: 
-
-If you wanted a stricter "default deny" approach instead, you could specify `false` for `*` and enable each filetype explicitly.
-
-There are stricter controls, including some that allow exclusion by directory specifications,
-but these are currently limited to Copilot Business users for their repositories and organisations.
+Now this is only a generic draft.
+As any project develops, the established conventions and rules may need to change or be expanded upon.
+When that happens, we come back and revise this file.
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- FIXME
+- Ensure GitHub Copilot extension is installed and you're logged into your GitHub account.
+- Create a Python virtual environment and install required packages (NumPy and Matplotlib).
+- Instructions files help standardize code style, enforce data integrity, and improve Copilot's suggestions across a whole project.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

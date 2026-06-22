@@ -7,7 +7,10 @@ exercises: 0
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How can an agentic approach assist with software development phases other than implementation?
-- FIXME
+- How do I create and configure custom agents for my development workflow?
+- What is the difference between a skill and an agent?
+- How can I structure a multi-stage development process using agents?
+- How do I ensure quality and correctness throughout an agent-driven development workflow?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -26,7 +29,6 @@ However, there are some limitations with the approach we have so far with using 
 - We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process. What if we want to change this approach?
 - The planning agent uses a single planning step where important project needs (requirements) and design considerations may be missed. However, established software development practice separates requirements and design as separate phases.
 
-FIXME: add more downsides
 
 ## Setting Up
 
@@ -52,6 +54,20 @@ This would give us:
 - Define guardrails and explicit allowable actions: e.g. read-only
 
 Generally, this approach is much quicker than setting up all this context every time for every kind of task - if you have a set way you tend to do something, define an agent to do it.
+
+::::::::::::::::::::::::::::::::: callout
+
+## How do Agents Differ from Skills?
+
+A defines **how** a specific task should be performed.
+It provides instructions, context, knowledge, resources, or procedures that an AI can apply when carrying out a particular activity.
+Skills are typically task-specific.
+
+However, an agent defines **what** should be achieved.
+It is an autonomous or semi-autonomous AI entity that can conduct its own reasoning about objectives,
+make decisions, plan work, and invoke one or more skills to accomplish a goal.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 However, we've seen that different stages of a development process require different mindsets and approaches.
 By creating a single agent that attempts to do everything,
@@ -204,7 +220,7 @@ FIXME: add "This extension helps us find contradictions in agent logic, persona,
 
 ### A Better Requirements Agent
 
-Let's take a look at [a version of this agent](../learners/files/agents/requirements-gatherer.agent.md) that takes these limitations into account.
+Let's take a look at [a version of this agent](files/agents/requirements-gatherer.agent.md.txt) that takes these limitations into account.
 
 The revised YAML front matter looks like:
 
@@ -234,7 +250,7 @@ Create a command line tool written in Python that reads in a single CSV data fil
 ```
 
 You should find a `requirements.md` file in the `project-docs` directory, hopefully with the sections we requested,
-[similar to this one](../learners/files/example-agent-output/requirements.md).
+[similar to this one](files/example-agent-output/requirements.md.txt).
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -325,7 +341,7 @@ and enter the following:
 Produce design
 ```
 
-FIXME: add example tech spec to learner files
+FIXME: add example tech spec to files
 
 You should find a `technical_spec.md` file in the `project-docs` directory, hopefully with the sections we requested,
 [similar to this one](../learners/files/example-agent-output/technical_spec.md).
@@ -409,7 +425,7 @@ ensure the `GPT-5.4 mini` model is selected,
 and enter the following:
 
 ```
-Produce implemmentation
+Produce implementation
 ```
 
 You should now find an initial implementation has appeared within your repository.
@@ -434,18 +450,46 @@ noting what it did well and what it could have done better.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: update the agent to have all the perms necessary to execute scripts and set environments
-FIXME: when executing agent, list steps it typically goes through, e.g. setup venv
-
 
 ## Summary
 
-FIXME: how to take this approach further? split technical specification into design/implementation tasks? maintenance? specialise further for agile development? i.e. whatever you want. but be sure it holds to the principles of gated reviews, simplicity, and reducing ambiguity.
-FIXME: existing tools - e.g. https://github.com/github/spec-kit
+In this episode, we've explored a process-based approach to software development using custom agents rather than relying on a single planning tool.
+By separating requirements, design, and implementation into distinct phases with dedicated agents,
+we've established a workflow that maintains clarity and enables careful review at each stage,
+whilst enabling specifications to themselves become **executable**.
+
+This approach is highly adaptable and can be extended in many ways to suit your specific needs:
+
+- **Specialization for Your Domain** - the agents we've created are really just a place to begin.
+You can tailor them to your research or project domain by refining their instructions and defining the exact output format your team needs.
+
+- **Further Process Decomposition** - you can split the technical specification phase into separate design and implementation stages with their own separate agents,
+or add additional phases such as testing or security review.
+Each stage should produce a reviewable artifact before moving to the next.
+
+- **Maintenance and Evolution** - create agents to assist with ongoing maintenance tasks such as bug triage, dependency updates, high-level code review (which is very useful), or documentation updates.
+These can follow the same patterns as your development agents.
+
+- **Agile Workflows** - adapt this approach for agile development by creating agents for sprint planning,
+creating user story refinement agents, or defining agents for specific agile ceremonies that generate artifacts for team review.
+
+If you wish to explore this approach further, the [GitHub Spec Kit](https://github.com/github/spec-kit) provides a comprehensive take on this approach,
+bundling a host of AI-assisted software development definitions and tools to support spec-driven development.
+
+Whatever direction you take, maintain three core principles that make this approach effective:
+
+- Every agent and its output should be reviewed and approved before proceeding to the next stage
+- Keep each agent focused on a single responsibility to minimize ambiguity and context size
+- Be explicit in constraints, approach, and how you want the output to guide consistent and predictable behavior
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- FIXME
+- Create separate agents for distinct development phases to maintain clarity and enable careful review.
+- Custom agents provide more control and flexibility than built-in planning tools.
+- Use YAML front matter to specify agent metadata, tools, and permissions following the principle of least privilege.
+- Each agent output should be reviewed and refined before proceeding to the next phase.
+- Specification-driven development reduces ambiguity and keeps developers in control of the process.
+- Extend this approach by tailoring agents to your domain, adding new phases, or creating agents for maintenance and agile workflows.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

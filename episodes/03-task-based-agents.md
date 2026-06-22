@@ -21,7 +21,15 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: intro
+In this episode, we'll move beyond simple code generation to adopt a more structured, task-based approach to software development.
+Rather than asking Copilot to build our entire application at once, we'll plan our work in detail,
+then break development into discrete tasks using reusable skills.
+This keeps you (not the AI tool) at the center of decision-making, with Copilot serving as an assistant.
+
+We'll learn to use the planning agent to decompose requirements into steps,
+create custom skills for common development tasks, and write tests to verify our work.
+Throughout, we'll emphasize the importance of reviewing and refining AI-generated content before committing it to our codebase.
+
 
 ## Using the Built-in Plan Agent
 
@@ -100,9 +108,6 @@ which forces us to consider ways forward and make decisions and capture these wi
 - It has created a concrete document we can discuss and refine with colleagues before we proceed.
 - It also provides a "checkpoint": if the implementation is unsatisfactory we can remove the implementation, amend the plan, and ask Copilot to create the implementation again.
 
-FIXME: expand on the benefits of externalising the agentic reasoning a bit
-
-
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Solo Exercise: Review!
@@ -160,15 +165,11 @@ Add your thoughts to the shared document.
 
 ## Using Skills for On-demand Coding Tasks
 
-FIXME: change these to skills and use them within the implementer agent in the next episode?
-FIXME: workflow then becomes: develop/use skills, build agents that use skills, plus diagram for that
-
 With the aid of Copilot's planning agent we've created an initial plan, reviewed and refined it, and had Copilot create an initial implementation for us based on the plan.
 However, there are other tasks typically conducted during development,
 and Copilot (and other similar generative AI tools and infrastructure such as Claude) allows us to encapsulate these tasks by creating our own custom *skills*.
+An AI skill is a packaged set of knowledge, instructions, and behaviours that extends an AI assistant's ability to perform a defined task.
 By defining common development tasks as skills, when it comes to implementation, we can call on these skills to lighten the load.
-
-FIXME: diagram showing developer agency vs autonomy: focus is on a person at the center driving development, reviewing suggestions and making decisions. AI is just another tool
 
 Let's create some skills using this approach to help us with some development tasks.
 
@@ -213,7 +214,7 @@ def concat(arg1, arg2):
 ```
 
 In VSCode, agents are typically defined in a file with a `.agent.md` suffix.
-Create a new `add-docstrings.agent.md` file in the `.github/agents` directory, and add the following contents:
+Create a new `add-docstrings.agent.md` file in the `.github/skills` directory, and add the [following contents](files/skills/add-docstrings/SKILL.md.txt):
 
 ~~~markdown
 ---
@@ -242,7 +243,8 @@ This skill adds docstrings to Python source code files.
 
 We're being careful to define constraints on the behaviour here in addition to defining the approach to take as a sequence of simple, explicit steps.
 
-Once you've saved the file, run the skill by entering `/add-docstrings` into the VSCode chat.
+Once you've saved the file, run the skill by ensuring you have `Agent` mode enabled,
+and entering `/add-docstrings` into the VSCode chat.
 You should see reST docstrings added to your code.
 
 :::::::::::::::::::::::::::::::::::::: challenge
@@ -293,8 +295,7 @@ This skill automatically fixes code issues identified by pylint.
 
 ## Constraints
 
-- ONLY make modifications based on output from pylint
-- ONLY make modifications to files in the `src/` directory
+- ONLY make modifications based on output from pylint.
 
 ## Approach
 
@@ -310,7 +311,11 @@ This skill automatically fixes code issues identified by pylint.
 
 ```bash
 python -m pylint src/
+```
 ~~~
+
+In the `Commands to Use` section, you may need to change the location of where your source code is located.
+e.g. if it's in the root directory, specify `.` instead.
 
 ### Improving our Skill
 
@@ -365,13 +370,14 @@ This appears to be a bug, and restarting VSCode should fix this.
 
 :::::::::::::::::::::::::: solution
 
-You can find an example improved `SKILL.md` [here](../learners/files/skills/pylint-fix/SKILL.md).
+You can find an example improved `SKILL.md` [here](files/skills/pylint-fix/SKILL.md.txt).
 
 :::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Run the skill by entering `/pylint-fix` in the VSCode chat window.
+Run the skill by ensuring you have `Agent` mode selected,
+and entering `/pylint-fix` in the VSCode chat window.
 Once complete, you should see that the skill has corrected a number of issues and added docstrings to our codebase.
 
 
@@ -454,7 +460,7 @@ Delete the `tests` directory along with its contents.
 15 mins.
 
 Based on what we've learned from writing our pylint skill,
-write a skill for automatically Pytest unit tests.
+write a skill for automatically drafting Pytest unit tests.
 Ensure it has the following sections:
 
 - Constraints
@@ -464,7 +470,7 @@ Ensure it has the following sections:
 Once finished, use the Chat Customisations Evaluations tool as before to review the skill and suggest improvements,
 and refine the skill until you are happy with it.
 
-Finally, use the skill to create some unit tests, e.g. enter `add-tests` into the chat window.
+Finally, use the skill to create some unit tests, e.g. select `Agent` mode and enter `/add-tests` into the chat window.
 
 :::::::::::::::::::::::::: solution
 
@@ -683,7 +689,7 @@ Ensure it has the following sections:
 Once finished, use the Chat Customisations Evaluations tool as before to review the skill and suggest improvements,
 and refine the skill until you are happy with it.
 
-Finally, use the skill to create the documentation, e.g. enter `build-mkdocs` into the chat window.
+Finally, use the skill to create the documentation, e.g. select `Agent` mode and enter `/build-mkdocs` into the chat window.
 
 :::::::::::::::::::::::::: solution
 
@@ -835,14 +841,22 @@ and add your thoughts to the shared document on the following questions:
 
 ## Summary
 
-So far we've created AI-based tools for common development tasks,
-as well as explored the limitations and risks of using AI for such activities.
+In this episode, we've explored a task-based approach to software development using Copilot's planning and skill capabilities.
+We began by using the built-in planning agent to break down a complex feature into manageable steps before implementation,
+then demonstrated how to create reusable skills for common development tasks such as adding docstrings,
+fixing code style issues with linting, writing unit tests, and generating documentation.
 
-FIXME: finish summary, essentially - can be helpful for creating scaffolding and setting up the use of a new technology, and for writing preliminary content.
-
+Throughout, we've emphasized that AI tools are most effective as assistants rather than replacements for developer judgment.
+They excel at creating scaffolding, setting up boilerplate code for new technologies, and generating preliminary content that can be reviewed and refined.
+However, they should always be reviewed carefully, and for some tasks, dedicated specialized tools may be more efficient and reliable than AI-based approaches.
+The key is understanding when to use AI as a helpful tool and when to reach for more established alternatives.
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- FIXME
+- Use the planning agent to create structured plans before implementation.
+- Create custom skills to encapsulate common development tasks.
+- Always review AI-generated code, tests, and documentation carefully.
+- Consider whether dedicated tools might be more appropriate than AI for certain tasks.
+- AI is most valuable for scaffolding, boilerplate generation, and preliminary content. The real value is what you add yourself and how you refine it.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
