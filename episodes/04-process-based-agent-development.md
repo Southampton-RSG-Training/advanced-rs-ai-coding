@@ -41,7 +41,6 @@ git clone https://github.com/Southampton-RSG-Training/advanced-ai-coding-example
 cd advanced-ai-agents-example
 ```
 
-
 ## A Process-oriented Approach using Agents
 
 One way to overcome these limitations would be to define and use a custom agent that follows a behaviour that we define ourselves.
@@ -120,9 +119,22 @@ In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the mode
 ```
 
 Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
-You should find the created agents file in the `.github/agents` directory.
 
-This generally produces a reasonable definition,
+You'll find a new file, typically ending `.agent.md`, has been created.
+This may be located in the `.github/agents` directory or - oddly - in the repository root.
+However, for it to be seen and be usable from the chat,
+it needs to be in this location so Copilot can find it.
+
+If it's not already in this directory, create the directory and move the file over, e.g.
+
+```bash
+mkdir .github/agents
+mv requirements-gatherer.agent.md .github/agents
+```
+
+Finally, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`,
+
+This generation process generally produces a reasonable definition,
 although given the probablistic nature of LLMs, yours will differ:
 
 ```markdown
@@ -153,8 +165,6 @@ Return a markdown requirements document with these sections:
 - User Stories
 - Success Metrics
 ```
-
-First, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`.
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
 
@@ -306,6 +316,8 @@ FIXME: get them to copy over the skills for the implementer agent
 /create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
 ```
 
+Again, the agent file may need to be moved to `.github/agents`.
+
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## A Better Design Agent
@@ -387,12 +399,7 @@ It should include clear, reviewable outputs such as source code, automated tests
 /create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
 ```
 
-### Reusing our Skills
-
-An incredibly neat feature of agents is that they are able to make use of skills.
-Let's modify our generated agent file to make use of these.
-
-FIXME: add in how to amend agent file to use skills where suitable
+As before, the agent file may need to be moved to `.github/agents`.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
