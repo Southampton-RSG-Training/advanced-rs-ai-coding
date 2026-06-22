@@ -209,8 +209,12 @@ Lastly, we have our set of subsections that describe the points of behaviour we 
 
 ## Limitations?
 
+3 mins.
+
 This isn't a bad start.
 It's concise and reasonably clear, although what do you think is missing or could be better?
+
+Add your thoughts to the shared document.
 
 :::::::::::::::::::::::::: solution
 
@@ -221,10 +225,10 @@ It's concise and reasonably clear, although what do you think is missing or coul
 - We should consider more strict permissions for the agent if possible
 - It might be useful to specify the specific AI model to use for this agent, if we can
 
-:::::::::::::::::::::::::::::::::::
+Ideally, we should also use the Chat Customisations Evaluations extension to check our agent file and amend as needed,
+since it's also designed to review agent definitions.
 
-FIXME: use chat customisations evaluations extension to check agent file, amend exercise above as needed
-FIXME: add "This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities."
+:::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -308,10 +312,6 @@ A good design specification provides a clear, reviewable blueprint that guides d
 
 With that in mind, let's ask Copilot to create an agent for this:
 
-FIXME: get them to copy over the skills for the implementer agent
-
-
-
 ```
 /create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
 ```
@@ -329,13 +329,13 @@ improve your design agent by doing the following:
 
 - Rename the produced agent file (probably created in `.github/agents`) to `architect.agent.md`.
 - Review the agent in general and refine it as you see fit.
-Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
+- Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
 - Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
 - Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory.
 
 :::::::::::::::::::::::::: solution
 
-FIXME: add example improved version of design agent
+An [example design agent](files/agents/architect.agent.md.txt).
 
 :::::::::::::::::::::::::::::::::::
 
@@ -353,10 +353,8 @@ and enter the following:
 Produce design
 ```
 
-FIXME: add example tech spec to files
-
 You should find a `technical_spec.md` file in the `project-docs` directory, hopefully with the sections we requested,
-[similar to this one](../learners/files/example-agent-output/technical_spec.md).
+[similar to this one](files/example-agent-output/technical_spec.md.txt).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -417,7 +415,7 @@ Aim to reduce ambiguities and ensure it follows a sensible approach that's in li
 
 :::::::::::::::::::::::::: solution
 
-FIXME: add example improved version of implementer agent
+An [example implementer agent](files/agents/implementer.agent.md.txt).
 
 :::::::::::::::::::::::::::::::::::
 
@@ -436,8 +434,6 @@ Produce implementation
 ```
 
 You should now find an initial implementation has appeared within your repository.
-
-FIXME: add example implementation to a separate example repo?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
