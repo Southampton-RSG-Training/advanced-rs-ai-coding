@@ -128,8 +128,9 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 <hr>
-<li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
 <li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+<li><a class="dropdown-item" href="reference.html">Reference</a></li>
+<li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
           </ul>
 </li>
       </ul>
@@ -308,8 +309,9 @@
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
                       <hr>
-<li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
 <li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+<li><a class="dropdown-item" href="reference.html">Reference</a></li>
+<li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
                     </ul>
 </div>
                 </div>
@@ -341,7 +343,7 @@
         
 <section id="aio-01-intro"><p>Content from <a href="01-intro.html">Introduction to Advanced Research Software AI Coding</a></p>
 <hr>
-<p>Last updated on 2026-06-17 |
+<p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -605,11 +607,12 @@ development every software project moves through the activities of:</p>
 <ul>
 <li>
 <strong>Requirements Analysis</strong> - understanding what needs to
-be built</li>
+be built (capturing within a Product Requirements Document, or PRD)</li>
 <li>
 <strong>Design</strong> - determining from the requirements how it
-should be structured (as an archtecture), the separate components within
-that architecture, and other technical decisions</li>
+should be structured (as an architecture), the separate components
+within that architecture, and other technical decisions (captured within
+a Technical Design Specification, or TDS)</li>
 <li>
 <strong>Implementation</strong> - doing the coding and other
 implementation activities to create the solution based on the
@@ -627,16 +630,16 @@ stages</div>
 </figure><!--
 Source of the above image can be rendered in the Mermaid Live editor:
 
-https://mermaid.live/edit#pako:eNpVkk9vozAQxb_KyKdUolH4kwQ4VMqWPeQQqUo4VVwsM4C1YLPG1m6a5rt3gCRqkRDMm_d7Y1u-MKFLZCmrWv1PNNxYyLNCAT1ciFzaFlO47GBoNLUqWTuDYEf5-nBlOAgzuVqtajRQjoLsrdQKdAW2wRvpQSPrpqXXSlWD7HpK5coCttihsgOFzrHHRcGO-NdJMzeKQu0Ub8-DHAr2BM_P8HbM6PMC2YLmy1o9zWBG4CzcfHl2mnz7xb7r5zF8XNnNvyf_z8bMvcDnSTsjEF7pgDz45WRbws5YWXFhh0_ICcxxGDdCxBz2U5tTxhqOOO6UqMPiwKWyqLgSeKMORH1Tp7RCMY_VRpYstcahxzo0HR9LdhmpgtGpduRN6bfk5k_BCnUlpufqXevujhnt6oalFW8HqlxfcouZ5LXh3UPlzurTWYk7g6W02hzmezFdjzv5e-o8slGVaF61U5alYbKehrP0wv5TGW2Xkb9JQt9fB2EUbql7Zqm_TEhcBXGSbKPADzbrq8c-pvWulsk2jqMgWkVhHPubOLl-AUX11pY
+https://mermaid.live/edit#pako:eNpVkk2PmzAQhv_KyKesxEaBkPBxWCldesghUrXhVHGxzADegk2NUZtm8987YBLtIiEx78zzYFu-MqFLZCmrWv1HNNxYyLNCAT1ciFzaFlO4HmBoNLUqWY8GwU7x7TGV4SDMPNVqVaOBcgpkb6VWoCuwDS6kB42sm5ZeK1UNsuvJypUFbLFDZQeSOu3bqmBv-HuUxjWKQh0Uby-DHAr2BM_P8EO_o7DweQgyLdbUe4FsRYuStXpytoxsLljgHEWjpOAtuBjOPS7ocXXserccPu1gURxJ8bXhVC_wcdajEQivdJAefBtlW8LBWFlxYYcPyAnMcZg2TISTfc2cZappN9OJEHVanbhUFhVXAhfqRNSndLYVinmsNrJkqTUjeqxD0_GpZNeJKhidfkezKX2W3PwqWKFuxPRc_dS6u2NGj3XD0oq3A1VjX3KLmeS14d0j5aPV54sSdwZLabU5ufszX6M7-X3uPNyoSjSvelSWpdu9P_-cpVf2l8owWof-Ptn6_i7Yhtto57ELS_11QuEmiJMkCgM_2O9uHvs3r3ezTqI4DoNw4-_jONhFu9t_oszlhA
 
-The mermaid source:
+The mermaid source (with arrows changed to use a single hypen -> so it can be included within a comment):
 
 flowchart TD
     accTitle: {A short figure title}
     accDescr: {A longer description of the figure, highlighting important elements}
 
-    R("Requirements\nAnalysis") -- PRD -> D(Design)
-    D("Design") -- TDS -> I(Implementation)
+    R("Requirements\nAnalysis") -- Project Requirements Doc. -> D(Design)
+    D("Design") -- Technical Design Spec. -> I(Implementation)
     I("Implementation") -> |Source Code, Build Artifacts| T("Testing")
     T("Testing") -> |Test Reports| M(Maintenance)
     M("Maintenance")
@@ -695,12 +698,6 @@ compromised through prompt injection or simply makes an incorrect
 assumption, it may perform destructive actions very quickly. Recent
 research has demonstrated that compromised coding agents can execute
 unauthorised commands, steal credentials, and exfiltrate data.</p></li>
-</ul>
-<p>Again, the most effective ways to mitigate these risks are well
-established software engineering practices: apply least privilege,
-review AI-generated outputs, verify dependencies, protect sensitive
-data, and ensure that high-risk actions are subject to human review.</p>
-<ul>
 <li><p><strong>Data Exposure</strong> - can occur when sensitive
 information is included in prompts or when AI tools access project
 files, credentials, source code, or proprietary information. In some
@@ -711,7 +708,12 @@ exploits AI hallucinations. An AI tool may recommend a software package
 that does not actually exist, and attackers can then create a malicious
 package with that name, hoping developers or AI agents will install it
 automatically.</p></li>
-</ul></section><section><h2 class="section-heading" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</ul>
+<p>Again, the most effective ways to mitigate these risks are well
+established software engineering practices: apply least privilege,
+review AI-generated outputs, verify dependencies, protect sensitive
+data, and ensure that high-risk actions are subject to human review.</p>
+</section><section><h2 class="section-heading" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <hr class="half-width">
 <ul>
@@ -761,7 +763,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-02-getting-started"><p>Content from <a href="02-getting-started.html">Getting Started</a></p>
 <hr>
-<p>Last updated on 2026-06-16 |
+<p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -864,11 +866,10 @@ the top left to indicate it’s working. You’ll be presented with a
 </ol>
 <p>We also need to ensure we’re logged into our GitHub account. You
 should see a GitHub-looking icon in the status bar at the bottom right
-of VSCode’s window.</p>
-<ol style="list-style-type: decimal">
-<li>Select the <code>Signed out</code> button in the bottom right of the
-VSCode status bar, and <code>Sign in to use AI Features</code>.</li>
-<li>Select <code>Continue with GitHub</code>.</li>
+of VSCode’s window (the icon within the blue box):</p>
+<figure><img src="../fig/vscode-github-sign-in.png" style="width:50.0%" alt="GitHub sign-in icon in the status bar" class="figure mx-auto d-block"><div class="figcaption">GitHub sign-in icon in the status bar</div>
+</figure><ol style="list-style-type: decimal">
+<li>Select the icon and select <code>Continue with GitHub</code>.</li>
 <li>You’ll be redirected to a GitHub login web page to authorise Visual
 Studio Code for GitHub. Select the GitHub account you wish to use and
 select <code>Continue</code>.</li>
@@ -922,7 +923,7 @@ to hold these packages.</p>
   Installing Python Packages
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Who has created and used a Python virtual environment before?</p>
 </div>
@@ -962,12 +963,47 @@ are similar tools for available for Ruby, Java and JavaScript.</li>
 </div>
 </div>
 </div>
-<p>Make sure you’re in the root directory of the repository, then
-type</p>
+<p>To create a virtual environment we’ll use the terminal (or shell).
+You can open one within VSCode by selecting <code>Terminal</code> from
+the VSCode menu and <code>New Terminal</code>, where you be presented
+with see a Bash prompt, which looks something like:</p>
+<div id="on-windows-i-only-see-powershell" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="on-windows-i-only-see-powershell" class="callout-inner">
+<h3 class="callout-title">On Windows, I only see PowerShell?</h3>
+<div class="callout-content">
+<p>If you open a terminal on Windows but see a PowerShell prompt instead
+(which looks like <code>PS&gt;</code>), you’ll need to change the
+default terminal type to Git Bash.</p>
+<ol style="list-style-type: decimal">
+<li>Select <code>File</code> from the VSCode menu, then
+<code>Preferences</code> and then <code>Settings</code>.</li>
+<li>Type <code>terminal.integrated.defaultProfile.windows</code> in the
+search bar.</li>
+<li>In the setting that appears, select <code>Git Bash</code> from the
+dropdown.</li>
+<li>Open a new terminal by selecting <code>Terminal</code> from the
+VSCode menu, then <code>New Terminal</code>.</li>
+</ol>
+<p>If you are presented with a Git Bash terminal that looks something
+like the following, you’re ready:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">user@hostname</span> MINGW64 ~</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Make sure you’re in the root directory of the repository, then
+type:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span></code></pre>
 </div>
 <p>Here, we’re using the built-on Python <code>venv</code> module -
 short for virtual environment - to create a virtual environment
@@ -977,12 +1013,12 @@ convention, as is creating it within the repository root directory. This
 makes sure the virtual environment is closely associated with this
 project, and not easily confused with another.</p>
 <p>Once created, we can <em>activate</em> it so it’s the one in use:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 <p>You should notice the prompt changes to reflect that the virtual
 environment is active, which is a handy reminder. For example:</p>
@@ -993,10 +1029,10 @@ environment is active, which is a handy reminder. For example:</p>
 </div>
 <p>Now we have our virtual environment, we can install NumPy and
 Matplotlib to it:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy matplotlib</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy matplotlib</span></code></pre>
 </div>
 <p>If we do <code>python -m pip list</code> now, we can see these
 packages, and their dependencies, installed within the virtual
@@ -1004,12 +1040,12 @@ environment we have activated.</p>
 <p>If we want to deactivate this environment, and return to the global
 Python package context, we can use <code>deactivate</code>. To
 reactivate it again, it’s the same as before:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a>
@@ -1053,75 +1089,44 @@ repository doesn’t use</li>
 <div class="section level3">
 <h3 id="create-an-instructions-file">Create an Instructions File<a class="anchor" aria-label="anchor" href="#create-an-instructions-file"></a>
 </h3>
-<p>FIXME: change to manual creation, since there’s no code anyway.
-FIXME: use example in <a href="https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7" class="external-link uri">https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7</a>
-as basis. FIXME: focus on goals for the app (high-level scenario
-description), data safety (i.e. don’t change anything in data/),
-technology stack, dev guidelines, coding style standards (e.g. PEP8,
-comments and docs (commenting strategy, include a README in the
-repository) FIXME: include never hardcode security and secrets FIXME:
-keep sections very short. write a section or two, get them to write
-another</p>
-</div>
-<div class="section level3">
-<h3 id="specifying-privacy-per-file-type">Specifying Privacy per File Type<a class="anchor" aria-label="anchor" href="#specifying-privacy-per-file-type"></a>
+<p>Let’s create our instructions file now.</p>
+<p>For Copilot, the convention is to store various configuration, skills
+and agents files within the <code>.github</code> directory, so let’s
+create that now. Within a terminal, ensure you’re at the root of the
+repository, and then:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<p>In VS Code, GitHub Copilot gives developers some mechanisms to
-control the level of privacy. This should be considered important where
-our code uses sensitive or otherwise confidential data, or potentially
-valuable IP-related code, such as algorithms.</p>
-<p>At a high level, Copilot works by sending small, relevant snippets of
-your open code (plus surrounding context) to the Copilot service to
-generate suggestions. You don’t explicitly “upload a project”, but you
-do control which files Copilot is allowed to see and draw context
-from.</p>
-<p>The most practical control is scoping Copilot by file, folder, or
-workspace. In VS Code you can disable Copilot entirely, or selectively
-turn it off for particular file types (for example, configuration files,
-data files, or notebooks).</p>
-<p>For example, we edit our VSCode settings to ignore csv files by:</p>
-<ol style="list-style-type: decimal">
-<li><p>Using <code>Ctrl + Shift + P</code> or
-<code>Cmd/Windows Key + Shift + P</code> to open the Command
-Palette</p></li>
-<li><p>Entering and selecting
-<code>Preferences: Open User Settings (JSON)</code></p></li>
-<li>
-<p>In the <code>settings.json</code> file that appears, add the
-following and save the file:</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">mkdir</span> .github</span></code></pre>
+</div>
+<p>Next, use VSCode to create a <code>copilot-instructions.md</code>
+file within that directory, and add the following:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="at">   </span><span class="fu">"github.copilot.enable"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="kw">,</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="at">      </span><span class="fu">"csv"</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a><span class="at">   </span><span class="kw">}</span></span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu"># Copilot Instructions for ai-tools-example</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a><span class="fu">## Python Code Style</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="ss">- </span>Follow **PEP8** for all Python code</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a><span class="ss">- </span>Use 4-space indentation</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a><span class="ss">- </span>Keep lines to a maximum of 79 characters</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1" aria-label="code-block-9-7"></a><span class="ss">- </span>Use descriptive variable and function names</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1" aria-label="code-block-9-8"></a><span class="ss">- </span>Add docstrings to functions and modules</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1" aria-label="code-block-9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1" aria-label="code-block-9-10"></a><span class="fu">## Data Integrity</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1" aria-label="code-block-9-11"></a><span class="ss">- </span>Do NOT modify files in the <span class="in">`data/`</span> directory</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1" aria-label="code-block-9-12"></a><span class="ss">- </span>The <span class="in">`data/`</span> directory contains CSV files that are input data only</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1" aria-label="code-block-9-13"></a><span class="ss">- </span>Data files should only be read, never written to or deleted</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1" aria-label="code-block-9-14"></a><span class="ss">- </span>Create output files within an <span class="in">`output/`</span> directory</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1" aria-label="code-block-9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1" aria-label="code-block-9-16"></a><span class="fu">## General Guidelines</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1" aria-label="code-block-9-17"></a><span class="ss">- </span>Write clear, maintainable code</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1" aria-label="code-block-9-18"></a><span class="ss">- </span>Test changes before committing</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1" aria-label="code-block-9-19"></a><span class="ss">- </span>Keep the workspace organized and clean</span></code></pre>
 </div>
-</li>
-</ol>
-<p>This will have the effect of potentially including all file types in
-context by default, but not CSV files.</p>
-<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
-  <h3 class="accordion-header" id="headingInstructor2">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Checkpoint: I’ve disabled the inclusion of csv files
-  </h3>
-</button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
-<div class="accordion-body">
-
-</div>
-</div>
-</div>
-</div>
-<p>If you wanted a stricter “default deny” approach instead, you could
-specify <code>false</code> for <code>*</code> and enable each filetype
-explicitly.</p>
-<p>There are stricter controls, including some that allow exclusion by
-directory specifications, but these are currently limited to Copilot
-Business users for their repositories and organisations.</p>
+<p>Now this is only a generic draft. As any project develops, the
+established conventions and rules may need to change or be expanded
+upon. When that happens, we come back and revise this file.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1130,7 +1135,13 @@ Business users for their repositories and organisations.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>FIXME</li>
+<li>Ensure GitHub Copilot extension is installed and you’re logged into
+your GitHub account.</li>
+<li>Create a Python virtual environment and install required packages
+(NumPy and Matplotlib).</li>
+<li>Instructions files help standardize code style, enforce data
+integrity, and improve Copilot’s suggestions across a whole
+project.</li>
 </ul>
 </div>
 </div>
@@ -1142,7 +1153,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03-task-based-agents"><p>Content from <a href="03-task-based-agents.html">Planning and Task-based Approach to Software Development</a></p>
 <hr>
-<p>Last updated on 2026-06-16 |
+<p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -1182,7 +1193,17 @@ framework</li>
 </div>
 </div>
 </div>
-<p>FIXME: intro</p>
+<p>In this episode, we’ll move beyond simple code generation to adopt a
+more structured, task-based approach to software development. Rather
+than asking Copilot to build our entire application at once, we’ll plan
+our work in detail, then break development into discrete tasks using
+reusable skills. This keeps you (not the AI tool) at the center of
+decision-making, with Copilot serving as an assistant.</p>
+<p>We’ll learn to use the planning agent to decompose requirements into
+steps, create custom skills for common development tasks, and write
+tests to verify our work. Throughout, we’ll emphasize the importance of
+reviewing and refining AI-generated content before committing it to our
+codebase.</p>
 <section><h2 class="section-heading" id="using-the-built-in-plan-agent">Using the Built-in Plan Agent<a class="anchor" aria-label="anchor" href="#using-the-built-in-plan-agent"></a>
 </h2>
 <hr class="half-width">
@@ -1281,8 +1302,6 @@ colleagues before we proceed.</li>
 unsatisfactory we can remove the implementation, amend the plan, and ask
 Copilot to create the implementation again.</li>
 </ul>
-<p>FIXME: expand on the benefits of externalising the agentic reasoning
-a bit</p>
 <div id="solo-exercise-review" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -1354,20 +1373,16 @@ For example (your command many differ):</p>
 </section><section><h2 class="section-heading" id="using-skills-for-on-demand-coding-tasks">Using Skills for On-demand Coding Tasks<a class="anchor" aria-label="anchor" href="#using-skills-for-on-demand-coding-tasks"></a>
 </h2>
 <hr class="half-width">
-<p>FIXME: change these to skills and use them within the implementer
-agent in the next episode? FIXME: workflow then becomes: develop/use
-skills, build agents that use skills, plus diagram for that</p>
 <p>With the aid of Copilot’s planning agent we’ve created an initial
 plan, reviewed and refined it, and had Copilot create an initial
 implementation for us based on the plan. However, there are other tasks
 typically conducted during development, and Copilot (and other similar
 generative AI tools and infrastructure such as Claude) allows us to
-encapsulate these tasks by creating our own custom <em>skills</em>. By
+encapsulate these tasks by creating our own custom <em>skills</em>. An
+AI skill is a packaged set of knowledge, instructions, and behaviours
+that extends an AI assistant’s ability to perform a defined task. By
 defining common development tasks as skills, when it comes to
 implementation, we can call on these skills to lighten the load.</p>
-<p>FIXME: diagram showing developer agency vs autonomy: focus is on a
-person at the center driving development, reviewing suggestions and
-making decisions. AI is just another tool</p>
 <p>Let’s create some skills using this approach to help us with some
 development tasks.</p>
 <p>First, from within our coding directory, create a new directory
@@ -1423,8 +1438,8 @@ e.g.:</p>
 <p>In VSCode, agents are typically defined in a file with a
 <code>.agent.md</code> suffix. Create a new
 <code>add-docstrings.agent.md</code> file in the
-<code>.github/agents</code> directory, and add the following
-contents:</p>
+<code>.github/skills</code> directory, and add the <a href="../files/skills/add-docstrings/SKILL.md.txt">following
+contents</a>:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1454,7 +1469,8 @@ contents:</p>
 <p>We’re being careful to define constraints on the behaviour here in
 addition to defining the approach to take as a sequence of simple,
 explicit steps.</p>
-<p>Once you’ve saved the file, run the skill by entering
+<p>Once you’ve saved the file, run the skill by ensuring you have
+<code>Agent</code> mode enabled, and entering
 <code>/add-docstrings</code> into the VSCode chat. You should see reST
 docstrings added to your code.</p>
 <div id="solo-exercise-review-1" class="callout discussion">
@@ -1518,24 +1534,27 @@ directory:</p>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1" aria-label="code-block-8-10"></a></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1" aria-label="code-block-8-11"></a><span class="fu">## Constraints</span></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1" aria-label="code-block-8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1" aria-label="code-block-8-13"></a><span class="ss">- </span>ONLY make modifications based on output from pylint</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1" aria-label="code-block-8-14"></a><span class="ss">- </span>ONLY make modifications to files in the <span class="in">`src/`</span> directory</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1" aria-label="code-block-8-15"></a></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1" aria-label="code-block-8-16"></a><span class="fu">## Approach</span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1" aria-label="code-block-8-17"></a></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1" aria-label="code-block-8-18"></a><span class="ss">1. </span>Run pylint and capture the output from running the command.</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1" aria-label="code-block-8-19"></a><span class="ss">2. </span>Analyse pylint output to identify warnings.</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1" aria-label="code-block-8-20"></a><span class="ss">3. </span>Apply fixes only with 100% confidence.</span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1" aria-label="code-block-8-21"></a><span class="ss">4. </span>Re-run pylint to verify fixes.</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1" aria-label="code-block-8-22"></a><span class="ss">5. </span>Provide a summary of what was fixed.</span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1" aria-label="code-block-8-23"></a></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1" aria-label="code-block-8-24"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1" aria-label="code-block-8-25"></a></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1" aria-label="code-block-8-26"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pylint</span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1" aria-label="code-block-8-27"></a></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1" aria-label="code-block-8-28"></a><span class="in">```bash</span></span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1" aria-label="code-block-8-29"></a><span class="ex">python</span> <span class="at">-m</span> pylint src/</span></code></pre>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1" aria-label="code-block-8-13"></a><span class="ss">- </span>ONLY make modifications based on output from pylint.</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1" aria-label="code-block-8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1" aria-label="code-block-8-15"></a><span class="fu">## Approach</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1" aria-label="code-block-8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1" aria-label="code-block-8-17"></a><span class="ss">1. </span>Run pylint and capture the output from running the command.</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1" aria-label="code-block-8-18"></a><span class="ss">2. </span>Analyse pylint output to identify warnings.</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1" aria-label="code-block-8-19"></a><span class="ss">3. </span>Apply fixes only with 100% confidence.</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1" aria-label="code-block-8-20"></a><span class="ss">4. </span>Re-run pylint to verify fixes.</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1" aria-label="code-block-8-21"></a><span class="ss">5. </span>Provide a summary of what was fixed.</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1" aria-label="code-block-8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1" aria-label="code-block-8-23"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1" aria-label="code-block-8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1" aria-label="code-block-8-25"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pylint</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1" aria-label="code-block-8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1" aria-label="code-block-8-27"></a><span class="in">```bash</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1" aria-label="code-block-8-28"></a><span class="ex">python</span> <span class="at">-m</span> pylint src/</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1" aria-label="code-block-8-29"></a><span class="in">```</span></span></code></pre>
 </div>
+<p>In the <code>Commands to Use</code> section, you may need to change
+the location of where your source code is located. e.g. if it’s in the
+root directory, specify <code>.</code> instead.</p>
 <div class="section level3">
 <h3 id="improving-our-skill">Improving our Skill<a class="anchor" aria-label="anchor" href="#improving-our-skill"></a>
 </h3>
@@ -1608,16 +1627,17 @@ a bug, and restarting VSCode should fix this.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>You can find an example improved <code>SKILL.md</code> <a href="../files/skills/pylint-fix/SKILL.html">here</a>.</p>
+<p>You can find an example improved <code>SKILL.md</code> <a href="../files/skills/pylint-fix/SKILL.md.txt">here</a>.</p>
 </div>
 </div>
 </div>
 </div>
-<p>Run the skill by entering <code>/pylint-fix</code> in the VSCode chat
-window. Once complete, you should see that the skill has corrected a
-number of issues and added docstrings to our codebase.</p>
+<p>Run the skill by ensuring you have <code>Agent</code> mode selected,
+and entering <code>/pylint-fix</code> in the VSCode chat window. Once
+complete, you should see that the skill has corrected a number of issues
+and added docstrings to our codebase.</p>
 <div id="when-you-have-a-hammer" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1711,8 +1731,8 @@ Unit Test Writer Skill</h3>
 <div class="callout-content">
 <p>15 mins.</p>
 <p>Based on what we’ve learned from writing our pylint skill, write a
-skill for automatically Pytest unit tests. Ensure it has the following
-sections:</p>
+skill for automatically drafting Pytest unit tests. Ensure it has the
+following sections:</p>
 <ul>
 <li>Constraints</li>
 <li>Approach: list the steps the skill needs to take to generate the
@@ -1722,8 +1742,9 @@ unit tests</li>
 <p>Once finished, use the Chat Customisations Evaluations tool as before
 to review the skill and suggest improvements, and refine the skill until
 you are happy with it.</p>
-<p>Finally, use the skill to create some unit tests, e.g. enter
-<code>add-tests</code> into the chat window.</p>
+<p>Finally, use the skill to create some unit tests, e.g. select
+<code>Agent</code> mode and enter <code>/add-tests</code> into the chat
+window.</p>
 </div>
 </div>
 </div>
@@ -1732,7 +1753,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>An initial try:</p>
 <div class="codewrapper sourceCode" id="cb13">
@@ -1997,8 +2018,9 @@ prerequisites, and how to run the software</li>
 <p>Once finished, use the Chat Customisations Evaluations tool as before
 to review the skill and suggest improvements, and refine the skill until
 you are happy with it.</p>
-<p>Finally, use the skill to create the documentation, e.g. enter
-<code>build-mkdocs</code> into the chat window.</p>
+<p>Finally, use the skill to create the documentation, e.g. select
+<code>Agent</code> mode and enter <code>/build-mkdocs</code> into the
+chat window.</p>
 </div>
 </div>
 </div>
@@ -2007,7 +2029,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here’s one solution:</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -2163,12 +2185,22 @@ up, and how to run the code and the tests?</li>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
-<p>So far we’ve created AI-based tools for common development tasks, as
-well as explored the limitations and risks of using AI for such
-activities.</p>
-<p>FIXME: finish summary, essentially - can be helpful for creating
-scaffolding and setting up the use of a new technology, and for writing
-preliminary content.</p>
+<p>In this episode, we’ve explored a task-based approach to software
+development using Copilot’s planning and skill capabilities. We began by
+using the built-in planning agent to break down a complex feature into
+manageable steps before implementation, then demonstrated how to create
+reusable skills for common development tasks such as adding docstrings,
+fixing code style issues with linting, writing unit tests, and
+generating documentation.</p>
+<p>Throughout, we’ve emphasized that AI tools are most effective as
+assistants rather than replacements for developer judgment. They excel
+at creating scaffolding, setting up boilerplate code for new
+technologies, and generating preliminary content that can be reviewed
+and refined. However, they should always be reviewed carefully, and for
+some tasks, dedicated specialized tools may be more efficient and
+reliable than AI-based approaches. The key is understanding when to use
+AI as a helpful tool and when to reach for more established
+alternatives.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2177,7 +2209,16 @@ preliminary content.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>FIXME</li>
+<li>Use the planning agent to create structured plans before
+implementation.</li>
+<li>Create custom skills to encapsulate common development tasks.</li>
+<li>Always review AI-generated code, tests, and documentation
+carefully.</li>
+<li>Consider whether dedicated tools might be more appropriate than AI
+for certain tasks.</li>
+<li>AI is most valuable for scaffolding, boilerplate generation, and
+preliminary content. The real value is what you add yourself and how you
+refine it.</li>
 </ul>
 </div>
 </div>
@@ -2188,7 +2229,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-04-process-based-agent-development"><p>Content from <a href="04-process-based-agent-development.html">Process-based Development Approach using Agents</a></p>
 <hr>
-<p>Last updated on 2026-06-16 |
+<p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-process-based-agent-development.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -2205,7 +2246,13 @@ any links that you are not going to use.
 <ul>
 <li>How can an agentic approach assist with software development phases
 other than implementation?</li>
-<li>FIXME</li>
+<li>How do I create and configure custom agents for my development
+workflow?</li>
+<li>What is the difference between a skill and an agent?</li>
+<li>How can I structure a multi-stage development process using
+agents?</li>
+<li>How do I ensure quality and correctness throughout an agent-driven
+development workflow?</li>
 </ul>
 </div>
 </div>
@@ -2240,7 +2287,6 @@ project needs (requirements) and design considerations may be missed.
 However, established software development practice separates
 requirements and design as separate phases.</li>
 </ul>
-<p>FIXME: add more downsides</p>
 <section><h2 class="section-heading" id="setting-up">Setting Up<a class="anchor" aria-label="anchor" href="#setting-up"></a>
 </h2>
 <hr class="half-width">
@@ -2274,6 +2320,25 @@ e.g. read-only</li>
 <p>Generally, this approach is much quicker than setting up all this
 context every time for every kind of task - if you have a set way you
 tend to do something, define an agent to do it.</p>
+<div id="how-do-agents-differ-from-skills" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="how-do-agents-differ-from-skills" class="callout-inner">
+<h3 class="callout-title">How do Agents Differ from Skills?</h3>
+<div class="callout-content">
+<p>A defines <strong>how</strong> a specific task should be performed.
+It provides instructions, context, knowledge, resources, or procedures
+that an AI can apply when carrying out a particular activity. Skills are
+typically task-specific.</p>
+<p>However, an agent defines <strong>what</strong> should be achieved.
+It is an autonomous or semi-autonomous AI entity that can conduct its
+own reasoning about objectives, make decisions, plan work, and invoke
+one or more skills to accomplish a goal.</p>
+</div>
+</div>
+</div>
 <p>However, we’ve seen that different stages of a development process
 require different mindsets and approaches. By creating a single agent
 that attempts to do everything, we risk an overly complex definition
@@ -2510,7 +2575,7 @@ ambiguities.”</p>
 <div class="section level3">
 <h3 id="a-better-requirements-agent">A Better Requirements Agent<a class="anchor" aria-label="anchor" href="#a-better-requirements-agent"></a>
 </h3>
-<p>Let’s take a look at <a href="../files/agents/requirements-gatherer.agent.html">a version of this
+<p>Let’s take a look at <a href="../files/agents/requirements-gatherer.agent.md.txt">a version of this
 agent</a> that takes these limitations into account.</p>
 <p>The revised YAML front matter looks like:</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -2544,7 +2609,7 @@ model is selected, and enter the following:</p>
 <pre><code>Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots</code></pre>
 <p>You should find a <code>requirements.md</code> file in the
 <code>project-docs</code> directory, hopefully with the sections we
-requested, <a href="../files/example-agent-output/requirements.html">similar to this
+requested, <a href="../files/example-agent-output/requirements.md.txt">similar to this
 one</a>.</p>
 <div id="review" class="callout challenge">
 <div class="callout-square">
@@ -2663,7 +2728,7 @@ document in the <code>project-docs</code> directory.</li>
 <code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
 model is selected, and enter the following:</p>
 <pre><code>Produce design</code></pre>
-<p>FIXME: add example tech spec to learner files</p>
+<p>FIXME: add example tech spec to files</p>
 <p>You should find a <code>technical_spec.md</code> file in the
 <code>project-docs</code> directory, hopefully with the sections we
 requested, <a href="../files/example-agent-output/technical_spec.html">similar to this
@@ -2782,7 +2847,7 @@ fields (the latter two will likely be very similar!).</li>
 <p>Select our new <code>implementer</code> agent from the
 <code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
 model is selected, and enter the following:</p>
-<pre><code>Produce implemmentation</code></pre>
+<pre><code>Produce implementation</code></pre>
 <p>You should now find an initial implementation has appeared within
 your repository.</p>
 <p>FIXME: add example implementation to a separate example repo?</p>
@@ -2809,18 +2874,53 @@ and what it could have done better.</p>
 </div>
 </div>
 </div>
-<p>FIXME: update the agent to have all the perms necessary to execute
-scripts and set environments FIXME: when executing agent, list steps it
-typically goes through, e.g. setup venv</p>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <hr class="half-width">
-<p>FIXME: how to take this approach further? split technical
-specification into design/implementation tasks? maintenance? specialise
-further for agile development? i.e. whatever you want. but be sure it
-holds to the principles of gated reviews, simplicity, and reducing
-ambiguity. FIXME: existing tools - e.g. <a href="https://github.com/github/spec-kit" class="external-link uri">https://github.com/github/spec-kit</a></p>
+<p>In this episode, we’ve explored a process-based approach to software
+development using custom agents rather than relying on a single planning
+tool. By separating requirements, design, and implementation into
+distinct phases with dedicated agents, we’ve established a workflow that
+maintains clarity and enables careful review at each stage, whilst
+enabling specifications to themselves become
+<strong>executable</strong>.</p>
+<p>This approach is highly adaptable and can be extended in many ways to
+suit your specific needs:</p>
+<ul>
+<li><p><strong>Specialization for Your Domain</strong> - the agents
+we’ve created are really just a place to begin. You can tailor them to
+your research or project domain by refining their instructions and
+defining the exact output format your team needs.</p></li>
+<li><p><strong>Further Process Decomposition</strong> - you can split
+the technical specification phase into separate design and
+implementation stages with their own separate agents, or add additional
+phases such as testing or security review. Each stage should produce a
+reviewable artifact before moving to the next.</p></li>
+<li><p><strong>Maintenance and Evolution</strong> - create agents to
+assist with ongoing maintenance tasks such as bug triage, dependency
+updates, high-level code review (which is very useful), or documentation
+updates. These can follow the same patterns as your development
+agents.</p></li>
+<li><p><strong>Agile Workflows</strong> - adapt this approach for agile
+development by creating agents for sprint planning, creating user story
+refinement agents, or defining agents for specific agile ceremonies that
+generate artifacts for team review.</p></li>
+</ul>
+<p>If you wish to explore this approach further, the <a href="https://github.com/github/spec-kit" class="external-link">GitHub Spec Kit</a> provides a
+comprehensive take on this approach, bundling a host of AI-assisted
+software development definitions and tools to support spec-driven
+development.</p>
+<p>Whatever direction you take, maintain three core principles that make
+this approach effective:</p>
+<ul>
+<li>Every agent and its output should be reviewed and approved before
+proceeding to the next stage</li>
+<li>Keep each agent focused on a single responsibility to minimize
+ambiguity and context size</li>
+<li>Be explicit in constraints, approach, and how you want the output to
+guide consistent and predictable behavior</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -2829,7 +2929,18 @@ ambiguity. FIXME: existing tools - e.g. <a href="https://github.com/github/spec
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>FIXME</li>
+<li>Create separate agents for distinct development phases to maintain
+clarity and enable careful review.</li>
+<li>Custom agents provide more control and flexibility than built-in
+planning tools.</li>
+<li>Use YAML front matter to specify agent metadata, tools, and
+permissions following the principle of least privilege.</li>
+<li>Each agent output should be reviewed and refined before proceeding
+to the next phase.</li>
+<li>Specification-driven development reduces ambiguity and keeps
+developers in control of the process.</li>
+<li>Extend this approach by tailoring agents to your domain, adding new
+phases, or creating agents for maintenance and agile workflows.</li>
 </ul>
 </div>
 </div>
@@ -2888,8 +2999,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/aio.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-17",
-  "datePublished": "2026-06-17"
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>

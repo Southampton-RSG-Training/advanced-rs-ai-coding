@@ -102,7 +102,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -270,7 +270,7 @@
                       <li>
                         <a href="profiles.html">Learner Profiles</a>
                       </li>
-                      <li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+                      <li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a href="reference.html">Reference</a></li><li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -306,7 +306,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Process-based Development Approach using Agents</h1>
-        <p>Last updated on 2026-06-16 |
+        <p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-process-based-agent-development.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -327,7 +327,13 @@
 <h3 class="card-title">Questions</h3>
 <ul><li>How can an agentic approach assist with software development phases
 other than implementation?</li>
-<li>FIXME</li>
+<li>How do I create and configure custom agents for my development
+workflow?</li>
+<li>What is the difference between a skill and an agent?</li>
+<li>How can I structure a multi-stage development process using
+agents?</li>
+<li>How do I ensure quality and correctness throughout an agent-driven
+development workflow?</li>
 </ul></div>
 </div>
 </div>
@@ -357,8 +363,7 @@ want to change this approach?</li>
 project needs (requirements) and design considerations may be missed.
 However, established software development practice separates
 requirements and design as separate phases.</li>
-</ul><p>FIXME: add more downsides</p>
-<section><h2 class="section-heading" id="setting-up">Setting Up<a class="anchor" aria-label="anchor" href="#setting-up"></a></h2>
+</ul><section><h2 class="section-heading" id="setting-up">Setting Up<a class="anchor" aria-label="anchor" href="#setting-up"></a></h2>
 <hr class="half-width"><p>Since we’ll be approaching the project again using a different
 perspective and approach, let’s re-clone the repository with the
 inflammation data we had earlier in a different location and use that,
@@ -385,6 +390,25 @@ e.g. read-only</li>
 </ul><p>Generally, this approach is much quicker than setting up all this
 context every time for every kind of task - if you have a set way you
 tend to do something, define an agent to do it.</p>
+<div id="how-do-agents-differ-from-skills" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="how-do-agents-differ-from-skills" class="callout-inner">
+<h3 class="callout-title">How do Agents Differ from Skills?</h3>
+<div class="callout-content">
+<p>A defines <strong>how</strong> a specific task should be performed.
+It provides instructions, context, knowledge, resources, or procedures
+that an AI can apply when carrying out a particular activity. Skills are
+typically task-specific.</p>
+<p>However, an agent defines <strong>what</strong> should be achieved.
+It is an autonomous or semi-autonomous AI entity that can conduct its
+own reasoning about objectives, make decisions, plan work, and invoke
+one or more skills to accomplish a goal.</p>
+</div>
+</div>
+</div>
 <p>However, we’ve seen that different stages of a development process
 require different mindsets and approaches. By creating a single agent
 that attempts to do everything, we risk an overly complex definition
@@ -607,7 +631,7 @@ ambiguities.”</p>
 </div>
 <div class="section level3">
 <h3 id="a-better-requirements-agent">A Better Requirements Agent<a class="anchor" aria-label="anchor" href="#a-better-requirements-agent"></a></h3>
-<p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.html">a version of this
+<p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.md.txt">a version of this
 agent</a> that takes these limitations into account.</p>
 <p>The revised YAML front matter looks like:</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -640,7 +664,7 @@ model is selected, and enter the following:</p>
 <pre><code>Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots</code></pre>
 <p>You should find a <code>requirements.md</code> file in the
 <code>project-docs</code> directory, hopefully with the sections we
-requested, <a href="files/example-agent-output/requirements.html">similar to this
+requested, <a href="files/example-agent-output/requirements.md.txt">similar to this
 one</a>.</p>
 <div id="review" class="callout challenge">
 <div class="callout-square">
@@ -753,7 +777,7 @@ document in the <code>project-docs</code> directory.</li>
 <code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
 model is selected, and enter the following:</p>
 <pre><code>Produce design</code></pre>
-<p>FIXME: add example tech spec to learner files</p>
+<p>FIXME: add example tech spec to files</p>
 <p>You should find a <code>technical_spec.md</code> file in the
 <code>project-docs</code> directory, hopefully with the sections we
 requested, <a href="files/example-agent-output/technical_spec.html">similar to this
@@ -865,7 +889,7 @@ fields (the latter two will likely be very similar!).</li>
 <p>Select our new <code>implementer</code> agent from the
 <code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
 model is selected, and enter the following:</p>
-<pre><code>Produce implemmentation</code></pre>
+<pre><code>Produce implementation</code></pre>
 <p>You should now find an initial implementation has appeared within
 your repository.</p>
 <p>FIXME: add example implementation to a separate example repo?</p>
@@ -890,24 +914,66 @@ and what it could have done better.</p>
 </div>
 </div>
 </div>
-<p>FIXME: update the agent to have all the perms necessary to execute
-scripts and set environments FIXME: when executing agent, list steps it
-typically goes through, e.g. setup venv</p>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
-<hr class="half-width"><p>FIXME: how to take this approach further? split technical
-specification into design/implementation tasks? maintenance? specialise
-further for agile development? i.e. whatever you want. but be sure it
-holds to the principles of gated reviews, simplicity, and reducing
-ambiguity. FIXME: existing tools - e.g. <a href="https://github.com/github/spec-kit" class="external-link uri">https://github.com/github/spec-kit</a></p>
-<div id="keypoints1" class="callout keypoints">
+<hr class="half-width"><p>In this episode, we’ve explored a process-based approach to software
+development using custom agents rather than relying on a single planning
+tool. By separating requirements, design, and implementation into
+distinct phases with dedicated agents, we’ve established a workflow that
+maintains clarity and enables careful review at each stage, whilst
+enabling specifications to themselves become
+<strong>executable</strong>.</p>
+<p>This approach is highly adaptable and can be extended in many ways to
+suit your specific needs:</p>
+<ul><li><p><strong>Specialization for Your Domain</strong> - the agents
+we’ve created are really just a place to begin. You can tailor them to
+your research or project domain by refining their instructions and
+defining the exact output format your team needs.</p></li>
+<li><p><strong>Further Process Decomposition</strong> - you can split
+the technical specification phase into separate design and
+implementation stages with their own separate agents, or add additional
+phases such as testing or security review. Each stage should produce a
+reviewable artifact before moving to the next.</p></li>
+<li><p><strong>Maintenance and Evolution</strong> - create agents to
+assist with ongoing maintenance tasks such as bug triage, dependency
+updates, high-level code review (which is very useful), or documentation
+updates. These can follow the same patterns as your development
+agents.</p></li>
+<li><p><strong>Agile Workflows</strong> - adapt this approach for agile
+development by creating agents for sprint planning, creating user story
+refinement agents, or defining agents for specific agile ceremonies that
+generate artifacts for team review.</p></li>
+</ul><p>If you wish to explore this approach further, the <a href="https://github.com/github/spec-kit" class="external-link">GitHub Spec Kit</a> provides a
+comprehensive take on this approach, bundling a host of AI-assisted
+software development definitions and tools to support spec-driven
+development.</p>
+<p>Whatever direction you take, maintain three core principles that make
+this approach effective:</p>
+<ul><li>Every agent and its output should be reviewed and approved before
+proceeding to the next stage</li>
+<li>Keep each agent focused on a single responsibility to minimize
+ambiguity and context size</li>
+<li>Be explicit in constraints, approach, and how you want the output to
+guide consistent and predictable behavior</li>
+</ul><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>FIXME</li>
+<ul><li>Create separate agents for distinct development phases to maintain
+clarity and enable careful review.</li>
+<li>Custom agents provide more control and flexibility than built-in
+planning tools.</li>
+<li>Use YAML front matter to specify agent metadata, tools, and
+permissions following the principle of least privilege.</li>
+<li>Each agent output should be reviewed and refined before proceeding
+to the next phase.</li>
+<li>Specification-driven development reduces ambiguity and keeps
+developers in control of the process.</li>
+<li>Extend this approach by tailoring agents to your domain, adding new
+phases, or creating agents for maintenance and agile workflows.</li>
 </ul></div>
 </div>
 </div>
@@ -975,8 +1041,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/04-process-based-agent-development.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/04-process-based-agent-development.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-16",
-  "datePublished": "2026-06-17"
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>

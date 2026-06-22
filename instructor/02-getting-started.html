@@ -102,7 +102,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -266,7 +266,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <hr><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+                      <hr><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -302,7 +302,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started</h1>
-        <p>Last updated on 2026-06-16 |
+        <p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -398,10 +398,9 @@ the top left to indicate it’s working. You’ll be presented with a
 </ul></li>
 </ol><p>We also need to ensure we’re logged into our GitHub account. You
 should see a GitHub-looking icon in the status bar at the bottom right
-of VSCode’s window.</p>
-<ol style="list-style-type: decimal"><li>Select the <code>Signed out</code> button in the bottom right of the
-VSCode status bar, and <code>Sign in to use AI Features</code>.</li>
-<li>Select <code>Continue with GitHub</code>.</li>
+of VSCode’s window (the icon within the blue box):</p>
+<figure><img src="../fig/vscode-github-sign-in.png" style="width:50.0%" alt="GitHub sign-in icon in the status bar" class="figure mx-auto d-block"><div class="figcaption">GitHub sign-in icon in the status bar</div>
+</figure><ol style="list-style-type: decimal"><li>Select the icon and select <code>Continue with GitHub</code>.</li>
 <li>You’ll be redirected to a GitHub login web page to authorise Visual
 Studio Code for GitHub. Select the GitHub account you wish to use and
 select <code>Continue</code>.</li>
@@ -450,7 +449,7 @@ to hold these packages.</p>
   Installing Python Packages
   </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Who has created and used a Python virtual environment before?</p>
 </div>
@@ -488,12 +487,45 @@ are similar tools for available for Ruby, Java and JavaScript.</li>
 </ul></div>
 </div>
 </div>
-<p>Make sure you’re in the root directory of the repository, then
-type</p>
+<p>To create a virtual environment we’ll use the terminal (or shell).
+You can open one within VSCode by selecting <code>Terminal</code> from
+the VSCode menu and <code>New Terminal</code>, where you be presented
+with see a Bash prompt, which looks something like:</p>
+<div id="on-windows-i-only-see-powershell" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="on-windows-i-only-see-powershell" class="callout-inner">
+<h3 class="callout-title">On Windows, I only see PowerShell?</h3>
+<div class="callout-content">
+<p>If you open a terminal on Windows but see a PowerShell prompt instead
+(which looks like <code>PS&gt;</code>), you’ll need to change the
+default terminal type to Git Bash.</p>
+<ol style="list-style-type: decimal"><li>Select <code>File</code> from the VSCode menu, then
+<code>Preferences</code> and then <code>Settings</code>.</li>
+<li>Type <code>terminal.integrated.defaultProfile.windows</code> in the
+search bar.</li>
+<li>In the setting that appears, select <code>Git Bash</code> from the
+dropdown.</li>
+<li>Open a new terminal by selecting <code>Terminal</code> from the
+VSCode menu, then <code>New Terminal</code>.</li>
+</ol><p>If you are presented with a Git Bash terminal that looks something
+like the following, you’re ready:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">user@hostname</span> MINGW64 ~</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Make sure you’re in the root directory of the repository, then
+type:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv venv</span></code></pre>
 </div>
 <p>Here, we’re using the built-on Python <code>venv</code> module -
 short for virtual environment - to create a virtual environment
@@ -503,12 +535,12 @@ convention, as is creating it within the repository root directory. This
 makes sure the virtual environment is closely associated with this
 project, and not easily confused with another.</p>
 <p>Once created, we can <em>activate</em> it so it’s the one in use:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 <p>You should notice the prompt changes to reflect that the virtual
 environment is active, which is a handy reminder. For example:</p>
@@ -519,10 +551,10 @@ environment is active, which is a handy reminder. For example:</p>
 </div>
 <p>Now we have our virtual environment, we can install NumPy and
 Matplotlib to it:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy matplotlib</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install numpy matplotlib</span></code></pre>
 </div>
 <p>If we do <code>python -m pip list</code> now, we can see these
 packages, and their dependencies, installed within the virtual
@@ -530,12 +562,12 @@ environment we have activated.</p>
 <p>If we want to deactivate this environment, and return to the global
 Python package context, we can use <code>deactivate</code>. To
 reactivate it again, it’s the same as before:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1" aria-label="code-block-6-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">[Linux]</span> source venv/bin/activate</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="ex">[Mac]</span> source venv/bin/activate</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="ex">[Windows]</span> source venv/Scripts/activate</span></code></pre>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="personalising-copilot-to-match-our-project">Personalising Copilot to Match our Project<a class="anchor" aria-label="anchor" href="#personalising-copilot-to-match-our-project"></a></h2>
@@ -571,72 +603,44 @@ repository doesn’t use</li>
 </ul></div>
 <div class="section level3">
 <h3 id="create-an-instructions-file">Create an Instructions File<a class="anchor" aria-label="anchor" href="#create-an-instructions-file"></a></h3>
-<p>FIXME: change to manual creation, since there’s no code anyway.
-FIXME: use example in <a href="https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7" class="external-link uri">https://dev.to/anchildress1/all-ive-learned-about-github-copilot-instructions-so-far-5bm7</a>
-as basis. FIXME: focus on goals for the app (high-level scenario
-description), data safety (i.e. don’t change anything in data/),
-technology stack, dev guidelines, coding style standards (e.g. PEP8,
-comments and docs (commenting strategy, include a README in the
-repository) FIXME: include never hardcode security and secrets FIXME:
-keep sections very short. write a section or two, get them to write
-another</p>
-</div>
-<div class="section level3">
-<h3 id="specifying-privacy-per-file-type">Specifying Privacy per File Type<a class="anchor" aria-label="anchor" href="#specifying-privacy-per-file-type"></a></h3>
-<p>In VS Code, GitHub Copilot gives developers some mechanisms to
-control the level of privacy. This should be considered important where
-our code uses sensitive or otherwise confidential data, or potentially
-valuable IP-related code, such as algorithms.</p>
-<p>At a high level, Copilot works by sending small, relevant snippets of
-your open code (plus surrounding context) to the Copilot service to
-generate suggestions. You don’t explicitly “upload a project”, but you
-do control which files Copilot is allowed to see and draw context
-from.</p>
-<p>The most practical control is scoping Copilot by file, folder, or
-workspace. In VS Code you can disable Copilot entirely, or selectively
-turn it off for particular file types (for example, configuration files,
-data files, or notebooks).</p>
-<p>For example, we edit our VSCode settings to ignore csv files by:</p>
-<ol style="list-style-type: decimal"><li><p>Using <code>Ctrl + Shift + P</code> or
-<code>Cmd/Windows Key + Shift + P</code> to open the Command
-Palette</p></li>
-<li><p>Entering and selecting
-<code>Preferences: Open User Settings (JSON)</code></p></li>
-<li>
-<p>In the <code>settings.json</code> file that appears, add the
-following and save the file:</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<p>Let’s create our instructions file now.</p>
+<p>For Copilot, the convention is to store various configuration, skills
+and agents files within the <code>.github</code> directory, so let’s
+create that now. Within a terminal, ensure you’re at the root of the
+repository, and then:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="at">   </span><span class="fu">"github.copilot.enable"</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="at">      </span><span class="fu">"*"</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="kw">,</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="at">      </span><span class="fu">"csv"</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a><span class="at">   </span><span class="kw">}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">mkdir</span> .github</span></code></pre>
 </div>
-</li>
-</ol><p>This will have the effect of potentially including all file types in
-context by default, but not CSV files.</p>
-<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
-  <h3 class="accordion-header" id="headingInstructor2">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>
-  Checkpoint: I’ve disabled the inclusion of csv files
-  </h3>
-</button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
-<div class="accordion-body">
-
+<p>Next, use VSCode to create a <code>copilot-instructions.md</code>
+file within that directory, and add the following:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu"># Copilot Instructions for ai-tools-example</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a><span class="fu">## Python Code Style</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="ss">- </span>Follow **PEP8** for all Python code</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a><span class="ss">- </span>Use 4-space indentation</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a><span class="ss">- </span>Keep lines to a maximum of 79 characters</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1" aria-label="code-block-9-7"></a><span class="ss">- </span>Use descriptive variable and function names</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1" aria-label="code-block-9-8"></a><span class="ss">- </span>Add docstrings to functions and modules</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1" aria-label="code-block-9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1" aria-label="code-block-9-10"></a><span class="fu">## Data Integrity</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1" aria-label="code-block-9-11"></a><span class="ss">- </span>Do NOT modify files in the <span class="in">`data/`</span> directory</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1" aria-label="code-block-9-12"></a><span class="ss">- </span>The <span class="in">`data/`</span> directory contains CSV files that are input data only</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1" aria-label="code-block-9-13"></a><span class="ss">- </span>Data files should only be read, never written to or deleted</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1" aria-label="code-block-9-14"></a><span class="ss">- </span>Create output files within an <span class="in">`output/`</span> directory</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1" aria-label="code-block-9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1" aria-label="code-block-9-16"></a><span class="fu">## General Guidelines</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1" aria-label="code-block-9-17"></a><span class="ss">- </span>Write clear, maintainable code</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1" aria-label="code-block-9-18"></a><span class="ss">- </span>Test changes before committing</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1" aria-label="code-block-9-19"></a><span class="ss">- </span>Keep the workspace organized and clean</span></code></pre>
 </div>
-</div>
-</div>
-</div>
-<p>If you wanted a stricter “default deny” approach instead, you could
-specify <code>false</code> for <code>*</code> and enable each filetype
-explicitly.</p>
-<p>There are stricter controls, including some that allow exclusion by
-directory specifications, but these are currently limited to Copilot
-Business users for their repositories and organisations.</p>
+<p>Now this is only a generic draft. As any project develops, the
+established conventions and rules may need to change or be expanded
+upon. When that happens, we come back and revise this file.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -644,7 +648,13 @@ Business users for their repositories and organisations.</p>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>FIXME</li>
+<ul><li>Ensure GitHub Copilot extension is installed and you’re logged into
+your GitHub account.</li>
+<li>Create a Python virtual environment and install required packages
+(NumPy and Matplotlib).</li>
+<li>Instructions files help standardize code style, enforce data
+integrity, and improve Copilot’s suggestions across a whole
+project.</li>
 </ul></div>
 </div>
 </div>
@@ -713,8 +723,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/instructor/02-getting-started.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-16",
-  "datePublished": "2026-06-17"
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>

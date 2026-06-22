@@ -102,7 +102,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -271,7 +271,7 @@
                       <li>
                         <a href="profiles.html">Learner Profiles</a>
                       </li>
-                      <li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+                      <li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a href="reference.html">Reference</a></li><li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -307,7 +307,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Planning and Task-based Approach to Software Development</h1>
-        <p>Last updated on 2026-06-16 |
+        <p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -348,7 +348,17 @@ framework</li>
 </div>
 </div>
 </div>
-<p>FIXME: intro</p>
+<p>In this episode, we’ll move beyond simple code generation to adopt a
+more structured, task-based approach to software development. Rather
+than asking Copilot to build our entire application at once, we’ll plan
+our work in detail, then break development into discrete tasks using
+reusable skills. This keeps you (not the AI tool) at the center of
+decision-making, with Copilot serving as an assistant.</p>
+<p>We’ll learn to use the planning agent to decompose requirements into
+steps, create custom skills for common development tasks, and write
+tests to verify our work. Throughout, we’ll emphasize the importance of
+reviewing and refining AI-generated content before committing it to our
+codebase.</p>
 <section><h2 class="section-heading" id="using-the-built-in-plan-agent">Using the Built-in Plan Agent<a class="anchor" aria-label="anchor" href="#using-the-built-in-plan-agent"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="creating-a-plan">Creating a Plan<a class="anchor" aria-label="anchor" href="#creating-a-plan"></a></h3>
@@ -440,9 +450,7 @@ colleagues before we proceed.</li>
 <li>It also provides a “checkpoint”: if the implementation is
 unsatisfactory we can remove the implementation, amend the plan, and ask
 Copilot to create the implementation again.</li>
-</ul><p>FIXME: expand on the benefits of externalising the agentic reasoning
-a bit</p>
-<div id="solo-exercise-review" class="callout discussion">
+</ul><div id="solo-exercise-review" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -508,20 +516,16 @@ For example (your command many differ):</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="using-skills-for-on-demand-coding-tasks">Using Skills for On-demand Coding Tasks<a class="anchor" aria-label="anchor" href="#using-skills-for-on-demand-coding-tasks"></a></h2>
-<hr class="half-width"><p>FIXME: change these to skills and use them within the implementer
-agent in the next episode? FIXME: workflow then becomes: develop/use
-skills, build agents that use skills, plus diagram for that</p>
-<p>With the aid of Copilot’s planning agent we’ve created an initial
+<hr class="half-width"><p>With the aid of Copilot’s planning agent we’ve created an initial
 plan, reviewed and refined it, and had Copilot create an initial
 implementation for us based on the plan. However, there are other tasks
 typically conducted during development, and Copilot (and other similar
 generative AI tools and infrastructure such as Claude) allows us to
-encapsulate these tasks by creating our own custom <em>skills</em>. By
+encapsulate these tasks by creating our own custom <em>skills</em>. An
+AI skill is a packaged set of knowledge, instructions, and behaviours
+that extends an AI assistant’s ability to perform a defined task. By
 defining common development tasks as skills, when it comes to
 implementation, we can call on these skills to lighten the load.</p>
-<p>FIXME: diagram showing developer agency vs autonomy: focus is on a
-person at the center driving development, reviewing suggestions and
-making decisions. AI is just another tool</p>
 <p>Let’s create some skills using this approach to help us with some
 development tasks.</p>
 <p>First, from within our coding directory, create a new directory
@@ -573,8 +577,8 @@ e.g.:</p>
 <p>In VSCode, agents are typically defined in a file with a
 <code>.agent.md</code> suffix. Create a new
 <code>add-docstrings.agent.md</code> file in the
-<code>.github/agents</code> directory, and add the following
-contents:</p>
+<code>.github/skills</code> directory, and add the <a href="files/skills/add-docstrings/SKILL.md.txt">following
+contents</a>:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -604,7 +608,8 @@ contents:</p>
 <p>We’re being careful to define constraints on the behaviour here in
 addition to defining the approach to take as a sequence of simple,
 explicit steps.</p>
-<p>Once you’ve saved the file, run the skill by entering
+<p>Once you’ve saved the file, run the skill by ensuring you have
+<code>Agent</code> mode enabled, and entering
 <code>/add-docstrings</code> into the VSCode chat. You should see reST
 docstrings added to your code.</p>
 <div id="solo-exercise-review-1" class="callout discussion">
@@ -666,24 +671,27 @@ directory:</p>
 <span id="cb8-10"><a href="#cb8-10" tabindex="-1" aria-label="code-block-8-10"></a></span>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1" aria-label="code-block-8-11"></a><span class="fu">## Constraints</span></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1" aria-label="code-block-8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1" aria-label="code-block-8-13"></a><span class="ss">- </span>ONLY make modifications based on output from pylint</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1" aria-label="code-block-8-14"></a><span class="ss">- </span>ONLY make modifications to files in the <span class="in">`src/`</span> directory</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1" aria-label="code-block-8-15"></a></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1" aria-label="code-block-8-16"></a><span class="fu">## Approach</span></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1" aria-label="code-block-8-17"></a></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1" aria-label="code-block-8-18"></a><span class="ss">1. </span>Run pylint and capture the output from running the command.</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1" aria-label="code-block-8-19"></a><span class="ss">2. </span>Analyse pylint output to identify warnings.</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1" aria-label="code-block-8-20"></a><span class="ss">3. </span>Apply fixes only with 100% confidence.</span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1" aria-label="code-block-8-21"></a><span class="ss">4. </span>Re-run pylint to verify fixes.</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1" aria-label="code-block-8-22"></a><span class="ss">5. </span>Provide a summary of what was fixed.</span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1" aria-label="code-block-8-23"></a></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1" aria-label="code-block-8-24"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1" aria-label="code-block-8-25"></a></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1" aria-label="code-block-8-26"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pylint</span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1" aria-label="code-block-8-27"></a></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1" aria-label="code-block-8-28"></a><span class="in">```bash</span></span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1" aria-label="code-block-8-29"></a><span class="ex">python</span> <span class="at">-m</span> pylint src/</span></code></pre>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1" aria-label="code-block-8-13"></a><span class="ss">- </span>ONLY make modifications based on output from pylint.</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1" aria-label="code-block-8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1" aria-label="code-block-8-15"></a><span class="fu">## Approach</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1" aria-label="code-block-8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1" aria-label="code-block-8-17"></a><span class="ss">1. </span>Run pylint and capture the output from running the command.</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1" aria-label="code-block-8-18"></a><span class="ss">2. </span>Analyse pylint output to identify warnings.</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1" aria-label="code-block-8-19"></a><span class="ss">3. </span>Apply fixes only with 100% confidence.</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1" aria-label="code-block-8-20"></a><span class="ss">4. </span>Re-run pylint to verify fixes.</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1" aria-label="code-block-8-21"></a><span class="ss">5. </span>Provide a summary of what was fixed.</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1" aria-label="code-block-8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1" aria-label="code-block-8-23"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1" aria-label="code-block-8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1" aria-label="code-block-8-25"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pylint</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1" aria-label="code-block-8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1" aria-label="code-block-8-27"></a><span class="in">```bash</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1" aria-label="code-block-8-28"></a><span class="ex">python</span> <span class="at">-m</span> pylint src/</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1" aria-label="code-block-8-29"></a><span class="in">```</span></span></code></pre>
 </div>
+<p>In the <code>Commands to Use</code> section, you may need to change
+the location of where your source code is located. e.g. if it’s in the
+root directory, specify <code>.</code> instead.</p>
 <div class="section level3">
 <h3 id="improving-our-skill">Improving our Skill<a class="anchor" aria-label="anchor" href="#improving-our-skill"></a></h3>
 <p>As we have it, the definition may seem reasonable, but let’s check it
@@ -753,16 +761,17 @@ a bug, and restarting VSCode should fix this.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<p>You can find an example improved <code>SKILL.md</code> <a href="files/skills/pylint-fix/SKILL.html">here</a>.</p>
+<p>You can find an example improved <code>SKILL.md</code> <a href="files/skills/pylint-fix/SKILL.md.txt">here</a>.</p>
 </div>
 </div>
 </div>
 </div>
-<p>Run the skill by entering <code>/pylint-fix</code> in the VSCode chat
-window. Once complete, you should see that the skill has corrected a
-number of issues and added docstrings to our codebase.</p>
+<p>Run the skill by ensuring you have <code>Agent</code> mode selected,
+and entering <code>/pylint-fix</code> in the VSCode chat window. Once
+complete, you should see that the skill has corrected a number of issues
+and added docstrings to our codebase.</p>
 <div id="when-you-have-a-hammer" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -853,8 +862,8 @@ Unit Test Writer Skill</h3>
 <div class="callout-content">
 <p>15 mins.</p>
 <p>Based on what we’ve learned from writing our pylint skill, write a
-skill for automatically Pytest unit tests. Ensure it has the following
-sections:</p>
+skill for automatically drafting Pytest unit tests. Ensure it has the
+following sections:</p>
 <ul><li>Constraints</li>
 <li>Approach: list the steps the skill needs to take to generate the
 unit tests</li>
@@ -862,8 +871,9 @@ unit tests</li>
 </ul><p>Once finished, use the Chat Customisations Evaluations tool as before
 to review the skill and suggest improvements, and refine the skill until
 you are happy with it.</p>
-<p>Finally, use the skill to create some unit tests, e.g. enter
-<code>add-tests</code> into the chat window.</p>
+<p>Finally, use the skill to create some unit tests, e.g. select
+<code>Agent</code> mode and enter <code>/add-tests</code> into the chat
+window.</p>
 </div>
 </div>
 </div>
@@ -872,7 +882,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>An initial try:</p>
 <div class="codewrapper sourceCode" id="cb13">
@@ -1130,8 +1140,9 @@ prerequisites, and how to run the software</li>
 </ul><p>Once finished, use the Chat Customisations Evaluations tool as before
 to review the skill and suggest improvements, and refine the skill until
 you are happy with it.</p>
-<p>Finally, use the skill to create the documentation, e.g. enter
-<code>build-mkdocs</code> into the chat window.</p>
+<p>Finally, use the skill to create the documentation, e.g. select
+<code>Agent</code> mode and enter <code>/build-mkdocs</code> into the
+chat window.</p>
 </div>
 </div>
 </div>
@@ -1140,7 +1151,7 @@ you are happy with it.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here’s one solution:</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -1292,12 +1303,22 @@ up, and how to run the code and the tests?</li>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
-<hr class="half-width"><p>So far we’ve created AI-based tools for common development tasks, as
-well as explored the limitations and risks of using AI for such
-activities.</p>
-<p>FIXME: finish summary, essentially - can be helpful for creating
-scaffolding and setting up the use of a new technology, and for writing
-preliminary content.</p>
+<hr class="half-width"><p>In this episode, we’ve explored a task-based approach to software
+development using Copilot’s planning and skill capabilities. We began by
+using the built-in planning agent to break down a complex feature into
+manageable steps before implementation, then demonstrated how to create
+reusable skills for common development tasks such as adding docstrings,
+fixing code style issues with linting, writing unit tests, and
+generating documentation.</p>
+<p>Throughout, we’ve emphasized that AI tools are most effective as
+assistants rather than replacements for developer judgment. They excel
+at creating scaffolding, setting up boilerplate code for new
+technologies, and generating preliminary content that can be reviewed
+and refined. However, they should always be reviewed carefully, and for
+some tasks, dedicated specialized tools may be more efficient and
+reliable than AI-based approaches. The key is understanding when to use
+AI as a helpful tool and when to reach for more established
+alternatives.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1305,7 +1326,16 @@ preliminary content.</p>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>FIXME</li>
+<ul><li>Use the planning agent to create structured plans before
+implementation.</li>
+<li>Create custom skills to encapsulate common development tasks.</li>
+<li>Always review AI-generated code, tests, and documentation
+carefully.</li>
+<li>Consider whether dedicated tools might be more appropriate than AI
+for certain tasks.</li>
+<li>AI is most valuable for scaffolding, boilerplate generation, and
+preliminary content. The real value is what you add yourself and how you
+refine it.</li>
 </ul></div>
 </div>
 </div>
@@ -1373,8 +1403,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/03-task-based-agents.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/03-task-based-agents.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-16",
-  "datePublished": "2026-06-17"
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>

@@ -102,7 +102,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li><li><a class="dropdown-item" href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -269,7 +269,7 @@
                       <li>
                         <a href="profiles.html">Learner Profiles</a>
                       </li>
-                      <li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li><li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li>
+                      <li><a href="multi-agent-development.html">Optional: Multi-agent Development</a></li><li><a href="reference.html">Reference</a></li><li><a href="using-mcp-external-services.html">Optional: Using External MCP Services</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -305,7 +305,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to Advanced Research Software AI Coding</h1>
-        <p>Last updated on 2026-06-17 |
+        <p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/01-intro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -553,11 +553,12 @@ engineering tell us?</p>
 development every software project moves through the activities of:</p>
 <ul><li>
 <strong>Requirements Analysis</strong> - understanding what needs to
-be built</li>
+be built (capturing within a Product Requirements Document, or PRD)</li>
 <li>
 <strong>Design</strong> - determining from the requirements how it
-should be structured (as an archtecture), the separate components within
-that architecture, and other technical decisions</li>
+should be structured (as an architecture), the separate components
+within that architecture, and other technical decisions (captured within
+a Technical Design Specification, or TDS)</li>
 <li>
 <strong>Implementation</strong> - doing the coding and other
 implementation activities to create the solution based on the
@@ -574,16 +575,16 @@ stages</div>
 </figure><!--
 Source of the above image can be rendered in the Mermaid Live editor:
 
-https://mermaid.live/edit#pako:eNpVkk9vozAQxb_KyKdUolH4kwQ4VMqWPeQQqUo4VVwsM4C1YLPG1m6a5rt3gCRqkRDMm_d7Y1u-MKFLZCmrWv1PNNxYyLNCAT1ciFzaFlO47GBoNLUqWTuDYEf5-nBlOAgzuVqtajRQjoLsrdQKdAW2wRvpQSPrpqXXSlWD7HpK5coCttihsgOFzrHHRcGO-NdJMzeKQu0Ub8-DHAr2BM_P8HbM6PMC2YLmy1o9zWBG4CzcfHl2mnz7xb7r5zF8XNnNvyf_z8bMvcDnSTsjEF7pgDz45WRbws5YWXFhh0_ICcxxGDdCxBz2U5tTxhqOOO6UqMPiwKWyqLgSeKMORH1Tp7RCMY_VRpYstcahxzo0HR9LdhmpgtGpduRN6bfk5k_BCnUlpufqXevujhnt6oalFW8HqlxfcouZ5LXh3UPlzurTWYk7g6W02hzmezFdjzv5e-o8slGVaF61U5alYbKehrP0wv5TGW2Xkb9JQt9fB2EUbql7Zqm_TEhcBXGSbKPADzbrq8c-pvWulsk2jqMgWkVhHPubOLl-AUX11pY
+https://mermaid.live/edit#pako:eNpVkk2PmzAQhv_KyKesxEaBkPBxWCldesghUrXhVHGxzADegk2NUZtm8987YBLtIiEx78zzYFu-MqFLZCmrWv1HNNxYyLNCAT1ciFzaFlO4HmBoNLUqWY8GwU7x7TGV4SDMPNVqVaOBcgpkb6VWoCuwDS6kB42sm5ZeK1UNsuvJypUFbLFDZQeSOu3bqmBv-HuUxjWKQh0Uby-DHAr2BM_P8EO_o7DweQgyLdbUe4FsRYuStXpytoxsLljgHEWjpOAtuBjOPS7ocXXserccPu1gURxJ8bXhVC_wcdajEQivdJAefBtlW8LBWFlxYYcPyAnMcZg2TISTfc2cZappN9OJEHVanbhUFhVXAhfqRNSndLYVinmsNrJkqTUjeqxD0_GpZNeJKhidfkezKX2W3PwqWKFuxPRc_dS6u2NGj3XD0oq3A1VjX3KLmeS14d0j5aPV54sSdwZLabU5ufszX6M7-X3uPNyoSjSvelSWpdu9P_-cpVf2l8owWof-Ptn6_i7Yhtto57ELS_11QuEmiJMkCgM_2O9uHvs3r3ezTqI4DoNw4-_jONhFu9t_oszlhA
 
-The mermaid source:
+The mermaid source (with arrows changed to use a single hypen -> so it can be included within a comment):
 
 flowchart TD
     accTitle: {A short figure title}
     accDescr: {A longer description of the figure, highlighting important elements}
 
-    R("Requirements\nAnalysis") -- PRD -> D(Design)
-    D("Design") -- TDS -> I(Implementation)
+    R("Requirements\nAnalysis") -- Project Requirements Doc. -> D(Design)
+    D("Design") -- Technical Design Spec. -> I(Implementation)
     I("Implementation") -> |Source Code, Build Artifacts| T("Testing")
     T("Testing") -> |Test Reports| M(Maintenance)
     M("Maintenance")
@@ -639,11 +640,7 @@ compromised through prompt injection or simply makes an incorrect
 assumption, it may perform destructive actions very quickly. Recent
 research has demonstrated that compromised coding agents can execute
 unauthorised commands, steal credentials, and exfiltrate data.</p></li>
-</ul><p>Again, the most effective ways to mitigate these risks are well
-established software engineering practices: apply least privilege,
-review AI-generated outputs, verify dependencies, protect sensitive
-data, and ensure that high-risk actions are subject to human review.</p>
-<ul><li><p><strong>Data Exposure</strong> - can occur when sensitive
+<li><p><strong>Data Exposure</strong> - can occur when sensitive
 information is included in prompts or when AI tools access project
 files, credentials, source code, or proprietary information. In some
 cases, prompt injection attacks can be used to extract confidential data
@@ -653,7 +650,11 @@ exploits AI hallucinations. An AI tool may recommend a software package
 that does not actually exist, and attackers can then create a malicious
 package with that name, hoping developers or AI agents will install it
 automatically.</p></li>
-</ul></section><section><h2 class="section-heading" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+</ul><p>Again, the most effective ways to mitigate these risks are well
+established software engineering practices: apply least privilege,
+review AI-generated outputs, verify dependencies, protect sensitive
+data, and ensure that high-risk actions are subject to human review.</p>
+</section><section><h2 class="section-heading" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 <hr class="half-width"><ul><li>
 <a href="https://www.theregister.com/software/2025/07/21/vibe-coding-service-replit-deleted-production-database/719783" class="external-link">“Vibe
 coding service Replit deleted user’s production database, faked data,
@@ -755,8 +756,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/01-intro.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/01-intro.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-17",
-  "datePublished": "2026-06-17"
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>
