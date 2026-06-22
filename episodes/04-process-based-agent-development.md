@@ -115,7 +115,7 @@ which we will then adapt to suit our needs more specifically.
 In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
 
 ```
-/create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope
+/create-agent a requirements gathering agent in .github/agents that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope. Do not create any implementation.
 ```
 
 Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
@@ -150,7 +150,8 @@ Your job is to create or refine a requirements document at project-docs/requirem
 ## Constraints
 - DO NOT invent implementation details.
 - DO NOT expand scope beyond what the prompt supports.
-- DO NOT write design or implementation plans.
+- DO NOT write a design.
+- DO NOT create an implementation.
 - ONLY produce requirements content.
 
 ## Approach
@@ -313,7 +314,7 @@ A good design specification provides a clear, reviewable blueprint that guides d
 With that in mind, let's ask Copilot to create an agent for this:
 
 ```
-/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
+/create-agent an software architect agent in .github/agents that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document. Do not create any implementation.
 ```
 
 Again, the agent file may need to be moved to `.github/agents`.
@@ -331,7 +332,7 @@ improve your design agent by doing the following:
 - Review the agent in general and refine it as you see fit.
 - Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
 - Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
-- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory.
+- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory based on `requirements.md`.
 
 :::::::::::::::::::::::::: solution
 
@@ -394,7 +395,7 @@ A good implementation should provide a complete and functional, maintainable, an
 It should include clear, reviewable outputs such as source code, automated tests, documentation, and evidence that the software behaves as intended.
 
 ```
-/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
+/create-agent an implementer agent in .github/agents that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
 ```
 
 As before, the agent file may need to be moved to `.github/agents`.
@@ -446,7 +447,7 @@ You should now find an initial implementation has appeared within your repositor
 As before, with a skeptical mindset:
 
 - Carefully review the generated implementation.
-- Run the implementation
+- Run and review the implementation.
 
 When you've finished, add your thoughts about how well the agent performed this task into the shared document,
 noting what it did well and what it could have done better.
