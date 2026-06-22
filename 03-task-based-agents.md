@@ -6,7 +6,12 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- FIXME
+- How can I use the planning agent to structure software development before implementation?
+- What are skills and how do I create reusable skills for common development tasks?
+- What is the format and structure of a skill definition file?
+- Why is testing important and what is a unit test?
+- How do I write and run unit tests using pytest?
+- How do I review and improve AI-generated skills and tests?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

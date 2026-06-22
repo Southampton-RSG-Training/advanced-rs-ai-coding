@@ -91,6 +91,9 @@ to represent the data, where:
 - Each column represents a successive day in the trial
 - Each cell represents an inflammation reading on a given day for a patient
 
+Note that the CSV files themselves contain only the data,
+and don't have a header row with names for each column.
+
 The goal of the project is to create a software tool that provides basic statistical analyses (mean value, minimum value, maximum value, and standard deviation),
 for a given dataset.
 The project has a few constraints, specifically that it must be written in Python and use the Numpy and Matplotlib Python libraries,
