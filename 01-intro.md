@@ -171,8 +171,8 @@ But what does software engineering tell us?
 Whether we follow a formal development process or not,
 in terms of development every software project moves through the activities of:
 
-- **Requirements Analysis** - understanding what needs to be built
-- **Design** - determining from the requirements how it should be structured (as an archtecture), the separate components within that architecture, and other technical decisions
+- **Requirements Analysis** - understanding what needs to be built (capturing within a Product Requirements Document, or PRD)
+- **Design** - determining from the requirements how it should be structured (as an architecture), the separate components within that architecture, and other technical decisions (captured within a Technical Design Specification, or TDS)
 - **Implementation** - doing the coding and other implementation activities to create the solution based on the design
 - **Testing** - verifying that the implementation is correct and behaves as expected
 - **Maintenance** - unless the output is a transitory one and will be discarded, further development necessary to ensure the software continues to function as required in the longer term
@@ -182,16 +182,16 @@ in terms of development every software project moves through the activities of:
 <!--
 Source of the above image can be rendered in the Mermaid Live editor:
 
-https://mermaid.live/edit#pako:eNpVkk9vozAQxb_KyKdUolH4kwQ4VMqWPeQQqUo4VVwsM4C1YLPG1m6a5rt3gCRqkRDMm_d7Y1u-MKFLZCmrWv1PNNxYyLNCAT1ciFzaFlO47GBoNLUqWTuDYEf5-nBlOAgzuVqtajRQjoLsrdQKdAW2wRvpQSPrpqXXSlWD7HpK5coCttihsgOFzrHHRcGO-NdJMzeKQu0Ub8-DHAr2BM_P8HbM6PMC2YLmy1o9zWBG4CzcfHl2mnz7xb7r5zF8XNnNvyf_z8bMvcDnSTsjEF7pgDz45WRbws5YWXFhh0_ICcxxGDdCxBz2U5tTxhqOOO6UqMPiwKWyqLgSeKMORH1Tp7RCMY_VRpYstcahxzo0HR9LdhmpgtGpduRN6bfk5k_BCnUlpufqXevujhnt6oalFW8HqlxfcouZ5LXh3UPlzurTWYk7g6W02hzmezFdjzv5e-o8slGVaF61U5alYbKehrP0wv5TGW2Xkb9JQt9fB2EUbql7Zqm_TEhcBXGSbKPADzbrq8c-pvWulsk2jqMgWkVhHPubOLl-AUX11pY
+https://mermaid.live/edit#pako:eNpVkk2PmzAQhv_KyKesxEaBkPBxWCldesghUrXhVHGxzADegk2NUZtm8987YBLtIiEx78zzYFu-MqFLZCmrWv1HNNxYyLNCAT1ciFzaFlO4HmBoNLUqWY8GwU7x7TGV4SDMPNVqVaOBcgpkb6VWoCuwDS6kB42sm5ZeK1UNsuvJypUFbLFDZQeSOu3bqmBv-HuUxjWKQh0Uby-DHAr2BM_P8EO_o7DweQgyLdbUe4FsRYuStXpytoxsLljgHEWjpOAtuBjOPS7ocXXserccPu1gURxJ8bXhVC_wcdajEQivdJAefBtlW8LBWFlxYYcPyAnMcZg2TISTfc2cZappN9OJEHVanbhUFhVXAhfqRNSndLYVinmsNrJkqTUjeqxD0_GpZNeJKhidfkezKX2W3PwqWKFuxPRc_dS6u2NGj3XD0oq3A1VjX3KLmeS14d0j5aPV54sSdwZLabU5ufszX6M7-X3uPNyoSjSvelSWpdu9P_-cpVf2l8owWof-Ptn6_i7Yhtto57ELS_11QuEmiJMkCgM_2O9uHvs3r3ezTqI4DoNw4-_jONhFu9t_oszlhA
 
-The mermaid source:
+The mermaid source (with arrows changed to use a single hypen -> so it can be included within a comment):
 
 flowchart TD
     accTitle: {A short figure title}
     accDescr: {A longer description of the figure, highlighting important elements}
 
-    R("Requirements\nAnalysis") -- PRD -> D(Design)
-    D("Design") -- TDS -> I(Implementation)
+    R("Requirements\nAnalysis") -- Project Requirements Doc. -> D(Design)
+    D("Design") -- Technical Design Spec. -> I(Implementation)
     I("Implementation") -> |Source Code, Build Artifacts| T("Testing")
     T("Testing") -> |Test Reports| M(Maintenance)
     M("Maintenance")
@@ -233,16 +233,17 @@ AI-generated code should therefore be reviewed and tested before use.
 If an agent is compromised through prompt injection or simply makes an incorrect assumption, it may perform destructive actions very quickly.
 Recent research has demonstrated that compromised coding agents can execute unauthorised commands, steal credentials, and exfiltrate data.
 
-Again, the most effective ways to mitigate these risks are well established software engineering practices:
-apply least privilege, review AI-generated outputs, verify dependencies, protect sensitive data,
-and ensure that high-risk actions are subject to human review.
-
 - **Data Exposure** - can occur when sensitive information is included in prompts or when AI tools access project files, credentials, source code, or proprietary information.
 In some cases, prompt injection attacks can be used to extract confidential data from development environments.
 
 - **Slopsquatting** - this is where a bad actor exploits AI hallucinations.
 An AI tool may recommend a software package that does not actually exist,
 and attackers can then create a malicious package with that name, hoping developers or AI agents will install it automatically.
+
+Again, the most effective ways to mitigate these risks are well established software engineering practices:
+apply least privilege, review AI-generated outputs, verify dependencies, protect sensitive data,
+and ensure that high-risk actions are subject to human review.
+
 
 ## References
 
