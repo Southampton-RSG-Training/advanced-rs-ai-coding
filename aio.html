@@ -896,6 +896,8 @@ day trial.</p>
 <li>Each cell represents an inflammation reading on a given day for a
 patient</li>
 </ul>
+<p>Note that the CSV files themselves contain only the data, and don’t
+have a header row with names for each column.</p>
 <p>The goal of the project is to create a software tool that provides
 basic statistical analyses (mean value, minimum value, maximum value,
 and standard deviation), for a given dataset. The project has a few
@@ -1149,7 +1151,14 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>FIXME</li>
+<li>How can I use the planning agent to structure software development
+before implementation?</li>
+<li>What are skills and how do I create reusable skills for common
+development tasks?</li>
+<li>What is the format and structure of a skill definition file?</li>
+<li>Why is testing important and what is a unit test?</li>
+<li>How do I write and run unit tests using pytest?</li>
+<li>How do I review and improve AI-generated skills and tests?</li>
 </ul>
 </div>
 </div>
@@ -2406,42 +2415,54 @@ enter:</p>
 <pre><code>/create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope</code></pre>
 <p>Here, our request briefly captures the above points, explicitly
 requesting the generation of a <code>requirements.md</code> document
-within a <code>project-docs</code> directory. You should find the
-created agents file in the <code>.github/agents</code> directory.</p>
-<p>This generally produces a reasonable definition, although given the
-probablistic nature of LLMs, yours will differ:</p>
+within a <code>project-docs</code> directory.</p>
+<p>You’ll find a new file, typically ending <code>.agent.md</code>, has
+been created. This may be located in the <code>.github/agents</code>
+directory or - oddly - in the repository root. However, for it to be
+seen and be usable from the chat, it needs to be in this location so
+Copilot can find it.</p>
+<p>If it’s not already in this directory, create the directory and move
+the file over, e.g.</p>
 <div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">mkdir</span> .github/agents</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">mv</span> requirements-gatherer.agent.md .github/agents</span></code></pre>
+</div>
+<p>Finally, to be consistent for the training, rename the agents file as
+<code>requirements-gatherer.agent.md</code>,</p>
+<p>This generation process generally produces a reasonable definition,
+although given the probablistic nature of LLMs, yours will differ:</p>
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="co">---</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a><span class="fu">## Constraints</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1" aria-label="code-block-3-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1" aria-label="code-block-3-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1" aria-label="code-block-3-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1" aria-label="code-block-3-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1" aria-label="code-block-3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1" aria-label="code-block-3-16"></a><span class="fu">## Approach</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1" aria-label="code-block-3-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1" aria-label="code-block-3-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1" aria-label="code-block-3-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1" aria-label="code-block-3-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1" aria-label="code-block-3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1" aria-label="code-block-3-22"></a><span class="fu">## Output Format</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1" aria-label="code-block-3-23"></a>Return a markdown requirements document with these sections:</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1" aria-label="code-block-3-24"></a><span class="ss">- </span>Assumptions</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1" aria-label="code-block-3-25"></a><span class="ss">- </span>User Stories</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1" aria-label="code-block-3-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="an">description:</span><span class="co"> "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="an">tools:</span><span class="co"> [read, search, edit]</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="co">---</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1" aria-label="code-block-4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1" aria-label="code-block-4-10"></a><span class="fu">## Constraints</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1" aria-label="code-block-4-11"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1" aria-label="code-block-4-12"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1" aria-label="code-block-4-13"></a><span class="ss">- </span>DO NOT write design or implementation plans.</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1" aria-label="code-block-4-14"></a><span class="ss">- </span>ONLY produce requirements content.</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1" aria-label="code-block-4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1" aria-label="code-block-4-16"></a><span class="fu">## Approach</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1" aria-label="code-block-4-17"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1" aria-label="code-block-4-18"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1" aria-label="code-block-4-19"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1" aria-label="code-block-4-20"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1" aria-label="code-block-4-21"></a></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1" aria-label="code-block-4-22"></a><span class="fu">## Output Format</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1" aria-label="code-block-4-23"></a>Return a markdown requirements document with these sections:</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1" aria-label="code-block-4-24"></a><span class="ss">- </span>Assumptions</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1" aria-label="code-block-4-25"></a><span class="ss">- </span>User Stories</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1" aria-label="code-block-4-26"></a><span class="ss">- </span>Success Metrics</span></code></pre>
 </div>
-<p>First, to be consistent for the training, rename the agents file as
-<code>requirements-gatherer.agent.md</code>.</p>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
 subsections.</p>
@@ -2504,8 +2525,10 @@ behaviour we wanted it to address.</p>
 <div id="limitations" class="callout-inner">
 <h3 class="callout-title">Limitations?</h3>
 <div class="callout-content">
+<p>3 mins.</p>
 <p>This isn’t a bad start. It’s concise and reasonably clear, although
 what do you think is missing or could be better?</p>
+<p>Add your thoughts to the shared document.</p>
 </div>
 </div>
 </div>
@@ -2514,7 +2537,7 @@ what do you think is missing or could be better?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>Be more explicit with for what we want, e.g. include the user story
@@ -2531,23 +2554,10 @@ possible</li>
 <li>It might be useful to specify the specific AI model to use for this
 agent, if we can</li>
 </ul>
+<p>Ideally, we should also use the Chat Customisations Evaluations
+extension to check our agent file and amend as needed, since it’s also
+designed to review agent definitions.</p>
 </div>
-</div>
-</div>
-</div>
-<div id="limitations" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<span class="callout-header">Discussion</span>
-<div id="limitations" class="callout-inner">
-<h3 class="callout-title">Limitations?<em> (continued)</em>
-</h3>
-<div class="callout-content">
-<p>FIXME: use chat customisations evaluations extension to check agent
-file, amend exercise above as needed FIXME: add “This extension helps us
-find contradictions in agent logic, persona, as well as identiying other
-ambiguities.”</p>
 </div>
 </div>
 </div>
@@ -2558,14 +2568,14 @@ ambiguities.”</p>
 <p>Let’s take a look at <a href="files/agents/requirements-gatherer.agent.md.txt">a version of this
 agent</a> that takes these limitations into account.</p>
 <p>The revised YAML front matter looks like:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="pp">----</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="pp">----</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="pp">----</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a><span class="pp">----</span></span></code></pre>
 </div>
 <p>So here, we’ve updated the allowed tools with more finely-grained
 permissions, restricting it to reading files, creating directories and
@@ -2622,7 +2632,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>When first developing agents, similarly to how we develop code, a
 typical process is to refine the behaviour of the agent over multiple
@@ -2656,8 +2666,9 @@ specification provides a clear, reviewable blueprint that guides
 development while remaining flexible enough to accommodate
 implementation details discovered during coding.</p>
 <p>With that in mind, let’s ask Copilot to create an agent for this:</p>
-<p>FIXME: get them to copy over the skills for the implementer agent</p>
 <pre><code>/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.</code></pre>
+<p>Again, the agent file may need to be moved to
+<code>.github/agents</code>.</p>
 <div id="a-better-design-agent" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -2672,9 +2683,9 @@ your design agent by doing the following:</p>
 <ul>
 <li>Rename the produced agent file (probably created in
 <code>.github/agents</code>) to <code>architect.agent.md</code>.</li>
-<li>Review the agent in general and refine it as you see fit. Aim to
-reduce ambiguities and ensure it follows a sensible approach that’s in
-line with our process and other agents so far.</li>
+<li>Review the agent in general and refine it as you see fit.</li>
+<li>Aim to reduce ambiguities and ensure it follows a sensible approach
+that’s in line with our process and other agents so far.</li>
 <li>Similarly, revise the YAML front matter to improve the
 <code>description</code>, <code>tools</code>, and <code>models</code>
 fields (the latter two will likely be very similar!).</li>
@@ -2689,9 +2700,10 @@ document in the <code>project-docs</code> directory.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<p>FIXME: add example improved version of design agent</p>
+<p>An <a href="files/agents/architect.agent.md.txt">example design
+agent</a>.</p>
 </div>
 </div>
 </div>
@@ -2708,10 +2720,9 @@ document in the <code>project-docs</code> directory.</li>
 <code>Agent/Ask/Plan</code> menu, ensure the <code>GPT-5.4 mini</code>
 model is selected, and enter the following:</p>
 <pre><code>Produce design</code></pre>
-<p>FIXME: add example tech spec to files</p>
 <p>You should find a <code>technical_spec.md</code> file in the
 <code>project-docs</code> directory, hopefully with the sections we
-requested, <a href="files/example-agent-output/technical_spec.html">similar to this
+requested, <a href="files/example-agent-output/technical_spec.md.txt">similar to this
 one</a>.</p>
 </div>
 </div>
@@ -2744,7 +2755,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We’re settling into a pattern now: have copilot draft an agent,
 review and refine it, run it to produce the actual output we want, and
@@ -2772,14 +2783,8 @@ follows the approved design. It should include clear, reviewable outputs
 such as source code, automated tests, documentation, and evidence that
 the software behaves as intended.</p>
 <pre><code>/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.</code></pre>
-<div class="section level3">
-<h3 id="reusing-our-skills">Reusing our Skills<a class="anchor" aria-label="anchor" href="#reusing-our-skills"></a>
-</h3>
-<p>An incredibly neat feature of agents is that they are able to make
-use of skills. Let’s modify our generated agent file to make use of
-these.</p>
-<p>FIXME: add in how to amend agent file to use skills where
-suitable</p>
+<p>As before, the agent file may need to be moved to
+<code>.github/agents</code>.</p>
 <div id="a-better-implementer-agent" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -2809,9 +2814,10 @@ fields (the latter two will likely be very similar!).</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
-<p>FIXME: add example improved version of implementer agent</p>
+<p>An <a href="files/agents/implementer.agent.md.txt">example
+implementer agent</a>.</p>
 </div>
 </div>
 </div>
@@ -2830,7 +2836,6 @@ model is selected, and enter the following:</p>
 <pre><code>Produce implementation</code></pre>
 <p>You should now find an initial implementation has appeared within
 your repository.</p>
-<p>FIXME: add example implementation to a separate example repo?</p>
 </div>
 </div>
 </div>
@@ -2851,7 +2856,6 @@ your repository.</p>
 <p>When you’ve finished, add your thoughts about how well the agent
 performed this task into the shared document, noting what it did well
 and what it could have done better.</p>
-</div>
 </div>
 </div>
 </div>
