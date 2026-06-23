@@ -6,11 +6,10 @@ exercises: 0
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How can an agentic approach assist with software development phases other than implementation?
-- How do I create and configure custom agents for my development workflow?
-- What is the difference between a skill and an agent?
-- How can I structure a multi-stage development process using agents?
-- How do I ensure quality and correctness throughout an agent-driven development workflow?
+- Why should we use specialised AI agents instead of a single general-purpose agent?
+- What is specification-driven development and how does it support AI-assisted software development?
+- How can we specify agents that assist with the different stages of the software development process as a whole?
+- What permissions, constraints, and guardrails should be defined for AI agents?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
