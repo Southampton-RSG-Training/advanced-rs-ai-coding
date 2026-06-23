@@ -56,9 +56,9 @@ It's installed by default on newer releases of VSCode,
 so may not be installed on older installations.
 
 1. Firstly, select the extensions icon, then type in "Copilot" into the search box at the top, and it'll give you a list of all Copilot-related extensions.
-1. Select the one which says `GitHub Copilot` from GitHub, which is the official Copilot extension. You may also see the `GitHub Copilot Chat` extension, which is automatically installed along with this one.
+1. Select the one which says `GitHub Copilot Chat` from GitHub, which is the official Copilot extension.
 1. Either:
-   - It says `Installed`, in which case you don't need to do anything.
+   - It says `Disable AI Features`, in which case you don't need to do anything.
    - It says `Install`, in which cae select that button to install it. It might take a minute - you can see a sliding blue line in the top left to indicate it's working. You'll be presented with a "Welcome" page for the extension which covers the main features. Select `Mark Done`.
 
 We also need to ensure we're logged into our GitHub account.
