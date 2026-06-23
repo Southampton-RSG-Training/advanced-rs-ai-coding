@@ -1,0 +1,47 @@
+# Description of the Tool
+
+Create a command line tool in Python that reads a single CSV data file from a data directory provided as an argument and produces PNG plots that visualise the mean, minimum, maximum, and standard deviation for each column in the dataset.
+
+# Assumptions
+
+- The tool is invoked from the command line with a path to a data directory.
+- The data directory contains a number of CSV files to process.
+- The CSV file is tabular data with columns that can be analysed numerically.
+- NumPy is available for statistical calculations.
+- Matplotlib is available for generating plots.
+- PNG is the required output image format.
+
+# User Stories
+
+- As a user, I want to provide a data directory as input so that the tool can locate the CSV files to process.
+  - Acceptance criteria:
+    - The tool accepts a directory path argument.
+    - The tool identifies the CSV files within that directory.
+
+- As a user, for each CSV file, I want the tool to calculate mean, minimum, maximum, and standard deviation values for each column so that I can understand the distribution of the data.
+  - Acceptance criteria:
+    - The tool produces values for mean, minimum, maximum, and standard deviation for each column.
+    - The calculations are based on NumPy.
+
+- As a user, I want the tool to create PNG plots for each CSV file so that I can visually inspect the calculated statistics.
+  - Acceptance criteria:
+    - The tool generates plot images in PNG format.
+    - The plots represent mean, minimum, maximum, and standard deviation across columns.
+
+- As a user, I want the plots saved to disk so that I can review them after the tool finishes.
+  - Acceptance criteria:
+    - The tool writes its plot outputs as files rather than only displaying them interactively.
+
+# Success Metrics
+
+- A user can run the tool with a data directory argument and obtain PNG plot files.
+- The generated plots reflect the mean, minimum, maximum, and standard deviation for each column in a CSV file.
+- The tool uses NumPy for statistical analysis and Matplotlib for plotting.
+- The tool works without requiring manual post-processing of the output files.
+
+# Out of Scope
+
+- Supporting non-CSV input formats.
+- Building a graphical user interface.
+- Defining a specific plot style, layout, or naming convention beyond PNG output.
+- Adding data cleaning, transformation, or advanced analytics beyond the requested summary statistics.

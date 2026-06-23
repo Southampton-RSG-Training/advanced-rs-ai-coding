@@ -10,8 +10,7 @@ This skill automatically fixes style issues identified by pylint in Python files
 
 ## Constraints
 
-- ONLY make modifications based on output from pylint
-- ONLY make modifications to Python source code files
+- ONLY make modifications based on output from pylint.
 
 ## Approach
 
@@ -28,4 +27,5 @@ This skill automatically fixes style issues identified by pylint in Python files
 - If pylint is not found after activating the virtual environment, stop and inform the user that pylint must be installed before proceeding.
 
 ```bash
-python -m *.py
+python -m pylint src/
+```

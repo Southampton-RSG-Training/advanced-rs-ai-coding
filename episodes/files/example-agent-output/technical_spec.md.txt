@@ -1,0 +1,152 @@
+# Technical Specification
+
+## Assumptions
+
+- The tool is a Python command-line application invoked with a single argument that identifies the input data directory.
+- The input directory may contain one or more CSV files, and the tool processes every CSV file it finds there.
+- Each CSV file contains tabular numeric data suitable for column-wise statistical analysis.
+- NumPy is used for all statistical calculations, and Matplotlib is used for plot generation.
+- The required output artifact is a PNG image file for each processed CSV file.
+- The design does not depend on a graphical user interface or interactive plot display.
+- No data cleaning, normalization, or non-CSV format support is required.
+
+## Architecture Overview
+
+The system is a small batch-oriented pipeline with four stages: command-line input, file discovery, statistical analysis, and plot generation/output. The CLI accepts a directory path, validates that it exists, and enumerates the CSV files inside it. Each CSV file is then loaded into a numeric data structure, summary statistics are computed column by column, and the results are rendered into a PNG plot saved to disk.
+
+The design keeps these concerns separated so that the file discovery logic does not depend on the statistics implementation, and the plotting layer only consumes already-computed summary values. This makes the workflow easy to reason about and keeps each part aligned with the requirements.
+
+## Component Structure and Responsibilities
+
+### 1. Command-Line Interface
+
+Responsibility: accept the data directory argument, validate basic usage, and initiate processing.
+
+Inputs:
+- A path to the directory containing CSV files.
+
+Outputs:
+- A processing request for the discovered CSV files.
+- User-facing errors for invalid arguments or missing directories.
+
+Dependencies:
+- The file discovery component.
+
+Notes:
+- The CLI should be minimal and deterministic.
+- Argument parsing should distinguish between missing input, invalid paths, and successful execution.
+
+### 2. File Discovery
+
+Responsibility: enumerate CSV files in the supplied directory and provide the list of files to process.
+
+Inputs:
+- The validated directory path from the CLI.
+
+Outputs:
+- A collection of CSV file paths.
+
+Dependencies:
+- The local filesystem.
+
+Notes:
+- Only files with the CSV extension are considered.
+- The component should define a stable traversal order so repeated runs produce predictable output ordering.
+
+### 3. Data Loading
+
+Responsibility: read one CSV file into a form suitable for numeric analysis.
+
+Inputs:
+- A single CSV file path.
+
+Outputs:
+- A numeric matrix or equivalent column-oriented data structure.
+
+Dependencies:
+- Standard CSV parsing facilities and NumPy-compatible data handling.
+
+Notes:
+- The loader should preserve column structure so statistics can be computed independently for each column.
+- Any CSV-specific parsing assumptions should remain narrow and consistent with the data files used by the tool.
+
+### 4. Statistics Calculator
+
+Responsibility: compute mean, minimum, maximum, and standard deviation for each column in the loaded dataset.
+
+Inputs:
+- The numeric dataset from the loader.
+
+Outputs:
+- Per-column summary statistics for mean, minimum, maximum, and standard deviation.
+
+Dependencies:
+- NumPy.
+
+Notes:
+- All summary values must come from NumPy-based calculations to match the requirements.
+- The output should be structured so the plotting layer can consume it without additional transformation.
+
+### 5. Plot Generator
+
+Responsibility: create a visual representation of the computed statistics for a single CSV file.
+
+Inputs:
+- The per-column summary statistics.
+
+Outputs:
+- A Matplotlib figure ready to be written as PNG.
+
+Dependencies:
+- Matplotlib.
+
+Notes:
+- The design only requires that the plot represent the mean, minimum, maximum, and standard deviation across columns.
+- Styling, layout, and naming specifics are intentionally left flexible because they are out of scope.
+
+### 6. Output Writer
+
+Responsibility: save the generated plot to disk in PNG format.
+
+Inputs:
+- The generated plot figure.
+- The source CSV file identity used to derive the output filename.
+
+Outputs:
+- A PNG file written to the filesystem.
+
+Dependencies:
+- The filesystem and Matplotlib save functionality.
+
+Notes:
+- The output should be written non-interactively so users can review files after execution completes.
+
+### 7. Orchestration Layer
+
+Responsibility: coordinate the end-to-end flow for each CSV file.
+
+Inputs:
+- The directory path from the CLI.
+- The discovered CSV file list.
+
+Outputs:
+- One PNG plot per CSV file.
+- Completion status for the overall run.
+
+Dependencies:
+- All of the components above.
+
+Notes:
+- The orchestration layer should process files in a predictable order and continue until all valid CSV files are handled.
+- Error handling should be localized so a failure in one file does not obscure which file caused the problem.
+
+## Step-by-Step Implementation Guide
+
+1. Define the command-line entry point that accepts a directory path and performs basic validation.
+2. Implement directory scanning to collect all CSV files in the supplied location in a deterministic order.
+3. Add CSV loading logic that converts one file into a numeric structure suitable for column-wise NumPy operations.
+4. Implement the statistics calculation step for mean, minimum, maximum, and standard deviation on each column.
+5. Build the plotting step that visualizes those summary statistics with Matplotlib.
+6. Add the output-writing step so each plot is saved as a PNG file instead of being shown interactively.
+7. Wire the orchestration flow so the tool repeats the load-analyze-plot-save cycle for every CSV file in the directory.
+8. Validate the end-to-end behavior by running the tool against the provided data directory and confirming that PNG files are created for each CSV input.

@@ -2,14 +2,18 @@
 title: Setup
 ---
 
-This course is for you if you have used GitHub Copilot in the past to improve your existing code, but would like to explore it further to:
+This course is for you if you have used GitHub Copilot in the past to improve your existing code, but would like to explore how to develop a reusable, structured approach using Copilot skills and agents.
 
-- Plan and develop software from scratch based on a defined set of project requirements
-- Create agent skills to support high level, reusable, multi-step tasks that integrate with external tools, services or data sources
-- Improve existing unit test cases and/or generate new unit tests
-- Understand the key security risks associated with using AI coding assistants
-- Use the Model Context Protocol to invoke custom service based tools
-- Understand the fundamentals of using AI coding subagents and multi-agent orchestration
+The learning objectives for the course are:
+
+- Differentiate between modes of AI-assisted software development, from inline assistance through to fully autonomous agents
+- Explain the key risks and security considerations when granting AI agents access to development and production systems
+- Configure constraints and coding standards to guide project-wide AI tool behavior
+- Create reusable, modular AI skills that implement specific development tasks
+- Develop and interpret unit tests to validate AI-generated code
+- Design a specification-driven development workflow using multiple agents across distinct software development lifecycle phases
+- Analyze the trade-offs between task-based planning and process-based multi-agent approaches for different project needs
+- Evaluate AI agent outputs for quality, correctness, and alignment with project specifications before deployment
 
 ## Skills Prerequisites
 

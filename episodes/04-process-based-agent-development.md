@@ -25,13 +25,20 @@ exercises: 0
 
 However, there are some limitations with the approach we have so far with using the built-in planning agent:
 
-- As implied by its name, it actively avoids moving to implementing solutions. By staying in planning mode, conversations are pulled back to planning instead of moving forward. If we want to go further, we need prompts or another mechanism to do that.
-- We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process.
-- It's a single intermediate step where important project needs (requirements) and design details may be missed. Established software development practice separates requirements and design. What if we want to explore the project needs separately to any design considerations?
+- We're completely at the mercy of how the planning agent is designed to operate, which may not fit our working style or process. What if we want to change this approach?
+- The planning agent uses a single planning step where important project needs (requirements) and design considerations may be missed. However, established software development practice separates requirements and design as separate phases.
 
-FIXME: add more downsides
 
-FIXME: add re-cloning the example repo for a fresh start (so they can keep both and compare/reuse later if they want). Get them to copy over the skills
+## Setting Up
+
+Since we'll be approaching the project again using a different perspective and approach,
+let's re-clone the repository with the inflammation data we had earlier in a different location and use that, e.g.
+
+```bash
+cd
+git clone https://github.com/Southampton-RSG-Training/advanced-ai-coding-example.git advanced-ai-agents-example
+cd advanced-ai-agents-example
+```
 
 ## A Process-oriented Approach using Agents
 
@@ -45,6 +52,20 @@ This would give us:
 - Define guardrails and explicit allowable actions: e.g. read-only
 
 Generally, this approach is much quicker than setting up all this context every time for every kind of task - if you have a set way you tend to do something, define an agent to do it.
+
+::::::::::::::::::::::::::::::::: callout
+
+## How do Agents Differ from Skills?
+
+A defines **how** a specific task should be performed.
+It provides instructions, context, knowledge, resources, or procedures that an AI can apply when carrying out a particular activity.
+Skills are typically task-specific.
+
+However, an agent defines **what** should be achieved.
+It is an autonomous or semi-autonomous AI entity that can conduct its own reasoning about objectives,
+make decisions, plan work, and invoke one or more skills to accomplish a goal.
+
+:::::::::::::::::::::::::::::::::::::::::
 
 However, we've seen that different stages of a development process require different mindsets and approaches.
 By creating a single agent that attempts to do everything,
@@ -93,13 +114,26 @@ which we will then adapt to suit our needs more specifically.
 In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
 
 ```
-/create-agent a requirements gathering agent that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope
+/create-agent a requirements gathering agent in .github/agents that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope. Do not create any implementation.
 ```
 
 Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
-You should find the created agents file in the `.github/agents` directory.
 
-This generally produces a reasonable definition,
+You'll find a new file, typically ending `.agent.md`, has been created.
+This may be located in the `.github/agents` directory or - oddly - in the repository root.
+However, for it to be seen and be usable from the chat,
+it needs to be in this location so Copilot can find it.
+
+If it's not already in this directory, create the directory and move the file over, e.g.
+
+```bash
+mkdir .github/agents
+mv requirements-gatherer.agent.md .github/agents
+```
+
+Finally, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`,
+
+This generation process generally produces a reasonable definition,
 although given the probablistic nature of LLMs, yours will differ:
 
 ```markdown
@@ -115,7 +149,8 @@ Your job is to create or refine a requirements document at project-docs/requirem
 ## Constraints
 - DO NOT invent implementation details.
 - DO NOT expand scope beyond what the prompt supports.
-- DO NOT write design or implementation plans.
+- DO NOT write a design.
+- DO NOT create an implementation.
 - ONLY produce requirements content.
 
 ## Approach
@@ -130,8 +165,6 @@ Return a markdown requirements document with these sections:
 - User Stories
 - Success Metrics
 ```
-
-First, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`.
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
 
@@ -176,8 +209,12 @@ Lastly, we have our set of subsections that describe the points of behaviour we 
 
 ## Limitations?
 
+3 mins.
+
 This isn't a bad start.
 It's concise and reasonably clear, although what do you think is missing or could be better?
+
+Add your thoughts to the shared document.
 
 :::::::::::::::::::::::::: solution
 
@@ -188,16 +225,16 @@ It's concise and reasonably clear, although what do you think is missing or coul
 - We should consider more strict permissions for the agent if possible
 - It might be useful to specify the specific AI model to use for this agent, if we can
 
-:::::::::::::::::::::::::::::::::::
+Ideally, we should also use the Chat Customisations Evaluations extension to check our agent file and amend as needed,
+since it's also designed to review agent definitions.
 
-FIXME: use chat customisations evaluations extension to check agent file, amend exercise above as needed
-FIXME: add "This extension helps us find contradictions in agent logic, persona, as well as identiying other ambiguities."
+:::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### A Better Requirements Agent
 
-Let's take a look at [a version of this agent](../learners/files/agents/requirements-gatherer.agent.md) that takes these limitations into account.
+Let's take a look at [a version of this agent](files/agents/requirements-gatherer.agent.md.txt) that takes these limitations into account.
 
 The revised YAML front matter looks like:
 
@@ -227,7 +264,7 @@ Create a command line tool written in Python that reads in a single CSV data fil
 ```
 
 You should find a `requirements.md` file in the `project-docs` directory, hopefully with the sections we requested,
-[similar to this one](../learners/files/example-agent-output/requirements.md).
+[similar to this one](files/example-agent-output/requirements.md.txt).
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -276,8 +313,10 @@ A good design specification provides a clear, reviewable blueprint that guides d
 With that in mind, let's ask Copilot to create an agent for this:
 
 ```
-/create-agent an software architect agent that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document.
+/create-agent an software architect agent in .github/agents that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document. Do not create any implementation.
 ```
+
+Again, the agent file may need to be moved to `.github/agents`.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -290,13 +329,13 @@ improve your design agent by doing the following:
 
 - Rename the produced agent file (probably created in `.github/agents`) to `architect.agent.md`.
 - Review the agent in general and refine it as you see fit.
-Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
+- Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
 - Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
-- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory.
+- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory based on `requirements.md`.
 
 :::::::::::::::::::::::::: solution
 
-FIXME: add example improved version of design agent
+An [example design agent](files/agents/architect.agent.md.txt).
 
 :::::::::::::::::::::::::::::::::::
 
@@ -314,10 +353,8 @@ and enter the following:
 Produce design
 ```
 
-FIXME: add example tech spec to learner files
-
 You should find a `technical_spec.md` file in the `project-docs` directory, hopefully with the sections we requested,
-[similar to this one](../learners/files/example-agent-output/technical_spec.md).
+[similar to this one](files/example-agent-output/technical_spec.md.txt).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -357,15 +394,10 @@ A good implementation should provide a complete and functional, maintainable, an
 It should include clear, reviewable outputs such as source code, automated tests, documentation, and evidence that the software behaves as intended.
 
 ```
-/create-agent an implementer agent that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
+/create-agent an implementer agent in .github/agents that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
 ```
 
-### Reusing our Skills
-
-An incredibly neat feature of agents is that they are able to make use of skills.
-Let's modify our generated agent file to make use of these.
-
-FIXME: add in how to amend agent file to use skills where suitable
+As before, the agent file may need to be moved to `.github/agents`.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -383,7 +415,7 @@ Aim to reduce ambiguities and ensure it follows a sensible approach that's in li
 
 :::::::::::::::::::::::::: solution
 
-FIXME: add example improved version of implementer agent
+An [example implementer agent](files/agents/implementer.agent.md.txt).
 
 :::::::::::::::::::::::::::::::::::
 
@@ -398,12 +430,10 @@ ensure the `GPT-5.4 mini` model is selected,
 and enter the following:
 
 ```
-Produce implemmentation
+Produce implementation
 ```
 
 You should now find an initial implementation has appeared within your repository.
-
-FIXME: add example implementation to a separate example repo?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -416,25 +446,53 @@ FIXME: add example implementation to a separate example repo?
 As before, with a skeptical mindset:
 
 - Carefully review the generated implementation.
-- Run the implementation
+- Run and review the implementation.
 
 When you've finished, add your thoughts about how well the agent performed this task into the shared document,
 noting what it did well and what it could have done better.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-FIXME: update the agent to have all the perms necessary to execute scripts and set environments
-FIXME: when executing agent, list steps it typically goes through, e.g. setup venv
-
 
 ## Summary
 
-FIXME: how to take this approach further? split technical specification into design/implementation tasks? maintenance? specialise further for agile development? i.e. whatever you want. but be sure it holds to the principles of gated reviews, simplicity, and reducing ambiguity.
-FIXME: existing tools - e.g. https://github.com/github/spec-kit
+In this episode, we've explored a process-based approach to software development using custom agents rather than relying on a single planning tool.
+By separating requirements, design, and implementation into distinct phases with dedicated agents,
+we've established a workflow that maintains clarity and enables careful review at each stage,
+whilst enabling specifications to themselves become **executable**.
+
+This approach is highly adaptable and can be extended in many ways to suit your specific needs:
+
+- **Specialization for Your Domain** - the agents we've created are really just a place to begin.
+You can tailor them to your research or project domain by refining their instructions and defining the exact output format your team needs.
+
+- **Further Process Decomposition** - you can split the technical specification phase into separate design and implementation stages with their own separate agents,
+or add additional phases such as testing or security review.
+Each stage should produce a reviewable artifact before moving to the next.
+
+- **Maintenance and Evolution** - create agents to assist with ongoing maintenance tasks such as bug triage, dependency updates, high-level code review (which is very useful), or documentation updates.
+These can follow the same patterns as your development agents.
+
+- **Agile Workflows** - adapt this approach for agile development by creating agents for sprint planning,
+creating user story refinement agents, or defining agents for specific agile ceremonies that generate artifacts for team review.
+
+If you wish to explore this approach further, the [GitHub Spec Kit](https://github.com/github/spec-kit) provides a comprehensive take on this approach,
+bundling a host of AI-assisted software development definitions and tools to support spec-driven development.
+
+Whatever direction you take, maintain three core principles that make this approach effective:
+
+- Every agent and its output should be reviewed and approved before proceeding to the next stage
+- Keep each agent focused on a single responsibility to minimize ambiguity and context size
+- Be explicit in constraints, approach, and how you want the output to guide consistent and predictable behavior
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- FIXME
+- Create separate agents for distinct development phases to maintain clarity and enable careful review.
+- Custom agents provide more control and flexibility than built-in planning tools.
+- Use YAML front matter to specify agent metadata, tools, and permissions following the principle of least privilege.
+- Each agent output should be reviewed and refined before proceeding to the next phase.
+- Specification-driven development reduces ambiguity and keeps developers in control of the process.
+- Extend this approach by tailoring agents to your domain, adding new phases, or creating agents for maintenance and agile workflows.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
