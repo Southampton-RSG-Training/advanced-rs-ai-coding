@@ -139,7 +139,9 @@ although given the probablistic nature of LLMs, yours will differ:
 ```markdown
 ---
 description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, and success metrics."
+name: "Requirements Gatherer"
 tools: [read, search, edit]
+argument-hint: "Describe the feature, problem, or product idea to turn into a requirements spec."
 user-invocable: true
 ---
 You are a specialist at turning a prompt into a concise requirements specification.
@@ -160,10 +162,7 @@ Your job is to create or refine a requirements document at project-docs/requirem
 4. Keep the document focused on requirements rather than solutions.
 
 ## Output Format
-Return a markdown requirements document with these sections:
-- Assumptions
-- User Stories
-- Success Metrics
+Return the completed requirements specification content and confirm that it was written to project-docs/requirements.md.
 ```
 
 Agent definitions tend to follow a common pattern of defining agent metadata, role, and aspects of its overall behaviour separated into subsections.
@@ -218,7 +217,7 @@ Add your thoughts to the shared document.
 
 :::::::::::::::::::::::::: solution
 
-- Be more explicit with for what we want, e.g. include the user story format
+- Be more explicit with for what we want, e.g. include the user story format, the output format of the specification document
 - It would be useful for our agent to ask questions when things aren't clear, instead of making unnecessary assumptions
 - An accepted practice when creating user stories is to create ways to validate that they are correct, i.e. with acceptance criteria for each one
 - Within our output doc, it could be useful to include what is out of scope for the project as a section
@@ -241,7 +240,10 @@ The revised YAML front matter looks like:
 ```yaml
 ----
 description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."
+name: "Requirements Gatherer"
 tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search]
+argument-hint: "Describe the feature, problem, or product idea to turn into a requirements spec."
+user-invocable: true
 model: GPT-5.4 mini (copilot)
 ----
 ```
@@ -251,7 +253,7 @@ So here, we've updated the allowed tools with more finely-grained permissions, r
 We've also included another parameter to explicitly specify the agent model to use.
 For the purpose of this training, we'll use the GPT-5.4 mini model.
 
-We can also see the revised subsections address our other concerns; asking clarifying questions when necessary, explicitly providing the user story format, and including a section on what is out of scope in the requirements spec.
+We can also see the revised subsections address our other concerns; asking clarifying questions when necessary, explicitly providing the user story format, and including a section on the contents of the spec and what is out of scope in it.
 
 ### Running our Requirements Agent
 
@@ -276,7 +278,9 @@ So with a skeptical mindset:
 
 - Carefully review the generated requirements document and ensure it makes sense to you.
 - Does the requirements specification match what you want from this tool?
-- Ensure you address any incorrect assumptions.
+- Ensure you address any incorrect assumptions:
+*in particular, does the spec correctly assume the tool should process all files within the `data/` directory,
+and not just one?*
 - Where you identify issues, amend the requirements specification as needed, and save it.
 
 Of course, your requirements specifications will be different!
