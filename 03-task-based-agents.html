@@ -118,7 +118,7 @@
     <a id="search-button" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: NaN%" aria-valuenow="NaN" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">NaN%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 26%" aria-valuenow="26" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">26%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -230,7 +230,6 @@
         <ul><li><a href="#using-the-built-in-plan-agent">Using the Built-in Plan Agent</a></li>
 <li><a href="#using-skills-for-on-demand-coding-tasks">Using Skills for On-demand Coding Tasks</a></li>
 <li><a href="#a-docstring-writer-skill">A Docstring Writer Skill</a></li>
-<li><a href="#a-code-linter-skill">A Code Linter Skill</a></li>
 <li><a href="#a-unit-test-builder-skill">A Unit Test Builder Skill</a></li>
 <li><a href="#a-documentation-skill">A Documentation Skill</a></li>
 <li><a href="#summary">Summary</a></li>
@@ -307,7 +306,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Planning and Task-based Approach to Software Development</h1>
-        <p>Last updated on 2026-06-22 |
+        <p>Last updated on 2026-06-30 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -634,91 +633,129 @@ if you agree with them! If not, correct them instead.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="a-code-linter-skill">A Code Linter Skill<a class="anchor" aria-label="anchor" href="#a-code-linter-skill"></a></h2>
+</section><section><h2 class="section-heading" id="a-unit-test-builder-skill">A Unit Test Builder Skill<a class="anchor" aria-label="anchor" href="#a-unit-test-builder-skill"></a></h2>
 <hr class="half-width"><p>Sometimes we want our skills to explicitly execute commands and do
 something based on analysing the output of those commands. Code linters
 are well established tools for statically analysing code and reporting
 common code issues. So how should we handle this?</p>
-<p>Code linters are automated tools that analyse source code to identify
-potential errors, stylistic inconsistencies, and violations of coding
-standards before the software is run. They help developers maintain
-cleaner and more readable code by highlighting issues such as unused
-variables, formatting problems, syntax mistakes, and poor programming
-practices. Linters are commonly integrated into Integrated Development
-Environments (IDEs), and in the case of VSCode, additional linting tools
-can be installed as extensions, such as <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.pylint" class="external-link">Pylint</a>
-or <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.flake8" class="external-link">flake8</a>.</p>
-<p>We can install Pylint into our virtual environment by ensuring our
-virtual environment is activated, and doing:</p>
+<p>A critical step in writing robust, reproducible code is to test your
+software, and in addition to testing software manually, the writing and
+running of unit tests is established practice that can save you time -
+for those types of test thare are amenable to automation.</p>
+<p><a href="https://docs.pytest.org/en/stable/" class="external-link">Pytest</a> is a popular
+Python testing framework that makes it straightforward to write and run
+automated tests. Unit tests help developers verify that individual
+functions and components behave as expected, reducing the likelihood of
+defects and making it safer to modify or extend software over time. By
+writing tests, teams can detect problems early and increase confidence
+that changes have not introduced old issues known as regressions. Pytest
+is widely used because it has a simple and readable syntax, requires
+minimal boilerplate code, provides detailed failure reports and
+integrates easily with continuous integration (CI) systems to automate
+testing as part of the development workflow.</p>
+<div class="section level3">
+<h3 id="a-quick-tour-of-pytest">A Quick Tour of Pytest<a class="anchor" aria-label="anchor" href="#a-quick-tour-of-pytest"></a></h3>
+<p>Let’s set up Pytest and create a directory to hold our tests:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install pylint</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install pytest</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="fu">mkdir</span> tests</span></code></pre>
 </div>
-<p>Let’s now define a skill that uses Pylint to identify code issues,
-provide a summary and plan of action, and fix these issues when the plan
-is approved. Linters also suggest the use of docstrings, so we should
-account for that and stipulate a docstring format we typically use.</p>
-<p>Create a new directory <code>pylint-fix</code> in the
-<code>.github/skills</code> directory, and add the following contents to
-a new <code>SKILL.md</code> file within the <code>pylint-fix</code>
-directory:</p>
+<p>Within the tests directory, we’ll also create an example test in a
+new <code>test_example.py</code>:</p>
 <div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="kw">def</span> test_addition():</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a>    <span class="cf">assert</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">3</span></span></code></pre>
+</div>
+<p>Ideally, we’d of course create a test that actually tests the code
+we’ve written, but since your code will likely differ in structure we’ve
+just used a generic example. We can now run this test (and any others
+that may be created in the future within this file) by doing:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/test_example.py</span></code></pre>
+</div>
+<p>And you should see the following:</p>
+<pre><code>================================ test session starts ================================
+platform darwin -- Python 3.14.2, pytest-9.0.3, pluggy-1.6.0
+rootdir: /Users/steve/Test
+configfile: pyproject.toml
+collected 1 item
+
+tests/test_example.py .                                                       [100%]
+
+================================= 1 passed in 0.01s =================================</code></pre>
+<p>Delete the <code>tests</code> directory along with its contents.</p>
+<div id="solo-exercise-create-a-unit-test-writer-skill" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="solo-exercise-create-a-unit-test-writer-skill" class="callout-inner">
+<h3 class="callout-title">Solo Exercise: Create a Unit Test Writer
+Skill</h3>
+<div class="callout-content">
+<p>10 mins.</p>
+<p>Based on what we’ve learned from writing our docstring skill, write a
+skill for automatically drafting Pytest unit tests. Ensure it has the
+following sections:</p>
+<ul><li>Constraints</li>
+<li>Approach: list the steps the skill needs to take to generate the
+unit tests</li>
+<li>Commands to Use</li>
+</ul></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>An initial try:</p>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="co">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1" aria-label="code-block-8-2"></a><span class="an">name:</span><span class="co"> pylint-fix</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1" aria-label="code-block-8-3"></a><span class="an">description:</span><span class="co"> Identify and fix code styling issues using the Pylint code linter.</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1" aria-label="code-block-8-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1" aria-label="code-block-8-5"></a><span class="an">metadata:</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1" aria-label="code-block-8-6"></a><span class="co">  version: 1.0.0</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1" aria-label="code-block-8-7"></a><span class="co">---</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1" aria-label="code-block-8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1" aria-label="code-block-8-9"></a>This skill automatically fixes code issues identified by pylint.</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1" aria-label="code-block-8-10"></a></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1" aria-label="code-block-8-11"></a><span class="fu">## Constraints</span></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1" aria-label="code-block-8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1" aria-label="code-block-8-13"></a><span class="ss">- </span>ONLY make modifications based on output from pylint.</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1" aria-label="code-block-8-14"></a></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1" aria-label="code-block-8-15"></a><span class="fu">## Approach</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1" aria-label="code-block-8-16"></a></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1" aria-label="code-block-8-17"></a><span class="ss">1. </span>Run pylint and capture the output from running the command.</span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1" aria-label="code-block-8-18"></a><span class="ss">2. </span>Analyse pylint output to identify warnings.</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1" aria-label="code-block-8-19"></a><span class="ss">3. </span>Apply fixes only with 100% confidence.</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1" aria-label="code-block-8-20"></a><span class="ss">4. </span>Re-run pylint to verify fixes.</span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1" aria-label="code-block-8-21"></a><span class="ss">5. </span>Provide a summary of what was fixed.</span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1" aria-label="code-block-8-22"></a></span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1" aria-label="code-block-8-23"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1" aria-label="code-block-8-24"></a></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1" aria-label="code-block-8-25"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pylint</span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1" aria-label="code-block-8-26"></a></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1" aria-label="code-block-8-27"></a><span class="in">```bash</span></span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1" aria-label="code-block-8-28"></a><span class="ex">python</span> <span class="at">-m</span> pylint src/</span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1" aria-label="code-block-8-29"></a><span class="in">```</span></span></code></pre>
-</div>
-<p>In the <code>Commands to Use</code> section, you may need to change
-the location of where your source code is located. e.g. if it’s in the
-root directory, specify <code>.</code> instead.</p>
-<div class="section level3">
-<h3 id="improving-our-skill">Improving our Skill<a class="anchor" aria-label="anchor" href="#improving-our-skill"></a></h3>
-<p>As we have it, the definition may seem reasonable, but let’s check it
-over.</p>
-<div id="class-exercise-so-whats-wrong-with-it" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<span class="callout-header">Discussion</span>
-<div id="class-exercise-so-whats-wrong-with-it" class="callout-inner">
-<h3 class="callout-title">Class Exercise: So What’s Wrong with It?</h3>
-<div class="callout-content">
-<p>5 mins.</p>
-<p>This skill is more complicated than our first one. What do you think
-could be improved? Is there anything missing?</p>
-<p>Add your thoughts to the shared document.</p>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a><span class="an">name:</span><span class="co"> add-tests</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a><span class="an">description:</span><span class="co"> Create Pytest unit tests.</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a><span class="an">metadata:</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1" aria-label="code-block-11-6"></a><span class="co">  version: 1.0.0</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1" aria-label="code-block-11-7"></a><span class="co">---</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1" aria-label="code-block-11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1" aria-label="code-block-11-9"></a>This skill writes Pytest unit tests.</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1" aria-label="code-block-11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1" aria-label="code-block-11-11"></a><span class="fu">## Constraints</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1" aria-label="code-block-11-12"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1" aria-label="code-block-11-13"></a><span class="ss">- </span>ONLY write tests and test files in the <span class="in">`tests`</span> directory.</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1" aria-label="code-block-11-14"></a><span class="ss">- </span>Tests should ONLY be written for Pytest.</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1" aria-label="code-block-11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1" aria-label="code-block-11-16"></a><span class="fu">## Approach</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1" aria-label="code-block-11-17"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1" aria-label="code-block-11-18"></a><span class="ss">1. </span>Examine the code and identify suitable unit tests.</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1" aria-label="code-block-11-19"></a><span class="ss">2. </span>Write the identified unit tests.</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1" aria-label="code-block-11-20"></a><span class="ss">3. </span>Run pytest to verify the tests.</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1" aria-label="code-block-11-21"></a><span class="ss">3. </span>Provide a summary of what was created and the results of running pytest.</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1" aria-label="code-block-11-22"></a></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1" aria-label="code-block-11-23"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1" aria-label="code-block-11-24"></a></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1" aria-label="code-block-11-25"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pytest</span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1" aria-label="code-block-11-26"></a></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1" aria-label="code-block-11-27"></a><span class="in">```bash</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1" aria-label="code-block-11-28"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/</span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1" aria-label="code-block-11-29"></a><span class="in">```</span></span></code></pre>
 </div>
 </div>
 </div>
-<p>One way to help us identify any issues is to use the
+</div>
+</div>
+<p>One way to help us identify any issues with our agent is to use the
 <code>Chat Customizations Evaluations</code> extension we installed
 earlier:</p>
 <ol style="list-style-type: decimal"><li>Select <code>Analyze</code> that should have appeared at the bottom
@@ -735,15 +772,14 @@ ambiguity, cognitive load, coverage gaps, amongst others.</p>
 with underlines. If you hover over either the entries in the
 <code>PROBLEMS</code> tab, or the editor underlines, a description will
 pop up explaining the issue.</p>
-<div id="solo-exercise-fix-our-skill.md" class="callout challenge">
+<div id="solo-exercise-review-and-refine-the-test-writer-skill" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="solo-exercise-fix-our-skill.md" class="callout-inner">
-<h3 class="callout-title">Solo Exercise: Fix our
-<code>SKILL.md</code>
-</h3>
+<div id="solo-exercise-review-and-refine-the-test-writer-skill" class="callout-inner">
+<h3 class="callout-title">Solo Exercise: Review and Refine the Test
+Writer Skill</h3>
 <div class="callout-content">
 <p>10 mins.</p>
 <p>Go through each of the identified issues and fix them.</p>
@@ -763,209 +799,58 @@ a bug, and restarting VSCode should fix this.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
-<div class="accordion-body">
-<p>You can find an example improved <code>SKILL.md</code> <a href="files/skills/pylint-fix/SKILL.md.txt">here</a>.</p>
-</div>
-</div>
-</div>
-</div>
-<p>Run the skill by ensuring you have <code>Agent</code> mode selected,
-and entering <code>/pylint-fix</code> in the VSCode chat window. Once
-complete, you should see that the skill has corrected a number of issues
-and added docstrings to our codebase.</p>
-<div id="when-you-have-a-hammer" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="when-you-have-a-hammer" class="callout-inner">
-<h3 class="callout-title">When You Have a Hammer…</h3>
-<div class="callout-content">
-<p>…everything looks like a nail.</p>
-<p>We’ve created a generative AI skill for this which seems useful. But
-using AI tools come at a cost - typically, they take a while to run and
-are prone to error. What we should also consider is whether a more
-dedicated tool on its own would be a better fit. For example, would
-simply using a code linting tool such as pylint, flake8, <a href="https://pycodestyle.pycqa.org/en/latest/" class="external-link">pycodestyle</a> or <a href="https://docs.astral.sh/ruff/" class="external-link">ruff</a> on its own - and following
-it’s suggestions - be enough? If we wanted automatic code formatting,
-would <a href="https://black.readthedocs.io/en/stable/" class="external-link">black</a> be
-sufficient?</p>
-<p>It comes down to a series of trade-offs we should consider. AI-based
-solutions often offer powerful, broader sets of capabilities that
-<em>may</em> save time, but dedicated tools run more efficiently and
-with a greater degree of precision, but <em>may</em> require more manual
-work.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="a-unit-test-builder-skill">A Unit Test Builder Skill<a class="anchor" aria-label="anchor" href="#a-unit-test-builder-skill"></a></h2>
-<hr class="half-width"><p>A critical step in writing robust, reproducible code is to test your
-software, and in addition to testing software manually, the writing and
-running of unit tests is established practice that can save you time -
-for those types of test thare are amenable to automation.</p>
-<p><a href="https://docs.pytest.org/en/stable/" class="external-link">Pytest</a> is a popular
-Python testing framework that makes it straightforward to write and run
-automated tests. Unit tests help developers verify that individual
-functions and components behave as expected, reducing the likelihood of
-defects and making it safer to modify or extend software over time. By
-writing tests, teams can detect problems early and increase confidence
-that changes have not introduced old issues known as regressions. Pytest
-is widely used because it has a simple and readable syntax, requires
-minimal boilerplate code, provides detailed failure reports and
-integrates easily with continuous integration (CI) systems to automate
-testing as part of the development workflow.</p>
-<div class="section level3">
-<h3 id="a-quick-tour-of-pytest">A Quick Tour of Pytest<a class="anchor" aria-label="anchor" href="#a-quick-tour-of-pytest"></a></h3>
-<p>Let’s set up Pytest and create a directory to hold our tests:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install pytest</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="fu">mkdir</span> tests</span></code></pre>
-</div>
-<p>Within the tests directory, we’ll also create an example test in a
-new <code>test_example.py</code>:</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="kw">def</span> test_addition():</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a>    <span class="cf">assert</span> <span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">3</span></span></code></pre>
-</div>
-<p>Ideally, we’d of course create a test that actually tests the code
-we’ve written, but since your code will likely differ in structure we’ve
-just used a generic example. We can now run this test (and any others
-that may be created in the future within this file) by doing:</p>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/test_example.py</span></code></pre>
-</div>
-<p>And you should see the following:</p>
-<pre><code>================================ test session starts ================================
-platform darwin -- Python 3.14.2, pytest-9.0.3, pluggy-1.6.0
-rootdir: /Users/steve/Test
-configfile: pyproject.toml
-collected 1 item
-
-tests/test_example.py .                                                       [100%]
-
-================================= 1 passed in 0.01s =================================</code></pre>
-<p>Delete the <code>tests</code> directory along with its contents.</p>
-<div id="solo-exercise-create-review-and-refine-a-unit-test-writer-skill" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<span class="callout-header">Challenge</span>
-<div id="solo-exercise-create-review-and-refine-a-unit-test-writer-skill" class="callout-inner">
-<h3 class="callout-title">Solo Exercise: Create, Review and Refine a
-Unit Test Writer Skill</h3>
-<div class="callout-content">
-<p>15 mins.</p>
-<p>Based on what we’ve learned from writing our pylint skill, write a
-skill for automatically drafting Pytest unit tests. Ensure it has the
-following sections:</p>
-<ul><li>Constraints</li>
-<li>Approach: list the steps the skill needs to take to generate the
-unit tests</li>
-<li>Commands to Use</li>
-</ul><p>Once finished, use the Chat Customisations Evaluations tool as before
-to review the skill and suggest improvements, and refine the skill until
-you are happy with it.</p>
-<p>Finally, use the skill to create some unit tests, e.g. select
-<code>Agent</code> mode and enter <code>/add-tests</code> into the chat
-window.</p>
-</div>
-</div>
-</div>
 <div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
-<p>An initial try:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<p>After running the Chat Customizations Evaluation tool on it, and
+making updates:</p>
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="co">---</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="an">name:</span><span class="co"> add-tests</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a><span class="an">description:</span><span class="co"> Create Pytest unit tests.</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1" aria-label="code-block-13-5"></a><span class="an">metadata:</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1" aria-label="code-block-13-6"></a><span class="co">  version: 1.0.0</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1" aria-label="code-block-13-7"></a><span class="co">---</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1" aria-label="code-block-13-8"></a></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1" aria-label="code-block-13-9"></a>This skill writes Pytest unit tests.</span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1" aria-label="code-block-13-10"></a></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1" aria-label="code-block-13-11"></a><span class="fu">## Constraints</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1" aria-label="code-block-13-12"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1" aria-label="code-block-13-13"></a><span class="ss">- </span>ONLY write tests and test files in the <span class="in">`tests`</span> directory.</span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1" aria-label="code-block-13-14"></a><span class="ss">- </span>Tests should ONLY be written for Pytest.</span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1" aria-label="code-block-13-15"></a></span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1" aria-label="code-block-13-16"></a><span class="fu">## Approach</span></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1" aria-label="code-block-13-17"></a></span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1" aria-label="code-block-13-18"></a><span class="ss">1. </span>Examine the code and identify suitable unit tests.</span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1" aria-label="code-block-13-19"></a><span class="ss">2. </span>Write the identified unit tests.</span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1" aria-label="code-block-13-20"></a><span class="ss">3. </span>Run pytest to verify the tests.</span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1" aria-label="code-block-13-21"></a><span class="ss">3. </span>Provide a summary of what was created and the results of running pytest.</span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1" aria-label="code-block-13-22"></a></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1" aria-label="code-block-13-23"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb13-24"><a href="#cb13-24" tabindex="-1" aria-label="code-block-13-24"></a></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1" aria-label="code-block-13-25"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pytest</span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1" aria-label="code-block-13-26"></a></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1" aria-label="code-block-13-27"></a><span class="in">```bash</span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1" aria-label="code-block-13-28"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/</span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1" aria-label="code-block-13-29"></a><span class="in">```</span></span></code></pre>
-</div>
-<p>After running the Chat Customizations Evaluation tool on it:</p>
-<div class="codewrapper sourceCode" id="cb14">
-<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="co">---</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="an">name:</span><span class="co"> add-tests</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a><span class="an">description:</span><span class="co"> Create Pytest unit tests.</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a><span class="an">metadata:</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a><span class="co">  version: 1.0.0</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1" aria-label="code-block-14-7"></a><span class="co">---</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1" aria-label="code-block-14-8"></a></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1" aria-label="code-block-14-9"></a>This skill writes Pytest unit tests.</span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1" aria-label="code-block-14-10"></a></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1" aria-label="code-block-14-11"></a><span class="fu">## Constraints</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1" aria-label="code-block-14-12"></a></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1" aria-label="code-block-14-13"></a><span class="ss">- </span>ONLY write tests and test files in the <span class="in">`tests`</span> directory.</span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1" aria-label="code-block-14-14"></a><span class="ss">- </span>If the <span class="in">`tests`</span> directory does not exist, create it and add an empty <span class="in">`__init__.py`</span> file before writing any test files.</span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1" aria-label="code-block-14-15"></a><span class="ss">- </span>Tests should ONLY be written for Pytest.</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1" aria-label="code-block-14-16"></a><span class="ss">- </span>Name test files as <span class="in">`test_&lt;source_module&gt;.py`</span> and test functions as <span class="in">`test_&lt;function_name&gt;_&lt;scenario&gt;`</span>, e.g. <span class="in">`test_parse_input_empty_string`</span>.</span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1" aria-label="code-block-14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1" aria-label="code-block-14-18"></a><span class="fu">## Approach</span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1" aria-label="code-block-14-19"></a></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1" aria-label="code-block-14-20"></a><span class="ss">1. </span>Examine the code and identify unit tests for all public functions and methods, prioritizing logic branches, edge cases, and error conditions. Exclude trivial one-line wrappers unless they have meaningful behavior.</span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1" aria-label="code-block-14-21"></a><span class="ss">2. </span>Write the identified unit tests.</span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1" aria-label="code-block-14-22"></a><span class="ss">3. </span>Run pytest to verify the tests.</span>
-<span id="cb14-23"><a href="#cb14-23" tabindex="-1" aria-label="code-block-14-23"></a><span class="ss">4. </span>If pytest exits with a non-zero code, report the specific failing tests and their error output, then attempt to fix the test code. Do not report success until all tests pass.</span>
-<span id="cb14-24"><a href="#cb14-24" tabindex="-1" aria-label="code-block-14-24"></a><span class="ss">5. </span>Provide a summary of what was created and the results of running pytest.</span>
-<span id="cb14-25"><a href="#cb14-25" tabindex="-1" aria-label="code-block-14-25"></a></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1" aria-label="code-block-14-26"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb14-27"><a href="#cb14-27" tabindex="-1" aria-label="code-block-14-27"></a></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1" aria-label="code-block-14-28"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pytest</span>
-<span id="cb14-29"><a href="#cb14-29" tabindex="-1" aria-label="code-block-14-29"></a></span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1" aria-label="code-block-14-30"></a><span class="in">```bash</span></span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1" aria-label="code-block-14-31"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/</span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1" aria-label="code-block-14-32"></a><span class="in">```</span></span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a><span class="an">name:</span><span class="co"> add-tests</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1" aria-label="code-block-12-3"></a><span class="an">description:</span><span class="co"> Create Pytest unit tests.</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1" aria-label="code-block-12-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1" aria-label="code-block-12-5"></a><span class="an">metadata:</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1" aria-label="code-block-12-6"></a><span class="co">  version: 1.0.0</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1" aria-label="code-block-12-7"></a><span class="co">---</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1" aria-label="code-block-12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1" aria-label="code-block-12-9"></a>This skill writes Pytest unit tests.</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1" aria-label="code-block-12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1" aria-label="code-block-12-11"></a><span class="fu">## Constraints</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1" aria-label="code-block-12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1" aria-label="code-block-12-13"></a><span class="ss">- </span>ONLY write tests and test files in the <span class="in">`tests`</span> directory.</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1" aria-label="code-block-12-14"></a><span class="ss">- </span>If the <span class="in">`tests`</span> directory does not exist, create it and add an empty <span class="in">`__init__.py`</span> file before writing any test files.</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1" aria-label="code-block-12-15"></a><span class="ss">- </span>Tests should ONLY be written for Pytest.</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1" aria-label="code-block-12-16"></a><span class="ss">- </span>Name test files as <span class="in">`test_&lt;source_module&gt;.py`</span> and test functions as <span class="in">`test_&lt;function_name&gt;_&lt;scenario&gt;`</span>, e.g. <span class="in">`test_parse_input_empty_string`</span>.</span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1" aria-label="code-block-12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1" aria-label="code-block-12-18"></a><span class="fu">## Approach</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1" aria-label="code-block-12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1" aria-label="code-block-12-20"></a><span class="ss">1. </span>Examine the code and identify unit tests for all public functions and methods, prioritizing logic branches, edge cases, and error conditions. Exclude trivial one-line wrappers unless they have meaningful behavior.</span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1" aria-label="code-block-12-21"></a><span class="ss">2. </span>Write the identified unit tests.</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1" aria-label="code-block-12-22"></a><span class="ss">3. </span>Run pytest to verify the tests.</span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1" aria-label="code-block-12-23"></a><span class="ss">4. </span>If pytest exits with a non-zero code, report the specific failing tests and their error output, then attempt to fix the test code. Do not report success until all tests pass.</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1" aria-label="code-block-12-24"></a><span class="ss">5. </span>Provide a summary of what was created and the results of running pytest.</span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1" aria-label="code-block-12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1" aria-label="code-block-12-26"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1" aria-label="code-block-12-27"></a></span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1" aria-label="code-block-12-28"></a><span class="ss">- </span>Ensure the virtual environment is activated before running pytest</span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1" aria-label="code-block-12-29"></a></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1" aria-label="code-block-12-30"></a><span class="in">```bash</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1" aria-label="code-block-12-31"></a><span class="ex">python</span> <span class="at">-m</span> pytest tests/</span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1" aria-label="code-block-12-32"></a><span class="in">```</span></span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
+<p>Now use the skill to create some unit tests, e.g. select
+<code>Agent</code> mode and enter <code>/add-tests</code> into the chat
+window.</p>
 <div id="class-exercise-how-did-it-do" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -976,10 +861,10 @@ window.</p>
 <div class="callout-content">
 <p>5 mins.</p>
 <p>Run the tests on the command line, e.g.:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a><span class="ex">python</span> <span class="at">-m</span> pytest <span class="at">-m</span> tests/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="ex">python</span> <span class="at">-m</span> pytest <span class="at">-m</span> tests/</span></code></pre>
 </div>
 <p>Did they pass?</p>
 <p>Take a look at the tests that have been written, and add your
@@ -1033,8 +918,11 @@ to ensure they genuinely improve software quality.</p>
 <h3 class="callout-title">Should we Even use AI at all for Generating
 Tests?</h3>
 <div class="callout-content">
-<p>As we’ve said before, it’s easy to reach for AI to attempt a task for
-us. In this case, beyond using AI to set up the test scaffolding, there
+<p>We’ve created a generative AI skill for this which seems useful. But
+using AI tools come at a cost - typically, they take a while to run and
+are prone to error. What we should also consider is whether a more
+dedicated tool on its own would be a better fit.</p>
+<p>In this case, beyond using AI to set up the test scaffolding, there
 are established tools that are more specifically designed to create unit
 tests for software.</p>
 <p>For example, <a href="https://hypothesis.readthedocs.io/en/latest/" class="external-link">Hypothesis</a> is a
@@ -1069,11 +957,11 @@ mechanistic process.</p>
 <h3 id="a-quick-tour-of-mkdocs">A Quick Tour of MkDocs<a class="anchor" aria-label="anchor" href="#a-quick-tour-of-mkdocs"></a></h3>
 <p>For example, we can create a new MkDocs project in our code by
 installing the <code>mkdocs</code> Python libraries and invoking it:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install mkdocs mkdocstrings<span class="pp">[</span><span class="ss">python</span><span class="pp">]</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs new .</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install mkdocs mkdocstrings<span class="pp">[</span><span class="ss">python</span><span class="pp">]</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs new .</span></code></pre>
 </div>
 <p>This will create two files in your project: <code>mkdocs.yml</code>
 and <code>docs/index.md</code>. The first file <code>mkdocs.yml</code>
@@ -1085,17 +973,17 @@ themes to use, how to organize navigation, etc.
 documentation site.</p>
 <p>Let’s first look at the <code>mkdocs.yml</code> file. It is almost
 empty, so let’s edit it to contain the following:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Inflammation Data Analysis</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a><span class="fu">nav</span><span class="kw">:</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1" aria-label="code-block-17-4"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1" aria-label="code-block-17-5"></a></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1" aria-label="code-block-17-6"></a><span class="fu">plugins</span><span class="kw">:</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1" aria-label="code-block-17-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> search</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1" aria-label="code-block-17-8"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mkdocstrings</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Inflammation Data Analysis</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1" aria-label="code-block-15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1" aria-label="code-block-15-3"></a><span class="fu">nav</span><span class="kw">:</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1" aria-label="code-block-15-4"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1" aria-label="code-block-15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1" aria-label="code-block-15-6"></a><span class="fu">plugins</span><span class="kw">:</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1" aria-label="code-block-15-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> search</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1" aria-label="code-block-15-8"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mkdocstrings</span></span></code></pre>
 </div>
 <p>Here we give a name to our documentation site, and set up the
 navigation menu with one item <code>Overview</code> that links to
@@ -1106,11 +994,11 @@ documentation from Python docstrings (i.e. like the ones generated by
 our <code>pylint-fix</code> skill).</p>
 <p>We can try to render the documentation site locally and see what it
 looks like:</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs serve</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs serve</span></code></pre>
 </div>
 <p>This will start to build a local static documentation site and serve
 it at a local web server. By default, it will be available at
@@ -1158,126 +1046,126 @@ chat window.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here’s one solution:</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="co">---</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1" aria-label="code-block-19-2"></a><span class="an">name:</span><span class="co"> build-docs</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1" aria-label="code-block-19-3"></a><span class="an">description:</span><span class="co"> Author and build software documentation using MkDocs.</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1" aria-label="code-block-19-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1" aria-label="code-block-19-5"></a><span class="an">metadata:</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1" aria-label="code-block-19-6"></a><span class="co">  version: 1.0.0</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1" aria-label="code-block-19-7"></a><span class="co">---</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1" aria-label="code-block-19-8"></a></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1" aria-label="code-block-19-9"></a>This skill uses MkDocs to create and build software documentation using MkDocs</span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1" aria-label="code-block-19-10"></a></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1" aria-label="code-block-19-11"></a><span class="fu">## Constraints</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1" aria-label="code-block-19-12"></a></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1" aria-label="code-block-19-13"></a><span class="ss">- </span>ONLY make modifications to the <span class="in">`mkdocs.yml`</span> file and files in the <span class="in">`docs/`</span> directory</span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1" aria-label="code-block-19-14"></a><span class="ss">- </span>If <span class="in">`mkdocstrings`</span> is not installed or the project does not use Python docstrings, remove it from the plugins list and notify the user.</span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1" aria-label="code-block-19-15"></a></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1" aria-label="code-block-19-16"></a><span class="fu">## Approach</span></span>
-<span id="cb19-17"><a href="#cb19-17" tabindex="-1" aria-label="code-block-19-17"></a></span>
-<span id="cb19-18"><a href="#cb19-18" tabindex="-1" aria-label="code-block-19-18"></a><span class="ss">1. </span>Inspect the codebase to identify software prerequisites needed to run the software and the automated tests.</span>
-<span id="cb19-19"><a href="#cb19-19" tabindex="-1" aria-label="code-block-19-19"></a><span class="ss">2. </span>Create a <span class="in">`mkdocs.yml`</span> file from the template below.</span>
-<span id="cb19-20"><a href="#cb19-20" tabindex="-1" aria-label="code-block-19-20"></a><span class="ss">3. </span>Write documentation sections as specified below.</span>
-<span id="cb19-21"><a href="#cb19-21" tabindex="-1" aria-label="code-block-19-21"></a><span class="ss">4. </span>Provide a summary of what was done.</span>
-<span id="cb19-22"><a href="#cb19-22" tabindex="-1" aria-label="code-block-19-22"></a></span>
-<span id="cb19-23"><a href="#cb19-23" tabindex="-1" aria-label="code-block-19-23"></a><span class="fu">## `mkdocs.yml` Template</span></span>
-<span id="cb19-24"><a href="#cb19-24" tabindex="-1" aria-label="code-block-19-24"></a></span>
-<span id="cb19-25"><a href="#cb19-25" tabindex="-1" aria-label="code-block-19-25"></a><span class="in">```yaml</span></span>
-<span id="cb19-26"><a href="#cb19-26" tabindex="-1" aria-label="code-block-19-26"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Replace with the actual name of the software being documented.</span></span>
-<span id="cb19-27"><a href="#cb19-27" tabindex="-1" aria-label="code-block-19-27"></a></span>
-<span id="cb19-28"><a href="#cb19-28" tabindex="-1" aria-label="code-block-19-28"></a><span class="fu">nav</span><span class="kw">:</span></span>
-<span id="cb19-29"><a href="#cb19-29" tabindex="-1" aria-label="code-block-19-29"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
-<span id="cb19-30"><a href="#cb19-30" tabindex="-1" aria-label="code-block-19-30"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Software Prerequisites</span><span class="kw">:</span><span class="at"> prerequisites.md</span></span>
-<span id="cb19-31"><a href="#cb19-31" tabindex="-1" aria-label="code-block-19-31"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running the Software</span><span class="kw">:</span><span class="at"> running.md</span></span>
-<span id="cb19-32"><a href="#cb19-32" tabindex="-1" aria-label="code-block-19-32"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running the Tests</span><span class="kw">:</span><span class="at"> tests.md</span></span>
-<span id="cb19-33"><a href="#cb19-33" tabindex="-1" aria-label="code-block-19-33"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">API</span><span class="kw">:</span><span class="at"> api.md</span></span>
-<span id="cb19-34"><a href="#cb19-34" tabindex="-1" aria-label="code-block-19-34"></a></span>
-<span id="cb19-35"><a href="#cb19-35" tabindex="-1" aria-label="code-block-19-35"></a><span class="fu">plugins</span><span class="kw">:</span></span>
-<span id="cb19-36"><a href="#cb19-36" tabindex="-1" aria-label="code-block-19-36"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>search</span>
-<span id="cb19-37"><a href="#cb19-37" tabindex="-1" aria-label="code-block-19-37"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>mkdocstrings</span>
-<span id="cb19-38"><a href="#cb19-38" tabindex="-1" aria-label="code-block-19-38"></a><span class="in">```</span></span>
-<span id="cb19-39"><a href="#cb19-39" tabindex="-1" aria-label="code-block-19-39"></a></span>
-<span id="cb19-40"><a href="#cb19-40" tabindex="-1" aria-label="code-block-19-40"></a><span class="fu">## Documentation Sections</span></span>
-<span id="cb19-41"><a href="#cb19-41" tabindex="-1" aria-label="code-block-19-41"></a></span>
-<span id="cb19-42"><a href="#cb19-42" tabindex="-1" aria-label="code-block-19-42"></a><span class="ss">- </span><span class="in">`docs/index.md`</span>: a brief overview of what the software aims to do, its high-level architecture, and the key technologies or libraries it uses.</span>
-<span id="cb19-43"><a href="#cb19-43" tabindex="-1" aria-label="code-block-19-43"></a><span class="ss">- </span><span class="in">`docs/prerequisites.md`</span>: contains instructions on how to install the software prerequisites needed to run the software.</span>
-<span id="cb19-44"><a href="#cb19-44" tabindex="-1" aria-label="code-block-19-44"></a><span class="ss">- </span><span class="in">`docs/running.md`</span>: instructions on how to run the software.</span>
-<span id="cb19-45"><a href="#cb19-45" tabindex="-1" aria-label="code-block-19-45"></a><span class="ss">- </span><span class="in">`docs/tests.md`</span>: instructions on how to run the automated tests.</span>
-<span id="cb19-46"><a href="#cb19-46" tabindex="-1" aria-label="code-block-19-46"></a><span class="ss">- </span><span class="in">`api.md`</span>: API documentation based on the code and its docstrings.</span>
-<span id="cb19-47"><a href="#cb19-47" tabindex="-1" aria-label="code-block-19-47"></a></span>
-<span id="cb19-48"><a href="#cb19-48" tabindex="-1" aria-label="code-block-19-48"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb19-49"><a href="#cb19-49" tabindex="-1" aria-label="code-block-19-49"></a></span>
-<span id="cb19-50"><a href="#cb19-50" tabindex="-1" aria-label="code-block-19-50"></a><span class="ss">- </span>Ensure the virtual environment is activated before building mkdocs</span>
-<span id="cb19-51"><a href="#cb19-51" tabindex="-1" aria-label="code-block-19-51"></a></span>
-<span id="cb19-52"><a href="#cb19-52" tabindex="-1" aria-label="code-block-19-52"></a><span class="in">```bash</span></span>
-<span id="cb19-53"><a href="#cb19-53" tabindex="-1" aria-label="code-block-19-53"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
-<span id="cb19-54"><a href="#cb19-54" tabindex="-1" aria-label="code-block-19-54"></a><span class="in">```</span></span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a><span class="an">name:</span><span class="co"> build-docs</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a><span class="an">description:</span><span class="co"> Author and build software documentation using MkDocs.</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1" aria-label="code-block-17-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1" aria-label="code-block-17-5"></a><span class="an">metadata:</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1" aria-label="code-block-17-6"></a><span class="co">  version: 1.0.0</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1" aria-label="code-block-17-7"></a><span class="co">---</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1" aria-label="code-block-17-8"></a></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1" aria-label="code-block-17-9"></a>This skill uses MkDocs to create and build software documentation using MkDocs</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1" aria-label="code-block-17-10"></a></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1" aria-label="code-block-17-11"></a><span class="fu">## Constraints</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1" aria-label="code-block-17-12"></a></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1" aria-label="code-block-17-13"></a><span class="ss">- </span>ONLY make modifications to the <span class="in">`mkdocs.yml`</span> file and files in the <span class="in">`docs/`</span> directory</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1" aria-label="code-block-17-14"></a><span class="ss">- </span>If <span class="in">`mkdocstrings`</span> is not installed or the project does not use Python docstrings, remove it from the plugins list and notify the user.</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1" aria-label="code-block-17-15"></a></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1" aria-label="code-block-17-16"></a><span class="fu">## Approach</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1" aria-label="code-block-17-17"></a></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1" aria-label="code-block-17-18"></a><span class="ss">1. </span>Inspect the codebase to identify software prerequisites needed to run the software and the automated tests.</span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1" aria-label="code-block-17-19"></a><span class="ss">2. </span>Create a <span class="in">`mkdocs.yml`</span> file from the template below.</span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1" aria-label="code-block-17-20"></a><span class="ss">3. </span>Write documentation sections as specified below.</span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1" aria-label="code-block-17-21"></a><span class="ss">4. </span>Provide a summary of what was done.</span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1" aria-label="code-block-17-22"></a></span>
+<span id="cb17-23"><a href="#cb17-23" tabindex="-1" aria-label="code-block-17-23"></a><span class="fu">## `mkdocs.yml` Template</span></span>
+<span id="cb17-24"><a href="#cb17-24" tabindex="-1" aria-label="code-block-17-24"></a></span>
+<span id="cb17-25"><a href="#cb17-25" tabindex="-1" aria-label="code-block-17-25"></a><span class="in">```yaml</span></span>
+<span id="cb17-26"><a href="#cb17-26" tabindex="-1" aria-label="code-block-17-26"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Replace with the actual name of the software being documented.</span></span>
+<span id="cb17-27"><a href="#cb17-27" tabindex="-1" aria-label="code-block-17-27"></a></span>
+<span id="cb17-28"><a href="#cb17-28" tabindex="-1" aria-label="code-block-17-28"></a><span class="fu">nav</span><span class="kw">:</span></span>
+<span id="cb17-29"><a href="#cb17-29" tabindex="-1" aria-label="code-block-17-29"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
+<span id="cb17-30"><a href="#cb17-30" tabindex="-1" aria-label="code-block-17-30"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Software Prerequisites</span><span class="kw">:</span><span class="at"> prerequisites.md</span></span>
+<span id="cb17-31"><a href="#cb17-31" tabindex="-1" aria-label="code-block-17-31"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running the Software</span><span class="kw">:</span><span class="at"> running.md</span></span>
+<span id="cb17-32"><a href="#cb17-32" tabindex="-1" aria-label="code-block-17-32"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running the Tests</span><span class="kw">:</span><span class="at"> tests.md</span></span>
+<span id="cb17-33"><a href="#cb17-33" tabindex="-1" aria-label="code-block-17-33"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">API</span><span class="kw">:</span><span class="at"> api.md</span></span>
+<span id="cb17-34"><a href="#cb17-34" tabindex="-1" aria-label="code-block-17-34"></a></span>
+<span id="cb17-35"><a href="#cb17-35" tabindex="-1" aria-label="code-block-17-35"></a><span class="fu">plugins</span><span class="kw">:</span></span>
+<span id="cb17-36"><a href="#cb17-36" tabindex="-1" aria-label="code-block-17-36"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>search</span>
+<span id="cb17-37"><a href="#cb17-37" tabindex="-1" aria-label="code-block-17-37"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>mkdocstrings</span>
+<span id="cb17-38"><a href="#cb17-38" tabindex="-1" aria-label="code-block-17-38"></a><span class="in">```</span></span>
+<span id="cb17-39"><a href="#cb17-39" tabindex="-1" aria-label="code-block-17-39"></a></span>
+<span id="cb17-40"><a href="#cb17-40" tabindex="-1" aria-label="code-block-17-40"></a><span class="fu">## Documentation Sections</span></span>
+<span id="cb17-41"><a href="#cb17-41" tabindex="-1" aria-label="code-block-17-41"></a></span>
+<span id="cb17-42"><a href="#cb17-42" tabindex="-1" aria-label="code-block-17-42"></a><span class="ss">- </span><span class="in">`docs/index.md`</span>: a brief overview of what the software aims to do, its high-level architecture, and the key technologies or libraries it uses.</span>
+<span id="cb17-43"><a href="#cb17-43" tabindex="-1" aria-label="code-block-17-43"></a><span class="ss">- </span><span class="in">`docs/prerequisites.md`</span>: contains instructions on how to install the software prerequisites needed to run the software.</span>
+<span id="cb17-44"><a href="#cb17-44" tabindex="-1" aria-label="code-block-17-44"></a><span class="ss">- </span><span class="in">`docs/running.md`</span>: instructions on how to run the software.</span>
+<span id="cb17-45"><a href="#cb17-45" tabindex="-1" aria-label="code-block-17-45"></a><span class="ss">- </span><span class="in">`docs/tests.md`</span>: instructions on how to run the automated tests.</span>
+<span id="cb17-46"><a href="#cb17-46" tabindex="-1" aria-label="code-block-17-46"></a><span class="ss">- </span><span class="in">`api.md`</span>: API documentation based on the code and its docstrings.</span>
+<span id="cb17-47"><a href="#cb17-47" tabindex="-1" aria-label="code-block-17-47"></a></span>
+<span id="cb17-48"><a href="#cb17-48" tabindex="-1" aria-label="code-block-17-48"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb17-49"><a href="#cb17-49" tabindex="-1" aria-label="code-block-17-49"></a></span>
+<span id="cb17-50"><a href="#cb17-50" tabindex="-1" aria-label="code-block-17-50"></a><span class="ss">- </span>Ensure the virtual environment is activated before building mkdocs</span>
+<span id="cb17-51"><a href="#cb17-51" tabindex="-1" aria-label="code-block-17-51"></a></span>
+<span id="cb17-52"><a href="#cb17-52" tabindex="-1" aria-label="code-block-17-52"></a><span class="in">```bash</span></span>
+<span id="cb17-53"><a href="#cb17-53" tabindex="-1" aria-label="code-block-17-53"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
+<span id="cb17-54"><a href="#cb17-54" tabindex="-1" aria-label="code-block-17-54"></a><span class="in">```</span></span></code></pre>
 </div>
 <p>Following the Chat Customizations Evaluation tool:</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="co">---</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a><span class="an">name:</span><span class="co"> build-docs</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1" aria-label="code-block-20-3"></a><span class="an">description:</span><span class="co"> Author and build software documentation using MkDocs.</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1" aria-label="code-block-20-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1" aria-label="code-block-20-5"></a><span class="an">metadata:</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1" aria-label="code-block-20-6"></a><span class="co">  version: 1.0.0</span></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1" aria-label="code-block-20-7"></a><span class="co">---</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1" aria-label="code-block-20-8"></a></span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1" aria-label="code-block-20-9"></a>This skill uses MkDocs to create and build software documentation using MkDocs</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1" aria-label="code-block-20-10"></a></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1" aria-label="code-block-20-11"></a><span class="fu">## Constraints</span></span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1" aria-label="code-block-20-12"></a></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1" aria-label="code-block-20-13"></a><span class="ss">- </span>ONLY make modifications to the <span class="in">`mkdocs.yml`</span> file and documentation files.</span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1" aria-label="code-block-20-14"></a><span class="ss">- </span>If <span class="in">`mkdocs.yml`</span> already exists, preserve any existing <span class="in">`site_name`</span> and any nav entries not covered by the template, and merge the template structure into it rather than overwriting it.</span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1" aria-label="code-block-20-15"></a><span class="ss">- </span>If <span class="in">`mkdocstrings`</span> is not installed or the project does not use Python docstrings, remove it from the plugins list, remove the <span class="in">`API Reference`</span> entry from <span class="in">`nav`</span>, populate <span class="in">`docs/api.md`</span> with manually authored API documentation extracted from the source code and note that it is not auto-generated, and notify the user.</span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1" aria-label="code-block-20-16"></a></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1" aria-label="code-block-20-17"></a><span class="fu">## Approach</span></span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1" aria-label="code-block-20-18"></a></span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1" aria-label="code-block-20-19"></a><span class="ss">1. </span>Inspect the codebase to identify software prerequisites needed to run the software and the automated tests.</span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1" aria-label="code-block-20-20"></a><span class="ss">2. </span>Create a <span class="in">`mkdocs.yml`</span> file from the template below.</span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1" aria-label="code-block-20-21"></a><span class="ss">3. </span>Write documentation sections as specified below.</span>
-<span id="cb20-22"><a href="#cb20-22" tabindex="-1" aria-label="code-block-20-22"></a><span class="ss">4. </span>Provide a summary of what was done.</span>
-<span id="cb20-23"><a href="#cb20-23" tabindex="-1" aria-label="code-block-20-23"></a></span>
-<span id="cb20-24"><a href="#cb20-24" tabindex="-1" aria-label="code-block-20-24"></a><span class="fu">## `mkdocs.yml` Template</span></span>
-<span id="cb20-25"><a href="#cb20-25" tabindex="-1" aria-label="code-block-20-25"></a></span>
-<span id="cb20-26"><a href="#cb20-26" tabindex="-1" aria-label="code-block-20-26"></a><span class="in">```yaml</span></span>
-<span id="cb20-27"><a href="#cb20-27" tabindex="-1" aria-label="code-block-20-27"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Replace with the actual name of the software being documented.</span></span>
-<span id="cb20-28"><a href="#cb20-28" tabindex="-1" aria-label="code-block-20-28"></a></span>
-<span id="cb20-29"><a href="#cb20-29" tabindex="-1" aria-label="code-block-20-29"></a><span class="fu">nav</span><span class="kw">:</span></span>
-<span id="cb20-30"><a href="#cb20-30" tabindex="-1" aria-label="code-block-20-30"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
-<span id="cb20-31"><a href="#cb20-31" tabindex="-1" aria-label="code-block-20-31"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Prerequisites</span><span class="kw">:</span><span class="at"> prerequisites.md</span></span>
-<span id="cb20-32"><a href="#cb20-32" tabindex="-1" aria-label="code-block-20-32"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running</span><span class="kw">:</span><span class="at"> running.md</span></span>
-<span id="cb20-33"><a href="#cb20-33" tabindex="-1" aria-label="code-block-20-33"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Tests</span><span class="kw">:</span><span class="at"> tests.md</span></span>
-<span id="cb20-34"><a href="#cb20-34" tabindex="-1" aria-label="code-block-20-34"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">API Reference</span><span class="kw">:</span><span class="at"> api.md</span></span>
-<span id="cb20-35"><a href="#cb20-35" tabindex="-1" aria-label="code-block-20-35"></a></span>
-<span id="cb20-36"><a href="#cb20-36" tabindex="-1" aria-label="code-block-20-36"></a><span class="fu">plugins</span><span class="kw">:</span></span>
-<span id="cb20-37"><a href="#cb20-37" tabindex="-1" aria-label="code-block-20-37"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>search</span>
-<span id="cb20-38"><a href="#cb20-38" tabindex="-1" aria-label="code-block-20-38"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>mkdocstrings</span>
-<span id="cb20-39"><a href="#cb20-39" tabindex="-1" aria-label="code-block-20-39"></a><span class="in">```</span></span>
-<span id="cb20-40"><a href="#cb20-40" tabindex="-1" aria-label="code-block-20-40"></a></span>
-<span id="cb20-41"><a href="#cb20-41" tabindex="-1" aria-label="code-block-20-41"></a><span class="fu">## Documentation Sections</span></span>
-<span id="cb20-42"><a href="#cb20-42" tabindex="-1" aria-label="code-block-20-42"></a></span>
-<span id="cb20-43"><a href="#cb20-43" tabindex="-1" aria-label="code-block-20-43"></a><span class="ss">- </span><span class="in">`docs/index.md`</span> - a brief overview of what the software aims to do, its high-level architecture, and the key technologies or libraries it uses.</span>
-<span id="cb20-44"><a href="#cb20-44" tabindex="-1" aria-label="code-block-20-44"></a><span class="ss">- </span><span class="in">`docs/prerequisites.md`</span> - contains instructions on how to install the software prerequisites needed to run the software. If the project contains a requirements.txt, pyproject.toml, or similar dependency file, include virtual environment setup instructions. Otherwise, omit that subsection.</span>
-<span id="cb20-45"><a href="#cb20-45" tabindex="-1" aria-label="code-block-20-45"></a><span class="ss">- </span><span class="in">`docs/running.md`</span> - instructions on how to run the software.</span>
-<span id="cb20-46"><a href="#cb20-46" tabindex="-1" aria-label="code-block-20-46"></a><span class="ss">- </span><span class="in">`docs/tests.md`</span> - instructions on how to run the automated tests. If no automated tests are found in the codebase, state that clearly in the file and keep the page in the nav with a brief placeholder note.</span>
-<span id="cb20-47"><a href="#cb20-47" tabindex="-1" aria-label="code-block-20-47"></a><span class="ss">- </span><span class="in">`docs/api.md`</span> - API documentation based on the code and its docstrings, or manually authored API documentation extracted from the source code if <span class="in">`mkdocstrings`</span> is not available; note when the documentation is not auto-generated.</span>
-<span id="cb20-48"><a href="#cb20-48" tabindex="-1" aria-label="code-block-20-48"></a></span>
-<span id="cb20-49"><a href="#cb20-49" tabindex="-1" aria-label="code-block-20-49"></a><span class="fu">## Commands to Use</span></span>
-<span id="cb20-50"><a href="#cb20-50" tabindex="-1" aria-label="code-block-20-50"></a></span>
-<span id="cb20-51"><a href="#cb20-51" tabindex="-1" aria-label="code-block-20-51"></a><span class="ss">- </span>If a virtual environment is already available, activate it before running the build command.</span>
-<span id="cb20-52"><a href="#cb20-52" tabindex="-1" aria-label="code-block-20-52"></a></span>
-<span id="cb20-53"><a href="#cb20-53" tabindex="-1" aria-label="code-block-20-53"></a><span class="in">```bash</span></span>
-<span id="cb20-54"><a href="#cb20-54" tabindex="-1" aria-label="code-block-20-54"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
-<span id="cb20-55"><a href="#cb20-55" tabindex="-1" aria-label="code-block-20-55"></a><span class="in">```</span></span></code></pre>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1" aria-label="code-block-18-2"></a><span class="an">name:</span><span class="co"> build-docs</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1" aria-label="code-block-18-3"></a><span class="an">description:</span><span class="co"> Author and build software documentation using MkDocs.</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1" aria-label="code-block-18-4"></a><span class="an">compatibility:</span><span class="co"> Requires python3</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1" aria-label="code-block-18-5"></a><span class="an">metadata:</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1" aria-label="code-block-18-6"></a><span class="co">  version: 1.0.0</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1" aria-label="code-block-18-7"></a><span class="co">---</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1" aria-label="code-block-18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1" aria-label="code-block-18-9"></a>This skill uses MkDocs to create and build software documentation using MkDocs</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1" aria-label="code-block-18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1" aria-label="code-block-18-11"></a><span class="fu">## Constraints</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1" aria-label="code-block-18-12"></a></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1" aria-label="code-block-18-13"></a><span class="ss">- </span>ONLY make modifications to the <span class="in">`mkdocs.yml`</span> file and documentation files.</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1" aria-label="code-block-18-14"></a><span class="ss">- </span>If <span class="in">`mkdocs.yml`</span> already exists, preserve any existing <span class="in">`site_name`</span> and any nav entries not covered by the template, and merge the template structure into it rather than overwriting it.</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1" aria-label="code-block-18-15"></a><span class="ss">- </span>If <span class="in">`mkdocstrings`</span> is not installed or the project does not use Python docstrings, remove it from the plugins list, remove the <span class="in">`API Reference`</span> entry from <span class="in">`nav`</span>, populate <span class="in">`docs/api.md`</span> with manually authored API documentation extracted from the source code and note that it is not auto-generated, and notify the user.</span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1" aria-label="code-block-18-16"></a></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1" aria-label="code-block-18-17"></a><span class="fu">## Approach</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1" aria-label="code-block-18-18"></a></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1" aria-label="code-block-18-19"></a><span class="ss">1. </span>Inspect the codebase to identify software prerequisites needed to run the software and the automated tests.</span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1" aria-label="code-block-18-20"></a><span class="ss">2. </span>Create a <span class="in">`mkdocs.yml`</span> file from the template below.</span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1" aria-label="code-block-18-21"></a><span class="ss">3. </span>Write documentation sections as specified below.</span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1" aria-label="code-block-18-22"></a><span class="ss">4. </span>Provide a summary of what was done.</span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1" aria-label="code-block-18-23"></a></span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1" aria-label="code-block-18-24"></a><span class="fu">## `mkdocs.yml` Template</span></span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1" aria-label="code-block-18-25"></a></span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1" aria-label="code-block-18-26"></a><span class="in">```yaml</span></span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1" aria-label="code-block-18-27"></a><span class="fu">site_name</span><span class="kw">:</span><span class="at"> Replace with the actual name of the software being documented.</span></span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1" aria-label="code-block-18-28"></a></span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1" aria-label="code-block-18-29"></a><span class="fu">nav</span><span class="kw">:</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1" aria-label="code-block-18-30"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Overview</span><span class="kw">:</span><span class="at"> index.md</span></span>
+<span id="cb18-31"><a href="#cb18-31" tabindex="-1" aria-label="code-block-18-31"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Prerequisites</span><span class="kw">:</span><span class="at"> prerequisites.md</span></span>
+<span id="cb18-32"><a href="#cb18-32" tabindex="-1" aria-label="code-block-18-32"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Running</span><span class="kw">:</span><span class="at"> running.md</span></span>
+<span id="cb18-33"><a href="#cb18-33" tabindex="-1" aria-label="code-block-18-33"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">Tests</span><span class="kw">:</span><span class="at"> tests.md</span></span>
+<span id="cb18-34"><a href="#cb18-34" tabindex="-1" aria-label="code-block-18-34"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">API Reference</span><span class="kw">:</span><span class="at"> api.md</span></span>
+<span id="cb18-35"><a href="#cb18-35" tabindex="-1" aria-label="code-block-18-35"></a></span>
+<span id="cb18-36"><a href="#cb18-36" tabindex="-1" aria-label="code-block-18-36"></a><span class="fu">plugins</span><span class="kw">:</span></span>
+<span id="cb18-37"><a href="#cb18-37" tabindex="-1" aria-label="code-block-18-37"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>search</span>
+<span id="cb18-38"><a href="#cb18-38" tabindex="-1" aria-label="code-block-18-38"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span>mkdocstrings</span>
+<span id="cb18-39"><a href="#cb18-39" tabindex="-1" aria-label="code-block-18-39"></a><span class="in">```</span></span>
+<span id="cb18-40"><a href="#cb18-40" tabindex="-1" aria-label="code-block-18-40"></a></span>
+<span id="cb18-41"><a href="#cb18-41" tabindex="-1" aria-label="code-block-18-41"></a><span class="fu">## Documentation Sections</span></span>
+<span id="cb18-42"><a href="#cb18-42" tabindex="-1" aria-label="code-block-18-42"></a></span>
+<span id="cb18-43"><a href="#cb18-43" tabindex="-1" aria-label="code-block-18-43"></a><span class="ss">- </span><span class="in">`docs/index.md`</span> - a brief overview of what the software aims to do, its high-level architecture, and the key technologies or libraries it uses.</span>
+<span id="cb18-44"><a href="#cb18-44" tabindex="-1" aria-label="code-block-18-44"></a><span class="ss">- </span><span class="in">`docs/prerequisites.md`</span> - contains instructions on how to install the software prerequisites needed to run the software. If the project contains a requirements.txt, pyproject.toml, or similar dependency file, include virtual environment setup instructions. Otherwise, omit that subsection.</span>
+<span id="cb18-45"><a href="#cb18-45" tabindex="-1" aria-label="code-block-18-45"></a><span class="ss">- </span><span class="in">`docs/running.md`</span> - instructions on how to run the software.</span>
+<span id="cb18-46"><a href="#cb18-46" tabindex="-1" aria-label="code-block-18-46"></a><span class="ss">- </span><span class="in">`docs/tests.md`</span> - instructions on how to run the automated tests. If no automated tests are found in the codebase, state that clearly in the file and keep the page in the nav with a brief placeholder note.</span>
+<span id="cb18-47"><a href="#cb18-47" tabindex="-1" aria-label="code-block-18-47"></a><span class="ss">- </span><span class="in">`docs/api.md`</span> - API documentation based on the code and its docstrings, or manually authored API documentation extracted from the source code if <span class="in">`mkdocstrings`</span> is not available; note when the documentation is not auto-generated.</span>
+<span id="cb18-48"><a href="#cb18-48" tabindex="-1" aria-label="code-block-18-48"></a></span>
+<span id="cb18-49"><a href="#cb18-49" tabindex="-1" aria-label="code-block-18-49"></a><span class="fu">## Commands to Use</span></span>
+<span id="cb18-50"><a href="#cb18-50" tabindex="-1" aria-label="code-block-18-50"></a></span>
+<span id="cb18-51"><a href="#cb18-51" tabindex="-1" aria-label="code-block-18-51"></a><span class="ss">- </span>If a virtual environment is already available, activate it before running the build command.</span>
+<span id="cb18-52"><a href="#cb18-52" tabindex="-1" aria-label="code-block-18-52"></a></span>
+<span id="cb18-53"><a href="#cb18-53" tabindex="-1" aria-label="code-block-18-53"></a><span class="in">```bash</span></span>
+<span id="cb18-54"><a href="#cb18-54" tabindex="-1" aria-label="code-block-18-54"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs build</span>
+<span id="cb18-55"><a href="#cb18-55" tabindex="-1" aria-label="code-block-18-55"></a><span class="in">```</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1293,10 +1181,10 @@ chat window.</p>
 <div class="callout-content">
 <p>5 mins.</p>
 <p>Serve the built documentation and view it in a browser, e.g.:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs serve</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="ex">python</span> <span class="at">-m</span> mkdocs serve</span></code></pre>
 </div>
 <p>Direct a browser to <a href="http://localhost:8000/" class="external-link uri">http://localhost:8000/</a></p>
 <p>Take a look at the documentation, and add your thoughts to the shared
@@ -1410,8 +1298,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/03-task-based-agents.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/03-task-based-agents.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-06-22",
-  "datePublished": "2026-06-23"
+  "dateModified": "2026-06-30",
+  "datePublished": "2026-06-30"
 }
 
   </script><script>
