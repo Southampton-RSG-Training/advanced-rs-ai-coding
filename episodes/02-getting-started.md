@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-teaching: 0
+teaching: 30
 exercises: 0
 ---
 
@@ -107,9 +107,7 @@ We're going to create what's known as a virtual environment to hold these packag
 
 :::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-## Installing Python Packages
-
-Who has created and used a Python virtual environment before?
+## Who has created and used a Python virtual environment before?
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

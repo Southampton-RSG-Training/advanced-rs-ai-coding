@@ -1,7 +1,7 @@
 ---
 title: "Planning and Task-based Approach to Software Development"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 60
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -37,6 +37,13 @@ Throughout, we'll emphasize the importance of reviewing and refining AI-generate
 
 
 ## Using the Built-in Plan Agent
+
+:::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+## Who's used the built-in Plan agent before?
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ### Creating a Plan
 
@@ -265,147 +272,11 @@ If not, correct them instead.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## A Code Linter Skill
+## A Unit Test Builder Skill
 
 Sometimes we want our skills to explicitly execute commands and do something based on analysing the output of those commands.
 Code linters are well established tools for statically analysing code and reporting common code issues.
 So how should we handle this?
-
-Code linters are automated tools that analyse source code to identify potential errors, stylistic inconsistencies, and violations of coding standards before the software is run.
-They help developers maintain cleaner and more readable code by highlighting issues such as unused variables, formatting problems, syntax mistakes, and poor programming practices.
-Linters are commonly integrated into Integrated Development Environments (IDEs), and in the case of VSCode, additional linting tools can be installed as extensions, such as [Pylint](https://marketplace.visualstudio.com/items?itemName=ms-python.pylint) or [flake8](https://marketplace.visualstudio.com/items?itemName=ms-python.flake8).
-
-We can install Pylint into our virtual environment by ensuring our virtual environment is activated, and doing:
-
-```bash
-python -m pip install pylint
-```
-
-Let's now define a skill that uses Pylint to identify code issues, provide a summary and plan of action, and fix these issues when the plan is approved.
-Linters also suggest the use of docstrings, so we should account for that and stipulate a docstring format we typically use.
-
-Create a new directory `pylint-fix` in the `.github/skills` directory,
-and add the following contents to a new `SKILL.md` file within the `pylint-fix` directory:
-
-~~~markdown
----
-name: pylint-fix
-description: Identify and fix code styling issues using the Pylint code linter.
-compatibility: Requires python3
-metadata:
-  version: 1.0.0
----
-
-This skill automatically fixes code issues identified by pylint.
-
-## Constraints
-
-- ONLY make modifications based on output from pylint.
-
-## Approach
-
-1. Run pylint and capture the output from running the command.
-2. Analyse pylint output to identify warnings.
-3. Apply fixes only with 100% confidence.
-4. Re-run pylint to verify fixes.
-5. Provide a summary of what was fixed.
-
-## Commands to Use
-
-- Ensure the virtual environment is activated before running pylint
-
-```bash
-python -m pylint src/
-```
-~~~
-
-In the `Commands to Use` section, you may need to change the location of where your source code is located.
-e.g. if it's in the root directory, specify `.` instead.
-
-### Improving our Skill
-
-As we have it, the definition may seem reasonable, but let's check it over.
-
-:::::::::::::::::::::::::::::::::::::: challenge
-
-## Class Exercise: So What's Wrong with It?
-
-5 mins.
-
-This skill is more complicated than our first one.
-What do you think could be improved? Is there anything missing?
-
-Add your thoughts to the shared document.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-One way to help us identify any issues is to use the `Chat Customizations Evaluations` extension we installed earlier:
-
-1. Select `Analyze` that should have appeared at the bottom of the `SKILL.md` file editor pane.
-If you receive an error here, check the syntax of the `SKILL.md` file.
-1. A pop-up box will request permission to conduct the analysis. Select `Allow` (or similar).
-1. When the analysis is complete, select `Show problems` when the pop-up appears, which will display a list of issues in the `PROBLEMS` tab in the bottom VSCode pane.
-
-You should see a whole host of issues that indicate problems with ambiguity, cognitive load, coverage gaps, amongst others.
-
-Within the file code editor, you should see these issues highlighted with underlines.
-If you hover over either the entries in the `PROBLEMS` tab, or the editor underlines,
-a description will pop up explaining the issue.
-
-:::::::::::::::::::::::::::::::::::::: challenge
-
-## Solo Exercise: Fix our `SKILL.md`
-
-10 mins.
-
-Go through each of the identified issues and fix them.
-
-One way to do this such that you get an opportunity to review the suggestions before they are applied,
-is to first right-click on the entry in the `PROBLEMS` tab and select `Explain` which drafts a set of proposed changes.
-
-The Chat Customisations Evaluations tool can be a bit overzealous,
-so if you think a suggestion is overkill, feel free to ignore it.
-
-If you're happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the skill file,
-then select `Keep` in the editor window.
-Otherwise, `Undo` the change and add your own fix.
-
-Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` tab still remain.
-This appears to be a bug, and restarting VSCode should fix this.
-
-:::::::::::::::::::::::::: solution
-
-You can find an example improved `SKILL.md` [here](files/skills/pylint-fix/SKILL.md.txt).
-
-:::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-Run the skill by ensuring you have `Agent` mode selected,
-and entering `/pylint-fix` in the VSCode chat window.
-Once complete, you should see that the skill has corrected a number of issues and added docstrings to our codebase.
-
-
-::::::::::::::::::::::::::::::::: callout
-
-## When You Have a Hammer...
-
-...everything looks like a nail.
-
-We've created a generative AI skill for this which seems useful.
-But using AI tools come at a cost - typically, they take a while to run and are prone to error.
-What we should also consider is whether a more dedicated tool on its own would be a better fit.
-For example, would simply using a code linting tool such as pylint, flake8, [pycodestyle](https://pycodestyle.pycqa.org/en/latest/) or [ruff](https://docs.astral.sh/ruff/) on its own - and following it's suggestions - be enough?
-If we wanted automatic code formatting, would [black](https://black.readthedocs.io/en/stable/) be sufficient?
-
-It comes down to a series of trade-offs we should consider.
-AI-based solutions often offer powerful, broader sets of capabilities that *may* save time,
-but dedicated tools run more efficiently and with a greater degree of precision, but *may* require more manual work.
-
-:::::::::::::::::::::::::::::::::::::::::
-
-
-## A Unit Test Builder Skill
 
 A critical step in writing robust, reproducible code is to test your software,
 and in addition to testing software manually,
@@ -460,22 +331,17 @@ Delete the `tests` directory along with its contents.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
-## Solo Exercise: Create, Review and Refine a Unit Test Writer Skill
+## Solo Exercise: Create a Unit Test Writer Skill
 
-15 mins.
+10 mins.
 
-Based on what we've learned from writing our pylint skill,
+Based on what we've learned from writing our docstring skill,
 write a skill for automatically drafting Pytest unit tests.
 Ensure it has the following sections:
 
 - Constraints
 - Approach: list the steps the skill needs to take to generate the unit tests
 - Commands to Use
-
-Once finished, use the Chat Customisations Evaluations tool as before to review the skill and suggest improvements,
-and refine the skill until you are happy with it.
-
-Finally, use the skill to create some unit tests, e.g. select `Agent` mode and enter `/add-tests` into the chat window.
 
 :::::::::::::::::::::::::: solution
 
@@ -513,7 +379,48 @@ python -m pytest tests/
 ```
 ~~~
 
-After running the Chat Customizations Evaluation tool on it:
+:::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+One way to help us identify any issues with our agent is to use the `Chat Customizations Evaluations` extension we installed earlier:
+
+1. Select `Analyze` that should have appeared at the bottom of the `SKILL.md` file editor pane.
+If you receive an error here, check the syntax of the `SKILL.md` file.
+1. A pop-up box will request permission to conduct the analysis. Select `Allow` (or similar).
+1. When the analysis is complete, select `Show problems` when the pop-up appears, which will display a list of issues in the `PROBLEMS` tab in the bottom VSCode pane.
+
+You should see a whole host of issues that indicate problems with ambiguity, cognitive load, coverage gaps, amongst others.
+
+Within the file code editor, you should see these issues highlighted with underlines.
+If you hover over either the entries in the `PROBLEMS` tab, or the editor underlines,
+a description will pop up explaining the issue.
+
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Solo Exercise: Review and Refine the Test Writer Skill
+
+10 mins.
+
+Go through each of the identified issues and fix them.
+
+One way to do this such that you get an opportunity to review the suggestions before they are applied,
+is to first right-click on the entry in the `PROBLEMS` tab and select `Explain` which drafts a set of proposed changes.
+
+The Chat Customisations Evaluations tool can be a bit overzealous,
+so if you think a suggestion is overkill, feel free to ignore it.
+
+If you're happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the skill file,
+then select `Keep` in the editor window.
+Otherwise, `Undo` the change and add your own fix.
+
+Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` tab still remain.
+This appears to be a bug, and restarting VSCode should fix this.
+
+:::::::::::::::::::::::::: solution
+
+After running the Chat Customizations Evaluation tool on it,
+and making updates:
 
 ~~~markdown
 ---
@@ -553,6 +460,8 @@ python -m pytest tests/
 :::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now use the skill to create some unit tests, e.g. select `Agent` mode and enter `/add-tests` into the chat window.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -603,7 +512,10 @@ but developers should review, refine, and validate the resulting tests to ensure
 
 ## Should we Even use AI at all for Generating Tests?
 
-As we've said before, it's easy to reach for AI to attempt a task for us.
+We've created a generative AI skill for this which seems useful.
+But using AI tools come at a cost - typically, they take a while to run and are prone to error.
+What we should also consider is whether a more dedicated tool on its own would be a better fit.
+
 In this case, beyond using AI to set up the test scaffolding,
 there are established tools that are more specifically designed to create unit tests for software.
 

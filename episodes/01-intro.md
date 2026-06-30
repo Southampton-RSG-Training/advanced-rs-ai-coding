@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Advanced Research Software AI Coding"
-teaching: 0
+teaching: 30
 exercises: 0
 ---
 
