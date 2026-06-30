@@ -1,7 +1,7 @@
 ---
 title: "Process-based Development Approach using Agents"
-teaching: 0
-exercises: 0
+teaching: 45
+exercises: 35
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -345,9 +345,7 @@ An [example design agent](files/agents/architect.agent.md.txt).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::: challenge
-
-### Design!
+### Running our Design Agent
 
 Select our new `architect` agent from the `Agent/Ask/Plan` menu,
 ensure the `GPT-5.4 mini` model is selected,
@@ -359,8 +357,6 @@ Produce design
 
 You should find a `technical_spec.md` file in the `project-docs` directory, hopefully with the sections we requested,
 [similar to this one](files/example-agent-output/technical_spec.md.txt).
-
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -425,9 +421,7 @@ An [example implementer agent](files/agents/implementer.agent.md.txt).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::: challenge
-
-### Implement!
+### Running our Implementer Agent
 
 Select our new `implementer` agent from the `Agent/Ask/Plan` menu,
 ensure the `GPT-5.4 mini` model is selected,
@@ -438,8 +432,6 @@ Produce implementation
 ```
 
 You should now find an initial implementation has appeared within your repository.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
