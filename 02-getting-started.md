@@ -137,12 +137,11 @@ it becomes much easier for someone else (which could be a future version of ours
 
 To create a virtual environment we'll use the terminal (or shell).
 You can open one within VSCode by selecting `Terminal` from the VSCode menu and `New Terminal`,
-where you be presented with see a Bash prompt,
-which looks something like:
+where you be presented with see a Bash prompt.
 
 ::::::::::::::::::::::::::::::::: callout
 
-## On Windows, I only see PowerShell?
+## On Windows, I only see `PS>` PowerShell prompt?
 
 If you open a terminal on Windows but see a PowerShell prompt instead (which looks like `PS>`),
 you'll need to change the default terminal type to Git Bash.
@@ -222,7 +221,7 @@ By giving Copilot this shared context we can specify the developer's (or develop
 It serves a similar purposes to a `CONTRIBUTING.md` file in a code repository;
 it provides guidance for how suggestions, code changes and contributions should be made,
 but aimed at Copilot's day-to-day decisions instead.
-It does this by adding context to queries from the `.github/.copilot-instructions.md` file.
+It does this by adding context to queries from the `.github/copilot-instructions.md` file.
 
 For example, if we were to ask Copilot "How should I make this code more readable?",
 without instructions Copilot may suggest to:
@@ -252,7 +251,7 @@ Next, use VSCode to create a `copilot-instructions.md` file within that director
 ## Python Code Style
 - Follow **PEP8** for all Python code
 - Use 4-space indentation
-- Keep lines to a maximum of 79 characters
+- Keep lines to a maximum of 120 characters
 - Use descriptive variable and function names
 - Add docstrings to functions and modules
 
