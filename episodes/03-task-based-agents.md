@@ -58,55 +58,47 @@ In short, it aims to guide users through a thoughtful planning phase prior to co
 
 Let's try it out now.
 
+1. Select `Local` from the `Set Session Target` dropdown.
 1. Select `Plan` from the Copilot mode dropdown in the chat panel.
-1. Select `GPT-5.4 mini` selected in the model dropdown
 1. Enter the following into the chat:
 
-   `Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool must use Numpy for statistical analysis and Matplotlib for generating the plots. Create a virtual environment for managing dependencies with pip, and a requirements.txt file to hold the dependencies.`
+   `Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool must use Numpy for statistical analysis and Matplotlib for generating the plots. Use the existing virtual environment in `venv` for managing dependencies with pip, and create a requirements.txt file to hold the dependencies.`
 
 1. Press `Enter`.
-1. Answer any clarifying questions from the planning agent.
+1. Answer any clarifying questions from the planning agent (e.g. which might include how to select the CSV file to process, or how to arrange the plots)
 1. Observe the step-by-step thinking and actions undertaken by the agent.
-1. When the planning agent concludes, select the option to `Open in Editor`, and `Keep`.
-1. Save the file that appears by selecting `Save as prompt file` which should appear in the bottom right of the editing window.
+1. When the planning agent concludes, select the option to `Open in Editor`
+1. When the plan appears in the editor, select it then select `Keep`.
+1. Save the file that appears by selecting `Save as prompt file` which should appear in the bottom right of the editing window, then confirming the filename in the top text bar by selecting it and pressing `Enter`.
 
 You should find you end up with something similar to this, saved as a prompt file (either in the repository root or in the `.github/prompts` directory),
 although the content will likely differ:
 
 ```markdown
-## Plan: CSV statistics plot CLI
+## Plan: CSV Statistics Plotter
 
-Build a small Python CLI that reads a single CSV file from a `data` directory argument, computes mean, min, max, and standard deviation with NumPy, and writes four PNG plots with Matplotlib. The workspace is currently just a clean data folder, so the implementation should scaffold a minimal Python project around a focused command-line entrypoint and dependency management via `venv` plus `requirements.txt`.
+Build a Python CLI that selects one CSV from a supplied data directory, calculates per-column statistics with NumPy, and saves a combined Matplotlib plot as a PNG.
 
 **Steps**
-1. Create the project scaffold and dependency files, including a virtual-environment workflow and `requirements.txt` entries for NumPy and Matplotlib.
-2. Implement the CLI entrypoint that accepts a path to the `data` directory, validates that exactly one CSV file is provided or selected, and routes that file into the analysis pipeline.
-3. Implement the analysis layer with NumPy to load the CSV and compute column-wise mean, min, max, and standard deviation.
-4. Implement the plotting layer with Matplotlib to generate four separate PNG files, one per statistic, saved alongside the input data or in a predictable output directory.
-5. Add basic usage documentation describing how to create the virtual environment, install dependencies, and run the tool.
-6. Validate the workflow with a smoke test on one of the existing inflammation CSV files and confirm the PNG outputs are created.
+1. Add a CLI with a positional data-directory argument and required `--csv` filename. Validate the selected headerless numeric CSV and report useful errors for invalid input.
+2. Calculate column-wise mean, minimum, maximum, and population standard deviation (`ddof=0`), and print the results in a readable table.
+3. Plot all four statistics against 1-based column labels in one PNG. Save it as `output/<csv-stem>-summary.png`, creating `output/` as needed. Do not modify files in `data/`.
+4. Add `requirements.txt` with NumPy 2.5.4 and Matplotlib 3.11.2, matching the existing venv.
+5. Add focused `unittest` coverage for the statistics, input validation, and PNG generation.
 
 **Relevant files**
-- `/Users/steve/Test/advanced-ai-coding-example/requirements.txt` — pinned runtime dependencies for NumPy and Matplotlib.
-- `/Users/steve/Test/advanced-ai-coding-example/.gitignore` — likely already covers `venv/` and `__pycache__/`; confirm it is sufficient for the new project files.
-- `/Users/steve/Test/advanced-ai-coding-example/<new CLI module>` — command-line parsing, CSV loading, and orchestration.
-- `/Users/steve/Test/advanced-ai-coding-example/<new plotting module>` — Matplotlib figure generation and PNG output.
-- `/Users/steve/Test/advanced-ai-coding-example/README.md` — setup and usage instructions.
+- [`.github/copilot-instructions.md`](.github/copilot-instructions.md) — Python style and read-only data/output rules.
+- New [`analyze_inflammation.py`](analyze_inflammation.py), [`requirements.txt`](requirements.txt), and [`tests/test_analyze_inflammation.py`](tests/test_analyze_inflammation.py).
 
 **Verification**
-1. Create a virtual environment and install dependencies from `requirements.txt`.
-2. Run the CLI against one known CSV in `data/` and verify four PNG files are produced.
-3. Open or inspect the outputs to confirm each plot reflects the expected statistic and uses the input file’s columns.
-4. Run any available lint or syntax check for the new Python files.
+1. Activate the existing environment and install with `python -m pip install -r requirements.txt`.
+2. Run `python -m unittest discover -s tests`.
+3. Run `python analyze_inflammation.py data --csv inflammation-01.csv`; check the printed values and `output/inflammation-01-summary.png`, and confirm the input data remains unchanged.
 
 **Decisions**
-- Use separate PNG files for mean, min, max, and standard deviation, because that matches the confirmed preference and keeps each output simple to inspect.
-- Keep the project minimal and CLI-first; no packaging metadata beyond `requirements.txt` unless it becomes necessary.
-- Treat the input as one CSV file selected from the provided data directory, with explicit validation and a helpful error if the directory is empty or contains multiple candidate CSV files.
-
-**Further Considerations**
-1. Confirm whether the tool should infer the single CSV automatically from the directory or require the user to pass the CSV file path directly. Recommendation: accept the directory path and infer the single file when possible, while allowing an explicit CSV path if needed.
-2. Confirm whether PNGs should be written next to the input CSV or into a dedicated output directory. Recommendation: write them into a sibling `output/` directory to keep generated artifacts separate from source data.
+- Require an explicit CSV filename because `data/` contains multiple CSVs.
+- Generate one combined PNG; print statistics without creating an extra data artifact.
+- Leave `.gitignore` unchanged.
 ```
 
 These generated plans tend to follow a structure that includes steps, relevant files, verification procedures, decisions made and any other further considerations.
@@ -119,6 +111,16 @@ which forces us to consider ways forward and make decisions and capture these wi
 - We may extend this plan with other sections and further detail as needed.
 - It has created a concrete document we can discuss and refine with colleagues before we proceed.
 - It also provides a "checkpoint": if the implementation is unsatisfactory we can remove the implementation, amend the plan, and ask Copilot to create the implementation again.
+
+Take a look at the `Problems` tab in the terminal pane at the bottom.
+You may spot some errors regarding files that don't exist.
+This is partly expected, since some of the files it mentions in the plan may not exist yet,
+but if you spot an error about a missing `.github/copilot-instructions.md` file,
+this is probably due to it getting the path to it incorrect,
+since it locates it relative to the location of the plan file.
+
+e.g. you may need to change `.github/copilot-instructions.md` to `../copilot-instructions.md`.
+
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
@@ -145,13 +147,13 @@ noting what it did well and what it could have done better.
 ### Enacting the Plan
 
 Once we're happy with our plan, we may proceed with implementation either by selecting the 'Start implementation' option in the chat if it appears,
-or by entering something like the following in the chat with the `Agent` mode enabled:
+or by selecting the plan file in the chat context and entering something like the following in the chat with the `Agent` mode enabled:
 
 ```
 Implement the plan
 ```
 
-The build-in agent mode will then create an implementation based on the plan.
+The built-in agent mode will then create an implementation based on the plan.
 You'll need to review and approve various actions the agent needs to take in order to follow the plan.
 If the agent seems to pause for too long, look for anything it wants you to select from the search dropdown at the top of the VSCode window.
 
@@ -191,7 +193,7 @@ First, from within our coding directory, create a new directory `.github/skills`
 mkdir .github/skills
 ```
 
-VSCode also has a useful extension that's useful for identifying issues with skills that we develop, so let's install that now:
+VSCode also has a useful extension that's useful for identifying issues with skills that we develop, so let's install that now so we can use it later:
 
 1. Select the `Extensions` icon on the sidebar.
 1. Add `@id:ms-vscode.vscode-chat-customizations-evaluations` into the search box, which is a specific reference for the extension we want.
@@ -226,7 +228,7 @@ def concat(arg1, arg2):
 ```
 
 In VSCode, agents are typically defined in a file with a `.agent.md` suffix.
-Create a new `add-docstrings.agent.md` file in the `.github/skills` directory, and add the [following contents](files/skills/add-docstrings/SKILL.md.txt):
+Create a new `add-docstrings` directory in `.github/skills`, and add a new `SKILL.md` file with the [following contents](files/skills/add-docstrings/SKILL.md.txt):
 
 ~~~markdown
 ---
@@ -255,7 +257,8 @@ This skill adds docstrings to Python source code files.
 
 We're being careful to define constraints on the behaviour here in addition to defining the approach to take as a sequence of simple, explicit steps.
 
-Once you've saved the file, run the skill by ensuring you have `Agent` mode enabled,
+Once you've saved the file, select the `analyze_inflammation.py` script file (or whatever it's called) in the chat context,
+then run the skill by ensuring you have `Agent` mode enabled,
 and entering `/add-docstrings` into the VSCode chat.
 You should see reST docstrings added to your code.
 
@@ -336,7 +339,7 @@ Delete the `tests` directory along with its contents.
 10 mins.
 
 Based on what we've learned from writing our docstring skill,
-write a skill for automatically drafting Pytest unit tests.
+write a skill for automatically drafting Pytest unit tests in `.github/skills/add-tests/SKILL.md`.
 Ensure it has the following sections:
 
 - Constraints
@@ -361,6 +364,7 @@ This skill writes Pytest unit tests.
 ## Constraints
 
 - ONLY write tests and test files in the `tests` directory.
+- ONLY write tests and test files in the `unit_tests` directory.
 - Tests should ONLY be written for Pytest.
 
 ## Approach
@@ -390,76 +394,14 @@ If you receive an error here, check the syntax of the `SKILL.md` file.
 1. A pop-up box will request permission to conduct the analysis. Select `Allow` (or similar).
 1. When the analysis is complete, select `Show problems` when the pop-up appears, which will display a list of issues in the `PROBLEMS` tab in the bottom VSCode pane.
 
-You should see a whole host of issues that indicate problems with ambiguity, cognitive load, coverage gaps, amongst others.
+You should see at least one issue classed as a contradiction,
+since we've specified two locations for the unit tests in the constraints.
 
 Within the file code editor, you should see these issues highlighted with underlines.
 If you hover over either the entries in the `PROBLEMS` tab, or the editor underlines,
 a description will pop up explaining the issue.
 
-:::::::::::::::::::::::::::::::::::::: challenge
-
-## Solo Exercise: Review and Refine the Test Writer Skill
-
-10 mins.
-
-Go through each of the identified issues and fix them.
-
-One way to do this such that you get an opportunity to review the suggestions before they are applied,
-is to first right-click on the entry in the `PROBLEMS` tab and select `Explain` which drafts a set of proposed changes.
-
-The Chat Customisations Evaluations tool can be a bit overzealous,
-so if you think a suggestion is overkill, feel free to ignore it.
-
-If you're happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the skill file,
-then select `Keep` in the editor window.
-Otherwise, `Undo` the change and add your own fix.
-
-Note: you may find that even once the identified problems are fixed, issues in the `PROBLEMS` tab still remain.
-This appears to be a bug, and restarting VSCode should fix this.
-
-:::::::::::::::::::::::::: solution
-
-After running the Chat Customizations Evaluation tool on it,
-and making updates:
-
-~~~markdown
----
-name: add-tests
-description: Create Pytest unit tests.
-compatibility: Requires python3
-metadata:
-  version: 1.0.0
----
-
-This skill writes Pytest unit tests.
-
-## Constraints
-
-- ONLY write tests and test files in the `tests` directory.
-- If the `tests` directory does not exist, create it and add an empty `__init__.py` file before writing any test files.
-- Tests should ONLY be written for Pytest.
-- Name test files as `test_<source_module>.py` and test functions as `test_<function_name>_<scenario>`, e.g. `test_parse_input_empty_string`.
-
-## Approach
-
-1. Examine the code and identify unit tests for all public functions and methods, prioritizing logic branches, edge cases, and error conditions. Exclude trivial one-line wrappers unless they have meaningful behavior.
-2. Write the identified unit tests.
-3. Run pytest to verify the tests.
-4. If pytest exits with a non-zero code, report the specific failing tests and their error output, then attempt to fix the test code. Do not report success until all tests pass.
-5. Provide a summary of what was created and the results of running pytest.
-
-## Commands to Use
-
-- Ensure the virtual environment is activated before running pytest
-
-```bash
-python -m pytest tests/
-```
-~~~
-
-:::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
+Remove the `unit_tests` line in the constraints section.
 
 Now use the skill to create some unit tests, e.g. select `Agent` mode and enter `/add-tests` into the chat window.
 
@@ -571,7 +513,7 @@ plugins:
 
 Here we give a name to our documentation site,
 and set up the navigation menu with one item `Overview` that links to `index.md`.
-We also enable two plugins, `search` to provide search functionality in the documentation site, and `mkdocstrings` to automatically generate API reference documentation from Python docstrings (i.e. like the ones generated by our `pylint-fix` skill).
+We also enable two plugins, `search` to provide search functionality in the documentation site, and `mkdocstrings` to automatically generate API reference documentation from Python docstrings (i.e. like the ones generated by our `add-docstrings` skill).
 
 We can try to render the documentation site locally and see what it looks like:
 
@@ -606,7 +548,7 @@ Ensure it has the following sections:
 Once finished, use the Chat Customisations Evaluations tool as before to review the skill and suggest improvements,
 and refine the skill until you are happy with it.
 
-Finally, use the skill to create the documentation, e.g. select `Agent` mode and enter `/build-mkdocs` into the chat window.
+Finally, use the skill to create the documentation, e.g. select `Agent` mode and enter `/create-docs` into the chat window.
 
 :::::::::::::::::::::::::: solution
 
@@ -614,7 +556,7 @@ Here's one solution:
 
 ~~~markdown
 ---
-name: build-docs
+name: create-docs
 description: Author and build software documentation using MkDocs.
 compatibility: Requires python3
 metadata:
@@ -737,7 +679,7 @@ python -m mkdocs build
 
 ## Class Exercise: How did it do?
 
-5 mins.
+10 mins.
 
 Serve the built documentation and view it in a browser, e.g.:
 
@@ -750,8 +692,10 @@ Direct a browser to http://localhost:8000/
 Take a look at the documentation,
 and add your thoughts to the shared document on the following questions:
 
-- Would they be adequate for another developer unfamiliar with the project to understand (at a basic level) what it's about, how to set it up, and how to run the code and the tests?
+- Are the docs buildable and viewable?
+- Are they correct?
 - How could they be improved?
+- Would they be adequate for another developer unfamiliar with the project to understand (at a basic level) what it's about, how to set it up, and how to run the code and the tests?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
