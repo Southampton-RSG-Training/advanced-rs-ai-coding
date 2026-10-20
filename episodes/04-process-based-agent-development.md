@@ -1,7 +1,7 @@
 ---
 title: "Process-based Development Approach using Agents"
-teaching: 45
-exercises: 35
+teaching: 30
+exercises: 55
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -109,32 +109,23 @@ When defining our agent that will produce this specification, we should consider
 
 ### A First Try...
 
-Fortunately VSCode allows us to create an agent definition file from a chat request,
-which we will then adapt to suit our needs more specifically.
-In the VSCode chat ensure you have the `GPT-5.4 mini` agent selected in the model dropdown, and enter:
+So what we want is a requirements gathering agent something like the following:
 
-```
-/create-agent a requirements gathering agent in .github/agents that creates a requirements specification document `project-docs/requirements.md` based on a prompt, which contains sections on assumptions, user stories, success metrics, and items which are out of scope. Do not create any implementation.
-```
+- Creates a requirements specification document based on a prompt
+- The specification it creates should contain sections on assumptions, user stories, success metrics, and items which are out of scope
+- We don't want it to create any implementation
 
-Here, our request briefly captures the above points, explicitly requesting the generation of a `requirements.md` document within a `project-docs` directory.
+Now Copilot actually has ability via the `/create-agent` chat command to create an agent definition from a prompt.
+This is useful to get started and build upon, but for the purposes of training,
+we'll use agent definitions already written so we can refer to and discuss the same fixed targets.
 
-You'll find a new file, typically ending `.agent.md`, has been created.
-This may be located in the `.github/agents` directory or - oddly - in the repository root.
-However, for it to be seen and be usable from the chat,
-it needs to be in this location so Copilot can find it.
-
-If it's not already in this directory, create the directory and move the file over, e.g.
+Agents definitions typically exist within the `.github/agents` directory, so let's create that now:
 
 ```bash
 mkdir .github/agents
-mv requirements-gatherer.agent.md .github/agents
 ```
 
-Finally, to be consistent for the training, rename the agents file as `requirements-gatherer.agent.md`,
-
-This generation process generally produces a reasonable definition,
-although given the probablistic nature of LLMs, yours will differ:
+Let's take a look at a first attempt at a requirements agent (no need just yet to copy this into your own IDEs):
 
 ```markdown
 ---
@@ -208,10 +199,9 @@ Lastly, we have our set of subsections that describe the points of behaviour we 
 
 ## Limitations?
 
-3 mins.
+5 mins.
 
-This isn't a bad start.
-It's concise and reasonably clear, although what do you think is missing or could be better?
+What do you think is missing or could be better?
 
 Add your thoughts to the shared document.
 
@@ -234,8 +224,9 @@ since it's also designed to review agent definitions.
 ### A Better Requirements Agent
 
 Let's take a look at [a version of this agent](files/agents/requirements-gatherer.agent.md.txt) that takes these limitations into account.
+Copy this definition into a new file `.github/agents/requirements-gatherer.agent.md`.
 
-The revised YAML front matter looks like:
+The revised YAML front matter now looks like:
 
 ```yaml
 ----
@@ -257,30 +248,32 @@ We can also see the revised subsections address our other concerns; asking clari
 
 ### Running our Requirements Agent
 
-Select our new `requirements-gatherer` agent from the `Agent/Ask/Plan` menu,
-ensure the `GPT-5.4 mini` model is selected,
-and enter the following:
+Select our new `Requirements Gatherer` agent from the `Set Agent` menu,
+select `Local` from the harness dropdown,
+and enter the following into the chat:
 
 ```
 Create a command line tool written in Python that reads in a single CSV data file contained in the data directory passed as an argument, and creates graphical plots saved as PNG images to visualise the mean, minimum, maximum and standard deviation across each column. The tool should use Numpy for statistical analysis and Matplotlib for generating the plots
 ```
 
-You should find a `requirements.md` file in the `project-docs` directory, hopefully with the sections we requested,
+So here we're only giving a high-level request for what we want, in terms of features and technical constraints.
+You may be asked clarifying questions.
+Feel free to answer these as you interpret what we want.
+
+You should find a `requirements.md` file in the `project-docs` directory with the sections we requested,
 [similar to this one](files/example-agent-output/requirements.md.txt).
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## Review!
 
-5 mins.
+10 mins.
 
 So with a skeptical mindset:
 
 - Carefully review the generated requirements document and ensure it makes sense to you.
 - Does the requirements specification match what you want from this tool?
-- Ensure you address any incorrect assumptions:
-*in particular, does the spec correctly assume the tool should process all files within the `data/` directory,
-and not just one?*
+- Ensure you address any incorrect assumptions.
 - Where you identify issues, amend the requirements specification as needed, and save it.
 
 Of course, your requirements specifications will be different!
@@ -291,7 +284,8 @@ noting what it did well and what it could have done better.
 :::::::::::::::::::::::::: solution
 
 When first developing agents, similarly to how we develop code, a typical process is to refine the behaviour of the agent over multiple runs until its output is satisfactory.
-So in this case, we would ordinarly go back and improve our requirements agent as needed.
+So in this case, we would ordinarily talk to our collaborators for feedback,
+and go back and improve our requirements agent as needed.
 
 :::::::::::::::::::::::::::::::::::
 
@@ -314,41 +308,32 @@ Instead, it should provide enough detail for developers, reviewers, and stakehol
 assess its suitability, identify risks, and agree on an implementation approach before coding begins.
 A good design specification provides a clear, reviewable blueprint that guides development while remaining flexible enough to accommodate implementation details discovered during coding.
 
-With that in mind, let's ask Copilot to create an agent for this:
+With that in mind, what we want is an agent that does something like:
 
-```
-/create-agent an software architect agent in .github/agents that creates a technical design specification document `project-docs/technical_spec.md` based the projects-docs/requirements.md file, which contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide. Verify that the design address the requirements specified in the requirements.md document. Do not create any implementation.
-```
+- Creates a technical design specification document based the `projects-docs/requirements.md` file.
+- A design specification that contains sections on assumptions, architecture overview, component structure and responsibilities, and a step-by-step implementation guide.
+- Verify that the design address the requirements specified in the requirements.md document. Do not create any implementation.
 
-Again, the agent file may need to be moved to `.github/agents`.
+Copy in the agent definition from [here](files/agents/architect.agent.md.txt) that takes these limitations into account,
+into a new file `.github/agents/architect.agent.md`.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## A Better Design Agent
 
-5 mins.
+10 mins.
 
 In a similar way to how we improved our requirements agent,
 improve your design agent by doing the following:
 
-- Rename the produced agent file (probably created in `.github/agents`) to `architect.agent.md`.
-- Review the agent in general and refine it as you see fit.
-- Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
-- Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
-- Ensure it specifies to produce a `technical_spec.md` document in the `project-docs` directory based on `requirements.md`.
-
-:::::::::::::::::::::::::: solution
-
-An [example design agent](files/agents/architect.agent.md.txt).
-
-:::::::::::::::::::::::::::::::::::
+- Review the agent and refine it as you see fit.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Running our Design Agent
 
-Select our new `architect` agent from the `Agent/Ask/Plan` menu,
-ensure the `GPT-5.4 mini` model is selected,
+Select our new `Software Architect` agent from the `Set Agent` menu,
+ensure the `Local` harness is selected,
 and enter the following:
 
 ```
@@ -362,7 +347,7 @@ You should find a `technical_spec.md` file in the `project-docs` directory, hope
 
 ## Review!
 
-5 mins.
+10 mins.
 
 As before, with a skeptical mindset:
 
@@ -393,38 +378,24 @@ Design decisions should be made and reviewed before implementation begins, reduc
 A good implementation should provide a complete and functional, maintainable, and tested solution that meets the requirements and follows the approved design.
 It should include clear, reviewable outputs such as source code, automated tests, documentation, and evidence that the software behaves as intended.
 
-```
-/create-agent an implementer agent in .github/agents that creates an implementation based the projects-docs/technical_spec.md file. Implement each implementation step in the spec and verify that the implementation addresses the specification defined in the technical_spec.md document.
-```
-
-As before, the agent file may need to be moved to `.github/agents`.
+Copy in the agent definition from [here](files/agents/implementer.agent.md.txt) that takes these limitations into account,
+into a new file `.github/agents/implementer.agent.md`.
 
 :::::::::::::::::::::::::::::::::::::: challenge
 
 ## A Better Implementer Agent
 
-5 mins.
+10 mins.
 
 In a similar way to how we improved our previous agents,
-improve your implementation agent by doing the following:
-
-- Rename the produced agent file (probably created in `.github/agents`) to `implementer.agent.md`.
-- Review the agent in general and refine it as you see fit.
-Aim to reduce ambiguities and ensure it follows a sensible approach that's in line with our process and other agents so far.
-- Similarly, revise the YAML front matter to improve the `description`, `tools`, and `models` fields (the latter two will likely be very similar!).
-
-:::::::::::::::::::::::::: solution
-
-An [example implementer agent](files/agents/implementer.agent.md.txt).
-
-:::::::::::::::::::::::::::::::::::
+review the agent in general and refine it as you see fit.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Running our Implementer Agent
 
-Select our new `implementer` agent from the `Agent/Ask/Plan` menu,
-ensure the `GPT-5.4 mini` model is selected,
+Select our new `implementer` agent from the `Set Agent` menu,
+ensure the `Local` harness is selected,
 and enter the following:
 
 ```
@@ -449,6 +420,14 @@ noting what it did well and what it could have done better.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+Of course, we're limited by the time we have for training,
+but in reality we would review and iterate this process at each the output points where a specification (or implementation) doesn't meet our needs.
+But the output specifications give us a more solid way to increase the clarity at each stage of this process,
+and harness and guide what AI is able to do for us.
+
+It's also important to note that in using the free tier of Copilot for this training we're unable to choose the model used in each case,
+and with more complex models more performant levels of reasoning are possible.
+
 
 ## Summary
 
@@ -457,7 +436,7 @@ By separating requirements, design, and implementation into distinct phases with
 we've established a workflow that maintains clarity and enables careful review at each stage,
 whilst enabling specifications to themselves become **executable**.
 
-This approach is highly adaptable and can be extended in many ways to suit your specific needs:
+This approach is highly adaptable and should be reviewed and amended to suit your specific needs:
 
 - **Specialization for Your Domain** - the agents we've created are really just a place to begin.
 You can tailor them to your research or project domain by refining their instructions and defining the exact output format your team needs.

@@ -126,7 +126,7 @@ e.g. you may need to change `.github/copilot-instructions.md` to `../copilot-ins
 
 ## Solo Exercise: Review!
 
-5 mins.
+10 mins.
 
 As we know, we should always review the output from generative AI.
 So with a skeptical mindset:
