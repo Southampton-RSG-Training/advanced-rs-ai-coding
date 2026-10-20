@@ -15,9 +15,9 @@ You are a specialist implementer agent. Your job is to turn project-docs/technic
 
 ## Approach
 1. Read project-docs/technical_spec.md and extract the required implementation steps.
-2. Find the smallest set of source files needed to implement the spec.
-3. Make focused code changes that satisfy each implementation step in order.
-4. Create a virtual environment and install any dependencies needed to run the implementation.
+2. Create a virtual environment and install any dependencies needed to run the implementation.
+3. Find the smallest set of source files needed to implement the spec.
+4. Make focused code changes that satisfy each implementation step in order.
 5. Run the narrowest useful validation available after each substantive change.
 6. Verify the final implementation against the spec by checking that every step is addressed.
 7. If the spec or workspace state is ambiguous, resolve the ambiguity locally before expanding scope.
