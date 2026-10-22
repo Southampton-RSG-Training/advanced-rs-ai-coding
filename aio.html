@@ -787,7 +787,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-02-getting-started"><p>Content from <a href="02-getting-started.html">Getting Started</a></p>
 <hr>
-<p>Last updated on 2026-10-16 |
+<p>Last updated on 2026-10-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/02-getting-started.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1132,7 +1132,8 @@ file within that directory, and add the following:</p>
 <span id="cb9-16"><a href="#cb9-16" tabindex="-1" aria-label="code-block-9-16"></a><span class="fu">## General Guidelines</span></span>
 <span id="cb9-17"><a href="#cb9-17" tabindex="-1" aria-label="code-block-9-17"></a><span class="ss">- </span>Write clear, maintainable code</span>
 <span id="cb9-18"><a href="#cb9-18" tabindex="-1" aria-label="code-block-9-18"></a><span class="ss">- </span>Test changes before committing</span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1" aria-label="code-block-9-19"></a><span class="ss">- </span>Keep the workspace organized and clean</span></code></pre>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1" aria-label="code-block-9-19"></a><span class="ss">- </span>Keep the workspace organized and clean</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1" aria-label="code-block-9-20"></a><span class="ss">- </span>Use a Python virtual environment held in <span class="in">`venv/`</span> for dependencies</span></code></pre>
 </div>
 <p>Now this is only a generic draft. As any project develops, the
 established conventions and rules may need to change or be expanded
@@ -1605,7 +1606,7 @@ short.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>An initial try:</p>
 <div class="codewrapper sourceCode" id="cb11">
@@ -1900,7 +1901,7 @@ chat window.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Here’s one solution:</p>
 <div class="codewrapper sourceCode" id="cb16">
@@ -2321,25 +2322,26 @@ just yet to copy this into your own IDEs):</p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="an">argument-hint:</span><span class="co"> "Describe the feature, problem, or product idea to turn into a requirements spec."</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1" aria-label="code-block-3-6"></a><span class="an">user-invocable:</span><span class="co"> true</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1" aria-label="code-block-3-7"></a><span class="co">---</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1" aria-label="code-block-3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1" aria-label="code-block-3-12"></a><span class="fu">## Constraints</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1" aria-label="code-block-3-13"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1" aria-label="code-block-3-14"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1" aria-label="code-block-3-15"></a><span class="ss">- </span>DO NOT write a design.</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1" aria-label="code-block-3-16"></a><span class="ss">- </span>DO NOT create an implementation.</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1" aria-label="code-block-3-17"></a><span class="ss">- </span>ONLY produce requirements content.</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1" aria-label="code-block-3-18"></a></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1" aria-label="code-block-3-19"></a><span class="fu">## Approach</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1" aria-label="code-block-3-20"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1" aria-label="code-block-3-21"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1" aria-label="code-block-3-22"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1" aria-label="code-block-3-23"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1" aria-label="code-block-3-24"></a></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1" aria-label="code-block-3-25"></a><span class="fu">## Output Format</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1" aria-label="code-block-3-26"></a>Return the completed requirements specification content and confirm that it was written to project-docs/requirements.md.</span></code></pre>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1" aria-label="code-block-3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1" aria-label="code-block-3-9"></a>You are a specialist at turning a prompt into a concise requirements specification.</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1" aria-label="code-block-3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1" aria-label="code-block-3-11"></a>Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1" aria-label="code-block-3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1" aria-label="code-block-3-13"></a><span class="fu">## Constraints</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1" aria-label="code-block-3-14"></a><span class="ss">- </span>DO NOT invent implementation details.</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1" aria-label="code-block-3-15"></a><span class="ss">- </span>DO NOT expand scope beyond what the prompt supports.</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1" aria-label="code-block-3-16"></a><span class="ss">- </span>DO NOT write a design.</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1" aria-label="code-block-3-17"></a><span class="ss">- </span>DO NOT create an implementation.</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1" aria-label="code-block-3-18"></a><span class="ss">- </span>ONLY produce requirements content.</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1" aria-label="code-block-3-19"></a></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1" aria-label="code-block-3-20"></a><span class="fu">## Approach</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1" aria-label="code-block-3-21"></a><span class="ss">1. </span>Extract the core problem, intended users, and any explicit constraints from the prompt.</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1" aria-label="code-block-3-22"></a><span class="ss">2. </span>Identify assumptions that are necessary to proceed and separate them from confirmed facts.</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1" aria-label="code-block-3-23"></a><span class="ss">3. </span>Write clear user stories and success metrics in concise markdown.</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1" aria-label="code-block-3-24"></a><span class="ss">4. </span>Keep the document focused on requirements rather than solutions.</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1" aria-label="code-block-3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1" aria-label="code-block-3-26"></a><span class="fu">## Output Format</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1" aria-label="code-block-3-27"></a>Return the completed requirements specification content and confirm that it was written to project-docs/requirements.md.</span></code></pre>
 </div>
 <p>Agent definitions tend to follow a common pattern of defining agent
 metadata, role, and aspects of its overall behaviour separated into
@@ -2450,23 +2452,19 @@ definition into a new file
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="pp">----</span></span>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="pp">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1" aria-label="code-block-4-3"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"Requirements Gatherer"</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1" aria-label="code-block-4-4"></a><span class="fu">tools</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">read/readFile</span><span class="kw">,</span><span class="at"> edit/createDirectory</span><span class="kw">,</span><span class="at"> edit/createFile</span><span class="kw">,</span><span class="at"> edit/editFiles</span><span class="kw">,</span><span class="at"> search</span><span class="kw">]</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1" aria-label="code-block-4-5"></a><span class="fu">argument-hint</span><span class="kw">:</span><span class="at"> </span><span class="st">"Describe the feature, problem, or product idea to turn into a requirements spec."</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1" aria-label="code-block-4-6"></a><span class="fu">user-invocable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> GPT-5.4 mini (copilot)</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1" aria-label="code-block-4-8"></a><span class="pp">----</span></span></code></pre>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1" aria-label="code-block-4-7"></a><span class="pp">---</span></span></code></pre>
 </div>
 <p>So here, we’ve updated the allowed tools with more finely-grained
 permissions, restricting it to reading files, creating directories and
 files (necessary to create the <code>project-docs</code> directory and
 <code>project-docs/requirements.md</code> file), editing files (in case
 anything needs to be updated), and keeping the ability to search.</p>
-<p>We’ve also included another parameter to explicitly specify the agent
-model to use. For the purpose of this training, we’ll use the GPT-5.4
-mini model.</p>
 <p>We can also see the revised subsections address our other concerns;
 asking clarifying questions when necessary, explicitly providing the
 user story format, and including a section on the contents of the spec
