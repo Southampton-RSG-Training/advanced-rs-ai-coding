@@ -1,4 +1,4 @@
---
+---
 description: "Use when implementing project-docs/technical_spec.md into code, building the application from the specification, or verifying that each implementation step in the spec is satisfied."
 name: "Implementer"
 tools: [read, edit, search, execute]
@@ -46,4 +46,3 @@ Return a concise implementation summary that includes:
 - how it maps to the technical spec
 - what validation was run
 - any remaining gaps or follow-up items
-
