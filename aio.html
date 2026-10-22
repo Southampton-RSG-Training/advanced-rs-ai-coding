@@ -1163,7 +1163,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-03-task-based-agents"><p>Content from <a href="03-task-based-agents.html">Planning and Task-based Approach to Software Development</a></p>
 <hr>
-<p>Last updated on 2026-10-20 |
+<p>Last updated on 2026-10-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/03-task-based-agents.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1589,11 +1589,14 @@ skill for automatically drafting Pytest unit tests in
 <code>.github/skills/add-tests/SKILL.md</code>. Ensure it has the
 following sections:</p>
 <ul>
-<li>Constraints</li>
-<li>Approach: list the steps the skill needs to take to generate the
-unit tests</li>
-<li>Commands to Use</li>
+<li>Constraints: what should it do? What should it not do? Where should
+tests reside?</li>
+<li>Approach: list the steps the skill needs to take to generate and run
+the unit tests</li>
+<li>Commands to Use: how to run the unit tests?</li>
 </ul>
+<p>With skill agent definitions conciseness is good, so try to keep it
+short.</p>
 </div>
 </div>
 </div>
@@ -1664,6 +1667,33 @@ with underlines. If you hover over either the entries in the
 pop up explaining the issue.</p>
 <p>Remove the <code>unit_tests</code> line in the constraints
 section.</p>
+<div id="solo-exercise-review-and-refine-the-test-writer-skill" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="solo-exercise-review-and-refine-the-test-writer-skill" class="callout-inner">
+<h3 class="callout-title">Solo Exercise: Review and Refine the Test
+Writer Skill</h3>
+<div class="callout-content">
+<p>5 mins.</p>
+<p>Go through each of the identified issues and fix them.</p>
+<p>One way to do this such that you get an opportunity to review the
+suggestions before they are applied, is to first right-click on the
+entry in the PROBLEMS tab and select Explain which drafts a set of
+proposed changes.</p>
+<p>The Chat Customisations Evaluations tool can be a bit overzealous, so
+if you think a suggestion is overkill, feel free to ignore it.</p>
+<p>If you’re happy with the change, select the <code>Apply to...</code>
+icon at the top right of the suggestion to apply it to the skill file,
+then select Keep in the editor window. Otherwise, Undo the change and
+add your own fix.</p>
+<p>Note: you may find that even once the identified problems are fixed,
+issues in the PROBLEMS tab still remain. This appears to be a bug, and
+restarting VSCode should fix this.</p>
+</div>
+</div>
+</div>
 <p>Now use the skill to create some unit tests, e.g. select
 <code>Agent</code> mode and enter <code>/add-tests</code> into the chat
 window.</p>
@@ -1676,19 +1706,20 @@ window.</p>
 <h3 class="callout-title">Class Exercise: How did it do?</h3>
 <div class="callout-content">
 <p>5 mins.</p>
-<p>Run the tests on the command line, e.g.:</p>
+<p>Take a look at the tests that have been written, and then run the
+tests on the command line, e.g.:</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="ex">python</span> <span class="at">-m</span> pytest <span class="at">-m</span> tests/</span></code></pre>
 </div>
-<p>Did they pass?</p>
-<p>Take a look at the tests that have been written, and add your
-thoughts to the shared document on the following questions:</p>
+<p>Add your thoughts to the shared document on the following
+questions:</p>
 <ul>
 <li>Can you understand them?</li>
 <li>How useful are they to you?</li>
 <li>How could they be improved? What’s missing?</li>
+<li>Did they pass?</li>
 </ul>
 </div>
 </div>
@@ -2002,7 +2033,7 @@ chat window.</p>
 <div id="class-exercise-how-did-it-do-1" class="callout-inner">
 <h3 class="callout-title">Class Exercise: How did it do?</h3>
 <div class="callout-content">
-<p>10 mins.</p>
+<p>5 mins.</p>
 <p>Serve the built documentation and view it in a browser, e.g.:</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2071,7 +2102,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-04-process-based-agent-development"><p>Content from <a href="04-process-based-agent-development.html">Process-based Development Approach using Agents</a></p>
 <hr>
-<p>Last updated on 2026-10-20 |
+<p>Last updated on 2026-10-22 |
 
         <a href="https://github.com/carpentries/workbench-template-md/edit/main/episodes/04-process-based-agent-development.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2383,7 +2414,7 @@ behaviour we wanted it to address.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li>Be more explicit with for what we want, e.g. include the user story
@@ -2485,7 +2516,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>When first developing agents, similarly to how we develop code, a
 typical process is to refine the behaviour of the agent over multiple
@@ -2541,7 +2572,7 @@ limitations into account, into a new file
 <div id="a-better-design-agent" class="callout-inner">
 <h3 class="callout-title">A Better Design Agent</h3>
 <div class="callout-content">
-<p>10 mins.</p>
+<p>5 mins.</p>
 <p>In a similar way to how we improved our requirements agent, improve
 your design agent by doing the following:</p>
 <ul>
@@ -2569,7 +2600,7 @@ one</a>.</p>
 <div id="review-1" class="callout-inner">
 <h3 class="callout-title">Review!</h3>
 <div class="callout-content">
-<p>10 mins.</p>
+<p>5 mins.</p>
 <p>As before, with a skeptical mindset:</p>
 <ul>
 <li>Carefully review the generated technical specification document and
@@ -2589,7 +2620,7 @@ and what it could have done better.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>We’re settling into a pattern now: have copilot draft an agent,
 review and refine it, run it to produce the actual output we want, and
@@ -2628,7 +2659,7 @@ limitations into account, into a new file
 <div id="a-better-implementer-agent" class="callout-inner">
 <h3 class="callout-title">A Better Implementer Agent</h3>
 <div class="callout-content">
-<p>10 mins.</p>
+<p>5 mins.</p>
 <p>In a similar way to how we improved our previous agents, review the
 agent in general and refine it as you see fit.</p>
 </div>
@@ -2798,8 +2829,8 @@ any links that you are not going to use.
   "url": "https://carpentries.github.io/workbench-template-md/aio.html",
   "identifier": "https://carpentries.github.io/workbench-template-md/aio.html",
   "dateCreated": "2026-05-05",
-  "dateModified": "2026-10-20",
-  "datePublished": "2026-10-20"
+  "dateModified": "2026-10-22",
+  "datePublished": "2026-10-22"
 }
 
   </script><script>
