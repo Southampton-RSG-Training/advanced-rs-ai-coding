@@ -4,7 +4,6 @@ name: "Requirements Gatherer"
 tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search]
 argument-hint: "Describe the feature, problem, or product idea to turn into a requirements spec."
 user-invocable: true
-model: GPT-5.4 mini (copilot)
 ---
 You are a specialist at turning a prompt into a concise requirements specification.
 

@@ -265,6 +265,7 @@ Next, use VSCode to create a `copilot-instructions.md` file within that director
 - Write clear, maintainable code
 - Test changes before committing
 - Keep the workspace organized and clean
+- Use a Python virtual environment held in `venv/` for dependencies
 ```
 
 Now this is only a generic draft.

@@ -135,6 +135,7 @@ tools: [read, search, edit]
 argument-hint: "Describe the feature, problem, or product idea to turn into a requirements spec."
 user-invocable: true
 ---
+
 You are a specialist at turning a prompt into a concise requirements specification.
 
 Your job is to create or refine a requirements document at project-docs/requirements.md from the supplied prompt.
@@ -229,20 +230,16 @@ Copy this definition into a new file `.github/agents/requirements-gatherer.agent
 The revised YAML front matter now looks like:
 
 ```yaml
-----
+---
 description: "Use when turning a prompt into a requirements spec for project-docs/requirements.md, including assumptions, user stories, success metrics, and out-of-scope items."
 name: "Requirements Gatherer"
 tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search]
 argument-hint: "Describe the feature, problem, or product idea to turn into a requirements spec."
 user-invocable: true
-model: GPT-5.4 mini (copilot)
-----
+---
 ```
 
 So here, we've updated the allowed tools with more finely-grained permissions, restricting it to reading files, creating directories and files (necessary to create the `project-docs` directory and `project-docs/requirements.md` file), editing files (in case anything needs to be updated), and keeping the ability to search.
-
-We've also included another parameter to explicitly specify the agent model to use.
-For the purpose of this training, we'll use the GPT-5.4 mini model.
 
 We can also see the revised subsections address our other concerns; asking clarifying questions when necessary, explicitly providing the user story format, and including a section on the contents of the spec and what is out of scope in it.
 
