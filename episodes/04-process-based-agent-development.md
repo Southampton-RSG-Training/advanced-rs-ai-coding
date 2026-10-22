@@ -1,7 +1,7 @@
 ---
 title: "Process-based Development Approach using Agents"
 teaching: 30
-exercises: 55
+exercises: 40
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -321,7 +321,7 @@ into a new file `.github/agents/architect.agent.md`.
 
 ## A Better Design Agent
 
-10 mins.
+5 mins.
 
 In a similar way to how we improved our requirements agent,
 improve your design agent by doing the following:
@@ -347,7 +347,7 @@ You should find a `technical_spec.md` file in the `project-docs` directory, hope
 
 ## Review!
 
-10 mins.
+5 mins.
 
 As before, with a skeptical mindset:
 
@@ -385,7 +385,7 @@ into a new file `.github/agents/implementer.agent.md`.
 
 ## A Better Implementer Agent
 
-10 mins.
+5 mins.
 
 In a similar way to how we improved our previous agents,
 review the agent in general and refine it as you see fit.

@@ -342,9 +342,11 @@ Based on what we've learned from writing our docstring skill,
 write a skill for automatically drafting Pytest unit tests in `.github/skills/add-tests/SKILL.md`.
 Ensure it has the following sections:
 
-- Constraints
-- Approach: list the steps the skill needs to take to generate the unit tests
-- Commands to Use
+- Constraints: what should it do? What should it not do? Where should tests reside?
+- Approach: list the steps the skill needs to take to generate and run the unit tests
+- Commands to Use: how to run the unit tests?
+
+With skill agent definitions conciseness is good, so try to keep it short.
 
 :::::::::::::::::::::::::: solution
 
@@ -403,6 +405,24 @@ a description will pop up explaining the issue.
 
 Remove the `unit_tests` line in the constraints section.
 
+:::::::::::::::::::::::::::::::::::::: challenge
+
+## Solo Exercise: Review and Refine the Test Writer Skill
+
+5 mins.
+
+Go through each of the identified issues and fix them.
+
+One way to do this such that you get an opportunity to review the suggestions before they are applied, is to first right-click on the entry in the PROBLEMS tab and select Explain which drafts a set of proposed changes.
+
+The Chat Customisations Evaluations tool can be a bit overzealous, so if you think a suggestion is overkill, feel free to ignore it.
+
+If you’re happy with the change, select the `Apply to...` icon at the top right of the suggestion to apply it to the skill file, then select Keep in the editor window. Otherwise, Undo the change and add your own fix.
+
+Note: you may find that even once the identified problems are fixed, issues in the PROBLEMS tab still remain. This appears to be a bug, and restarting VSCode should fix this.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 Now use the skill to create some unit tests, e.g. select `Agent` mode and enter `/add-tests` into the chat window.
 
 :::::::::::::::::::::::::::::::::::::: challenge
@@ -411,20 +431,19 @@ Now use the skill to create some unit tests, e.g. select `Agent` mode and enter 
 
 5 mins.
 
-Run the tests on the command line, e.g.:
+Take a look at the tests that have been written,
+and then run the tests on the command line, e.g.:
 
 ```bash
 python -m pytest -m tests/
 ```
 
-Did they pass?
-
-Take a look at the tests that have been written,
-and add your thoughts to the shared document on the following questions:
+Add your thoughts to the shared document on the following questions:
 
 - Can you understand them?
 - How useful are they to you?
 - How could they be improved? What's missing?
+- Did they pass?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -679,7 +698,7 @@ python -m mkdocs build
 
 ## Class Exercise: How did it do?
 
-10 mins.
+5 mins.
 
 Serve the built documentation and view it in a browser, e.g.:
 
